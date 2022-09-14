@@ -9,14 +9,14 @@
 
 ## 🫶🏻 Member
 
-### ✨ Front-End
+### Client
 
 |[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="230px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="230px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="230px" >](https://github.com/NR0617)|
 |:---:|:---:|:---:|
 |[홍성권](https://github.com/Hong-sk) |[정다운](https://github.com/git-daun) |[오나래](https://github.com/NR0617)|
 |FE_CTO|팀블로그 관리|기록 및 AWS 담당|
 
-### ✨ Back-End
+### Server
 
 |[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="200px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="200px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="200px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="200px" >](https://github.com/HYUNSUK331)|
 |:---:|:---:|:---:|:---:|
@@ -25,9 +25,9 @@
 
 <br>
 
-### 💪🏻 Tool
+## 💪🏻 Tool
 
-## 🔧 Back-End
+### 🔧 Back-End
 
 <p>
   <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
@@ -43,7 +43,7 @@
 </p>
 
 
-## 🔨 Front-End
+### 🔨 Front-End
 
 <p>
   <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
