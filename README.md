@@ -57,13 +57,18 @@
 
 ### 🤝🏻 협업도구
 
-1. 공지 및 이슈 공유 : Notion, Discord
-2. 프로젝트 관리 : Jira, Github
+### 1. 공지 및 이슈 공유 : Notion, Discord
+
+### 2. 프로젝트 관리 : Jira, Github
+<p>
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-4. 기술 및 이슈 기록 : Jira
-5. 비대면 회의 : Google meet
-6. 기타 문서 작업 : 구글docs
+</p>
+### 3. 기술 및 이슈 기록 : Jira
+
+### 4. 비대면 회의 : Google meet
+
+### 5. 기타 문서 작업 : 구글docs
 
 <br>
 
