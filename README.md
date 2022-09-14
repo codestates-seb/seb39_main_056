@@ -25,9 +25,11 @@
 
 ### 🤝🏻 협업도구
 
-<P>
-	<img>
-</p>
+1. 공지 및 이슈 공유 : Notion, Discord
+2. 프로젝트 관리 : Jira, Github
+3. 기술 및 이슈 기록 : Jira
+4. 비대면 회의 : Google meet
+5. 기타 문서 작업 : 구글docs
 
 <br>
 
@@ -45,3 +47,5 @@
 | refactor | 코드 리팩토링                                         |
 | docs     | 문서 수정 (MD 파일)                                   |
 | test     | 테스트 코드를 생성하거나 수정 하는 경우               |
+
+## 👊🏻 branch strategy
