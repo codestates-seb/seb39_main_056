@@ -21,11 +21,14 @@
 |🌟Team Leader|BE_CTO|기록 및 GitHub 관리|AWS 담당|
 
 <br>
+
 ### 💪🏻 Tool
 
-## Back-End
+## 🔧 Back-End
 
-## Front-End
+## 🔨 Front-End
+
+<br>
 
 ### 🤝🏻 협업도구
 
