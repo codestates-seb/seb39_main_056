@@ -15,7 +15,7 @@
 |FE_CTO|팀블로그 관리|기록 및 AWS 담당|
 
 ### Server
-|[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="150px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="150px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="150px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="150px" >](https://github.com/HYUNSUK331)|
+|[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="180px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="180px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="180px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="180px" >](https://github.com/HYUNSUK331)|
 |:---:|:---:|:---:|:---:|
 |[강시혁](https://github.com/Si-Hyeak-KANG) |[황윤준](https://github.com/YunJuniverse)|[홍민정](https://github.com/hongmj37) |[이현석](https://github.com/HYUNSUK331)|
 |🌟Team Leader|BE_CTO|기록 및 GitHub 관리|AWS 담당|
