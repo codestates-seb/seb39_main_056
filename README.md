@@ -8,11 +8,17 @@
 <br>
 
 ## 🫶🏻 Team Member
-| 팀장 강시혁 (BE)   |  팀원 황윤준 (BE)  | 팀원 홍민정 (BE)  | 팀원 이현석 (BE)   |
-|----------------—|----------------—|----------------—|-----------------|
-|<img src=‘~~~~.jpeg’ width='150'>|<img src='h~~~.jpeg' width='150'/>|<img src=‘~~~~.jpeg' width='150'/>|<img src=‘~~~~png' width='150'/>| 
-|@Si-hyeak-Kang|(https://github.com/sihyeaking).   |
-| 팀원 홍성권 (FE)   |  팀원 정다운 (FE)  | 팀원 오나래 (FE)  |
+### CLIENT
+|[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="230px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="230px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="230px" >](https://github.com/NR0617)|
+|:---:|:---:|:---:|
+|[홍성권](https://github.com/Hong-sk) |[정다운](https://github.com/git-daun) |[오나래](https://github.com/NR0617)|
+|FE_CTO|리마인더, 브랜치 관리|기록 및 노션 관리|
+
+### SERVER
+|[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="230px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="230px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="230px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="230px" >](https://github.com/HYUNSUK331)|
+|:---:|:---:|:---:|:---:|
+|[강시혁](https://github.com/Si-Hyeak-KANG) |[황윤준](https://github.com/YunJuniverse)|[홍민정](https://github.com/hongmj37) |[이현석](https://github.com/HYUNSUK331)|
+|🌟PM|BE_CTO|기록 및 GitHub 관리|부PM 및 디스코드 관리|
 
 <br>
 
