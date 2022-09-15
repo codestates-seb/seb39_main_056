@@ -1,7 +1,5 @@
 # ⛔️ NOT_ERROR 팀
 
-### 우리는
-
 ## 프로젝트 소개
 ### 프로젝트 기간
 
@@ -11,17 +9,21 @@
 
 ### 프로젝트 기획, 설명
 - ~~ 거래 ~~
+  - ~~ 이러한 기능
+  - ~~~~ 기능
+
+---
 
 ## 🫶🏻 Member
 
-### Client
+### FE
 
 |[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="230px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="230px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="230px" >](https://github.com/NR0617)|
 |:---:|:---:|:---:|
 |[홍성권](https://github.com/Hong-sk) |[정다운](https://github.com/git-daun) |[오나래](https://github.com/NR0617)|
 |FE_CTO|팀블로그 관리|기록 및 AWS 담당|
 
-### Server
+### BE
 
 |[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="200px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="200px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="200px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="200px" >](https://github.com/HYUNSUK331)|
 |:---:|:---:|:---:|:---:|
@@ -44,8 +46,9 @@
   <img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"> 
   <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> 
   <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white">
-  <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">
+  <img src="https://img.shields.io/badge/gradle 7.5-02303A?style=for-the-badge&logo=gradle&logoColor=white">
   <img src="https://img.shields.io/badge/junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white">
+  <img src="https://img.shields.io/badge/RestDocs-8CA1AF?style=for-the-badge&logo=readthedocs&logoColor=white">
 </p>
 
 
@@ -63,18 +66,25 @@
 </p>
 
 
-### 🤝🏻 협업도구
+### 🛠 협업도구
 
-1. 공지 및 이슈 공유 : Notion, Discord
-2. 프로젝트 관리 : Jira, Github
-3. 기술 및 이슈 기록 : Jira
-4. 비대면 회의 : Google meet
-5. 기타 문서 작업 : 구글docs
+<p>
+  <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+</p>
 
 <br>
 
-### 👍🏻 팀 규칙
 
+## 👍🏻 프로젝트 구조도
+
+### BackEnd
+
+### CI/CD
+
+### ERD
 
 ## 🤙🏻 Git Commit & PR Message
 
