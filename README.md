@@ -54,7 +54,7 @@
   <img src="https://img.shields.io/badge/RestDocs-8CA1AF?style=for-the-badge&logo=readthedocs&logoColor=white">
 </p>
 
-### ▪️ Front-End
+#### ▪️ Front-End
 
 <p>
   <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
@@ -67,7 +67,7 @@
   <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
 </p>
 
-### ▪️ 협업도구
+#### ▪️ 협업도구
 
 <p>
   <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
@@ -80,11 +80,11 @@
 
 ## 🔎 프로젝트 구조도
 
-### ▪️ BackEnd
+#### ▪️ BackEnd
 
-### ▪️ CI/CD
+#### ▪️ CI/CD
 
-### ▪️ ERD
+#### ▪️ ERD
 
 <br>
 
