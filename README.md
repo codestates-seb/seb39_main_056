@@ -14,7 +14,7 @@
   - ~~ 이러한 기능
   - 어쩌구 ~~~~ 기능
 
----
+
 <br>
 
 ### 👩‍👧‍👧 Member
@@ -34,7 +34,7 @@
 |🌟Team Leader|BE_CTO|기록 및 GitHub 관리|AWS 담당|
 
 <br>
----
+
 ### 🛠 Tool
 
 #### ▪️ Back-End
@@ -76,7 +76,7 @@
 <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
 </p>
 <br>
----
+
 
 ## 🔎 프로젝트 구조도
 
