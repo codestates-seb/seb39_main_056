@@ -1,4 +1,4 @@
-# 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, 떙땡땡땡
+## 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, 떙땡땡땡
 
 ### ⛔ 프로젝트 소개
 
@@ -16,16 +16,16 @@
   
 <br>
 
-## 👩‍👧‍👧 Member
+### 👩‍👧‍👧 Member
 
-### ▪️ FE
+#### ▪️ FE
 
 |[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="230px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="230px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="230px" >](https://github.com/NR0617)|
 |:---:|:---:|:---:|
 |[홍성권](https://github.com/Hong-sk) |[정다운](https://github.com/git-daun) |[오나래](https://github.com/NR0617)|
 |FE_CTO|팀블로그 관리|기록 및 AWS 담당|
 
-### ▪️ BE
+#### ▪️ BE
 
 |[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="200px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="200px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="200px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="200px" >](https://github.com/HYUNSUK331)|
 |:---:|:---:|:---:|:---:|
@@ -34,9 +34,9 @@
 
 <br>
 
-## 🛠 Tool
+### 🛠 Tool
 
-### ▪️ Back-End
+#### ▪️ Back-End
 
 <p>
   <img src="https://img.shields.io/badge/java 11-007396?style=for-the-badge&logo=java&logoColor=white">
