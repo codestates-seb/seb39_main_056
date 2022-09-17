@@ -1,4 +1,4 @@
-## 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, 나의채식
+## 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **나의채식**
 
 ## ⛔ 프로젝트 소개
 
@@ -10,23 +10,21 @@
 
 #### ▪️ 프로젝트 기획, 설명
 
-- 어쩌구 ~~ 거래 ~~
-  - ~~ 이러한 기능
-  - 어쩌구 ~~~~ 기능
-
+- 우리의 프로젝트
+- 개인 맞춤형 
 
 <br>
 
-## 👩‍👧‍👧 Member
+## 👨🏻‍💻 Member
 
-### ▪️ FE
+### ▪ 👩‍👧‍👦 FE
 
 |[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="230px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="230px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="230px" >](https://github.com/NR0617)|
 |:---:|:---:|:---:|
 |[홍성권](https://github.com/Hong-sk) |[정다운](https://github.com/git-daun) |[오나래](https://github.com/NR0617)|
 |FE_CTO|팀블로그 관리|기록 및 AWS 담당|
 
-### ▪️ BE
+### 👨‍👩‍👧‍👧 BE
 
 |[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="200px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="200px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="200px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="200px" >](https://github.com/HYUNSUK331)|
 |:---:|:---:|:---:|:---:|
@@ -72,8 +70,9 @@
 <p>
   <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+  
 </p>
 <br>
 
