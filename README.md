@@ -1,14 +1,14 @@
-## 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **나의채식**
+# 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **🍀마켓**
 
-### ⛔ 프로젝트 소개
+( 이미지 삽입 )
 
-#### ▪️ 프로젝트 기간
+### ▪️ 프로젝트 기간
 
 - 기획 및 설계 : 2022. 09. 07 - 09.18
 - 프로젝트 구현 : 2022. 09.18 - 
 - 버그 수정 및 리팩토링 : 2022. 09.
 
-#### ▪️ 프로젝트 기획, 설명
+### ▪️ 프로젝트 기획, 설명
 
 - 우리의 프로젝트
 - 개인 맞춤형 
@@ -17,23 +17,19 @@
 
 ## 👨🏻‍💻 Member
 
-### FE
-
-|[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="230px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="230px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="230px" >](https://github.com/NR0617)|
+|[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="225px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="225px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="225px" >](https://github.com/NR0617)|
 |:---:|:---:|:---:|
-|[홍성권](https://github.com/Hong-sk) |[정다운](https://github.com/git-daun) |[오나래](https://github.com/NR0617)|
+|[FE 홍성권](https://github.com/Hong-sk) |[FE 정다운](https://github.com/git-daun) |[FE 오나래](https://github.com/NR0617)|
 |FE_CTO|팀블로그 관리|기록 및 AWS 담당|
-
-### BE
 
 |[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="200px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="200px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="200px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="200px" >](https://github.com/HYUNSUK331)|
 |:---:|:---:|:---:|:---:|
-|[강시혁](https://github.com/Si-Hyeak-KANG) |[황윤준](https://github.com/YunJuniverse)|[홍민정](https://github.com/hongmj37) |[이현석](https://github.com/HYUNSUK331)|
+|[BE 강시혁](https://github.com/Si-Hyeak-KANG) |[BE 황윤준](https://github.com/YunJuniverse)|[BE 홍민정](https://github.com/hongmj37) |[BE 이현석](https://github.com/HYUNSUK331)|
 |🌟Team Leader|BE_CTO|기록 및 GitHub 관리|AWS 담당|
 
 <br>
 
-## 🛠 Tool
+## (로고) Tool
 
 <p>
   <img src="https://img.shields.io/badge/java 11-007396?style=for-the-badge&logo=java&logoColor=white">
@@ -71,17 +67,19 @@
 <br>
 
 
-## 🔎 프로젝트 구조도
+## (로고) Project Structure
 
-### ▪️ BackEnd
+### ERD
 
-### ▪️ CI/CD
+(이미지 삽입)
 
-### ▪️ ERD
+### CI/CD
+
+(이미지 삽입)
 
 <br>
 
-## ✅ Git Commit & PR Message
+## (로고) Git Commit & PR Message
 
 | 태그이름 | 설명                                                  |
 | -------- | ----------------------------------------------------- |
@@ -94,4 +92,4 @@
 | docs     | 문서 수정 (MD 파일)                                   |
 | test     | 테스트 코드를 생성하거나 수정 하는 경우               |
 
-## ✅ branch strategy
+## (로고) branch strategy
