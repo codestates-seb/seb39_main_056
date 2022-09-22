@@ -2,7 +2,7 @@
 ## 🍀채식 유형에 따른 개인맞춤형 상품 제공 웹 서비스
 ### 채식 유형만 정하세요, 상품은 저희가 필터링 해드릴게요!
 ---
-### 파일 디렉토리 구조
+### 📂파일 디렉토리 구조
 ```
 ├── /src
    ├── /assets
@@ -18,7 +18,7 @@
        
 ```
 ---
-## Tech Stack
+## 🎇Tech Stack
 <p>
 <img src="https://user-images.githubusercontent.com/94218285/191661069-b1c6b339-ddce-408f-a824-ebc07d7ab3dd.png" width="100px" height="100px">
 <img src="https://user-images.githubusercontent.com/94218285/191661136-789ec3c6-b48b-469a-82bc-16f3e1169dca.png" width="100px" height="100px">
@@ -28,7 +28,7 @@
 
 
 ---
-## 협업도구
+##👩‍🌾협업도구
 
 <p>
    <img src="https://user-images.githubusercontent.com/94218285/191662784-4ea64920-e7af-4e97-b939-29cc0e9bdf91.png" width="100px" height="100px">
@@ -39,10 +39,12 @@
 
 ---
 ## 🗣팀 커뮤니케이션 방식
-매일 오전 9시 30분에 모여서 굿모닝 세션을 통해 진행상황을 공유한다.
-매주 월,금요일은 CTO 회고를 진행한다.
-정한 컨벤션을 준수한다.
+
+- 매일 오전 9시 30분에 모여서 굿모닝 세션을 통해 진행상황을 공유한다.
+- 매주 월,금요일은 CTO 회고를 진행한다.
+- 정한 컨벤션을 준수한다.
+
 ---
 
-## 프로젝트 화면 
+## 🎁프로젝트 화면 
 (추가예정)
