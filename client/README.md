@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+## seb39_main_056의 Main-Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🍀채식 유형에 따른 개인맞춤형 상품 제공 웹 서비스
 
-## Available Scripts
+#### " 채식 유형만 정하세요, 상품은 저희가 선별해 드릴게요!"
 
-In the project directory, you can run:
+---
 
-### `npm start`
+### 📂파일 디렉토리 구조
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+├── /src
+   ├── /assets
+   ├── /components
+        ├──/pages
+        ├──/templates
+        └──/ui
+           ├──/atoms
+           ├──/molecules
+           └──/organisms
+   ├── /hooks
+   └── /store
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🎇Tech Stack
 
-### `npm run build`
+<p>
+<img src="https://user-images.githubusercontent.com/94218285/191661069-b1c6b339-ddce-408f-a824-ebc07d7ab3dd.png" width="100px" height="100px">
+<img src="https://user-images.githubusercontent.com/94218285/191661136-789ec3c6-b48b-469a-82bc-16f3e1169dca.png" width="100px" height="100px">
+<img src="https://user-images.githubusercontent.com/94218285/191661088-659e8e20-e021-434b-990a-a4b0cf725308.png" width="100px" height="100px">
+</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 👩‍🌾협업도구
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<p>
+   <img src="https://user-images.githubusercontent.com/94218285/191662784-4ea64920-e7af-4e97-b939-29cc0e9bdf91.png" width="100px" height="100px">
+<img src="https://user-images.githubusercontent.com/94218285/191662689-48c3cbe1-ce0e-4766-9776-1e5ed1c9e17b.png" width="100px" height="100px">
+<img src="https://camo.githubusercontent.com/1d9a433174710d3b5a3bcedf1b443320d53a3aed186950310fb486a1a7b628a5/68747470733a2f2f7777772e7376677265706f2e636f6d2f73686f772f3333313336382f646973636f72642d76322e737667" width="100px" height="100px">
 
-### `npm run eject`
+</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ❤️ 서비스의 주요 기능
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 소셜 회원가입
+- 사용자가 선택한 채식 유형에 따라 상품 필터링하여 제공
+- 화면 오른쪽 하단에 플로팅배너로 페이지에 상관없이 채식 유형 변경
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🎁 프로젝트 화면
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+(추가예정)
