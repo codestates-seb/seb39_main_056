@@ -1,23 +1,25 @@
-import axios from 'axios';
-import React from 'react';
+import logo from './logo.svg';
 import './App.css';
-import GlobalStyles from './styles/GlobalStyles';
-import { useState } from 'react';
 
-const App = () => {
-	const url = process.env.REACT_APP_API_URL;
-	const [state, setState] = useState('ddd');
-
-	fetch(url)
-		.then(res => res.text())
-		.then(data => setState(data));
-
+function App() {
 	return (
-		<>
-			<GlobalStyles />
-			<p>{state}</p>
-		</>
+		<div className="App">
+			<header className="App-header">
+				<img src={logo} className="App-logo" alt="logo" />
+				<p>
+					Edit <code>src/App.js</code> and save to reload.
+				</p>
+				<a
+					className="App-link"
+					href="https://reactjs.org"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Learn React
+				</a>
+			</header>
+		</div>
 	);
-};
+}
 
 export default App;
