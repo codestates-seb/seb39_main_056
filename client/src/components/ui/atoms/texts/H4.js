@@ -9,4 +9,4 @@ const Para = styled.p`
   padding: 5px 5px;
 `;
 
-export default H4;
+export default Para;
