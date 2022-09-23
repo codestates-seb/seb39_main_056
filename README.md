@@ -2,25 +2,40 @@
 
 ( 이미지 삽입 )
 
+`핵심 목표 : 채식 유형 맞춤형 식품 구매`
+
 ### ▪️ 프로젝트 기간
 
-- 기획 및 설계 : 2022. 09. 07 - 09.21
-- 프로젝트 구현 
-  - Sprint 1 : 2022.09.22 - 09.26
-  - Sprint 2 : 2022.09.27 - 10.03
-  - Sprint 3 : 2022.10.04 - 10.10
-- 버그 수정 및 리팩토링
-  - 2022.09.30 - 10.03
-  - 2022.10.10 - 10.12
+#### `2022.09.07 ~ 2022.10.12`
 
-### ▪️ 프로젝트 기획, 설명
+### ▪️ 프로젝트 설명
+ 
+ 채식을 하거나, 관심이 있는 사람들이 식품을 선택할 때 본인의 채식 유형을 고려하여 편하게 제품 구매할 수 있게 하고자함
+ 나아가 채식은 고기를 먹지않는 것'이라는 인식에서 벗어나, 본인만의 채식 유형을 선택할 수 있음
 
-- 우리의 프로젝트
-- 개인 맞춤형 
+#### 🛣 기획 배경
 
-<br>
+* 즉, 채식의 유통시장이 커지며 다양한 제품군이 출시되고 있지만 소비자들은 이를 인식하지 못하고 불편해 하고 있음
+  * 비건 제품이 인기를 끌면서 연관성이 높은 유통업계에선 시장을 공략해 성장동력 확보와 매출 다변화라는 효과를 얻기 위해 대체육 뿐만 아니라 다양한 제품군의 신제품 출시에 분주한 상황
+  * 국내 소비자들의 비거니즘 실천이 어려운 이유로 높은 가격과 적은 유통채널, 제품의 다양성 부족을 뽑음
 
-## 👨🏻‍💻 Member
+#### 📝 서비스 특징
+
+* 채식의 9가지 유형에 맞게 카테고리화하여, 개인 맞춤형으로 제품을 제공
+* 플렉시테리언, 폴로-페스코, 페스코, 폴로, 락토-오보, 락토, 오보, 비건, 프루테리언 등 다야한 종류의 채식에 맞게 상품 데이터 분류
+* 대체품, 야채류 제품만 나열되어 있는 기존 채식 쇼핑몰과 다른 차별점 보유
+* UI//UX 부분에 채식 유형 정보를 알 수 있도록 제작하여 사용자 경험 극대화
+* 채식에 대한 정확한 인식으로 다양한 채식 유형의 소비자들에게 편한 쇼핑 서비스 제공
+* 웹 또는 모바일로 서비스 이용 가능
+
+#### ✨ 핵심 기능
+
+* 제품을 조회하고, 결제하여 구매하는 쇼핑몰 기능
+* 본인이 설정한 채식 유형에 맞게 식제품 위주 노출 기능
+* 개인의 채식 유형 관리 기능
+* 채식 유형에 맞는 정보 제공 기능
+
+### 👨🏻‍💻 Member
 
 |[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="225px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="225px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="225px" >](https://github.com/NR0617)|
 |:---:|:---:|:---:|
@@ -34,57 +49,33 @@
 
 <br>
 
-## (로고) Tool
-
-<p>
-  <img src="https://img.shields.io/badge/java 11-007396?style=for-the-badge&logo=java&logoColor=white">
-  <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
-  <img src="https://img.shields.io/badge/spring boot 2.7.2-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
-  <img src="https://img.shields.io/badge/spring security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white">
-  <img src="https://img.shields.io/badge/spring data jpa-6DB33F?style=for-the-badge&logo=springdatajpa&logoColor=white">
-  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
-  <img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"> 
-  <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> 
-  <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white">
-  <img src="https://img.shields.io/badge/gradle 7.5-02303A?style=for-the-badge&logo=gradle&logoColor=white">
-  <img src="https://img.shields.io/badge/junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white">
-  <img src="https://img.shields.io/badge/RestDocs-8CA1AF?style=for-the-badge&logo=readthedocs&logoColor=white">
-</p>
-
-<p>
-  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
-  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
-  <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
-  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
-  <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> 
-  <img src="https://img.shields.io/badge/angular.js-DD0031?style=for-the-badge&logo=angularjs&logoColor=white">
-  <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
-</p>
-
+### (로고) 협업 Tool
 <p>
   <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
   <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
-  
+
 </p>
+
 <br>
 
-
-## (로고) Project Structure
-
-### ERD
-
-(이미지 삽입)
-
-### CI/CD
-
+### (로고) 작업 예상 기간
 (이미지 삽입)
 
 <br>
 
-## (로고) Git Commit & PR Message
+### (로고) Project Structure
+
+#### ▪️ CI/CD
+
+(이미지 삽입)
+
+<br>
+
+### (로고) 브랜치 전략 & 커밋 메시지 규칙
+
+### ▪️ Commit Message Rule
 
 | 태그이름     | 설명                               |
 |----------|----------------------------------|
@@ -96,4 +87,33 @@
 | style    | 코드 포맷 변경, 세미 콜론 누락, 코드 수정이 없는 경우 |
 | design   | CSS 등 UI 수정                      |
 
-## (로고) branch strategy
+(1) 커밋 메시지는 브랜치를 토대로 작성합니다.
+
+(2) git commit 수행 시, 자동으로 커밋 템플릿 화면이 뜹니다.
+
+(3) 해당 형식에 맞게 기록해주세요.
+
+### ▪️ branch strategy
+
+* main : 사용자에게 언제든 제품으로 출시할 수 있는 브랜치
+* dev/fe : 다음 버전 배포를 위한 "개발 중" 브랜치
+* dev/be : 다음 버전 배포를 위한 "개발 중" 브랜치
+* feature : 기능 개발, 리팩토링, 문서 작업 등 단위별 작업 관리를 위한 브랜치
+
+(1) 각 개발자분들은 본 repository를 clone 합니다.
+
+(2) Jira에서 이슈가 할당되면 이슈를 진행중으로 바꿔주세요.
+
+(3) 진행중으로 이슈 상태를 바꾸면 자동으로 이슈에 해당하는 브랜치가 생성됩니다.
+
+(4) pull을 받고 브랜치를 checkout 시켜주세요.
+
+(5) 작업을 진행하고 완료되면, 생성된 브랜치에 push 를 합니다.
+
+(6) push한 작업을 토대로 팀 코드리뷰를 진행합니다.
+
+(7) FE는 dev/fe로 BE는 dev/be로 pull request 를 합니다.
+    (Pull request 시, 자동으로 템플릿이 뜨니 형식에 맞게 기록해주세요.)
+
+<br>
+
