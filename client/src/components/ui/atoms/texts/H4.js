@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const H4 = styled.p`
+const Para = styled.p`
   font-size: 15px;
   color: #594a4e;
   text-align: center;
