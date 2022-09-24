@@ -49,6 +49,8 @@ dependencies {
 
     //oauth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 }
 
 task copyDocument(type: Copy) {

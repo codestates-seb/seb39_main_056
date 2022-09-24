@@ -48,7 +48,14 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
+    public User update(String name) {
+        this.userName = name;
+        return this;
+    }
+
     public String getRole() {
         return this.role.getValue();
     }
+
+
 }

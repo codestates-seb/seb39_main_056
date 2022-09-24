@@ -1,6 +1,7 @@
 package com.noterror.app.api.config.auth;
 
 import com.noterror.app.api.config.auth.dto.OAuthAttributes;
+import com.noterror.app.api.config.auth.dto.SessionUser;
 import com.noterror.app.api.domain.entity.User;
 import com.noterror.app.api.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
