@@ -28,9 +28,13 @@ public class Product {
     private LocalDateTime signDate;
 
     @Column(nullable = false)
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
     private String thumbnailImage;
 
     @Column(nullable = false)
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
     private String detailImage;
 
     // TODO : 식재료
