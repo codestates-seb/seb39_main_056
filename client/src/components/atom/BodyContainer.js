@@ -5,7 +5,7 @@ const BodyContainer = styled.div`
 	height: 100%;
 	margin: 0 auto;
 	margin-top: 50px;
-	padding-bottom: 32px; ;
+	padding-bottom: 32px;
 `;
 
 export default BodyContainer;

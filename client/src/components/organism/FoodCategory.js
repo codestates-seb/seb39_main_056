@@ -1,4 +1,5 @@
 import FoodCatrgoryItems from './FoodCatrgoryItems';
+import FoodCategoryBtn from './FoodCategoryBtn';
 
 const FoodCategory = ({ Foodarr, isClick, setIsClick }) => {
 	return (
@@ -8,6 +9,7 @@ const FoodCategory = ({ Foodarr, isClick, setIsClick }) => {
 				isClick={isClick}
 				setIsClick={setIsClick}
 			/>
+			<FoodCategoryBtn />
 		</>
 	);
 };

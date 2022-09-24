@@ -11,14 +11,14 @@ const MainPage = () => {
 	const [isClick, setIsClick] = useState(false);
 
 	return (
-		<div>
+		<>
 			<PageHeader />
 			<FoodCategory
 				Foodarr={Foodarr}
 				isClick={isClick}
 				setIsClick={setIsClick}
 			/>
-		</div>
+		</>
 	);
 };
 

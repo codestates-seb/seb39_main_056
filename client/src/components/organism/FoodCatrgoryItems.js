@@ -1,8 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-//여기서 스타일을 바꿔줘야함 뭐에 따라? state가 true인지 false인지 따라!
-//그럼 page가 모든 state랑 함수를 들고 있어야지
-//어떤 state가 필요한가?
 
 const FoodCategoryBox = styled.div`
 	display: flex;
@@ -13,12 +10,12 @@ const FoodCategoryBox = styled.div`
 
 const FoodCategoryItemBox = styled.div`
 	padding: 10px 40px;
-	border: 1px solid lightgray;
+	margin: 10px;
+	border: none;
 	cursor: pointer;
-	:hover {
-		color: blue;
-	}
-	background-color: ${props => props.isClick || 'red'};
+	border-radius: 10px;
+	color: #33272a;
+	background-color: ${props => props.isClick || '#c3f0ca'};
 `;
 
 const FoodCatrgoryItems = ({ Foodarr, isClick, setIsClick }) => {
