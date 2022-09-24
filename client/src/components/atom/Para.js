@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Para = styled.p`
+const Para = styled.div`
 	font-size: 15px;
 	color: #594a4e;
 	text-align: center;

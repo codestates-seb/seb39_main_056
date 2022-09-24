@@ -1,39 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FoodCategoryBox = styled.div`
+const FoodCategoryContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: 20px;
 `;
 
-const FoodCategoryItemBox = styled.div`
+const FoodCategoryBtn = styled.div`
 	padding: 10px 40px;
-	margin: 10px;
 	border: none;
 	cursor: pointer;
-	border-radius: 10px;
 	color: #33272a;
-	background-color: ${props => props.isClick || '#c3f0ca'};
+	border: 1px solid #c3f0ca;
+	:hover {
+		text-decoration: underline;
+	}
 `;
 
-const FoodCatrgoryItems = ({ Foodarr, isClick, setIsClick }) => {
-	const onClick = () => {
-		setIsClick(!isClick);
-		console.log(isClick);
-	};
-
+const FoodCatrgoryItems = ({ Foodarr }) => {
 	return (
-		<FoodCategoryBox>
+		<FoodCategoryContainer>
 			{Foodarr.map((item, i) => {
-				return (
-					<FoodCategoryItemBox key={i} isClick={isClick} onClick={onClick}>
-						{item}
-					</FoodCategoryItemBox>
-				);
+				return <FoodCategoryBtn key={i}>{item}</FoodCategoryBtn>;
 			})}
-		</FoodCategoryBox>
+		</FoodCategoryContainer>
 	);
 };
 

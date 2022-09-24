@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-const H3 = styled.p`
+const H3 = styled.div`
 	font-size: 16px;
 	color: #33272a;
 	text-align: center;
 	font-weight: 400;
 	display: inline-block;
-	padding: 5px 5px;
+	padding: 1px;
 `;
 
 export default H3;

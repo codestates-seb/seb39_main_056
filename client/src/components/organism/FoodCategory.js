@@ -1,15 +1,11 @@
 import FoodCatrgoryItems from './FoodCatrgoryItems';
-import FoodCategoryBtn from './FoodCategoryBtn';
+import FoodCategorySort from './FoodCategorySort';
 
-const FoodCategory = ({ Foodarr, isClick, setIsClick }) => {
+const FoodCategory = ({ Foodarr, AssortArr }) => {
 	return (
 		<>
-			<FoodCatrgoryItems
-				Foodarr={Foodarr}
-				isClick={isClick}
-				setIsClick={setIsClick}
-			/>
-			<FoodCategoryBtn />
+			<FoodCatrgoryItems Foodarr={Foodarr} />
+			<FoodCategorySort AssortArr={AssortArr} />
 		</>
 	);
 };
