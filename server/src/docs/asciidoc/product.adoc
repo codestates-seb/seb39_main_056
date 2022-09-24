@@ -29,8 +29,8 @@ NOTE: 기능에 대해서 문제가 있을 경우, 담당자에게 문의 하세
 | `POST`
 | Used to create a new resource
 
-| `PATCH`
-| Used to update an existing resource, including partial updates
+| `PUT`
+| Used to update an existing resource
 
 | `DELETE`
 | Used to delete an existing resource
@@ -82,5 +82,27 @@ include::{snippets}/get-product/response-fields.adoc[]
 
 == 제품 전체 조회
 
+=== URL endpoint
+include::{snippets}/get-products/curl-request.adoc[]
 
+NOTE: Host 는 변경될 수 있습니다.
+
+=== Request-body
+include::{snippets}/get-products/request-body.adoc[]
+
+=== Response-body
+include::{snippets}/get-products/response-body.adoc[]
+
+NOTE: 1페이지당 20개의 데이터가 등록 날짜의 내림차순 방식으로 정렬된 것 default입니다.
+
+=== request-parameters
+include::{snippets}/get-products/request-parameters.adoc[]
+
+
+NOTE: 정렬 기준은 signDate(등록 날짜), price(금액)으로 입력할 수 있습니다.
+
+NOTE: 정렬 방식은 asc(오름차순), desc(내림차순)으로 입력할 수 있습니다.
+
+=== Response-fields
+include::{snippets}/get-products/response-fields.adoc[]
 
