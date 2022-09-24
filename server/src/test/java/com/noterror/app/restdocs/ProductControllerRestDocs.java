@@ -47,8 +47,8 @@ class ProductControllerRestDocs {
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .signDate(LocalDateTime.now())
-                .ingredients(List.of("야채류","해조류","균류","어패류","난류"))
-                .categories(List.of("간편식","조미용식"))
+                //.ingredients(List.of("야채류","해조류","균류","어패류","난류"))
+                //.categories(List.of("간편식","조미용식"))
                 .build();
 
         given(productService.findProduct(Mockito.anyLong())).willReturn(productData);

@@ -27,11 +27,10 @@ public class ProductController {
     @GetMapping("/detail/{product-id}")
     public ResponseEntity getProduct(@PathVariable("product-id") Long productId) {
 
-        Product product = productService.findProduct(productId);
+        Product getProduct = productService.findProduct(productId);
 
         return new ResponseEntity(
-                new SingleProductResponse(product),
+                new SingleProductResponse(getProduct),
                 HttpStatus.OK);
     }
-
 }
