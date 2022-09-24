@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 담당자 : 강시혁, 이현석
+ * 담당자 : 강시혁, 이현석, 홍민정
  */
 @RestController
 @CrossOrigin
@@ -44,15 +44,14 @@ public class ProductController {
      * 제품 전체 조회
      */
     @GetMapping("/list")
-    public ResponseEntity getProducts(@RequestParam int page,
-                                      @RequestParam int size,
-                                      @RequestParam String sort,
-                                      @RequestParam String orderBy) {
+    public ResponseEntity getProducts(@RequestParam(required = false, defaultValue = "1") int page,
+                                      @RequestParam(required = false, defaultValue = "20") int size,
+                                      @RequestParam(required = false, defaultValue = "signDate") String sort,
+                                      @RequestParam(required = false, defaultValue = "desc") String orderBy) {
 
         Page<Product> productInPage =
                 productService.findProductsWithPageAndSort(page-1,size,sort,orderBy);
-        List<Product> productsInList =
-                productService.pageToListProducts(productInPage);
+        List<Product> productsInList = productInPage.getContent();
 
         Sort sortInfo = new Sort(sort, orderBy);
 

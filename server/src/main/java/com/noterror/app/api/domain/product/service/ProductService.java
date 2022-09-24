@@ -24,5 +24,4 @@ public interface ProductService {
      */
     Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy);
 
-    List<Product> pageToListProducts(Page page);
 }
