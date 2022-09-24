@@ -572,7 +572,7 @@ use of HTTP status codes.</p>
 <h3 id="_url_endpoint">2.1. URL endpoint</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/product/detail/1' -i -X GET</code></pre>
+<pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/products/detail/1' -i -X GET</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -606,11 +606,9 @@ Host 는 변경될 수 있습니다.
     "productName" : "카레라면",
     "price" : 10000,
     "quantity" : 3,
-    "signDate" : "2022-09-23T23:03:12.6798015",
+    "signDate" : "2022-09-24T15:41:21.3574336",
     "thumbnailImage" : "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA",
-    "detailImage" : "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA",
-    "ingredients" : [ "야채류", "해조류", "균류", "어패류", "난류" ],
-    "categories" : [ "간편식", "조미용식" ]
+    "detailImage" : "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
   }
 }</code></pre>
 </div>
@@ -619,7 +617,7 @@ Host 는 변경될 수 있습니다.
 <div class="sect2">
 <h3 id="_path_parameters">2.4. Path-parameters</h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. /product/detail/{product-id}</caption>
+<caption class="title">Table 1. /products/detail/{product-id}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -694,16 +692,6 @@ Host 는 변경될 수 있습니다.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Varies</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">제품 등록 날짜</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>product.ingredients</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">식재료 정보</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>product.categories</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">카테고리</p></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -719,7 +707,7 @@ Host 는 변경될 수 있습니다.
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-09-23 23:07:42 +0900
+Last updated 2022-09-24 15:13:37 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">

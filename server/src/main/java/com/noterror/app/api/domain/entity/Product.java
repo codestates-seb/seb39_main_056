@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Getter @Setter @NoArgsConstructor
 @AllArgsConstructor @Builder
-public class Product {
+public class Product{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

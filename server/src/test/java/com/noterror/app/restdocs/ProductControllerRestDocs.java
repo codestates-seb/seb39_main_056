@@ -54,7 +54,7 @@ class ProductControllerRestDocs {
         given(productService.findProduct(Mockito.anyLong())).willReturn(productData);
 
         mockMvc.perform(
-                get("/product/detail/{product-id}"
+                get("/products/detail/{product-id}"
                         ,productData.getProductId()))
                 .andExpect(status().isOk())
                 .andDo(document("get-product",
@@ -72,9 +72,9 @@ class ProductControllerRestDocs {
                                         fieldWithPath("product.quantity").type(JsonFieldType.NUMBER).description("수량"),
                                         fieldWithPath("product.thumbnailImage").type(JsonFieldType.STRING).description("썸네일 이미지"),
                                         fieldWithPath("product.detailImage").type(JsonFieldType.STRING).description("상세 정보 이미지"),
-                                        fieldWithPath("product.signDate").type(JsonFieldType.VARIES).description("제품 등록 날짜"),
-                                        fieldWithPath("product.ingredients").type(JsonFieldType.ARRAY).description("식재료 정보"),
-                                        fieldWithPath("product.categories").type(JsonFieldType.ARRAY).description("카테고리")
+                                        fieldWithPath("product.signDate").type(JsonFieldType.VARIES).description("제품 등록 날짜")
+                                        //fieldWithPath("product.ingredients").type(JsonFieldType.ARRAY).description("식재료 정보"),
+                                        //fieldWithPath("product.categories").type(JsonFieldType.ARRAY).description("카테고리")
                                 )
                         )
                         ));
