@@ -1,9 +1,12 @@
-import PageHeader from './components/organism/PageHeader';
+import BodyContainer from './components/atom/BodyContainer';
+import MainPage from './components/pages/MainPage';
 
 function App() {
 	return (
 		<div className="App">
-			<PageHeader />
+			<BodyContainer>
+				<MainPage />
+			</BodyContainer>
 		</div>
 	);
 }
