@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const BodyContainer = styled.div`
-	width: 70%;
+	width: 80%;
 	height: 100%;
 	margin: 0 auto;
 	margin-top: 50px;

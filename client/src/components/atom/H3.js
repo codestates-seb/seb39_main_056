@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const H3 = styled.div`
-	font-size: 16px;
+	font-size: 14px;
 	color: #33272a;
 	text-align: center;
 	font-weight: 400;

@@ -4,8 +4,9 @@ import styled from 'styled-components';
 const FoodCategoryContainer = styled.div`
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	margin: 20px;
+	flex-wrap: wrap;
+	/* align-items: center;
+	margin: 20px; */
 `;
 
 const FoodCategoryBtn = styled.div`

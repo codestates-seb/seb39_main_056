@@ -4,8 +4,9 @@ import FoodCard from './FoodCard';
 
 const Container = styled.div`
 	display: flex;
-	width: 250px;
-	margin: 10px;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 `;
 
 const FoodList = () => {
@@ -15,7 +16,6 @@ const FoodList = () => {
 		let res = await fetch(url);
 		let data = await res.json();
 		setCardList(data);
-		console.log(cardList);
 	};
 	useEffect(() => {
 		getProducts();
@@ -24,12 +24,9 @@ const FoodList = () => {
 	return (
 		<>
 			<Container>
-				{/* {cardList.map(card => {
-					<FoodCard card={card} />;
-				})} */}
-				<FoodCard />
-				<FoodCard />
-				<FoodCard />
+				{cardList.map((card, i) => {
+					return <FoodCard card={card} key={i} />;
+				})}
 			</Container>
 		</>
 	);
