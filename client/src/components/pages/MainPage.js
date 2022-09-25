@@ -5,7 +5,7 @@ import PageHeader from '../organism/PageHeader';
 
 const MainPage = () => {
 	// 음식 카테고리
-	const Foodarr = ['간편식', '간식', '음료', '반찬', '조미료'];
+	const Foodarr = ['전체보기', '간편식', '간식', '음료', '반찬', '조미료'];
 	// 메인화면 정렬 버튼
 	const AssortArr = ['신제품순', '낮은가격순', '높은가격순'];
 

@@ -2,40 +2,29 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 
-const SortContainer = styled.div`
+const SortContainer = styled.form`
 	display: flex;
 	justify-content: end;
-	margin-bottom: 20px;
-	flex-wrap: wrap;
-`;
-const SortBtn = styled.div`
+	margin: 20px;
 	padding: 10px;
-	margin: 10px;
+`;
+const SortSelect = styled.select`
+	padding: 10px;
+	width: 130px;
 	cursor: pointer;
-	// state에 따라 클릭될때마다 그것만 바뀌게 하고 싶은데!
-	background-color: ${props => props.isClick || '#c3f0ca'};
 `;
 
 const FoodCategorySort = ({ AssortArr }) => {
-	const [isClick, setIsClick] = useState(false);
-	const onClick = () => {
-		setIsClick(!isClick);
-		console.log(isClick);
+	const onChange = e => {
+		console.log(e.target.value);
 	};
 	return (
 		<SortContainer>
-			{AssortArr.map((btn, i) => {
-				return (
-					<SortBtn
-						key={i}
-						onClick={onClick}
-						isClick={isClick}
-						setIsClick={setIsClick}
-					>
-						{btn}
-					</SortBtn>
-				);
-			})}
+			<SortSelect onChange={onChange}>
+				{AssortArr.map((btn, i) => {
+					return <option key={i}>{btn}</option>;
+				})}
+			</SortSelect>
 		</SortContainer>
 	);
 };
