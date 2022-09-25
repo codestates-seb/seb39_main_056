@@ -35,10 +35,8 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(ProductController.class)//(1)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
-@WebAppConfiguration
 class ProductControllerRestDocs {
 
     @Autowired
@@ -47,16 +45,21 @@ class ProductControllerRestDocs {
     @MockBean
     private ProductService productService;
 
-    @MockBean
-    private ProductMapper mapper;
-
     @Autowired
     private Gson gson;
 
     @Test
     @DisplayName("제품 수정 API 문서화")
     void patchProductTest() throws Exception {
-        ProductResponseDto productData = ProductResponseDto.builder()
+        Product request = Product.builder()
+                .productName("카레라면")
+                .price(10000)
+                .quantity(3)
+                .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
+                .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
+                .build();
+
+        Product response = Product.builder()
                 .productId(1L)
                 .productName("카레라면")
                 .price(10000)
@@ -66,59 +69,47 @@ class ProductControllerRestDocs {
                 .signDate(LocalDateTime.now())
                 .build();
 
-        ProductPatchDto patchData = new ProductPatchDto();
-        patchData.setProductId(1L);
-        patchData.setProductName("카레카레라면");
-        patchData.setPrice(20000);
-        patchData.setQuantity(3);
-        patchData.setThumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA");
-        patchData.setDetailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA");
-
         //given
-        given(mapper.productPatchDtoToProduct(any(ProductPatchDto.class))).willReturn(new Product());
-        given(productService.updateProduct(any(Product.class))).willReturn(new Product());
-        given(mapper.productToProductResponseDto(any(Product.class))).willReturn(productData);
+        given(productService.updateProduct(any(Product.class))).willReturn(response);
 
-        String content = gson.toJson(patchData);
+        String content = gson.toJson(request);
 
         //when
         ResultActions actions = mockMvc.perform(
-                put("/admin/edit/{product-id}", productData.getProductId())
+                put("/products/admin/edit/{product-id}", response.getProductId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content));
 
         //then
-                actions
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.productName").value(productData.getProductName()))
-                        .andDo(document("update-product",              // (9)
-                            preprocessRequest(prettyPrint()),
-                            preprocessResponse(prettyPrint()),
-                            pathParameters(
-                                    parameterWithName("product-id").description("제품 식별자")
-                             ),
-                            requestFields(
-                                 List.of(
-                                         fieldWithPath("productName").type(JsonFieldType.STRING).description("제품명").optional(),
-                                         fieldWithPath("price").type(JsonFieldType.NUMBER).description("제품가격").optional(),
-                                         fieldWithPath("quantity").type(JsonFieldType.NUMBER).description("수량").optional(),
-                                         fieldWithPath("thumbnailImage").type(JsonFieldType.STRING).description("썸네일 이미지").optional(),
-                                         fieldWithPath("detailImage").type(JsonFieldType.STRING).description("상세 정보 이미지").optional()
-                                 )
-                                ),
-                            responseFields(
-                                List.of(
-                                        fieldWithPath("product").type(JsonFieldType.OBJECT).description("제품 결과 데이터"),
-                                        fieldWithPath("product.productId").type(JsonFieldType.NUMBER).description("제품 식별자"),
-                                        fieldWithPath("product.productName").type(JsonFieldType.STRING).description("제품명"),
-                                        fieldWithPath("product.price").type(JsonFieldType.NUMBER).description("제품가격"),
-                                        fieldWithPath("product.quantity").type(JsonFieldType.NUMBER).description("수량"),
-                                        fieldWithPath("product.thumbnailImage").type(JsonFieldType.STRING).description("썸네일 이미지"),
-                                        fieldWithPath("product.detailImage").type(JsonFieldType.STRING).description("상세 정보 이미지"),
-                                        fieldWithPath("product.signDate").type(JsonFieldType.VARIES).description("제품 등록 날짜")
-                                )
+        actions.andExpect(status().isOk())
+                .andDo(document("update-product",              // (9)
+                preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint()),
+                pathParameters(
+                        parameterWithName("product-id").description("제품 식별자")
+                ),
+                requestFields(
+                        List.of(
+                                fieldWithPath("productName").type(JsonFieldType.STRING).description("제품명").optional(),
+                                fieldWithPath("price").type(JsonFieldType.NUMBER).description("제품가격").optional(),
+                                fieldWithPath("quantity").type(JsonFieldType.NUMBER).description("수량").optional(),
+                                fieldWithPath("thumbnailImage").type(JsonFieldType.STRING).description("썸네일 이미지").optional(),
+                                fieldWithPath("detailImage").type(JsonFieldType.STRING).description("상세 정보 이미지").optional()
                         )
-                ));
+                ),
+                responseFields(
+                        List.of(
+                                fieldWithPath("product").type(JsonFieldType.OBJECT).description("제품 결과 데이터"),
+                                fieldWithPath("product.productId").type(JsonFieldType.NUMBER).description("제품 식별자"),
+                                fieldWithPath("product.productName").type(JsonFieldType.STRING).description("제품명"),
+                                fieldWithPath("product.price").type(JsonFieldType.NUMBER).description("제품가격"),
+                                fieldWithPath("product.quantity").type(JsonFieldType.NUMBER).description("수량"),
+                                fieldWithPath("product.thumbnailImage").type(JsonFieldType.STRING).description("썸네일 이미지"),
+                                fieldWithPath("product.detailImage").type(JsonFieldType.STRING).description("상세 정보 이미지"),
+                                fieldWithPath("product.signDate").type(JsonFieldType.VARIES).description("제품 등록 날짜")
+                        )
+                )));
     }
 }
+

@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public class SingleProductResponse<T> {
-    private T data;
+    private T product;
 
-    public SingleProductResponse(T data){
-        this.data = data;
+    public SingleProductResponse(T product){
+        this.product = product;
     }
 }
