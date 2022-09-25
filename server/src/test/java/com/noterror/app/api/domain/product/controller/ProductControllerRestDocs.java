@@ -16,7 +16,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
@@ -35,7 +37,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(ProductController.class)//(1)
 @MockBean(JpaMetamodelMappingContext.class)
-@AutoConfigureRestDocs //(2)
+@AutoConfigureRestDocs
+@WebAppConfiguration
 class ProductControllerRestDocs {
 
     @Autowired
@@ -53,7 +56,7 @@ class ProductControllerRestDocs {
     @Test
     @DisplayName("제품 수정 API 문서화")
     void patchProductTest() throws Exception {
-        Product productData = Product.builder()
+        ProductResponseDto productData = ProductResponseDto.builder()
                 .productId(1L)
                 .productName("카레라면")
                 .price(10000)
@@ -62,39 +65,34 @@ class ProductControllerRestDocs {
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .signDate(LocalDateTime.now())
                 .build();
-        String content = gson.toJson(productData);
 
-        ProductResponseDto responseData = ProductResponseDto.builder()
-                .productId(1L)
-                .productName("카레라면")
-                .price(10000)
-                .quantity(3)
-                .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .signDate(LocalDateTime.now())
-                .build();
+        ProductPatchDto patchData = new ProductPatchDto();
+        patchData.setProductId(1L);
+        patchData.setProductName("카레카레라면");
+        patchData.setPrice(20000);
+        patchData.setQuantity(3);
+        patchData.setThumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA");
+        patchData.setDetailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA");
 
         //given
-        given(mapper.productPatchDtoToProduct(Mockito.any(ProductPatchDto.class))).willReturn(new Product());
-        given(productService.updateProduct(Mockito.any(Product.class))).willReturn(new Product());
-        given(mapper.productToProductResponseDto(Mockito.any(Product.class))).willReturn(responseData);
+        given(mapper.productPatchDtoToProduct(any(ProductPatchDto.class))).willReturn(new Product());
+        given(productService.updateProduct(any(Product.class))).willReturn(new Product());
+        given(mapper.productToProductResponseDto(any(Product.class))).willReturn(productData);
+
+        String content = gson.toJson(patchData);
 
         //when
         ResultActions actions = mockMvc.perform(
                 put("/admin/edit/{product-id}", productData.getProductId())
-                        .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(content));
 
-
-        actions
+        //then
+                actions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.productId").value(responseData.getProductId()))
-                .andExpect(jsonPath("$.data.productName").value(responseData.getProductName()))
-                .andExpect(jsonPath("$.data.price").value(responseData.getPrice()))
-                .andExpect(jsonPath("$.data.quantity").value(responseData.getQuantity()))
-
-                .andDo(document("update-product",              // (9)
+                .andExpect(jsonPath("$.data.productName").value(productData.getProductName()))
+                        .andDo(document("update-product",              // (9)
                             preprocessRequest(prettyPrint()),
                             preprocessResponse(prettyPrint()),
                             pathParameters(

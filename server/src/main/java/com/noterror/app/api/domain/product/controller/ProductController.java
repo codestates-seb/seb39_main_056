@@ -5,6 +5,7 @@ import com.noterror.app.api.domain.product.dto.ProductPatchDto;
 import com.noterror.app.api.domain.product.mapper.ProductMapper;
 import com.noterror.app.api.domain.product.service.ProductService;
 import com.noterror.app.api.global.response.SingleProductResponse;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/")
 @RequiredArgsConstructor
+@AllArgsConstructor
 @CrossOrigin(origins="*")
 public class ProductController {
 

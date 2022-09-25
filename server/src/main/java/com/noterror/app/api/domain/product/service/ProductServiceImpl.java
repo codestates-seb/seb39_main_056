@@ -4,24 +4,19 @@ import com.noterror.app.api.domain.entity.Product;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProductServiceImpl implements ProductService{
     private final ProductRepository productRepository;
-    @Override
-    @Transactional(readOnly = true)
-    public Product findProduct(Long productId) {
-
-        return productRepository.findById(productId)
-                .orElseThrow(()-> new NullPointerException("조회된 제품이 없습니다."));
-    }
-
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Product updateProduct(Product product){
 
         Product findProduct = findExistProduct(product.getProductId());

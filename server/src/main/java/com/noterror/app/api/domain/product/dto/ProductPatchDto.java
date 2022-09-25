@@ -12,4 +12,8 @@ public class ProductPatchDto {
     private int quantity;
     private String thumbnailImage;
     private String detailImage;
+
+    public void setProductId(Long productId){
+        this.productId = productId;
+    }
 }
