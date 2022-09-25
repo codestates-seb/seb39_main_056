@@ -10,7 +10,7 @@ function App() {
 			<Router>
 				<GlobalStyles />
 				<Header />
-				<Route path="/product:id" element={<ProductPage />} />
+				<Route path="/product/:id" element={<ProductPage />} />
 			</Router>
 		</>
 	);
