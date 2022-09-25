@@ -15,6 +15,17 @@ spring :
         format_sql: true
     show-sql: true
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 168883878507-baobefrju8ott00dsdqgme60fl2im107.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile
+
 logging:
   level:
     org:
@@ -22,7 +33,5 @@ logging:
         orm:
           jpa: DEBUG
 
-server:
-  port:
-    9050
+
 
