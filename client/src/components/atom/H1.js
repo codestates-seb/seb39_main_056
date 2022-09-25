@@ -6,6 +6,7 @@ const H1 = styled.p`
 	font-weight: 500;
 	letter-spacing: -0.8px;
 	text-align: center;
+	margin-bottom: 0;
 `;
 
 export default H1;
