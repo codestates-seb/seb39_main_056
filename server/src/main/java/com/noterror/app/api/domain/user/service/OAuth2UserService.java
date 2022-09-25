@@ -9,7 +9,7 @@ import com.noterror.app.api.domain.entity.User;
 import com.noterror.app.api.domain.user.dto.IdTokenRequestDto;
 import com.noterror.app.api.domain.user.repository.UserRepository;
 import com.noterror.app.infra.filter.JWTUtils;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

@@ -23,7 +23,7 @@ logging:
           jpa: DEBUG
 
 app:
-  jwtSecret: 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
-  googleClientId: 168883878507-baobefrju8ott00dsdqgme60fl2im107.apps.googleusercontent.com
+  jwtSecret: {secret}
+  googleClientId: {client-id}
 
 
