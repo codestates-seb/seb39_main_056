@@ -1,35 +1,41 @@
 package com.noterror.app.api.domain.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
-@Data
+
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    private String provider;
-    private String providerId;
-    private String role;
     private String username;
+
     private String email;
 
-    @Builder
-    public User(String provider, String providerId, String role, String username, String email) {
-        this.provider = provider;
-        this.providerId = providerId;
-        this.role = role;
-        this.username = username;
+    private String role;
+
+    private String password;
+
+    private int phone;
+
+    @Embedded
+    private Address address;
+
+    private String vegetarianType;
+
+    public User(String firstName, String lastName, String email) {
+        this.username = lastName + firstName;
         this.email = email;
     }
+
+    //TODO 가입유형
+
 }
