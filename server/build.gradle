@@ -1,9 +1,8 @@
 plugins {
     id 'org.springframework.boot' version '2.7.3'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-    //id 'org.asciidoctor.convert' version '1.5.8'
-    id 'java'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'java'
 }
 
 group = 'com.noterror'
@@ -22,8 +21,11 @@ repositories {
 }
 
 ext {
-//    set('snippetsDir', file("build/generated-snippets"))
     snippetsDir = file('build/generated-snippets')
+}
+
+configurations {
+    asciidoctorExtensions
 }
 
 dependencies {
@@ -35,6 +37,7 @@ dependencies {
 
     //Spring web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.projectlombok:lombok:1.18.20'
 
     //lombok
     compileOnly 'org.projectlombok:lombok'
@@ -46,23 +49,17 @@ dependencies {
     //test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+
     //rest docs
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     implementation 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     implementation 'com.google.code.gson:gson'
 
-
+    //mapstruct
     // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
-    implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.2.Final'
-
-    //asciidoctor
-    implementation 'org.springframework.restdocs:spring-restdocs-asciidoctor'
-
-    // Spring Security https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
-  //  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.7.4'
-
+    implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
 }
-
 
 tasks.named('test') {
     outputs.dir snippetsDir
@@ -70,7 +67,7 @@ tasks.named('test') {
 }
 
 tasks.named('asciidoctor') {
-    configurations "asciidoctorExtensitons"
+    configurations "asciidoctorExtensions"
     inputs.dir snippetsDir
     dependsOn test
 }
