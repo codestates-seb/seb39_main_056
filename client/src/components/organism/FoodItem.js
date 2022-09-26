@@ -19,7 +19,6 @@ const FoodItem = ({ item }) => {
 	const onClick = e => {
 		setIsClick(!isClick);
 		console.log(e.target.textContent, isClick);
-		//그다음에 어떻게 하지?
 	};
 	return (
 		<FoodCategoryBtn onClick={onClick} isClick={isClick}>

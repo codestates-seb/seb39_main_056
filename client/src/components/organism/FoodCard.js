@@ -2,6 +2,7 @@
 import H2 from '../atom/H2';
 import H3 from '../atom/H3';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
 	display: flex;
@@ -31,11 +32,13 @@ const FoodCard = ({ card }) => {
 		fontWeight: '600',
 	};
 	return (
-		<Container>
-			<Img src={card?.thumbnailImage} />
-			<H2 style={style}>{card?.productName}</H2>
-			<H3>{card?.price}원</H3>
-		</Container>
+		<Link to="/product/:id">
+			<Container>
+				<Img src={card?.thumbnailImage} />
+				<H2 style={style}>{card?.productName}</H2>
+				<H3>{card?.price}원</H3>
+			</Container>
+		</Link>
 	);
 };
 
