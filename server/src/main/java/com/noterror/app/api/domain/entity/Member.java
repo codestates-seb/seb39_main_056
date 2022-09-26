@@ -14,25 +14,26 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "member")
 public class Member {
+    /** 회원 식별자 */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long memberId;
 
+    /** 회원 이름 */
     @Column(nullable = false)
     private String memberName;
 
-//    @Column(nullable = false)
-//    private String password;
-
-    @Column(nullable = false)
+    /** 이메일 */
+    @Column(unique = true, nullable = false)
     private String email;
 
+    /** 휴대전화번호 */
     @Column(nullable = false)
     private String phone;
 
     /** 우편번호 */
     @Column(nullable = false)
-    private int zipCode;
+    private String zipCode;
 
     /** 도로명 주소 */
     @Column(nullable = false)
@@ -48,12 +49,8 @@ public class Member {
     @Column(nullable = true)
     private LocalDateTime regDate = LocalDateTime.now();
 
-//    /** 소셜명 */
-//    @Column(nullable = false)
-//    private String signupType;
 
-    /** Admin/User 역할 */
-    @Enumerated(EnumType.STRING)
+    /** Admin/User 역할구분 */
     @Column(nullable = true)
     private Role role;
 }
