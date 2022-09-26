@@ -1,6 +1,7 @@
 package com.noterror.app.api.domain.product.service;
 
 import com.noterror.app.api.domain.entity.Product;
+import com.noterror.app.api.domain.product.dto.ProductPostDto;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface ProductService {
     
     Product updateProduct(Product product);
     
-    Product createProduct(ProductRequestDto productRequestDto);
+    Product createProduct(ProductPostDto productPostDto);
 
     void delete(long productId);
 }

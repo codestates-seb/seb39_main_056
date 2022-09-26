@@ -2,17 +2,23 @@ package com.noterror.app.api.domain.product.controller;
 
 import com.noterror.app.api.domain.entity.Product;
 import com.noterror.app.api.domain.product.dto.ProductPatchDto;
+import com.noterror.app.api.domain.product.dto.ProductPostDto;
+import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.mapper.ProductMapper;
 import com.noterror.app.api.domain.product.service.ProductService;
+import com.noterror.app.api.global.response.MultiProductResponse;
 import com.noterror.app.api.global.response.SingleProductResponse;
+import com.noterror.app.api.global.sort.Sort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+
 /**
  * 담당자 : 강시혁, 이현석, 홍민정
  */
@@ -81,8 +87,8 @@ public class ProductController {
     * 제품 등록
     */
     @PostMapping("/admin/registration")
-    public ResponseEntity<ProductResponseDto> postProduct(@RequestBody ProductRequestDto productRequestDto){
-        Product sellerProductRequest = productService.createProduct(productRequestDto);
+    public ResponseEntity<ProductResponseDto> postProduct(@RequestBody ProductPostDto productPostDto){
+        Product sellerProductRequest = productService.createProduct(productPostDto);
 
         return new ResponseEntity(
                 new SingleProductResponse(new ProductResponseDto(sellerProductRequest)), HttpStatus.CREATED);

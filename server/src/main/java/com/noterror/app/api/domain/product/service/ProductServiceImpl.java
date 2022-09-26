@@ -1,14 +1,13 @@
 package com.noterror.app.api.domain.product.service;
 
-import com.noterror.app.api.domain.product.dto.ProductRequestDto;
-import com.noterror.app.api.domain.product.dto.ProductResponseDto;
+import com.noterror.app.api.domain.product.dto.ProductPostDto;
 import com.noterror.app.api.domain.entity.Product;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -59,13 +58,13 @@ public class ProductServiceImpl implements ProductService{
     }
     
     @Override
-    public Product createProduct(ProductRequestDto productRequestDto){
+    public Product createProduct(ProductPostDto productPostDto){
         Product product = new Product();
-        product.setProductName(productRequestDto.getProductName());
-        product.setPrice(productRequestDto.getPrice());
-        product.setQuantity(productRequestDto.getQuantity());
-        product.setDetailImage(productRequestDto.getDetailImage());
-        product.setThumbnailImage(productRequestDto.getThumbnailImage());
+        product.setProductName(productPostDto.getProductName());
+        product.setPrice(productPostDto.getPrice());
+        product.setQuantity(productPostDto.getQuantity());
+        product.setDetailImage(productPostDto.getDetailImage());
+        product.setThumbnailImage(productPostDto.getThumbnailImage());
 
         return productRepository.save(product);
     }

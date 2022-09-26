@@ -1,5 +1,6 @@
-package com.noterror.app;
+package com.noterror.app.restdocs;
 
+import com.google.gson.Gson;
 import com.noterror.app.api.domain.entity.Role;
 import com.noterror.app.api.domain.entity.Member;
 import com.noterror.app.api.domain.user.controller.MemberController;
@@ -28,12 +29,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MemberController.class)
 @AutoConfigureRestDocs
 public class MemberControllerRestDocs {
-    @Autowired
-    private MockMvc mockMvc;
-    @MockBean
-    private MemberService memberService;
+
+    @Autowired private MockMvc mockMvc;
+    @Autowired private Gson gson;
+
+    @MockBean private MemberService memberService;
+
     @Test
-    void postUser() throws Exception {
+    void postMember() throws Exception {
 
         //given
         Member memberData = Member.builder()
