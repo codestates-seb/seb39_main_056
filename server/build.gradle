@@ -53,7 +53,7 @@ dependencies {
     //rest docs
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     implementation 'org.springframework.restdocs:spring-restdocs-asciidoctor'
-    implementation 'com.google.code.gson:gson'
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     //mapstruct
     // https://mvnrepository.com/artifact/org.mapstruct/mapstruct

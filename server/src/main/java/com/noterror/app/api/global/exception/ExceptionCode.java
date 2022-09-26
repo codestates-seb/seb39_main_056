@@ -21,7 +21,6 @@ public enum ExceptionCode {
 
 
     //Token
-
     @Getter
     private int status;
 
