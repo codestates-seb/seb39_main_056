@@ -11,6 +11,10 @@ endif::[]
 
 * `Kang Si Hyeak(JAMES) <zlcls456@gmail.com>`
 
+* `Lee Hyun Suk <rjqnrdl0331@gmail.com>`
+
+* `Hong Min Jeong(HONG) <alswjd3813@naver.com>`
+
 v1.0.0, 2022.09.23
 
 ***
@@ -105,4 +109,19 @@ NOTE: 정렬 방식은 asc(오름차순), desc(내림차순)으로 입력할 수
 
 === Response-fields
 include::{snippets}/get-products/response-fields.adoc[]
+
+== 제품 등록
+
+=== URL endpoint
+include::{snippets}/post-product/curl-request.adoc[]
+
+
+=== Request-body
+include::{snippets}/post-product/request-body.adoc[]
+
+=== Response-body
+include::{snippets}/post-product/response-body.adoc[]
+
+=== Response-fields
+include::{snippets}/post-product/response-fields.adoc[]
 

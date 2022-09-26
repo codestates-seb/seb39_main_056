@@ -7,8 +7,9 @@ import org.springframework.http.HttpStatus;
 public class SingleProductResponse<T> {
  
     private T product;
-
+    
     public SingleProductResponse(T product){
         this.product = product;
     }
+
 }

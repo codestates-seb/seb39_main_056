@@ -65,7 +65,7 @@ public class ProductController {
     }
     
     /**
-    * 제품 
+    * 제품 수정
     */
     @PutMapping("/admin/edit/{product-id}")
     public ResponseEntity patchProduct(@PathVariable("product-id") Long productId, @Valid @RequestBody ProductPatchDto productPatchDto){
@@ -75,5 +75,26 @@ public class ProductController {
         return new ResponseEntity<>(
                         new SingleProductResponse<>(mapper.productToProductResponseDto(Result)),
                         HttpStatus.OK);
+    }
+    
+    /**
+    * 제품 등록
+    */
+    @PostMapping("/admin/registration")
+    public ResponseEntity<ProductResponseDto> postProduct(@RequestBody ProductRequestDto productRequestDto){
+        Product sellerProductRequest = productService.createProduct(productRequestDto);
+
+        return new ResponseEntity(
+                new SingleProductResponse(new ProductResponseDto(sellerProductRequest)), HttpStatus.CREATED);
+    }
+    
+    /**
+    * 제품 삭제
+    */
+    @DeleteMapping("/admin/edit/{productId}")
+    public ResponseEntity deleteProduct(@PathVariable("productId") long ProductId) {
+        productService.delete(ProductId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

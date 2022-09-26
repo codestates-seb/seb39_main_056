@@ -25,4 +25,8 @@ public interface ProductService {
     Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy);
     
     Product updateProduct(Product product);
+    
+    Product createProduct(ProductRequestDto productRequestDto);
+
+    void delete(long productId);
 }

@@ -1,5 +1,7 @@
 package com.noterror.app.api.domain.product.service;
 
+import com.noterror.app.api.domain.product.dto.ProductRequestDto;
+import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.entity.Product;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +56,24 @@ public class ProductServiceImpl implements ProductService{
                 .ifPresent(thumbnailImage -> findProduct.setThumbnailImage(thumbnailImage));
 
         return productRepository.save(findProduct);
+    }
+    
+    @Override
+    public Product createProduct(ProductRequestDto productRequestDto){
+        Product product = new Product();
+        product.setProductName(productRequestDto.getProductName());
+        product.setPrice(productRequestDto.getPrice());
+        product.setQuantity(productRequestDto.getQuantity());
+        product.setDetailImage(productRequestDto.getDetailImage());
+        product.setThumbnailImage(productRequestDto.getThumbnailImage());
+
+        return productRepository.save(product);
+    }
+    
+    @Override
+    public void delete(long productId) {
+        Product findProduct = findExistProduct(productId);
+        productRepository.delete(findProduct);
     }
 
     public Product findExistProduct(Long productId) {
