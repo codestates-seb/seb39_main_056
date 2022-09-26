@@ -3,7 +3,9 @@ package com.noterror.app.api.domain.product.service;
 import com.noterror.app.api.domain.entity.Product;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,11 +13,12 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProductServiceImpl implements ProductService{
     private final ProductRepository productRepository;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Product updateProduct(Product product){
 
         Product findProduct = findExistProduct(product.getProductId());
@@ -34,7 +37,6 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.save(findProduct);
     }
 
-    @Override
     public Product findExistProduct(Long productId) {
         Optional<Product> optionalProduct = productRepository.findById(productId);
         Product findProduct =

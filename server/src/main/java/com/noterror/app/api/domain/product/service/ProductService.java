@@ -7,5 +7,4 @@ public interface ProductService {
 
     Product updateProduct(Product product);
 
-    Product findExistProduct(Long productId);
 }
