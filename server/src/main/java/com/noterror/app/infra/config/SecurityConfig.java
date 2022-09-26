@@ -26,11 +26,11 @@ public class SecurityConfig{
         http.cors();
         http.headers().frameOptions().disable();
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringAntMatchers("*");
+                        .ignoringAntMatchers("/oauth/login/google");
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeRequests()
-                .antMatchers("/oauth/login/*").permitAll()
+                .antMatchers("/oauth/login/google").permitAll()
                 .anyRequest().authenticated();
         return http.build();
     }

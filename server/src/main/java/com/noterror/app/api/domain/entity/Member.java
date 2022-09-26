@@ -10,29 +10,30 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class User {
+@Table(name = "ACCOUNT")
+public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long memberId;
 
-    private String username;
+    private String memberName;
 
     private String email;
 
     private String role;
 
-    private String password;
+    //private String password;
 
-    private int phone;
+    private String phone;
 
     @Embedded
     private Address address;
 
     private String vegetarianType;
 
-    public User(String firstName, String lastName, String email) {
-        this.username = lastName + firstName;
+    public Member(String firstName, String lastName, String email) {
+        this.memberName = lastName + firstName;
         this.email = email;
     }
 

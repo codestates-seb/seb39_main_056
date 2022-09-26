@@ -9,7 +9,7 @@ spring :
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
@@ -23,7 +23,7 @@ logging:
           jpa: DEBUG
 
 app:
-  jwtSecret: {secret}
-  googleClientId: {client-id}
+  jwtSecret: Aslkdjalwidjaslmdnmcnvxleflisdjflskejflidsjflskjefasdsadsadasdqweqewqe123asdsadzxczcadw
+  googleClientId: 768802690854-ss2gofhva6jah2687ifdnts745bkvf05.apps.googleusercontent.com
 
 

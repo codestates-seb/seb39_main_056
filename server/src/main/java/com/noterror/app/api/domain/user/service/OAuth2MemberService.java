@@ -5,9 +5,9 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.noterror.app.api.domain.entity.User;
+import com.noterror.app.api.domain.entity.Member;
 import com.noterror.app.api.domain.user.dto.IdTokenRequestDto;
-import com.noterror.app.api.domain.user.repository.UserRepository;
+import com.noterror.app.api.domain.user.repository.MemberRepository;
 import com.noterror.app.infra.filter.JWTUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,16 +18,16 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 
 @Service
-public class OAuth2UserService {
+public class OAuth2MemberService {
 
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
     private final JWTUtils jwtUtils;
     private final GoogleIdTokenVerifier verifier;
 
-    public OAuth2UserService(@Value("${app.googleClientId}") String clientId,
-                          UserRepository userRepository,
-                          JWTUtils jwtUtils) {
-        this.userRepository = userRepository;
+    public OAuth2MemberService(@Value("${app.googleClientId}") String clientId,
+                               MemberRepository memberRepository,
+                               JWTUtils jwtUtils) {
+        this.memberRepository = memberRepository;
         this.jwtUtils = jwtUtils;
         NetHttpTransport transport = new NetHttpTransport();
         JsonFactory jsonFactory = new JacksonFactory();
@@ -37,32 +37,32 @@ public class OAuth2UserService {
     }
 
     public String loginOAuthGoogle(IdTokenRequestDto requestBody) {
-        User user = verifyIDToken(requestBody.getIdToken());
-        if(user == null) {
+        Member member = verifyIDToken(requestBody.getIdToken());
+        if(member == null) {
             throw new IllegalStateException();
         }
-        user = createOrUpdateUser(user);
-        return jwtUtils.createToken(user, false);
+        member = createOrUpdateUser(member);
+        return jwtUtils.createToken(member, false);
     }
 
     @Transactional
-    public User createOrUpdateUser(User user) {
+    public Member createOrUpdateUser(Member member) {
 
-        User existingUser =
-                userRepository
-                        .findByEmail(user.getEmail()).orElse(null);
-        if (existingUser == null) {
-            user.setRole("ROLE_USER");
-            userRepository.save(user);
-            return user;
+        Member existingMember =
+                memberRepository
+                        .findByEmail(member.getEmail()).orElse(null);
+        if (existingMember == null) {
+            member.setRole("ROLE_USER");
+            memberRepository.save(member);
+            return member;
         }
-        existingUser.setUsername(user.getUsername());
-        existingUser.setEmail(user.getEmail());
-        userRepository.save(existingUser);
-        return existingUser;
+        existingMember.setMemberName(member.getMemberName());
+        existingMember.setEmail(member.getEmail());
+        memberRepository.save(existingMember);
+        return existingMember;
     }
 
-    private User verifyIDToken(String idToken) {
+    private Member verifyIDToken(String idToken) {
         try {
             GoogleIdToken idTokenObj = verifier.verify(idToken);
             if (idTokenObj == null) {
@@ -74,7 +74,7 @@ public class OAuth2UserService {
             String firstName = (String) payload.get("given_name");
             String lastName = (String) payload.get("family_name");
 
-            return new User(firstName, lastName, email);
+            return new Member(firstName, lastName, email);
         } catch (GeneralSecurityException | IOException e) {
             return null;
         }

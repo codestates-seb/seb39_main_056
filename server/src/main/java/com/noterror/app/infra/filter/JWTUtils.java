@@ -1,6 +1,6 @@
 package com.noterror.app.infra.filter;
 
-import com.noterror.app.api.domain.entity.User;
+import com.noterror.app.api.domain.entity.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -30,14 +30,14 @@ public class JWTUtils {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String createToken(User user, boolean rememberMe) {
+    public String createToken(Member member, boolean rememberMe) {
         long now = (new Date()).getTime();
         Date validity = rememberMe ? new Date(now + TOKEN_VALIDITY_REMEMBER) : new Date(now + TOKEN_VALIDITY);
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", user.getRole());
+        claims.put("role", member.getRole());
 
         return Jwts.builder()
-                .setSubject(user.getUserId().toString())
+                .setSubject(member.getMemberId().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(validity)
                 .addClaims(claims)
