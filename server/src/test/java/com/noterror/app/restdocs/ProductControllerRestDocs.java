@@ -1,38 +1,38 @@
 package com.noterror.app.restdocs;
 
-import com.google.gson.Gson;
+import com.noterror.app.api.admin.AdminProductController;
 import com.noterror.app.api.domain.entity.Product;
-import com.noterror.app.api.domain.product.dto.ProductRequestDto;
-import com.noterror.app.api.domain.product.dto.ProductResponseDto;
+import com.noterror.app.api.domain.product.controller.ProductController;
 import com.noterror.app.api.domain.product.service.ProductService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
-import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.noterror.app.stubData.ProductStubData.getProductsSortSignDate;
+import static com.noterror.app.stubData.ProductStubData.responseProductData;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WebMvcTest(ProductController.class)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
 class ProductControllerRestDocs {
@@ -47,22 +47,12 @@ class ProductControllerRestDocs {
     @DisplayName("제품 상세 조회 API 문서화")
     void getProduct() throws Exception {
 
-        ProductResponseDto responseProductData =
-                new ProductResponseDto(
-                        1L,
-                        "카레라면",
-                        3, 10000,
-                        LocalDateTime.now(),
-                        "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA",
-                        "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
-                );
-
         given(productService.findProduct(Mockito.anyLong()))
-                .willReturn(responseProductData);
+                .willReturn(responseProductData());
 
         mockMvc.perform(
                         get("/products/detail/{product-id}"
-                                , responseProductData.getProductId()))
+                                , responseProductData().getProductId()))
                 .andExpect(status().isOk())
                 .andDo(document("get-product",
                         preprocessRequest(prettyPrint()),
@@ -91,30 +81,8 @@ class ProductControllerRestDocs {
     @DisplayName("제품 전체 조회 API 문서화")
     void getProducts_with_page_and_size() throws Exception {
 
-        Product productDataInDB_1
-                = Product.builder()
-                .productId(1L)
-                .productName("카레라면")
-                .price(10000)
-                .quantity(3)
-                .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .signDate(LocalDateTime.now())
-                .build();
-
-        Product productDataInDB_2
-                = Product.builder()
-                .productId(2L)
-                .productName("옥수수식빵")
-                .price(2000)
-                .quantity(2)
-                .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .signDate(LocalDateTime.now().plusDays(1))
-                .build();
-
-        List<Product> responseProductsInList = (List.of(productDataInDB_2, productDataInDB_1));
-        Page<Product> responseProductsInPage = new PageImpl(responseProductsInList);
+        Page<Product> responseProductsInPage =
+                new PageImpl(getProductsSortSignDate());
 
         given(productService.findProductsWithPageAndSort(anyInt(), anyInt(), anyString(), anyString()))
                 .willReturn(responseProductsInPage);

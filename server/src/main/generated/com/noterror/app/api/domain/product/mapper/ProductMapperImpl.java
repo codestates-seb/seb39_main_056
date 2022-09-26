@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-26T19:49:36+0900",
+    date = "2022-09-26T21:42:33+0900",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.13 (Oracle Corporation)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
 
     @Override
-    public Product productPostDtoToProduct(ProductRequestDto request) {
+    public Product productRequestDtoToProduct(ProductRequestDto request) {
         if ( request == null ) {
             return null;
         }

@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDto createProduct(ProductRequestDto productRequestDto) {
 
-        Product mappingProduct = mapper.productPostDtoToProduct(productRequestDto);
+        Product mappingProduct = mapper.productRequestDtoToProduct(productRequestDto);
         Product newProduct = productRepository.save(mappingProduct);
         ProductResponseDto result = mapper.productToProductResponseDto(newProduct);
 

@@ -3,9 +3,7 @@ package com.noterror.app.restdocs;
 import com.google.gson.Gson;
 import com.noterror.app.api.admin.AdminProductController;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
-import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.service.ProductService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,9 +17,10 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.noterror.app.stubData.ProductStubData.requestProductData;
+import static com.noterror.app.stubData.ProductStubData.responseProductData;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
@@ -41,48 +40,22 @@ class AdminProductControllerRestDocs {
 
     @Autowired
     MockMvc mockMvc;
-
-    @MockBean
-    private ProductService productService;
-
     @Autowired
     Gson gson;
 
-    static ProductRequestDto requestProductData;
-    static ProductResponseDto responseProductData;
-
-    @BeforeEach
-    void beforeEach() {
-        requestProductData =
-                new ProductRequestDto(
-                        "카레라면",
-                        3, 10000,
-                        "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA",
-                        "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
-                );
-
-
-        responseProductData =
-                new ProductResponseDto(
-                        1L,
-                        "카레라면",
-                        3, 10000,
-                        LocalDateTime.now(),
-                        "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA",
-                        "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
-                );
-    }
+    @MockBean
+    private ProductService productService;
 
     @Test
     @DisplayName("제품 등록 API 문서화")
     void postProductApiDocs() throws Exception {
 
-        String jsonOfRequest = gson.toJson(requestProductData);
+        String jsonOfRequest = gson.toJson(requestProductData());
 
         given(
                 productService.createProduct(
                         Mockito.any(ProductRequestDto.class)))
-                .willReturn(responseProductData);
+                .willReturn(responseProductData());
 
         ResultActions action = mockMvc.perform(
                 post("/admin/products/registration")
@@ -125,13 +98,13 @@ class AdminProductControllerRestDocs {
 
         Long productId = 1L;
         Gson gson = new Gson();
-        String jsonOfRequest = gson.toJson(requestProductData);
+        String jsonOfRequest = gson.toJson(requestProductData());
 
         given(
                 productService.updateProduct(
                         anyLong(),
                         Mockito.any(ProductRequestDto.class)))
-                .willReturn(responseProductData);
+                .willReturn(responseProductData());
 
         ResultActions actions = mockMvc.perform(
                 put("/admin/products/edit/{product-id}", productId)

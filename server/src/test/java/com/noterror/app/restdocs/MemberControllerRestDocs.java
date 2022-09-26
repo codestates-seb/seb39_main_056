@@ -30,10 +30,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs
 public class MemberControllerRestDocs {
 
-    @Autowired private MockMvc mockMvc;
-    @Autowired private Gson gson;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private Gson gson;
 
-    @MockBean private MemberService memberService;
+    @MockBean
+    private MemberService memberService;
 
     @Test
     void postMember() throws Exception {
@@ -55,7 +58,7 @@ public class MemberControllerRestDocs {
 
         //when
         mockMvc.perform( //content로 넣어주기
-                post("/oauth/sign-up"))
+                        post("/oauth/sign-up"))
                 .andExpect(status().isCreated())
                 .andDo(document("post-user",
                         preprocessRequest(prettyPrint()),
@@ -71,7 +74,7 @@ public class MemberControllerRestDocs {
                                         fieldWithPath("user.zipCode").type(JsonFieldType.STRING).description("우편번호"),
                                         fieldWithPath("user.detailAddress").type(JsonFieldType.STRING).description("상세주소"),
                                         fieldWithPath("user.role").type(JsonFieldType.STRING).description("회원 유형")
-                                       // fieldWithPath("user.vegetationType").type(JsonFieldType.STRING).description("채식 유형")
+                                        // fieldWithPath("user.vegetationType").type(JsonFieldType.STRING).description("채식 유형")
                                 )
                         )
                 ));
