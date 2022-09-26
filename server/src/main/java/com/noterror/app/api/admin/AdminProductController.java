@@ -15,6 +15,7 @@ import javax.validation.Valid;
 /**
  * 담당자 : 이현석, 홍민정
  * SCOPE : ADMIN PAGE, ROLE_ADMIN
+ * 리팩토링 : 강시혁
  * 대상 : Product
  */
 @RestController
