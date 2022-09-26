@@ -1,6 +1,7 @@
 package com.noterror.app.api.domain.product.service;
 
 import com.noterror.app.api.domain.entity.Product;
+import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -48,12 +49,12 @@ class ProductServiceImplSliceTest {
         //when
         given(productRepository.findById(anyLong()))
                 .willReturn(Optional.of(dataInDB));
-        Product getProduct = productService.findProduct(1L);
+        ProductResponseDto response = productService.findProduct(1L);
 
         //then
-        assertEquals(getProduct.getProductId(),dataInDB.getProductId());
-        assertEquals(getProduct.getProductName(), dataInDB.getProductName());
-        assertEquals(getProduct.getSignDate(), dataInDB.getSignDate());
+        assertEquals(response.getProductId(),dataInDB.getProductId());
+        assertEquals(response.getProductName(), dataInDB.getProductName());
+        assertEquals(response.getSignDate(), dataInDB.getSignDate());
     }
 
     @Test

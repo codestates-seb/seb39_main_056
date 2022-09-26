@@ -2,6 +2,7 @@ package com.noterror.app.api.domain.product.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -9,11 +10,10 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductPostDto {
+public class ProductRequestDto {
     private String productName;
     private int quantity;
     private int price;
     private String thumbnailImage;
     private  String detailImage;
-
 }

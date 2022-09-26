@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.entity;
 
+import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,9 +8,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
-@AllArgsConstructor @Builder
-public class Product{
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +22,6 @@ public class Product{
     private String productName;
 
     private int price;
-
 
     private int quantity;
 
@@ -34,4 +37,13 @@ public class Product{
 
     // TODO : 식재료
     // TODO : 카테고리
+
+    //== BUSINESS LOGIC ==//
+    public void updateProductInfo(ProductRequestDto productRequestDto) {
+        this.productName = productRequestDto.getProductName();
+        this.quantity = productRequestDto.getQuantity();
+        this.price = productRequestDto.getPrice();
+        this.thumbnailImage = productRequestDto.getThumbnailImage();
+        this.detailImage = productRequestDto.getDetailImage();
+    }
 }
