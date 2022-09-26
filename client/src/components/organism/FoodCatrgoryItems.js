@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import H2 from '../atom/H2';
+
+import FoodItem from './FoodItem';
 
 const FoodCategoryContainer = styled.div`
 	display: flex;
@@ -8,33 +9,11 @@ const FoodCategoryContainer = styled.div`
 	flex-wrap: wrap;
 `;
 
-const FoodCategoryBtn = styled.div`
-	flex-grow: 1;
-	width: 110px;
-	padding: 10px 40px;
-	border: none;
-	cursor: pointer;
-	color: #33272a;
-	border: 1px solid #c3f0ca;
-	text-align: center;
-	background-color: ${props => props.isClick || '#c3f0ca'};
-`;
-
 const FoodCatrgoryItems = ({ Foodarr }) => {
-	const [isClick, setIsClick] = useState(false);
-	const onClick = e => {
-		setIsClick(!isClick);
-		console.log(e.target.textContent, isClick);
-		//그다음에 어떻게 하지?
-	};
 	return (
 		<FoodCategoryContainer>
 			{Foodarr.map((item, i) => {
-				return (
-					<FoodCategoryBtn key={i} onClick={onClick} isClick={isClick}>
-						<H2>{item}</H2>
-					</FoodCategoryBtn>
-				);
+				return <FoodItem key={i} item={item} />;
 			})}
 		</FoodCategoryContainer>
 	);

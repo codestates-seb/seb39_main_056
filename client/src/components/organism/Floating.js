@@ -2,15 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-	background-color: beige;
 	position: fixed;
 	bottom: 0;
 	right: 0;
 	margin: 20px;
 	border-radius: 10px;
+	background-color: beige;
 `;
 
 const Item = styled.div`
+	color: #594a4e;
 	text-align: center;
 	width: 60px;
 	height: 20px;
