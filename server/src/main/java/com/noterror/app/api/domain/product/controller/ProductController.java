@@ -13,22 +13,60 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
+/**
+ * 담당자 : 강시혁, 이현석, 홍민정
+ */
 @RestController
-@RequestMapping("/products")
-@Validated
+@CrossOrigin
 @Slf4j
-@CrossOrigin(origins="*")
+@RequestMapping("/products")
+@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
     private final ProductMapper mapper;
 
-    public ProductController(ProductService productService, ProductMapper mapper){
-        this.productService = productService;
-        this.mapper = mapper;
+    /**
+     * 제품 개별 조회
+     * @param : productId
+     */
+    @GetMapping("/detail/{product-id}")
+    public ResponseEntity getProduct(@PathVariable("product-id") Long productId) {
+
+        Product getProduct = productService.findProduct(productId);
+
+        return new ResponseEntity(
+                new SingleProductResponse(getProduct),
+                HttpStatus.OK);
     }
 
+    /**
+     * 제품 전체 조회
+     */
+    @GetMapping("/list")
+    public ResponseEntity getProducts(@RequestParam(required = false, defaultValue = "1") int page,
+                                      @RequestParam(required = false, defaultValue = "20") int size,
+                                      @RequestParam(required = false, defaultValue = "signDate") String sort,
+                                      @RequestParam(required = false, defaultValue = "desc") String orderBy) {
+
+        Page<Product> productInPage =
+                productService.findProductsWithPageAndSort(page-1,size,sort,orderBy);
+        List<Product> productsInList = productInPage.getContent();
+
+        Sort sortInfo = new Sort(sort, orderBy);
+
+        return new ResponseEntity(
+                new MultiProductResponse(
+                        productsInList,productInPage,sortInfo
+                ),
+                HttpStatus.OK
+        );
+
+    }
+    
+    /**
+    * 제품 
+    */
     @PutMapping("/admin/edit/{product-id}")
     public ResponseEntity patchProduct(@PathVariable("product-id") Long productId, @Valid @RequestBody ProductPatchDto productPatchDto){
         productPatchDto.setProductId(productId);
@@ -38,5 +76,4 @@ public class ProductController {
                         new SingleProductResponse<>(mapper.productToProductResponseDto(Result)),
                         HttpStatus.OK);
     }
-
 }

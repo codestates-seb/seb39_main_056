@@ -13,12 +13,31 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class ProductServiceImpl implements ProductService{
+    
     private final ProductRepository productRepository;
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Product findProduct(Long productId) {
+
+        return productRepository.findById(productId)
+                .orElseThrow(()-> new NullPointerException("조회된 제품이 없습니다."));
+    }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+    public Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy) {
+
+        if(orderBy.equals("desc") || orderBy.equals(null)) {
+            return productRepository.findAll(
+                    PageRequest.of(page, size, Sort.by(sort).descending()));
+        }
+
+        return productRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
+    }
+
+    @Override
+    // @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE) - 공부
     public Product updateProduct(Product product){
 
         Product findProduct = findExistProduct(product.getProductId());

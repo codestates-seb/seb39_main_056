@@ -4,33 +4,34 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Builder
-public class Product {
+@Getter @Setter @NoArgsConstructor
+@AllArgsConstructor @Builder
+public class Product{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
-    @Column(nullable = false)
     private String productName;
 
-    @Column(nullable = false)
     private int price;
 
-    @Column(nullable = false)
+
     private int quantity;
 
-    @Column(nullable = false)
     private LocalDateTime signDate;
 
-    @Column(nullable = false)
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
     private String thumbnailImage;
 
-    @Column(nullable = false)
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
     private String detailImage;
+
+    // TODO : 식재료
+    // TODO : 카테고리
 }

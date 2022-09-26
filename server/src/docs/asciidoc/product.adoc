@@ -1,0 +1,108 @@
+= 채식 유형에 따른 개인맞춤형 상품 제공 웹 서비스
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+* `Kang Si Hyeak(JAMES) <zlcls456@gmail.com>`
+
+v1.0.0, 2022.09.23
+
+***
+== API 문서 개요
+
+해당 문서는 제품 상세 조회, 제품 전체 조회 기능들에 대한 API 문서입니다.
+
+NOTE: 기능에 대해서 문제가 있을 경우, 담당자에게 문의 하세요.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+***
+
+== 제품 상세 조회
+
+=== URL endpoint
+include::{snippets}/get-product/curl-request.adoc[]
+
+NOTE: Host 는 변경될 수 있습니다.
+
+=== Request-body
+include::{snippets}/get-product/request-body.adoc[]
+
+=== Response-body
+include::{snippets}/get-product/response-body.adoc[]
+
+=== Path-parameters
+include::{snippets}/get-product/path-parameters.adoc[]
+
+=== Response-fields
+include::{snippets}/get-product/response-fields.adoc[]
+
+== 제품 전체 조회
+
+=== URL endpoint
+include::{snippets}/get-products/curl-request.adoc[]
+
+NOTE: Host 는 변경될 수 있습니다.
+
+=== Request-body
+include::{snippets}/get-products/request-body.adoc[]
+
+=== Response-body
+include::{snippets}/get-products/response-body.adoc[]
+
+NOTE: 1페이지당 20개의 데이터가 등록 날짜의 내림차순 방식으로 정렬된 것 default입니다.
+
+=== request-parameters
+include::{snippets}/get-products/request-parameters.adoc[]
+
+
+NOTE: 정렬 기준은 signDate(등록 날짜), price(금액)으로 입력할 수 있습니다.
+
+NOTE: 정렬 방식은 asc(오름차순), desc(내림차순)으로 입력할 수 있습니다.
+
+=== Response-fields
+include::{snippets}/get-products/response-fields.adoc[]
+
