@@ -1,19 +1,18 @@
 package com.noterror.app.api.domain.product.controller;
 
 import com.noterror.app.api.domain.entity.Product;
+import com.noterror.app.api.domain.product.dto.ProductPatchDto;
+import com.noterror.app.api.domain.product.mapper.ProductMapper;
 import com.noterror.app.api.domain.product.service.ProductService;
-import com.noterror.app.api.global.response.MultiProductResponse;
 import com.noterror.app.api.global.response.SingleProductResponse;
-import com.noterror.app.api.global.sort.Sort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+import javax.validation.Valid;
 /**
  * 담당자 : 강시혁, 이현석, 홍민정
  */
@@ -25,6 +24,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductMapper mapper;
 
     /**
      * 제품 개별 조회
@@ -62,5 +62,18 @@ public class ProductController {
                 HttpStatus.OK
         );
 
+    }
+    
+    /**
+    * 제품 
+    */
+    @PutMapping("/admin/edit/{product-id}")
+    public ResponseEntity patchProduct(@PathVariable("product-id") Long productId, @Valid @RequestBody ProductPatchDto productPatchDto){
+        productPatchDto.setProductId(productId);
+        Product Result = productService.updateProduct(mapper.productPatchDtoToProduct(productPatchDto));
+
+        return new ResponseEntity<>(
+                        new SingleProductResponse<>(mapper.productToProductResponseDto(Result)),
+                        HttpStatus.OK);
     }
 }

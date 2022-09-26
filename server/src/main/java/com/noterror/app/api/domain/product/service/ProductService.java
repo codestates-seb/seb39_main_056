@@ -23,5 +23,6 @@ public interface ProductService {
      * @return Page
      */
     Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy);
-
+    
+    Product updateProduct(Product product);
 }
