@@ -1,0 +1,76 @@
+= 채식 유형에 따른 개인맞춤형 상품 제공 웹 서비스
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+
+v1.0.0, 2022.09.23
+
+***
+== API 문서 개요
+
+해당 문서는 제품 등록 기능에 대한 API 문서입니다.
+
+NOTE: 기능에 대해서 문제가 있을 경우, 담당자에게 문의 하세요.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+***
+
+== 제품 등록
+
+=== URL endpoint
+include::{snippets}/post-product/curl-request.adoc[]
+
+
+=== Request-body
+include::{snippets}/post-product/request-body.adoc[]
+
+=== Response-body
+include::{snippets}/post-product/response-body.adoc[]
+
+=== Response-fields
+include::{snippets}/post-product/response-fields.adoc[]
