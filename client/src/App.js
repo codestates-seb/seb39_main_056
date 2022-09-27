@@ -10,6 +10,7 @@ import Type from './components/pages/Type.js';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Info from './components/pages/Info';
+import Header from './components/organism/Header';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
         <BodyContainer>
           <Routes>
+          <Header />
             <Route path="/" element={<MainPage />} />
             <Route path="/mypage/:id" element={<Mypage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
