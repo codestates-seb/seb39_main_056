@@ -19,10 +19,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
+    @Column(nullable = false)
     private String productName;
 
+    @Column(nullable = false)
     private int price;
 
+    @Column(nullable = false)
     private int quantity;
 
     private LocalDateTime signDate;
