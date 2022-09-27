@@ -1,10 +1,11 @@
+
 package com.noterror.app.api.domain.entity;
 
+import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
 
 @Entity
 @AllArgsConstructor
@@ -15,14 +16,13 @@ import java.time.LocalDateTime;
 @Table(name = "member")
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
     @Column(nullable = false)
     private String memberName;
 
-//    @Column(nullable = false)
-//    private String password;
+    // TODO 패스워드
 
     @Column(nullable = false)
     private String email;
@@ -30,15 +30,21 @@ public class Member {
     @Column(nullable = false)
     private String phone;
 
-    /** 우편번호 */
+    /**
+     * 우편번호
+     */
     @Column(nullable = false)
-    private int zipCode;
+    private String zipCode;
 
-    /** 도로명 주소 */
+    /**
+     * 도로명 주소
+     */
     @Column(nullable = false)
     private String city;
 
-    /** 상세 주소(사용자 입력) */
+    /**
+     * 상세 주소(사용자 입력)
+     */
     @Column(nullable = false)
     private String detailAddress;
 
@@ -48,12 +54,17 @@ public class Member {
     @Column(nullable = true)
     private LocalDateTime regDate = LocalDateTime.now();
 
-//    /** 소셜명 */
-//    @Column(nullable = false)
-//    private String signupType;
-
-    /** Admin/User 역할 */
+    /**
+     * Admin/User 역할
+     */
     @Enumerated(EnumType.STRING)
     @Column(nullable = true)
     private Role role;
+
+    public void updateMemberInfo(MemberRequestDto memberRequestDto) {
+        this.phone = memberRequestDto.getPhone();
+        this.zipCode = memberRequestDto.getZipCode();
+        this.city = memberRequestDto.getCity();
+        this.detailAddress = memberRequestDto.getDetailAddress();
+    }
 }

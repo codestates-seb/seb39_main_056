@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 담당자 : 강시혁
+ * 담당자 : 강시혁, 황윤준
+ * SCOPE : 제품 조회
+ * 리팩토링 : 강시혁
+ * 대상 : PRODCUT
  */
 @RestController
 @CrossOrigin
@@ -64,6 +67,5 @@ public class ProductController {
                 ),
                 HttpStatus.OK
         );
-
     }
 }

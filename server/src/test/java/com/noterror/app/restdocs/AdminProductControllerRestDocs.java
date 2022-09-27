@@ -38,10 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs
 class AdminProductControllerRestDocs {
 
-    @Autowired
-    MockMvc mockMvc;
-    @Autowired
-    Gson gson;
+    @Autowired MockMvc mockMvc;
+    @Autowired Gson gson;
 
     @MockBean
     private ProductService productService;
@@ -97,7 +95,7 @@ class AdminProductControllerRestDocs {
     void putProductApiDocs() throws Exception {
 
         Long productId = 1L;
-        Gson gson = new Gson();
+
         String jsonOfRequest = gson.toJson(requestProductData());
 
         given(

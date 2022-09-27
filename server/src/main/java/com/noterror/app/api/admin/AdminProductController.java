@@ -29,7 +29,6 @@ public class AdminProductController {
 
     /**
      * 제품 등록
-     *
      * @RequestBody 제품명, 수량, 금액, 썸네일 이미지, 상세 이미지
      */
     @PostMapping("/registration")
@@ -43,12 +42,11 @@ public class AdminProductController {
 
     /**
      * 제품 수정
-     *
      * @PathVariable 제품 식별자
      * @RequestBody 제품명, 수량, 금액, 썸네일 이미지, 상세 이미지
      */
     @PutMapping("/edit/{product-id}")
-    public ResponseEntity patchProduct(@PathVariable("product-id") Long productId, @Valid @RequestBody ProductRequestDto productRequestDto) {
+    public ResponseEntity putProduct(@PathVariable("product-id") Long productId, @Valid @RequestBody ProductRequestDto productRequestDto) {
 
         ProductResponseDto response = productService.updateProduct(productId, productRequestDto);
 

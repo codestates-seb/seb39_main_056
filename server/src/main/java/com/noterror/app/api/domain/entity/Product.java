@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -28,7 +27,7 @@ public class Product {
     @Column(nullable = false)
     private int quantity;
 
-    private LocalDateTime signDate;
+    private LocalDateTime signDate = LocalDateTime.now();
 
     @Lob
     @Basic(fetch = FetchType.EAGER)
@@ -42,11 +41,11 @@ public class Product {
     // TODO : 카테고리
 
     //== BUSINESS LOGIC ==//
-    public void updateProductInfo(ProductRequestDto productRequestDto) {
-        this.productName = productRequestDto.getProductName();
-        this.quantity = productRequestDto.getQuantity();
-        this.price = productRequestDto.getPrice();
-        this.thumbnailImage = productRequestDto.getThumbnailImage();
-        this.detailImage = productRequestDto.getDetailImage();
+    public void updateProductInfo(ProductRequestDto productPatchDto) {
+        this.productName = productPatchDto.getProductName();
+        this.quantity = productPatchDto.getQuantity();
+        this.price = productPatchDto.getPrice();
+        this.thumbnailImage = productPatchDto.getThumbnailImage();
+        this.detailImage = productPatchDto.getDetailImage();
     }
 }

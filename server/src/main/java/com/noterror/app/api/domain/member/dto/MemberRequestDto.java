@@ -1,4 +1,4 @@
-package com.noterror.app.api.domain.user.dto;
+package com.noterror.app.api.domain.member.dto;
 
 import lombok.Data;
 import lombok.Getter;
@@ -13,6 +13,8 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 public class MemberRequestDto {
+
+    /** 회원 이름 */
     @NotBlank(message = "이름을 입력해주세요.")
     private String memberName;
 
@@ -27,7 +29,7 @@ public class MemberRequestDto {
 
     /** 우편번호 */
     @NotEmpty
-    private int zipCode;
+    private String zipCode;
 
     /** 도로명 주소 */
     @NotEmpty
@@ -37,7 +39,4 @@ public class MemberRequestDto {
     @NotEmpty
     private String detailAddress;
 
- //   private String role = "ROLE_USER";
- //   private String vegetarianType;
-//    private String signupType;
 }

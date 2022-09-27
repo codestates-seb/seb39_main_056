@@ -22,16 +22,16 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
+/**
+ * 슬라이스 테스트
+ */
 @ExtendWith(MockitoExtension.class)
 class ProductServiceImplSliceTest {
 
-    @Mock
-    private ProductRepository productRepository;
-    @Mock
-    private ProductMapper mapper;
+    @Mock private ProductRepository productRepository;
+    @Mock private ProductMapper mapper;
 
-    @InjectMocks
-    private ProductServiceImpl productService;
+    @InjectMocks private ProductServiceImpl productService;
 
     @Test
     @DisplayName("제품 조회 성공- 데이터 존재")

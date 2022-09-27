@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
  * JPA 즉, 엔티티에서 발생하는 에러에 대한 처리
  * ConstraintViolation : 실패 정보를 보관 하는 객체
  */
-
 @AllArgsConstructor
 @Getter
 public class ConstraintError {

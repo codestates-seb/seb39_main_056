@@ -1,10 +1,12 @@
 package com.noterror.app.api.domain.product.service;
 
-import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.entity.Product;
+import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.mapper.ProductMapper;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
+import com.noterror.app.api.global.exception.BusinessLogicException;
+import com.noterror.app.api.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -68,6 +70,6 @@ public class ProductServiceImpl implements ProductService {
 
     public Product findExistProduct(Long productId) {
         return productRepository.findById(productId)
-                .orElseThrow(() -> new NullPointerException("조회된 제품이 없습니다."));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.PRODUCT_NOT_FOUND));
     }
 }

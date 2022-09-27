@@ -13,16 +13,13 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class ProductRequestDto {
 
-
     @NotBlank(message = "이름을 입력해주세요.")
     @Length(max=50)
     private String productName;
 
-    @NotBlank(message = "수량을 입력해주세요.")
     @Min(1)
     private int quantity;
 
-    @NotBlank(message = "가격을 입력해주세요.")
     @Min(100)
     private int price;
 

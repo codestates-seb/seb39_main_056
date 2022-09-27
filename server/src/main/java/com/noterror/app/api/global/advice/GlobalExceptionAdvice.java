@@ -17,14 +17,14 @@ import javax.validation.ConstraintViolationException;
 @RestControllerAdvice
 public class GlobalExceptionAdvice {
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "유효성 검증 실패")
     public ErrorResponse handleValidException(MethodArgumentNotValidException e){
         final ErrorResponse response = ErrorResponse.of(e.getBindingResult());
         return response;
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "제약 조건이 위배")
     public ErrorResponse handleConstraintException(ConstraintViolationException e){
         final ErrorResponse response = ErrorResponse.of(e.getConstraintViolations());
         return response;
