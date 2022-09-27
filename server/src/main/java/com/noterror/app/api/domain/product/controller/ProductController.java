@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @Slf4j
+@Validated
 @RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
@@ -74,7 +76,7 @@ public class ProductController {
     * 제품 수정
     */
     @PutMapping("/admin/edit/{product-id}")
-    public ResponseEntity patchProduct(@PathVariable("product-id") Long productId, @Valid @RequestBody ProductPatchDto productPatchDto){
+    public ResponseEntity patchProduct(@PathVariable("product-id") Long productId, @RequestBody @Valid ProductPatchDto productPatchDto){
         productPatchDto.setProductId(productId);
         Product Result = productService.updateProduct(mapper.productPatchDtoToProduct(productPatchDto));
 
@@ -87,7 +89,7 @@ public class ProductController {
     * 제품 등록
     */
     @PostMapping("/admin/registration")
-    public ResponseEntity<ProductResponseDto> postProduct(@RequestBody ProductPostDto productPostDto){
+    public ResponseEntity<ProductResponseDto> postProduct(@RequestBody @Valid ProductPostDto productPostDto){
         Product sellerProductRequest = productService.createProduct(productPostDto);
 
         return new ResponseEntity(
