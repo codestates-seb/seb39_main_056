@@ -1,7 +1,7 @@
-package com.noterror.app.api.domain.user.dto;
+package com.noterror.app.api.global.response;
 
 public class SingleMemberResponse<T> {
-    T member;
+    private T member;
     public SingleMemberResponse(T member) {
         this.member = member;
     }

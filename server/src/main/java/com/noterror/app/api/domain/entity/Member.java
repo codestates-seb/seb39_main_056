@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.entity;
 
+import com.noterror.app.api.domain.member.dto.MemberPatchDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Member {
 
     /** 이메일 */
     @Column(unique = true, nullable = false)
+
     private String email;
 
     /** 휴대전화번호 */
@@ -43,14 +45,22 @@ public class Member {
     @Column(nullable = false)
     private String detailAddress;
 
-    @Column(nullable = true)
     private String vegetarianType;
 
     @Column(nullable = true)
     private LocalDateTime regDate = LocalDateTime.now();
 
-
     /** Admin/User 역할구분 */
     @Column(nullable = true)
     private Role role;
+
+    public void updateMemberInfo(MemberPatchDto memberPatchDto){
+        this.memberId = memberPatchDto.getMemberId();
+        this.phone = memberPatchDto.getPhone();
+        this.zipCode = memberPatchDto.getZipCode();
+        this.city = memberPatchDto.getCity();
+        this.detailAddress = memberPatchDto.getDetailAddress();
+        this.vegetarianType = memberPatchDto.getVegetarianType();
+    }
+
 }

@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
@@ -22,7 +21,7 @@ public class Product{
 
     private int quantity;
 
-    private LocalDateTime signDate;
+    private LocalDateTime signDate = LocalDateTime.now();
 
     @Lob
     @Basic(fetch = FetchType.EAGER)

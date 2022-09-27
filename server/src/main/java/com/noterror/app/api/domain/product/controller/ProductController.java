@@ -76,7 +76,7 @@ public class ProductController {
     @PutMapping("/admin/edit/{product-id}")
     public ResponseEntity patchProduct(@PathVariable("product-id") Long productId, @Valid @RequestBody ProductPatchDto productPatchDto){
         productPatchDto.setProductId(productId);
-        Product Result = productService.updateProduct(mapper.productPatchDtoToProduct(productPatchDto));
+        Product Result = productService.updateProduct(productPatchDto);
 
         return new ResponseEntity<>(
                         new SingleProductResponse<>(mapper.productToProductResponseDto(Result)),

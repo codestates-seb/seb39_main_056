@@ -2,10 +2,12 @@ package com.noterror.app.restdocs;
 
 import com.google.gson.Gson;
 import com.noterror.app.api.domain.entity.Member;
+
 import com.noterror.app.api.domain.entity.Role;
-import com.noterror.app.api.domain.user.controller.MemberController;
-import com.noterror.app.api.domain.user.userService.MemberService;
+
 import org.junit.jupiter.api.DisplayName;
+import com.noterror.app.api.domain.member.controller.MemberController;
+import com.noterror.app.api.domain.member.userService.MemberService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +68,7 @@ public class MemberControllerRestDocs {
 
         String content = gson.toJson(requestMemberData);
 
-        given(memberService.create(Mockito.any())).willReturn(memberDataInDB);
+        given(memberService.createMember(Mockito.any())).willReturn(memberDataInDB);
 
         //when
         ResultActions action =  mockMvc.perform( //content로 넣어주기
