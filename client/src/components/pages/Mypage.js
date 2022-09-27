@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import H2 from '../atom/H2';
+import { Link } from 'react-router-dom';
 
 const Container = styled.table`
 	width: 100%;
@@ -9,12 +9,25 @@ const Container = styled.table`
 	border-collapse: collapse;
 `;
 
-const LineTh = styled.th`
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-`;
+const Types = [
+	'플렉시테리언',
+	'폴로-페스코',
+	'페스코',
+	'폴로',
+	'락토-오보',
+	'락토',
+	'오보',
+	'비건',
+	'프루테리언',
+];
 
 const Mypage = () => {
+	const patchInfo = () => {
+		alert('정보 수정 버튼');
+	};
+	const deletInfo = () => {
+		alert('삭제 버튼');
+	};
 	return (
 		<Container>
 			<thead>
@@ -65,15 +78,9 @@ const Mypage = () => {
 					<td>채식유형</td>
 					<td>
 						<select>
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
+							{Types.map(type => {
+								return <option>{type}</option>;
+							})}
 						</select>
 					</td>
 				</tr>
@@ -81,9 +88,11 @@ const Mypage = () => {
 					<td></td>
 					<td></td>
 					<td>
-						<button>정보수정</button>
-						<button>회원탈퇴</button>
-						<button>메인으로</button>
+						<button onClick={patchInfo}>정보수정</button>
+						<button onClick={deletInfo}>회원탈퇴</button>
+						<Link to="/">
+							<button>메인으로</button>
+						</Link>
 					</td>
 				</tr>
 			</tbody>
