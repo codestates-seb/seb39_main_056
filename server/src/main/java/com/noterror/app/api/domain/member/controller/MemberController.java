@@ -1,62 +1,66 @@
 package com.noterror.app.api.domain.member.controller;
 
-import com.noterror.app.api.domain.member.dto.MemberPatchDto;
 import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import com.noterror.app.api.domain.member.dto.MemberResponseDto;
+import com.noterror.app.api.domain.member.memberService.MemberService;
 import com.noterror.app.api.global.response.SingleMemberResponse;
-import com.noterror.app.api.domain.member.userService.MemberService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+
+/**
+ * 담당자 : 황윤준, 이현석
+ * SCOPE : 일반 회원 관리
+ * 리팩토링 : 이현석, 강시혁
+ * 대상 : MEMBER
+ */
 @RequestMapping(value = "/")
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
 
-    /** 회원 가입 */
+    /**
+     * 회원 정보 등록
+     */
     @PostMapping(value = "oauth/sign-up")
     @Transactional
-    public ResponseEntity<MemberResponseDto> createUser(@RequestBody MemberRequestDto memberRequestDto){
-
-        MemberResponseDto memberData = memberService.createMember(memberRequestDto);
-        return new ResponseEntity(HttpStatus.CREATED);
+    public ResponseEntity<MemberResponseDto> createMember(@RequestBody MemberRequestDto memberRequestDto) {
+        MemberResponseDto response = memberService.saveMemberInfo(memberRequestDto);
+        return new ResponseEntity(new SingleMemberResponse<>(response), HttpStatus.CREATED);
     }
-
-    /** 회원 탈퇴 */
-    @DeleteMapping("/myPage/info/{memberId}")
-    public ResponseEntity deleteProduct(@PathVariable("memberId") long memberId) {
-        memberService.delete(memberId);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
 
     /**
      * 회원 정보 수정
      */
-    @PutMapping("/myPage/info/{memberId}")
-    public ResponseEntity updateMember(@PathVariable("memberId") Long memberId, @RequestBody MemberPatchDto memberPatchDto) {
-
-        MemberResponseDto member =
-                memberService.updateMember(memberId, memberPatchDto);
+    @PutMapping("/myPage/info/{member-id}")
+    public ResponseEntity putMember(@PathVariable("member-id") Long memberId, @RequestBody MemberRequestDto memberRequestDto) {
+        MemberResponseDto response = memberService.updateMember(memberId, memberRequestDto);
         return new ResponseEntity<>(
-                new SingleMemberResponse<>(member)
-                        ,HttpStatus.OK);
+                new SingleMemberResponse<>(response)
+                , HttpStatus.OK);
     }
+
     /**
      * 개별 회원 정보 조회
      */
-    @GetMapping("/myPage/info/{memberId}")
-    public ResponseEntity getMember(@PathVariable("memberId")Long memberId){
-        MemberResponseDto memberResult = memberService.findMember(memberId);
-
+    @GetMapping("/myPage/info/{member-id}")
+    public ResponseEntity getMember(@PathVariable("member-id") Long memberId) {
+        MemberResponseDto response = memberService.findMember(memberId);
         return new ResponseEntity<>(
-                new SingleMemberResponse(memberResult),HttpStatus.OK);
+                new SingleMemberResponse(response), HttpStatus.OK);
+    }
+
+    /**
+     * 회원 탈퇴
+     */
+    @DeleteMapping("/myPage/info/{member-id}")
+    public ResponseEntity deleteProduct(@PathVariable("member-id") long memberId) {
+        memberService.removeMember(memberId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

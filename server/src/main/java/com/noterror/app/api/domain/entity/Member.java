@@ -1,11 +1,11 @@
+
 package com.noterror.app.api.domain.entity;
 
-import com.noterror.app.api.domain.member.dto.MemberPatchDto;
+import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
 
 @Entity
 @AllArgsConstructor
@@ -15,52 +15,56 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "member")
 public class Member {
-    /** 회원 식별자 */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
-    /** 회원 이름 */
     @Column(nullable = false)
     private String memberName;
 
-    /** 이메일 */
-    @Column(unique = true, nullable = false)
+    // TODO 패스워드
 
+    @Column(nullable = false)
     private String email;
 
-    /** 휴대전화번호 */
     @Column(nullable = false)
     private String phone;
 
-    /** 우편번호 */
+    /**
+     * 우편번호
+     */
     @Column(nullable = false)
     private String zipCode;
 
-    /** 도로명 주소 */
+    /**
+     * 도로명 주소
+     */
     @Column(nullable = false)
     private String city;
 
-    /** 상세 주소(사용자 입력) */
+    /**
+     * 상세 주소(사용자 입력)
+     */
     @Column(nullable = false)
     private String detailAddress;
 
+    @Column(nullable = true)
     private String vegetarianType;
 
     @Column(nullable = true)
     private LocalDateTime regDate = LocalDateTime.now();
 
-    /** Admin/User 역할구분 */
+    /**
+     * Admin/User 역할
+     */
+    @Enumerated(EnumType.STRING)
     @Column(nullable = true)
     private Role role;
 
-    public void updateMemberInfo(MemberPatchDto memberPatchDto){
-        this.memberId = memberPatchDto.getMemberId();
-        this.phone = memberPatchDto.getPhone();
-        this.zipCode = memberPatchDto.getZipCode();
-        this.city = memberPatchDto.getCity();
-        this.detailAddress = memberPatchDto.getDetailAddress();
-        this.vegetarianType = memberPatchDto.getVegetarianType();
+    public void updateMemberInfo(MemberRequestDto memberRequestDto) {
+        this.phone = memberRequestDto.getPhone();
+        this.zipCode = memberRequestDto.getZipCode();
+        this.city = memberRequestDto.getCity();
+        this.detailAddress = memberRequestDto.getDetailAddress();
     }
-
 }

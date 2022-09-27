@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ProductResponseDto {
@@ -20,14 +19,4 @@ public class ProductResponseDto {
     private LocalDateTime signDate;
     private String thumbnailImage;
     private  String detailImage;
-
-    public ProductResponseDto(Product product){
-        this.productId = product.getProductId();
-        this.productName = product.getProductName();
-        this.price = product.getPrice();
-        this.signDate = product.getSignDate();
-        this.thumbnailImage = product.getThumbnailImage();
-        this.detailImage = product.getDetailImage();
-    }
-
 }

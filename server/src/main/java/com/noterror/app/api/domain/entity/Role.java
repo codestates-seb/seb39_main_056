@@ -2,9 +2,6 @@ package com.noterror.app.api.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-import javax.persistence.Entity;
 
 @Getter
 @AllArgsConstructor

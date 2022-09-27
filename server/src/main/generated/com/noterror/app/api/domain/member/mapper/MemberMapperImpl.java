@@ -4,12 +4,14 @@ import com.noterror.app.api.domain.entity.Member;
 import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import com.noterror.app.api.domain.member.dto.MemberResponseDto;
 import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-27T15:48:35+0900",
+    date = "2022-09-27T17:10:20+0900",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.13 (Oracle Corporation)"
 )
+@Component
 public class MemberMapperImpl implements MemberMapper {
 
     @Override
