@@ -1,6 +1,9 @@
 package com.noterror.app.api.domain.product.service;
 
 import com.noterror.app.api.domain.entity.Product;
+import com.noterror.app.api.domain.product.dto.ProductRequestDto;
+import com.noterror.app.api.domain.product.dto.ProductResponseDto;
+import com.noterror.app.api.domain.product.mapper.ProductMapper;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,18 +11,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
+import static com.noterror.app.stubData.ProductStubData.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,53 +27,63 @@ class ProductServiceImplSliceTest {
 
     @Mock
     private ProductRepository productRepository;
+    @Mock
+    private ProductMapper mapper;
 
     @InjectMocks
     private ProductServiceImpl productService;
 
     @Test
     @DisplayName("제품 조회 성공- 데이터 존재")
-    void findProduct_exist_id() throws Exception {
-        //given
-        Product dataInDB = Product.builder()
-                .productId(1L)
-                .productName("카레라면")
-                .price(10000)
-                .quantity(3)
-                .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .signDate(LocalDateTime.now())
-                .build();
-
+    void findProduct_success_test() throws Exception {
         //when
         given(productRepository.findById(anyLong()))
-                .willReturn(Optional.of(dataInDB));
-        Product getProduct = productService.findProduct(1L);
+                .willReturn(Optional.of(getProduct_1()));
+        given(mapper.productToProductResponseDto(any(Product.class)))
+                .willReturn(responseProductData());
+
+        ProductResponseDto response = productService.findProduct(1L);
 
         //then
-        assertEquals(getProduct.getProductId(),dataInDB.getProductId());
-        assertEquals(getProduct.getProductName(), dataInDB.getProductName());
-        assertEquals(getProduct.getSignDate(), dataInDB.getSignDate());
+        assertEquals(response.getProductId(),getProduct_1().getProductId());
+        assertEquals(response.getProductName(), getProduct_1().getProductName());
     }
 
     @Test
-    @DisplayName("제품 조회 실패 - NullPointException")
-    void findProduct_fail() throws Exception {
+    @DisplayName("제품 조회 실패 - 조회된 제품이 없습니다.")
+    void findExistProduct_fail_test() throws Exception {
         //given
-        Product dataInDB = null;
+        Product nullDataInDB = null;
 
         //when
         given(productRepository.findById(anyLong()))
-                .willReturn(Optional.ofNullable(dataInDB));
+                .willReturn(Optional.ofNullable(nullDataInDB));
 
         String result = "";
         try {
-            productService.findProduct(1L);
+            productService.findExistProduct(1L);
         } catch (NullPointerException e) {
             result = e.getMessage();
         }
 
         //then
         assertTrue(result.equals("조회된 제품이 없습니다."));
+    }
+
+    @Test
+    @DisplayName("제품 등록 성공")
+    void createProduct_success_test() throws Exception {
+        //given
+        given(mapper.productRequestDtoToProduct(any(ProductRequestDto.class)))
+                .willReturn(getProduct_1());
+        given(productRepository.save(any(Product.class)))
+                .willReturn(getProduct_1());
+        given(mapper.productToProductResponseDto(any(Product.class)))
+                .willReturn(responseProductData());
+        //when
+        ProductResponseDto response = productService.createProduct(requestProductData());
+
+        //then
+        assertThat(response.getProductName()).isEqualTo(requestProductData().getProductName());
     }
 }

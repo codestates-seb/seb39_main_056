@@ -1,4 +1,4 @@
-= 채식 유형에 따른 개인맞춤형 상품 제공 웹 서비스
+= 채식이들
 :sectnums:
 :toc: left
 :toclevels: 4
@@ -9,18 +9,22 @@ ifndef::snippets[]
 :snippets: ./build/generated-snippets
 endif::[]
 
-* `Kang Si Hyeak(JAMES) <zlcls456@gmail.com>`
+`채식 유형에 따른 개인맞춤형 상품 제공 웹 서비스`
 
-* `Lee Hyun Suk <rjqnrdl0331@gmail.com>`
+__v1.0.0, 2022.09.23__
 
-* `Hong Min Jeong(HONG) <alswjd3813@naver.com>`
+* __Kang Si Hyeak <zlcls456@gmail.com>__
 
-v1.0.0, 2022.09.23
+* __Lee Hyun Suk <rjqnrdl0331@gmail.com>__
+
+* __Hong Min Jeong <alswjd3813@naver.com>__
 
 ***
+
+
 == API 문서 개요
 
-해당 문서는 제품 상세 조회, 제품 전체 조회 기능들에 대한 API 문서입니다.
+해당 문서는 제품 기능들에 대한 API 문서입니다.
 
 NOTE: 기능에 대해서 문제가 있을 경우, 담당자에게 문의 하세요.
 
@@ -63,20 +67,16 @@ use of HTTP status codes.
 | The requested resource did not exist
 |===
 
-***
 
 == 제품 상세 조회
 
-=== URL endpoint
-include::{snippets}/get-product/curl-request.adoc[]
-
+=== Http-request
 NOTE: Host 는 변경될 수 있습니다.
 
-=== Request-body
-include::{snippets}/get-product/request-body.adoc[]
+include::{snippets}/get-product/http-request.adoc[]
 
-=== Response-body
-include::{snippets}/get-product/response-body.adoc[]
+=== Http-response
+include::{snippets}/get-product/http-response.adoc[]
 
 === Path-parameters
 include::{snippets}/get-product/path-parameters.adoc[]
@@ -86,20 +86,17 @@ include::{snippets}/get-product/response-fields.adoc[]
 
 == 제품 전체 조회
 
-=== URL endpoint
-include::{snippets}/get-products/curl-request.adoc[]
-
+=== Http-request
 NOTE: Host 는 변경될 수 있습니다.
 
-=== Request-body
-include::{snippets}/get-products/request-body.adoc[]
+include::{snippets}/get-products/http-request.adoc[]
 
-=== Response-body
-include::{snippets}/get-products/response-body.adoc[]
+=== Http-response
+include::{snippets}/get-products/http-response.adoc[]
 
 NOTE: 1페이지당 20개의 데이터가 등록 날짜의 내림차순 방식으로 정렬된 것 default입니다.
 
-=== request-parameters
+=== Request-parameters
 include::{snippets}/get-products/request-parameters.adoc[]
 
 
@@ -112,16 +109,44 @@ include::{snippets}/get-products/response-fields.adoc[]
 
 == 제품 등록
 
-=== URL endpoint
-include::{snippets}/post-product/curl-request.adoc[]
+=== Http-request
+NOTE: Host 는 변경될 수 있습니다.
 
+include::{snippets}/post-product/http-request.adoc[]
 
-=== Request-body
-include::{snippets}/post-product/request-body.adoc[]
+=== Http-response
+include::{snippets}/post-product/http-response.adoc[]
 
-=== Response-body
-include::{snippets}/post-product/response-body.adoc[]
+=== Request-fields
+include::{snippets}/post-product/request-fields.adoc[]
 
 === Response-fields
 include::{snippets}/post-product/response-fields.adoc[]
 
+== 제품 수정
+=== Http-request
+NOTE: Host 는 변경될 수 있습니다.
+
+include::{snippets}/update-product/http-request.adoc[]
+
+=== Http-response
+include::{snippets}/update-product/http-response.adoc[]
+
+=== Request-fields
+include::{snippets}/update-product/request-fields.adoc[]
+
+=== Response-fields
+include::{snippets}/update-product/response-fields.adoc[]
+
+== 제품 삭제
+
+=== Http-request
+NOTE: Host 는 변경될 수 있습니다.
+
+include::{snippets}/delete-product/http-request.adoc[]
+
+=== Http-response
+include::{snippets}/delete-product/http-response.adoc[]
+
+=== Path-parameters
+include::{snippets}/delete-product/path-parameters.adoc[]

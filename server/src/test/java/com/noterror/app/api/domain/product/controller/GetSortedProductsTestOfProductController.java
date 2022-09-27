@@ -18,10 +18,13 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * 제품 전체 조회 기능의 모든 CASE 테스트
+ */
 @Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
-public class GetProductsOfProductControllerTest {
+public class GetSortedProductsTestOfProductController {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private ProductRepository productRepository;
@@ -41,6 +44,9 @@ public class GetProductsOfProductControllerTest {
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();
 
+        dataInDB_1 = productRepository.save(data_1);
+        dataInDB_1.setSignDate(LocalDateTime.now());
+
         // 제일 최신 등록
         Product data_2
                 = Product.builder()
@@ -50,6 +56,9 @@ public class GetProductsOfProductControllerTest {
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();
+
+        dataInDB_2 = productRepository.save(data_2);
+        dataInDB_2.setSignDate(LocalDateTime.now().plusDays(3));
 
         // 제일 낮은 가격
         Product data_3
@@ -61,10 +70,6 @@ public class GetProductsOfProductControllerTest {
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();
 
-        dataInDB_1 = productRepository.save(data_1);
-        dataInDB_1.setSignDate(LocalDateTime.now());
-        dataInDB_2 = productRepository.save(data_2);
-        dataInDB_2.setSignDate(LocalDateTime.now().plusDays(3));
         dataInDB_3 = productRepository.save(data_3);
         dataInDB_3.setSignDate(LocalDateTime.now().plusDays(1));
     }
@@ -76,7 +81,7 @@ public class GetProductsOfProductControllerTest {
 
     @Test
     @DisplayName("제품 전체 조회 성공 테스트 - 한 페이지당 40개 데이터 조회")
-    void getProducts_size_40() throws Exception {
+    void 제품_전체_조회_40개() throws Exception {
 
         mockMvc.perform(
                         get("/products/list")
@@ -88,7 +93,7 @@ public class GetProductsOfProductControllerTest {
     // 출력 순서 : 2 -> 3 -> 1
     @Test
     @DisplayName("제품 전체 조회 성공 테스트 - param 에 아무 것도 없을 때(default)")
-    void getProducts_sort_newProduct() throws Exception {
+    void 제품_전체_조회_신제품순() throws Exception {
 
         mockMvc.perform(
                         get("/products/list"))
@@ -104,7 +109,7 @@ public class GetProductsOfProductControllerTest {
     // 출력 순서 : 3 -> 2 -> 1
     @Test
     @DisplayName("제품 전체 조회 성공 테스트 - 낮은 가격순 정렬")
-    void getProducts_sort_price_orderBy_asc() throws Exception {
+    void 제품_전체_조회_낮은가격순() throws Exception {
 
         mockMvc.perform(
                         get("/products/list")
@@ -122,7 +127,7 @@ public class GetProductsOfProductControllerTest {
     // 출력 순서 : 1 -> 2 -> 3
     @Test
     @DisplayName("제품 전체 조회 성공 테스트 - 높은 가격순 정렬")
-    void getProducts_sort_price_orderBy_desc() throws Exception {
+    void 제품_전체_조회_높은가격순() throws Exception {
 
         mockMvc.perform(
                         get("/products/list")
@@ -136,10 +141,4 @@ public class GetProductsOfProductControllerTest {
                 .andExpect(jsonPath("$.sortInfo.sort").value("price"))
                 .andExpect(jsonPath("$.sortInfo.orderBy").value("desc"));
     }
-
-
-
-
-
-
 }

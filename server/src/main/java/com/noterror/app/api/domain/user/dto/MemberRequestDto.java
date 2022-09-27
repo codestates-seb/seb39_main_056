@@ -1,9 +1,8 @@
 package com.noterror.app.api.domain.user.dto;
 
-import com.noterror.app.api.domain.entity.Role;
-import lombok.*;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
