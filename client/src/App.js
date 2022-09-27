@@ -1,23 +1,25 @@
-import axios from "axios";
-import React from "react";
-import "./App.css";
-import GlobalStyles from "./styles/GlobalStyles";
-import { useState } from "react";
+import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import GlobalStyles from './style/GlobalStyles';
+import Type from './components/pages/Type.js';
+import Login from './components/pages/Login';
+import Register from './components/pages/Register';
+import Info from './components/pages/Info';
 
-const App = () => {
-  const url = process.env.REACT_APP_API_URL;
-  const [state, setState] = useState("ddd");
-
-  fetch(url)
-    .then((res) => res.text())
-    .then((data) => setState(data));
-
+function App() {
   return (
-    <>
+    <div>
       <GlobalStyles />
-      <p>{state}</p>
-    </>
+      <BrowserRouter>
+        <Routes>
+          <Route path="type/" element={<Type />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/info" element={<Info />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
-};
+}
 
 export default App;
