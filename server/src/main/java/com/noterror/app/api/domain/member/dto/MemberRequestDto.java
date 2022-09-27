@@ -1,6 +1,5 @@
-package com.noterror.app.api.domain.user.dto;
+package com.noterror.app.api.domain.member.dto;
 
-import com.noterror.app.api.domain.entity.Role;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -13,17 +12,20 @@ import javax.validation.constraints.NotEmpty;
 public class MemberRequestDto {
     @NotBlank(message = "이름을 입력해주세요.")
     private String memberName;
+
     @NotEmpty(message = "이메일(ID)를 입력해주세요")
     @Email(message = "이메일 형식으로 입력해주세요")
     private String email;
+
     //@NotEmpty(message = "비밀번호를 입력해주세요")
     //private String password;
+
     @NotEmpty(message = "휴대전화번호를 입력해주세요")
     private String phone;
 
     /** 우편번호 */
     @NotEmpty
-    private int zipCode;
+    private String zipCode;
 
     /** 도로명 주소 */
     @NotEmpty

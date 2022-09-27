@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.product.service;
 
+import com.noterror.app.api.domain.product.dto.ProductPatchDto;
 import com.noterror.app.api.domain.product.dto.ProductPostDto;
 import com.noterror.app.api.domain.entity.Product;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
@@ -39,7 +40,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     // @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE) - 공부
-    public Product updateProduct(Product product){
+    public Product updateProduct(ProductPatchDto product){
 
         Product findProduct = findExistProduct(product.getProductId());
 
@@ -70,7 +71,7 @@ public class ProductServiceImpl implements ProductService{
     }
     
     @Override
-    public void delete(long productId) {
+    public void delete(Long productId) {
         Product findProduct = findExistProduct(productId);
         productRepository.delete(findProduct);
     }

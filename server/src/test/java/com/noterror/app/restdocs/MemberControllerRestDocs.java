@@ -1,10 +1,9 @@
 package com.noterror.app.restdocs;
 
 import com.google.gson.Gson;
-import com.noterror.app.api.domain.entity.Role;
 import com.noterror.app.api.domain.entity.Member;
-import com.noterror.app.api.domain.user.controller.MemberController;
-import com.noterror.app.api.domain.user.userService.MemberService;
+import com.noterror.app.api.domain.member.controller.MemberController;
+import com.noterror.app.api.domain.member.userService.MemberService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

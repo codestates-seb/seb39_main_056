@@ -1,6 +1,7 @@
 package com.noterror.app.api.domain.product.service;
 
 import com.noterror.app.api.domain.entity.Product;
+import com.noterror.app.api.domain.product.dto.ProductPatchDto;
 import com.noterror.app.api.domain.product.dto.ProductPostDto;
 import org.springframework.data.domain.Page;
 
@@ -24,10 +25,11 @@ public interface ProductService {
      * @return Page
      */
     Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy);
-    
-    Product updateProduct(Product product);
+
+    Product updateProduct(ProductPatchDto productPatchDto);
     
     Product createProduct(ProductPostDto productPostDto);
 
-    void delete(long productId);
+    void delete(Long productId);
+
 }

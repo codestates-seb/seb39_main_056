@@ -1,5 +1,7 @@
 package com.noterror.app.api.domain.entity;
 
+import com.noterror.app.api.domain.member.dto.MemberPatchDto;
+import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,9 +23,6 @@ public class Member {
     @Column(nullable = false)
     private String memberName;
 
-//    @Column(nullable = false)
-//    private String password;
-
     @Column(nullable = false)
     private String email;
 
@@ -32,7 +31,7 @@ public class Member {
 
     /** 우편번호 */
     @Column(nullable = false)
-    private int zipCode;
+    private String zipCode;
 
     /** 도로명 주소 */
     @Column(nullable = false)
@@ -42,18 +41,22 @@ public class Member {
     @Column(nullable = false)
     private String detailAddress;
 
-    @Column(nullable = true)
     private String vegetarianType;
 
     @Column(nullable = true)
     private LocalDateTime regDate = LocalDateTime.now();
 
+    public void updateProductInfo(MemberPatchDto memberPatchDto){
+        this.memberId = memberPatchDto.getMemberId();
+        this.phone = memberPatchDto.getPhone();
+        this.zipCode = memberPatchDto.getZipCode();
+        this.city = memberPatchDto.getCity();
+        this.detailAddress = memberPatchDto.getDetailAddress();
+        this.vegetarianType = memberPatchDto.getVegetarianType();
+    }
+
 //    /** 소셜명 */
 //    @Column(nullable = false)
 //    private String signupType;
 
-    /** Admin/User 역할 */
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
-    private Role role;
 }

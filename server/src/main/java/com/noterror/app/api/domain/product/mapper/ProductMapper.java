@@ -8,6 +8,6 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProductMapper {
-    Product productPatchDtoToProduct(ProductPatchDto productPatchDto);
+    Product productRequestDtoToProduct(ProductPatchDto productPatchDto);
     ProductResponseDto productToProductResponseDto(Product product);
 }

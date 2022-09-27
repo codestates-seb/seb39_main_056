@@ -253,7 +253,7 @@ class ProductControllerRestDocs {
                 );
 
         //given
-        given(productService.updateProduct(Mockito.any(Product.class))).willReturn(new Product());
+        given(productService.updateProduct(Mockito.any(ProductPatchDto.class))).willReturn(new Product());
 
         //when
         ResultActions actions = mockMvc.perform(
