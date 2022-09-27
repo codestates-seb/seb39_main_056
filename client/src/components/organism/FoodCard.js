@@ -13,6 +13,7 @@ const Container = styled.div`
 	:hover {
 		transform: scale(1.1);
 	}
+	text-decoration: none;
 `;
 const Img = styled.img`
 	width: 210px;
@@ -22,12 +23,6 @@ const Img = styled.img`
 `;
 
 const FoodCard = ({ card }) => {
-	// const [isClick, setIsClick] = useState(false);
-	// const onClick = () => {
-	// 	setIsClick(!isClick);
-	// 	console.log(isClick);
-	// };
-
 	const style = {
 		fontWeight: '600',
 	};
