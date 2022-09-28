@@ -11,11 +11,12 @@ public enum ExceptionCode {
 
 
     //Member
-    MEMBER_BAD_REQUEST(400, "잘못된 요청입니다. (유저)"),
+    MEMBER_BAD_REQUEST(400, "잘못된 요청입니다. (유저 토큰)"),
+    MEMBER_LOGIN_FAIL(401, "아이디, 패스워드가 잘못되었습니다."),
+    MEMBER_EXPIRED_TOKEN(401,"만료된 토큰입니다."),
     MEMBER_EXISTS(409, "이미 존재하는 회원입니다."),
-    MEMBER_UNAUTHORIZED(401, "권한이 없는 사용자입니다."),
     MEMBER_NOT_FOUND(404, "존재하지 않는 회원입니다."),
-    MEMBER_NOT_AUTHENTICATION(403, "인증이 필요한 사용자입니다."),
+    MEMBER_NOT_AUTHENTICATION(403, "인증 혹은 권한이 없습니다."),
 
     //Server
     INTERNAL_SERVER_ERROR(500, "서버 에러"),

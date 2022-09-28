@@ -6,6 +6,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -22,31 +24,16 @@ public class Member {
     @Column(nullable = false)
     private String memberName;
 
-    // TODO 패스워드
+    private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String phone;
 
-    /**
-     * 우편번호
-     */
-    @Column(nullable = false)
-    private String zipCode;
-
-    /**
-     * 도로명 주소
-     */
-    @Column(nullable = false)
-    private String city;
-
-    /**
-     * 상세 주소(사용자 입력)
-     */
-    @Column(nullable = false)
-    private String detailAddress;
+    @Embedded
+    private Address address;
 
     @Column(nullable = true)
     private String vegetarianType;
@@ -54,17 +41,16 @@ public class Member {
     @Column(nullable = true)
     private LocalDateTime regDate = LocalDateTime.now();
 
-    /**
-     * Admin/User 역할
-     */
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
-    private Role role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
+    //== BUSINESS LOGIC ==//
     public void updateMemberInfo(MemberRequestDto memberRequestDto) {
         this.phone = memberRequestDto.getPhone();
-        this.zipCode = memberRequestDto.getZipCode();
-        this.city = memberRequestDto.getCity();
-        this.detailAddress = memberRequestDto.getDetailAddress();
+        new Address(
+                memberRequestDto.getZipCode(),
+                memberRequestDto.getCity(),
+                memberRequestDto.getDetailAddress()
+        );
     }
 }

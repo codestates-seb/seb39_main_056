@@ -5,6 +5,7 @@ import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.mapper.ProductMapper;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
+import com.noterror.app.api.global.exception.BusinessLogicException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -62,7 +63,7 @@ class ProductServiceImplSliceTest {
         String result = "";
         try {
             productService.findExistProduct(1L);
-        } catch (NullPointerException e) {
+        } catch (BusinessLogicException e) {
             result = e.getMessage();
         }
 

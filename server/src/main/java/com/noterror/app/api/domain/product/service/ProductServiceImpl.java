@@ -25,7 +25,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public ProductResponseDto findProduct(Long productId) {
-
         return mapper.productToProductResponseDto(findExistProduct(productId));
     }
 
@@ -33,12 +32,15 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy) {
 
-        if (orderBy.equals("desc") || orderBy.equals(null)) {
+        if (isDescending(orderBy)) {
             return productRepository.findAll(
                     PageRequest.of(page, size, Sort.by(sort).descending()));
         }
-
         return productRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
+    }
+
+    private boolean isDescending(String orderBy) {
+        return orderBy.equals("desc") || orderBy.equals(null);
     }
 
     @Override

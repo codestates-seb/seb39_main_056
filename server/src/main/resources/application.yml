@@ -22,7 +22,8 @@ logging:
         orm:
           jpa: DEBUG
 
-server:
-  port:
-    9050
+jwt:
+  secret0key: ${JWT_SECRET_KEY}
+  access-token-expiration-minutes: 30
+  refresh-token-expiration-minutes: 420
 

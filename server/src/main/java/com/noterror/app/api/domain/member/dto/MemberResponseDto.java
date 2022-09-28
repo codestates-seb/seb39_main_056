@@ -20,16 +20,4 @@ public class MemberResponseDto {
     private String detailAddress;
     private String vegetarianType;
     private LocalDateTime regDate;
-
-    public MemberResponseDto(Member member) {
-        this.memberId = member.getMemberId();
-        this.memberName = member.getMemberName();
-        this.email = member.getEmail();
-        this.phone = member.getPhone();
-        this.zipCode = member.getZipCode();
-        this.city = member.getPhone();
-        this.detailAddress = member.getDetailAddress();
-        this.vegetarianType = member.getVegetarianType();
-        this.regDate = member.getRegDate();
-    }
 }
