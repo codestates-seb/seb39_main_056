@@ -18,8 +18,8 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <BodyContainer>
-          <Routes>
           <Header />
+          <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/mypage/:id" element={<Mypage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
