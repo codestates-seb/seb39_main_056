@@ -7,11 +7,6 @@ import com.noterror.app.api.domain.entity.Product;
 import java.util.List;
 
 public interface CartService {
-    /**
-     * 장바구니 생성
-     * @param member
-     */
-    void createCart(Member member);
 
     /**
      * 장바구니 제품 추가
@@ -29,20 +24,16 @@ public interface CartService {
 
     /**
      * 장바구니 한 개 제품 삭제
-     * @param cartDetailId
+     * @param productId
      */
-    void deleteCart(Long cartDetailId);
+    void deleteCart(Long productId);
 
-    /**
-     * 장바구니 여러 제품 삭제
-     */
-    void deleteCarts(List<CartDetail> cartDetails);
 
     /**
      * 장바구니 모두 비우기
-     * @param cartId
+     * @param memberId
      */
-    void deleteCartAll(Long cartId);
+    void deleteCartAll(Long memberId);
 
     /**
      * 장바구니 목록 조회
@@ -51,9 +42,7 @@ public interface CartService {
      */
     List<CartDetail> listCart(Cart cart);
 
-    /**
-     * 장바구니 금액 총 합
-     * @return
-     */
-    int totalMoney();
+    CartDetail findExistCartDetail(Long cartDetailId, Long memberId);
+
+    Cart findExistCart(Long memberId);
 }

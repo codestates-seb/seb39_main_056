@@ -54,6 +54,9 @@ public class Member {
     @Column(nullable = true)
     private LocalDateTime regDate = LocalDateTime.now();
 
+    @OneToOne(mappedBy = "member")
+    private Cart cart;
+
     /**
      * Admin/User 역할
      */

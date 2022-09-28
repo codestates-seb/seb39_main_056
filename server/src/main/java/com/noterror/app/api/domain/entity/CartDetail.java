@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class CartDetail {
     @Id
-    private Long CartDetailId;
+    private Long cartDetailId;
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
@@ -27,7 +27,7 @@ public class CartDetail {
 
     private int count;
 
-    public CartDetail createCartDetail(Cart cart, Product product, int count){
+    public static CartDetail createCartDetail(Cart cart, Product product, int count){
         CartDetail cartDetail = new CartDetail();
         cartDetail.setCart(cart);
         cartDetail.setProduct(product);
