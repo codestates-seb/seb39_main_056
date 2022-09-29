@@ -27,3 +27,7 @@ jwt:
   access-token-expiration-minutes: 30
   refresh-token-expiration-minutes: 420
 
+mail:
+  address:
+    admin : {ADMIN_EMAIL}
+

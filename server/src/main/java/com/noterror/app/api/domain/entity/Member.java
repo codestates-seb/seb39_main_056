@@ -5,6 +5,7 @@ import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@Table(name = "member")
-public class Member {
+public class Member implements Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
@@ -52,5 +52,11 @@ public class Member {
                 memberRequestDto.getCity(),
                 memberRequestDto.getDetailAddress()
         );
+    }
+
+    // Principal 기능
+    @Override
+    public String getName() {
+        return getEmail();
     }
 }
