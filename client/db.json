@@ -1,16 +1,14 @@
 {
-  "user": [
-    {
-      "userId": 0,
-      "userName": "제임스",
-      "phoneNum": "010-2903-8493",
-      "zipCode": "404-222",
-      "address": "제주도 제주시 제주아파트",
-      "addressDetail": "A동 101호",
-      "emailAdress": "James@google.com",
-      "type": "오보"
-    }
-  ],
+  "user": {
+    "userId": 0,
+    "userName": "제임스",
+    "phoneNum": "01023123qwe",
+    "zipCode": "qweqwe",
+    "address": "qweq",
+    "addressDetail": "qwe",
+    "emailAdress": "James@google.com",
+    "type": "페스코"
+  },
   "products": [
     {
       "productId": 0,

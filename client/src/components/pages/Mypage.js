@@ -10,22 +10,12 @@ const Container = styled.table`
   border-collapse: collapse;
 `;
 
-const Types = [
-  '플렉시테리언',
-  '폴로-페스코',
-  '페스코',
-  '폴로',
-  '락토-오보',
-  '락토',
-  '오보',
-  '비건',
-  '프루테리언',
-];
-
 const Mypage = () => {
   // 맨처음 가져오는 GET 정보 저장된 state
   const [info, setInfo] = useState('');
-
+  // 채식유형 저장하는 state
+  const [selects, setSelect] = useState();
+  // 회원정보에 따라 데이터 고정하는 get요청
   const fetchData = () => {
     fetch(`http://localhost:3001/user`)
       .then(res => res.json())
@@ -37,11 +27,34 @@ const Mypage = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    const phone = e.target.phone.value;
-    const zipcode = e.target.zipcode.value;
-    const firstAdress = e.target.firstAdress.value;
-    const secondAdress = e.target.secondAdress.value;
-    console.log(phone, zipcode, firstAdress, secondAdress);
+    // input에 있는 정보들을 변수에 담아서 fetch요청을 한다.
+    const phoneNum = e.target.phone.value;
+    const zipCode = e.target.zipcode.value;
+    const address = e.target.firstAdress.value;
+    const addressDetail = e.target.secondAdress.value;
+    const type = { selects }.selects;
+    // console.log(phoneNum, zipCode, address, addressDetail, type);
+    //정보수정: patch요청을 한다.
+
+    try {
+      fetch(`http://localhost:3001/user`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phoneNum,
+          zipCode,
+          address,
+          addressDetail,
+          type,
+        }),
+      })
+        .then(alert('정보가 성공적으로 수정되었습니다'))
+        .then(window.location.reload());
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -61,7 +74,7 @@ const Mypage = () => {
             <td>
               <input
                 disabled="disabled"
-                value={info[0]?.userName === undefined ? '' : info[0]?.userName}
+                value={info?.userName === undefined ? '' : info?.userName}
               />
             </td>
           </tr>
@@ -71,11 +84,10 @@ const Mypage = () => {
             <td>
               <input
                 disabled="disabled"
-                value={
-                  info[0]?.emailAdress === undefined ? '' : info[0]?.emailAdress
-                }
+                value={info?.emailAdress === undefined ? '' : info?.emailAdress}
               />
             </td>
+            {/* 블로깅할거니까 지우지말자 */}
             {/* <td>
               <input disabled="disabled" value={info[0]?.emailAdress} />
             </td> */}
@@ -84,7 +96,7 @@ const Mypage = () => {
             <td>배송조회</td>
             <td>전화번호</td>
             <td>
-              <input name="phone" type="text" />
+              <input name="phone" type="text" defaultValue={info.phoneNum} />
             </td>
           </tr>
           <tr>
@@ -106,10 +118,16 @@ const Mypage = () => {
             <td></td>
             <td>채식유형</td>
             <td>
-              <select>
-                {Types.map((type, i) => {
-                  return <option key={i}>{type}</option>;
-                })}
+              <select value={selects} onChange={e => setSelect(e.target.value)}>
+                <option>플렉시테리언</option>
+                <option>폴로-페스코</option>
+                <option>페스코</option>
+                <option>폴로</option>
+                <option>락토-오보</option>
+                <option>락토</option>
+                <option>오보</option>
+                <option>비건</option>
+                <option>프루테리언</option>
               </select>
             </td>
           </tr>
