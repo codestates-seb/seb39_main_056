@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.cart.service;
 
+import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.repository.CartDetailRepository;
 import com.noterror.app.api.domain.cart.repository.CartRepository;
 import com.noterror.app.api.domain.entity.Cart;
@@ -14,55 +15,75 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
+@RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
     private final CartDetailRepository cartDetailRepository;
-    private final CartRepository cartRepository;
-    private final MemberRepository memberRepository;
     private final ProductRepository productRepository;
-    
+    private final MemberRepository memberRepository;
+    private final CartRepository cartRepository;
 
-    @Override
+    public void createCart(Member member) {
+        Cart cart = Cart.createCart(member);
+        cartRepository.save(cart);
+    }
+
     @Transactional
-    public void addCart(Member member, Product product, int count) {
-        //장바구니 존재유무 확인
-        Cart cart = cartRepository.findByMemberId(member.getMemberId());
+    public Long addCart(CartProductDto cartProductDto, Long memberId) {
+        Member member= memberRepository.findById(memberId).get();
 
-        if (cart == null) {
-            cart = Cart.CreateCart(member);
+        Product product = productRepository.findById(cartProductDto.getProduct().getProductId()).get();
+
+        Cart cart = member.getCart();
+
+        if( cart == null ){
+            cart = Cart.createCart(member);
             cartRepository.save(cart);
         }
-        //제품 존재 유무 확인
-        Optional<Product> productCheck = productRepository.findById(product.getProductId());
 
-        //상품이 장바구니에 존재하는지 확인
-        CartDetail cartDetail = cartDetailRepository.findByCartAndProduct(cart.getCartId(), product.getProductId());
+        Long exId = cartProductDto.getProduct().getProductId();
 
-        //상품이 장바구니에 없다면, 장바구니에 상품을 생성하고 추가
-        if (cartDetail == null){
-            cartDetail = CartDetail.createCartDetail(cart, product, count);
-            cartDetailRepository.save(cartDetail);
-            cart.setCount(cart.getCount() + 1);
-        } else {
-            cartDetail.addCount(count);
+        CartDetail savedCartItem = cartDetailRepository.getReferenceById(exId);
+
+        // 만약 상품이 이미 있으면은 개수를 +
+        if(savedCartItem != null){
+            savedCartItem.addCount(cartProductDto.getCount());
+            return savedCartItem.getCartDetailId();
+        } else { // 아니면은 CartItem 에 상품 저장
+            CartDetail cartItem = CartDetail.createCartDetail(cart, product, cartProductDto.getCount());
+            cartDetailRepository.save(cartItem);
+            return cartItem.getCartDetailId();
         }
 
     }
 
     @Override
-    public void updateCart(CartDetail cartDetail){
+    @Transactional(readOnly = true)
+    public List<CartDetail> listCart(Cart cart) {
+        List<CartDetail> cartList = cartDetailRepository.findAll();
+        List<CartDetail> userCartList = new ArrayList<>();
 
+        for(CartDetail cartDetail : cartList) {
+            if(cartDetail.getCart().getCartId() == cart.getCartId()) {
+                userCartList.add(cartDetail);
+            }
+        }
+        return userCartList;
+    }
+
+    @Override
+    public void updateCart(Long cartDetailId, int count){
+        CartDetail cartDetail = cartDetailRepository.findById(cartDetailId).orElseThrow(NullPointerException::new);
+        cartDetail.addCount(count);
     }
 
     @Override
     public void deleteCart(Long cartDetailId) {
-        cartDetailRepository.deleteById(cartDetailId);
-
+        CartDetail cartDetail = cartDetailRepository.findById(cartDetailId).orElseThrow(NullPointerException::new);
+        cartDetailRepository.delete(cartDetail);
     }
 
     @Override
@@ -75,28 +96,5 @@ public class CartServiceImpl implements CartService {
                 cartDetailRepository.deleteById(cartDetail.getCartDetailId());
             }
         }
-    }
-
-    @Override
-    public List<CartDetail> listCart(Cart cart) {
-        List<CartDetail> cartDetails = cartDetailRepository.findAll();
-        List<CartDetail> products = new ArrayList<>();
-
-        for(CartDetail cartDetail : cartDetails) {
-            if(cartDetail.getCart().getCartId() == cart.getCartId()){
-                products.add(cartDetail);
-            }
-        }
-        return products;
-    }
-
-    public Cart findExistCart(Long memberId) {
-        Cart cart = cartRepository.findByMemberId(memberId);
-        return cart;
-    }
-
-    public CartDetail findExistCartDetail(Long cartId, Long productId) {
-        CartDetail cartDetail = cartDetailRepository.findByCartAndProduct(cartId, productId);
-        return cartDetail;
     }
 }

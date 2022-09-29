@@ -2,10 +2,7 @@ package com.noterror.app.api.domain.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,17 +12,26 @@ import javax.persistence.ManyToOne;
 @Entity
 public class CartDetail {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cartDetail_id")
     private Long cartDetailId;
 
-    @ManyToOne
+    private int count;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @ManyToOne
+    public void addCart(Cart cart) {
+        this.cart = cart;
+    }
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private int count;
+    public void addProduct(Product product) {
+        this.product = product;
+    }
 
     public static CartDetail createCartDetail(Cart cart, Product product, int count){
         CartDetail cartDetail = new CartDetail();
@@ -38,5 +44,9 @@ public class CartDetail {
 
     public void addCount(int count){
         this.count += count;
+    }
+
+    public void updateCount(int count) {
+        this.count = count;
     }
 }
