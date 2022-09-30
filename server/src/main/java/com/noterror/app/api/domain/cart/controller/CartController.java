@@ -4,8 +4,8 @@ import com.noterror.app.api.domain.cart.dto.CartDetailDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.service.CartService;
 import com.noterror.app.api.domain.entity.Cart;
-import com.noterror.app.api.domain.entity.CartDetail;
 import com.noterror.app.api.domain.entity.Member;
+import com.noterror.app.api.global.response.MultiCartResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,43 +24,42 @@ public class CartController {
     /**
      * 장바구니 제품 추가
      * @param cartProductDto
-     * @param
+     * @param memberId
      * @return
      */
-    @PostMapping("cart")
-    public ResponseEntity addCartProduct(@RequestBody CartProductDto cartProductDto, Long memberId) {
+    @PostMapping("{member-id}/cart")
+    public @ResponseBody ResponseEntity addCartProduct(@RequestBody CartProductDto cartProductDto, @PathVariable("member-id") Long memberId) {
 
-        Long cartDetailId = cartService.addCart(cartProductDto, memberId );
+        Long cartDetailId = cartService.addCart(cartProductDto, memberId);
 
-        return new ResponseEntity( new SingleCartResponse(cartDetailId), HttpStatus.OK);
+        return new ResponseEntity(new SingleCartResponse(cartDetailId), HttpStatus.OK);
     }
 
     /**
      * 장바구니 조회
-     * @param
+     * @param cartDetailId
+     * @param cart
      * @return
      */
-    @GetMapping("cart")
-    public ResponseEntity viewCartProduct(Cart cart) {
-        List<CartDetail> cartDetailList = cartService.listCart(cart);
+    @GetMapping("{member-id}/cart")
+    public ResponseEntity viewCartProduct(@PathVariable("member-id") Long memberId) {
 
-        return new ResponseEntity( new SingleCartResponse(cartDetailList), HttpStatus.OK);
+        List<CartDetailDto> cartDetailList = cartService.listCart(memberId);
+        return new ResponseEntity(new MultiCartResponse(cartDetailList), HttpStatus.OK);
     }
-
-
 
     /**
      * 장바구니 수량 변경
      * @param cartDetailId
-     * @param count
+     * @param
      * @return
      */
-    @PatchMapping("cartDetail/{cartDetail-id}")
-    public ResponseEntity updateCartProduct(@PathVariable("cartDetail-id") Long cartDetailId, int count) {
-        if(count<0) {
+    @PatchMapping("{member-id}/cart/{cartDetail-id}")
+    public @ResponseBody ResponseEntity updateCartProduct(@PathVariable("member-id") Long memberId, @PathVariable("cartDetail-id") Long cartDetailId, @RequestBody CartProductDto cartProductDto) {
+        if(cartProductDto.getCount() < 0) {
             return new ResponseEntity<String>("최소 1개 이상 담아주세요", HttpStatus.BAD_REQUEST);
         }
-        cartService.updateCart(cartDetailId, count);
+        cartService.updateCart(cartDetailId, cartProductDto.getCount());
         return new ResponseEntity(new SingleCartResponse(cartDetailId), HttpStatus.OK);
     }
 
@@ -69,8 +68,8 @@ public class CartController {
      * @param cartDetailId
      * @return
      */
-    @DeleteMapping("cartDetail/{cartDetail-id}")
-    public ResponseEntity deleteCartProduct(@PathVariable("cartDetail-id") Long cartDetailId) {
+    @DeleteMapping("{member-id}/cart/{cartDetail-id}")
+    public ResponseEntity deleteCartProduct(@PathVariable("member-id") Long memberId, @PathVariable("cartDetail-id") Long cartDetailId) {
         cartService.deleteCart(cartDetailId);
         return new ResponseEntity(new SingleCartResponse(cartDetailId), HttpStatus.OK);
     }
@@ -78,11 +77,11 @@ public class CartController {
 
     /**
      * 장바구니 전체 삭제
-     * @param member
+     * @param
      */
-   @DeleteMapping("cartDetail")
+   @DeleteMapping("{member-id}/cart")
 
-    public void deleteCartProductAll(Member member) {
-        cartService.deleteCartAll(member.getMemberId());
+    public void deleteCartProductAll(@PathVariable("member-id") Long memberId) {
+        cartService.deleteCartAll(memberId);
     }
 }

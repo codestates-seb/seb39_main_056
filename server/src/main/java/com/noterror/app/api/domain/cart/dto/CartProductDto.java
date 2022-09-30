@@ -1,9 +1,7 @@
 package com.noterror.app.api.domain.cart.dto;
 
 import com.noterror.app.api.domain.entity.Product;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -11,12 +9,11 @@ import javax.validation.constraints.NotNull;
 /**
  * 장바구니 담기 dto
  */
-@Getter
-@Setter
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CartProductDto {
-    @NotNull
-    private Product product;
+    private Long productId;
 
     @Min(1)
     private int count;

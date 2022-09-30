@@ -1,15 +1,14 @@
 package com.noterror.app.api.domain.cart.dto;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * 장바구니 조회 Dto
  */
-@Getter
-@Setter
+
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CartDetailDto {
     private Long cartDetailId;
 
@@ -19,7 +18,7 @@ public class CartDetailDto {
 
     private int count;
 
-
+/*
     public CartDetailDto(Long cartDetailId, String productName,
                          int price, int count){
         this.cartDetailId = cartDetailId;
@@ -27,4 +26,6 @@ public class CartDetailDto {
         this.price = price;
         this.count = count;
     }
+
+ */
 }

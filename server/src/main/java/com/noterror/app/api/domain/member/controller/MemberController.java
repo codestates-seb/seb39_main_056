@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 /**
  * 담당자 : 황윤준, 이현석
@@ -38,7 +40,7 @@ public class MemberController {
      * 회원 정보 수정
      */
     @PutMapping("/myPage/info/{member-id}")
-    public ResponseEntity putMember(@PathVariable("member-id") Long memberId, @RequestBody MemberRequestDto memberRequestDto) {
+    public ResponseEntity putMember(@PathVariable("member-id") Long memberId, @RequestBody @Valid MemberRequestDto memberRequestDto) {
         MemberResponseDto response = memberService.updateMember(memberId, memberRequestDto);
         return new ResponseEntity<>(
                 new SingleMemberResponse<>(response)

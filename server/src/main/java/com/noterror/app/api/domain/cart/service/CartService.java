@@ -1,18 +1,15 @@
 package com.noterror.app.api.domain.cart.service;
+import com.noterror.app.api.domain.cart.dto.CartDetailDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
-import com.noterror.app.api.domain.entity.Cart;
-import com.noterror.app.api.domain.entity.CartDetail;
 
 import java.util.List;
 
 
 public interface CartService {
-
     /**
-     * 장바구니 추가
-     * @param
-     * @param
-     * @param
+     * 장바구니 제품 추가
+     * @param cartProductDto
+     * @param memberId
      * @return
      */
     Long addCart(CartProductDto cartProductDto, Long memberId) ;
@@ -27,10 +24,10 @@ public interface CartService {
     /**
      * 장바구니 전체 조회
      *
-     * @param cart
+     * @param memberId
      * @return
      */
-    List<CartDetail> listCart(Cart cart);
+    List<CartDetailDto> listCart(Long memberId);
 
     /**
      * 장바구니 제품 삭제

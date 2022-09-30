@@ -10,11 +10,12 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
+@Table(name = "CART_DETAIL")
 public class CartDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cartDetail_id")
-    private Long cartDetailId;
+    private Long cartDetailId; // CART_DETAIL_ID
 
     private int count;
 
@@ -42,10 +43,12 @@ public class CartDetail {
         return cartDetail;
     }
 
+    //장바구니에 상품 수량 증가
     public void addCount(int count){
         this.count += count;
     }
 
+    //장바구니에 담을 수량 반영
     public void updateCount(int count) {
         this.count = count;
     }

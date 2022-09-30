@@ -7,6 +7,9 @@ spring :
   datasource:
     url: jdbc:h2:mem:test
 
+  sql:
+    init:
+      data-location: classpath*:db/h2/data.sql
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -22,7 +25,4 @@ logging:
         orm:
           jpa: DEBUG
 
-server:
-  port:
-    9050
 
