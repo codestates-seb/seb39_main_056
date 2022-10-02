@@ -22,7 +22,7 @@ public interface CartService {
      * @param count
      * @return
      */
-    CartProductDto updateCart(Long cartDetailId, int count);
+    CartProductDto updateCart(Long cartDetailId, CartProductDto cartProductDto);
 
     /**
      * 장바구니 전체 조회
@@ -37,13 +37,6 @@ public interface CartService {
      * @param cartDetailId
      */
     void deleteCart(Long cartDetailId);
-
-    /**
-     * 장바구니 전체 삭제
-     * @param memberId
-     */
-    void deleteCartAll(Long memberId);
-
 
 
 }

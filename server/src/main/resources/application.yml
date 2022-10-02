@@ -11,6 +11,7 @@ spring :
     init:
       data-location: classpath*:db/h2/data.sql
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
     properties:

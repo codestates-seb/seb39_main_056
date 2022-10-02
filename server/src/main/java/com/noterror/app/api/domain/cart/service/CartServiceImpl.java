@@ -53,8 +53,8 @@ public class CartServiceImpl implements CartService {
             cartDetailRepository.save(productsByCartId);
             CartDetailDto cartDetailDto = new CartDetailDto();
             cartDetailDto.setCartDetailId(productsByCartId.getCartDetailId());
-            cartDetailDto.setProductName(productsByCartId.getProduct().getProductName());
-            cartDetailDto.setPrice(productsByCartId.getProduct().getPrice());
+            cartDetailDto.setProductName(product.getProductName());
+            cartDetailDto.setPrice(product.getPrice());
             cartDetailDto.setCount(productsByCartId.getCount());
             return cartDetailDto;
         } else { // 아니면은 CartItem 에 상품 저장
@@ -62,12 +62,13 @@ public class CartServiceImpl implements CartService {
             cartDetailRepository.save(cartItem);
             CartDetailDto cartDetailDto = new CartDetailDto();
             cartDetailDto.setCartDetailId(cartItem.getCartDetailId());
-            cartDetailDto.setProductName(cartItem.getProduct().getProductName());
-            cartDetailDto.setPrice(cartItem.getProduct().getPrice());
+            cartDetailDto.setProductName(product.getProductName());
+            cartDetailDto.setPrice(product.getPrice());
             cartDetailDto.setCount(cartItem.getCount());
             return cartDetailDto;
         }
     }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -82,19 +83,21 @@ public class CartServiceImpl implements CartService {
         }
 
         cartDetailDtoList = cartDetailRepository.findCartDetailDtoList(cart.getCartId());
+
         return cartDetailDtoList;
     }
 
+
     //장바구니 상품수량 up
     @Override
-    public CartProductDto updateCart(Long cartDetailId, int count){
+    public CartProductDto updateCart(Long cartDetailId, CartProductDto cartProductDto){
         CartDetail cartDetail = cartDetailRepository.findById(cartDetailId).get();
-        cartDetail.updateCount(count);
+        cartDetail.updateCount(cartProductDto.getCount());
         cartDetailRepository.save(cartDetail);
-        CartProductDto cartProductDto = new CartProductDto();
-        cartProductDto.setProductId(cartDetail.getProduct().getProductId());
-        cartProductDto.setCount(cartDetail.getCount());
-        return cartProductDto;
+        CartProductDto cartUpdateDto = new CartProductDto();
+        cartUpdateDto.setProductId(cartProductDto.getProductId());
+        cartUpdateDto.setCount(cartProductDto.getCount());
+        return cartUpdateDto;
     }
 
     @Override
@@ -103,15 +106,4 @@ public class CartServiceImpl implements CartService {
         cartDetailRepository.delete(cartDetail);
     }
 
-    @Override
-    public void deleteCartAll(Long memberId) {
-        List<CartDetail> products = cartDetailRepository.findAll();
-        //해당하는 유저의 장바구니 내역 삭제
-        for(CartDetail cartDetail : products){
-            if(cartDetail.getCart().getMember().getMemberId() == memberId ){
-                cartDetail.getCart().setCount(cartDetail.getCart().getCount() - 1);
-                cartDetailRepository.deleteById(cartDetail.getCartDetailId());
-            }
-        }
-    }
 }
