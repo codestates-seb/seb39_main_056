@@ -45,25 +45,28 @@ public class CartServiceImpl implements CartService {
         }
 
         //상품이 장바구니에 있는지 없는지 조회
-        CartDetail productsByCartId = cartDetailRepository.findByCartIdAndProductId(cart.getCartId(), product.getProductId());
+        CartDetail existProduct = cartDetailRepository.findByCartIdAndProductId(cart.getCartId(), cartProductDto.getProductId());
 
         // 만약 상품이 이미 있으면은 개수를 +
-        if( productsByCartId != null) {
-            productsByCartId.addCount(cartProductDto.getCount());
-            cartDetailRepository.save(productsByCartId);
+        if(existProduct != null) {
+            existProduct.addCount(cartProductDto.getCount());
+            //cartDetailRepository.save(existProduct);
+
             CartDetailDto cartDetailDto = new CartDetailDto();
-            cartDetailDto.setCartDetailId(productsByCartId.getCartDetailId());
-            cartDetailDto.setProductName(product.getProductName());
-            cartDetailDto.setPrice(product.getPrice());
-            cartDetailDto.setCount(productsByCartId.getCount());
+            cartDetailDto.setCartDetailId(existProduct.getCartDetailId());
+            cartDetailDto.setProductName(existProduct.getProduct().getProductName());
+            cartDetailDto.setPrice(existProduct.getProduct().getPrice());
+            cartDetailDto.setCount(existProduct.getCount());
             return cartDetailDto;
-        } else { // 아니면은 CartItem 에 상품 저장
+        }
+        else { // 아니면은 CartItem 에 상품 저장
             CartDetail cartItem = CartDetail.createCartDetail(cart, product, cartProductDto.getCount());
             cartDetailRepository.save(cartItem);
+
             CartDetailDto cartDetailDto = new CartDetailDto();
             cartDetailDto.setCartDetailId(cartItem.getCartDetailId());
-            cartDetailDto.setProductName(product.getProductName());
-            cartDetailDto.setPrice(product.getPrice());
+            cartDetailDto.setProductName(cartItem.getProduct().getProductName());
+            cartDetailDto.setPrice(cartItem.getProduct().getPrice());
             cartDetailDto.setCount(cartItem.getCount());
             return cartDetailDto;
         }
@@ -93,7 +96,8 @@ public class CartServiceImpl implements CartService {
     public CartProductDto updateCart(Long cartDetailId, CartProductDto cartProductDto){
         CartDetail cartDetail = cartDetailRepository.findById(cartDetailId).get();
         cartDetail.updateCount(cartProductDto.getCount());
-        cartDetailRepository.save(cartDetail);
+
+        //cartDetailRepository.save(cartDetail);
         CartProductDto cartUpdateDto = new CartProductDto();
         cartUpdateDto.setProductId(cartProductDto.getProductId());
         cartUpdateDto.setCount(cartProductDto.getCount());

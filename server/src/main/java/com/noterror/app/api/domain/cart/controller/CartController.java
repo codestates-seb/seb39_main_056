@@ -74,15 +74,4 @@ public class CartController {
         cartService.deleteCart(cartDetailId);
         return new ResponseEntity(new SingleCartResponse(cartDetailId), HttpStatus.OK);
     }
-
-
-    /**
-     * 장바구니 전체 삭제
-     * @param
-     */
-   @DeleteMapping("{member-id}/cart")
-
-    public void deleteCartProductAll(@PathVariable("member-id") Long memberId) {
-        cartService.deleteCartAll(memberId);
-    }
 }

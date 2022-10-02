@@ -43,12 +43,12 @@ public class CartDetail {
         return cartDetail;
     }
 
-    //장바구니에 상품 수량 증가
+    //장바구니에 상품 수량 추가
     public void addCount(int count){
         this.count += count;
     }
 
-    //장바구니에 담을 수량 반영
+    //장바구니에 담을 수량 변경
     public void updateCount(int count) {
         this.count = count;
     }
