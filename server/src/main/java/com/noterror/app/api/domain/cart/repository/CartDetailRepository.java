@@ -15,6 +15,15 @@ public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
     @Query(value = "select cart_detail_id, cart_id, product_id, count from cart_detail", nativeQuery = true)
     CartDetail findByCartIdAndProductId(Long cartId, Long productId);
 
+    //@Query(value = "select cart_detail_id, cart_id, product_id, count from cart_detail", nativeQuery = true)
+    //CartDetail findByProductId(Long productId);
+
+    @Query("select ci.cartDetailId, ci.product.productName, ci.product.price, ci.count " +
+            "from CartDetail ci "+
+            "where ci.product.productId = :productId ")
+    CartDetail findByProductId(@Param("productId") Long productId);
+
+
     @Query("select new com.noterror.app.api.domain.cart.dto.CartDetailDto(ci.cartDetailId, ci.product.productName, ci.product.price, ci.count) " +
             "from CartDetail ci "+
             "where ci.cart.cartId = :cartId ")

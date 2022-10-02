@@ -41,8 +41,8 @@ public class CartServiceImpl implements CartService {
         }
 
         //상품이 장바구니에 있는지 없는지 조회
-        CartDetail existProduct = cartDetailRepository.findByCartIdAndProductId(cart.getCartId(), cartProductDto.getProductId());
-
+        //CartDetail existProduct = cartDetailRepository.findByCartIdAndProductId(cart.getCartId(), cartProductDto.getProductId());
+        CartDetail existProduct = cartDetailRepository.findByProductId(product.getProductId());
         // 만약 상품이 이미 있으면은 개수를 +
         if(existProduct != null) {
             existProduct.addCount(cartProductDto.getCount());
