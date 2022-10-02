@@ -1,6 +1,6 @@
 package com.noterror.app.infra.auth;
 
-import com.noterror.app.api.domain.entity.Member;
+import com.noterror.app.api.domain.entity.member.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

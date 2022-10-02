@@ -1,11 +1,13 @@
 package com.noterror.app.infra.config;
 
+import com.noterror.app.api.domain.member.memberService.MemberService;
 import com.noterror.app.infra.auth.AuthFailureHandler;
 import com.noterror.app.infra.auth.AuthSuccessHandler;
 import com.noterror.app.infra.auth.CustomAuthorityUtils;
 import com.noterror.app.infra.auth.JwTokenizer;
 import com.noterror.app.infra.filter.JwtAuthenticationFilter;
 import com.noterror.app.infra.filter.JwtVerificationFilter;
+import com.noterror.app.infra.oauth2.OAuth2MemberSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -31,6 +34,7 @@ public class SecurityConfig {
 
     private final JwTokenizer jwTokenizer;
     private final CustomAuthorityUtils authorityUtils;
+    private final MemberService memberService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -47,8 +51,14 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers("/admin/**").hasRole("ADMIN")
-                        .antMatchers(HttpMethod.GET,"/products/**").permitAll()
-                        .anyRequest().hasRole("USER")); // 모든 http request 허용 -> 추후 제거
+                        .antMatchers(HttpMethod.GET, "/products/**").permitAll()
+                        .anyRequest().permitAll())
+                .oauth2Login(oauth2 -> oauth2.successHandler(
+                        new OAuth2MemberSuccessHandler(
+                                jwTokenizer, authorityUtils, memberService
+                        )
+                ));
+
         return http.build();
     }
 
@@ -72,17 +82,9 @@ public class SecurityConfig {
     public class CustomFilterConfigure extends AbstractHttpConfigurer<CustomFilterConfigure, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
-            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
-
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwTokenizer);
-            jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login"); // TODO 추후 변경
-            jwtAuthenticationFilter.setAuthenticationFailureHandler(new AuthFailureHandler());
-            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new AuthSuccessHandler());
-
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwTokenizer, authorityUtils);
 
-            builder.addFilter(jwtAuthenticationFilter)
-                    .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
+            builder.addFilterAfter(jwtVerificationFilter, OAuth2LoginAuthenticationFilter.class); // (2)
         }
     }
 }

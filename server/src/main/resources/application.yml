@@ -1,4 +1,7 @@
-spring :
+spring:
+  profiles:
+    include: oauth
+
   h2:
     console:
       enabled: true
@@ -9,11 +12,16 @@ spring :
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
-    show-sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      data-locations: classpath*:db/h2/data.sql
 
 logging:
   level:
@@ -21,13 +29,3 @@ logging:
       springframework:
         orm:
           jpa: DEBUG
-
-jwt:
-  secret0key: ${JWT_SECRET_KEY}
-  access-token-expiration-minutes: 30
-  refresh-token-expiration-minutes: 420
-
-mail:
-  address:
-    admin : {ADMIN_EMAIL}
-

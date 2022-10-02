@@ -27,7 +27,7 @@ public class Product {
     @Column(nullable = false)
     private int quantity;
 
-    private LocalDateTime signDate = LocalDateTime.now();
+    private LocalDateTime signDate;
 
     @Lob
     @Basic(fetch = FetchType.EAGER)
@@ -37,7 +37,6 @@ public class Product {
     @Basic(fetch = FetchType.EAGER)
     private String detailImage;
 
-    // TODO : 식재료
     // TODO : 카테고리
 
     //== BUSINESS LOGIC ==//

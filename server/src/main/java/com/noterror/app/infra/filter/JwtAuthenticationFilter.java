@@ -1,8 +1,8 @@
 package com.noterror.app.infra.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.noterror.app.api.domain.entity.Member;
-import com.noterror.app.api.domain.member.dto.GeneralLoginForm;
+import com.noterror.app.api.domain.entity.member.Member;
+import com.noterror.app.api.domain.member.dto.GeneralLoginDto;
 import com.noterror.app.infra.auth.JwTokenizer;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -33,10 +33,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        GeneralLoginForm generalLoginForm = objectMapper.readValue(request.getInputStream(), GeneralLoginForm.class);
+        GeneralLoginDto generalLoginDto = objectMapper.readValue(request.getInputStream(), GeneralLoginDto.class);
 
         UsernamePasswordAuthenticationToken authenticationToken
-                = new UsernamePasswordAuthenticationToken(generalLoginForm.getEmail(), generalLoginForm.getPassword());
+                = new UsernamePasswordAuthenticationToken(generalLoginDto.getEmail(), generalLoginDto.getPassword());
 
         return authenticationManager.authenticate(authenticationToken);
     }

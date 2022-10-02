@@ -1,7 +1,6 @@
-package com.noterror.app.api.domain.entity;
+package com.noterror.app.api.domain.entity.member;
 
 import lombok.Getter;
-import org.springframework.jdbc.datasource.AbstractDriverBasedDataSource;
 
 import javax.persistence.Embeddable;
 

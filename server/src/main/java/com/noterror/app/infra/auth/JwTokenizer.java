@@ -82,6 +82,7 @@ public class JwTokenizer {
         return key;
     }
 
+    // 검증 후, Claims 반환
     public Jws<Claims> getClaims(String jws, String encodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(encodedSecretKey);
 
@@ -103,6 +104,5 @@ public class JwTokenizer {
         Date expiration = calendar.getTime();
         return expiration;
     }
-
 
 }

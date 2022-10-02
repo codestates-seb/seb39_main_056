@@ -32,15 +32,15 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy) {
 
-        if (isDescending(orderBy)) {
-            return productRepository.findAll(
-                    PageRequest.of(page, size, Sort.by(sort).descending()));
+        if (isAscending(orderBy)) {
+            return productRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
         }
-        return productRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
+        return productRepository.findAll(
+                PageRequest.of(page, size, Sort.by(sort).descending()));
     }
 
-    private boolean isDescending(String orderBy) {
-        return orderBy.equals("desc") || orderBy.equals(null);
+    private boolean isAscending(String orderBy) {
+        return orderBy.equals("asc");
     }
 
     @Override
