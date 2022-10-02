@@ -26,4 +26,3 @@ logging:
         orm:
           jpa: DEBUG
 
-

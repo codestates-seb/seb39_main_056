@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartProductDto {
+    @NotNull
     private Long productId;
 
     @Min(1)

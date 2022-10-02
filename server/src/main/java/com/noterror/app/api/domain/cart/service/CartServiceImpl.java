@@ -27,11 +27,7 @@ public class CartServiceImpl implements CartService {
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
 
-    public void createCart(Member member) {
-        Cart cart = Cart.createCart(member);
-        cartRepository.save(cart);
-    }
-
+    @Override
     @Transactional
     public CartDetailDto addCart(CartProductDto cartProductDto, Long memberId) {
 

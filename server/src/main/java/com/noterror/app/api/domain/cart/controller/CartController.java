@@ -37,12 +37,11 @@ public class CartController {
 
     /**
      * 장바구니 조회
-     * @param cartDetailId
-     * @param cart
+     * @param memberId
      * @return
      */
     @GetMapping("{member-id}/cart")
-    public ResponseEntity viewCartProduct(@PathVariable("member-id") Long memberId) {
+    public @ResponseBody ResponseEntity viewCartProduct(@PathVariable("member-id") Long memberId) {
 
         List<CartDetailDto> cartDetailList = cartService.listCart(memberId);
 
@@ -50,9 +49,10 @@ public class CartController {
     }
 
     /**
-     * 장바구니 수량 변경
+     * 장바구니 제품 수량 변경
+     * @param memberId
      * @param cartDetailId
-     * @param
+     * @param cartProductDto
      * @return
      */
     @PatchMapping("{member-id}/cart/{cartDetail-id}")
@@ -66,11 +66,12 @@ public class CartController {
 
     /**
      * 장바구니 제품 삭제
+     * @param memberId
      * @param cartDetailId
      * @return
      */
     @DeleteMapping("{member-id}/cart/{cartDetail-id}")
-    public ResponseEntity deleteCartProduct(@PathVariable("member-id") Long memberId, @PathVariable("cartDetail-id") Long cartDetailId) {
+    public @ResponseBody ResponseEntity deleteCartProduct(@PathVariable("member-id") Long memberId, @PathVariable("cartDetail-id") Long cartDetailId) {
         cartService.deleteCart(cartDetailId);
         return new ResponseEntity(new SingleCartResponse(cartDetailId), HttpStatus.OK);
     }

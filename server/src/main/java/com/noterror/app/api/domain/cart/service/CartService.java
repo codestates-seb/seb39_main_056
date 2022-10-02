@@ -8,7 +8,6 @@ import java.util.List;
 public interface CartService {
     /**
      * 장바구니 제품 추가
-     *
      * @param cartProductDto
      * @param memberId
      * @return
@@ -17,16 +16,14 @@ public interface CartService {
 
     /**
      * 장바구니 수량 변경
-     *
      * @param cartDetailId
-     * @param count
+     * @param cartProductDto
      * @return
      */
     CartProductDto updateCart(Long cartDetailId, CartProductDto cartProductDto);
 
     /**
-     * 장바구니 전체 조회
-     *
+     * 장바구니 조회
      * @param memberId
      * @return
      */
@@ -37,6 +34,4 @@ public interface CartService {
      * @param cartDetailId
      */
     void deleteCart(Long cartDetailId);
-
-
 }
