@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 장바구니 담기 dto
+ * 장바구니에 담을 제품의 id와 수량을 입력받음
  */
 @Data
 @NoArgsConstructor

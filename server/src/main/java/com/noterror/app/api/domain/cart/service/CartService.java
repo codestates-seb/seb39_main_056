@@ -8,18 +8,21 @@ import java.util.List;
 public interface CartService {
     /**
      * 장바구니 제품 추가
+     *
      * @param cartProductDto
      * @param memberId
      * @return
      */
-    Long addCart(CartProductDto cartProductDto, Long memberId) ;
+    CartDetailDto addCart(CartProductDto cartProductDto, Long memberId) ;
 
     /**
      * 장바구니 수량 변경
+     *
      * @param cartDetailId
      * @param count
+     * @return
      */
-    void updateCart(Long cartDetailId, int count);
+    CartProductDto updateCart(Long cartDetailId, int count);
 
     /**
      * 장바구니 전체 조회

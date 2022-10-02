@@ -4,6 +4,7 @@ import com.noterror.app.api.domain.cart.dto.CartDetailDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.service.CartService;
 import com.noterror.app.api.domain.entity.Cart;
+import com.noterror.app.api.domain.entity.CartDetail;
 import com.noterror.app.api.domain.entity.Member;
 import com.noterror.app.api.global.response.MultiCartResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,9 +33,9 @@ public class CartController {
     @PostMapping("{member-id}/cart")
     public @ResponseBody ResponseEntity addCartProduct(@RequestBody CartProductDto cartProductDto, @PathVariable("member-id") Long memberId) {
 
-        Long cartDetailId = cartService.addCart(cartProductDto, memberId);
+        CartDetailDto cartDetail = cartService.addCart(cartProductDto, memberId);
 
-        return new ResponseEntity(new SingleCartResponse(cartDetailId), HttpStatus.OK);
+        return new ResponseEntity(new SingleCartResponse(cartDetail), HttpStatus.OK);
     }
 
     /**
@@ -59,8 +62,8 @@ public class CartController {
         if(cartProductDto.getCount() < 0) {
             return new ResponseEntity<String>("최소 1개 이상 담아주세요", HttpStatus.BAD_REQUEST);
         }
-        cartService.updateCart(cartDetailId, cartProductDto.getCount());
-        return new ResponseEntity(new SingleCartResponse(cartDetailId), HttpStatus.OK);
+        CartProductDto cartDetail = cartService.updateCart(cartDetailId, cartProductDto.getCount());
+        return new ResponseEntity(new SingleCartResponse(cartDetail), HttpStatus.OK);
     }
 
     /**

@@ -29,10 +29,10 @@ public class Cart {
     }
 
     @OneToMany(mappedBy = "cart")
-    private List<CartDetail> cartProduct = new ArrayList<>();
+    private List<CartDetail> cartDetail = new ArrayList<>();
 
     public void addCartDetail(CartDetail cartDetail){
-        this.cartProduct.add(cartDetail);
+        this.cartDetail.add(cartDetail);
     }
 
 

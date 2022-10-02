@@ -33,10 +33,10 @@ public class CartServiceImpl implements CartService {
     }
 
     @Transactional
-    public Long addCart(CartProductDto cartProductDto, Long memberId) {
+    public CartDetailDto addCart(CartProductDto cartProductDto, Long memberId) {
+
         Member member= memberRepository.findById(memberId).get();
         Product product = productRepository.findById(cartProductDto.getProductId()).get();
-
         Cart cart = member.getCart();
 
         if( cart == null ){
@@ -44,19 +44,28 @@ public class CartServiceImpl implements CartService {
             cartRepository.save(cart);
         }
 
-        //CartDetail savedCartItem = cartDetailRepository.getReferenceById(product.getProductId());
-
         //상품이 장바구니에 있는지 없는지 조회
         CartDetail productsByCartId = cartDetailRepository.findByCartIdAndProductId(cart.getCartId(), product.getProductId());
 
         // 만약 상품이 이미 있으면은 개수를 +
-        if(productsByCartId != null){
+        if( productsByCartId != null) {
             productsByCartId.addCount(cartProductDto.getCount());
-            return productsByCartId.getCartDetailId();
+            cartDetailRepository.save(productsByCartId);
+            CartDetailDto cartDetailDto = new CartDetailDto();
+            cartDetailDto.setCartDetailId(productsByCartId.getCartDetailId());
+            cartDetailDto.setProductName(productsByCartId.getProduct().getProductName());
+            cartDetailDto.setPrice(productsByCartId.getProduct().getPrice());
+            cartDetailDto.setCount(productsByCartId.getCount());
+            return cartDetailDto;
         } else { // 아니면은 CartItem 에 상품 저장
             CartDetail cartItem = CartDetail.createCartDetail(cart, product, cartProductDto.getCount());
             cartDetailRepository.save(cartItem);
-            return cartItem.getCartDetailId();
+            CartDetailDto cartDetailDto = new CartDetailDto();
+            cartDetailDto.setCartDetailId(cartItem.getCartDetailId());
+            cartDetailDto.setProductName(cartItem.getProduct().getProductName());
+            cartDetailDto.setPrice(cartItem.getProduct().getPrice());
+            cartDetailDto.setCount(cartItem.getCount());
+            return cartDetailDto;
         }
     }
 
@@ -66,22 +75,26 @@ public class CartServiceImpl implements CartService {
         List<CartDetailDto> cartDetailDtoList = new ArrayList<>();
 
         Member member = memberRepository.findById(memberId).get();
-        Long cartId = member.getCart().getCartId();
-        //Cart cart = cartRepository.findById(cartId).get();
+        Cart cart = member.getCart();
 
-        if(cartId == null) {
+        if(cart == null) {
             return cartDetailDtoList;
         }
-        //cartDetailDtoList = (List<CartDetailDto>) cartDetailRepository.findById(cartDetailId).get();
-        cartDetailDtoList = cartDetailRepository.findCartDetailDtoList(cartId);
+
+        cartDetailDtoList = cartDetailRepository.findCartDetailDtoList(cart.getCartId());
         return cartDetailDtoList;
     }
 
     //장바구니 상품수량 up
     @Override
-    public void updateCart(Long cartDetailId, int count){
+    public CartProductDto updateCart(Long cartDetailId, int count){
         CartDetail cartDetail = cartDetailRepository.findById(cartDetailId).get();
         cartDetail.updateCount(count);
+        cartDetailRepository.save(cartDetail);
+        CartProductDto cartProductDto = new CartProductDto();
+        cartProductDto.setProductId(cartDetail.getProduct().getProductId());
+        cartProductDto.setCount(cartDetail.getCount());
+        return cartProductDto;
     }
 
     @Override

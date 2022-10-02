@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class CartDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cartDetail_id")
+    @Column(name = "cart_detail_id")
     private Long cartDetailId; // CART_DETAIL_ID
 
     private int count;
