@@ -69,11 +69,13 @@ use of HTTP status codes.
 === Http-request
 Note: Host는 변경될 수 있습니다.
 
-=== Http-request
 include::{snippets}/post-cart/http-request.adoc[]
 
 === Http-response
 include::{snippets}/post-cart/http-response.adoc[]
+
+=== Path-parameters
+include::{snippets}/post-cart/path-parameters.adoc[]
 
 === Request-fields
 include::{snippets}/post-cart/request-fields.adoc[]
@@ -81,8 +83,25 @@ include::{snippets}/post-cart/request-fields.adoc[]
 === Response-fields
 include::{snippets}/post-cart/response-fields.adoc[]
 
-== 장바구니 제품 조회
-
 == 장바구니 제품 수량 수정
+
+=== Http-request
+Note: Host는 변경될 수 있습니다.
+
+include::{snippets}/update-cart-product-count/http-request.adoc[]
+
+=== Http-response
+include::{snippets}/update-cart-product-count/http-response.adoc[]
+
+=== Path-parameters
+include::{snippets}/update-cart-product-count/path-parameters.adoc[]
+
+=== Request-fields
+include::{snippets}/update-cart-product-count/request-fields.adoc[]
+
+=== Response-fields
+include::{snippets}/update-cart-product-count/response-fields.adoc[]
+
+== 장바구니 제품 조회
 
 == 장바구니 제품 삭제
