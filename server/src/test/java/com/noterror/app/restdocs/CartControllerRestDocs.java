@@ -3,6 +3,7 @@ package com.noterror.app.restdocs;
 import com.google.gson.Gson;
 import com.noterror.app.api.domain.cart.controller.CartController;
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
+import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.service.CartService;
 import org.junit.jupiter.api.DisplayName;
@@ -93,14 +94,14 @@ public class CartControllerRestDocs {
         Long memberId = 1L;
         Long cartDetailId = 2L;
 
-        CartProductDto request = new CartProductDto(1L, 3);
+        CartPatchDto request = new CartPatchDto(1L, 3);
         String jsonRequest = gson.toJson(request);
 
-        CartProductDto response = new CartProductDto(1L, 5);
-        given(cartService.updateCart(anyLong(), Mockito.any(request.getClass()))).willReturn(response);
+        CartPatchDto response = new CartPatchDto(1L, 5);
+        given(cartService.updateCart(Mockito.any(request.getClass()))).willReturn(response);
 
         ResultActions actions = mockMvc.perform(
-                patch("/{member-id}/cart/{cartDetail-id}", memberId, cartDetailId)
+                patch("/{member-id}/cart", memberId)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest));
@@ -110,19 +111,18 @@ public class CartControllerRestDocs {
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         pathParameters(
-                                parameterWithName("member-id").description("회원 식별자"),
-                                parameterWithName("cartDetail-id").description("장바구니 제품 식별자")
+                                parameterWithName("member-id").description("회원 식별자")
                         ),
                         requestFields(
                                 List.of(
-                                        fieldWithPath("productId").type(JsonFieldType.NUMBER).description("제품 식별자"),
+                                        fieldWithPath("cartDetailId").type(JsonFieldType.NUMBER).description("장바구니 제품 식별자"),
                                         fieldWithPath("count").type(JsonFieldType.NUMBER).description("제품 수량")
                                 )
                         ),
                         responseFields(
                                 List.of(
                                         fieldWithPath("cartDetail").type(JsonFieldType.OBJECT).description("장바구니에 담긴 제품 데이터"),
-                                        fieldWithPath("cartDetail.productId").type(JsonFieldType.NUMBER).description("제품 식별자"),
+                                        fieldWithPath("cartDetail.cartDetailId").type(JsonFieldType.NUMBER).description("장바구니 제품 식별자"),
                                         fieldWithPath("cartDetail.count").type(JsonFieldType.NUMBER).description("제품 변경 수량")
                                 )
                         )));

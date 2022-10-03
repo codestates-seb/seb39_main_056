@@ -6,16 +6,16 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * 장바구니 담기 dto
- * 장바구니에 담을 제품의 id와 수량을 입력받음
+ * 장바구니 수량 변경
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
-public class CartProductDto {
+@Getter
+@Setter
+public class CartPatchDto {
     @NotNull
-    private Long productId;
+    private Long cartDetailId;
 
     @Min(1)
     private int count;

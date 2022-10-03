@@ -1,6 +1,7 @@
 package com.noterror.app.api.domain.cart.service;
 
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
+import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.repository.CartDetailRepository;
 import com.noterror.app.api.domain.cart.repository.CartRepository;
@@ -89,14 +90,14 @@ public class CartServiceImpl implements CartService {
 
     //장바구니 상품수량 up
     @Override
-    public CartProductDto updateCart(Long cartDetailId, CartProductDto cartProductDto){
-        CartDetail cartDetail = cartDetailRepository.findById(cartDetailId).get();
-        cartDetail.updateCount(cartProductDto.getCount());
+    public CartPatchDto updateCart(CartPatchDto cartPatchDto){
+        CartDetail cartDetail = cartDetailRepository.findById(cartPatchDto.getCartDetailId()).get();
+        cartDetail.updateCount(cartPatchDto.getCount());
 
         //cartDetailRepository.save(cartDetail);
-        CartProductDto cartUpdateDto = new CartProductDto();
-        cartUpdateDto.setProductId(cartProductDto.getProductId());
-        cartUpdateDto.setCount(cartProductDto.getCount());
+        CartPatchDto cartUpdateDto = new CartPatchDto();
+        cartUpdateDto.setCartDetailId(cartPatchDto.getCartDetailId());
+        cartUpdateDto.setCount(cartPatchDto.getCount());
         return cartUpdateDto;
     }
 

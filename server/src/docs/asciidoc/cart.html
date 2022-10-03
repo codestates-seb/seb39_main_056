@@ -737,14 +737,14 @@ Content-Length: 123
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight nowrap"><code data-lang="http">PATCH /1/cart/2 HTTP/1.1
+<pre class="prettyprint highlight nowrap"><code data-lang="http">PATCH /1/cart HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
-Content-Length: 36
+Content-Length: 39
 Host: localhost:8080
 
 {
-  "productId" : 1,
+  "cartDetailId" : 1,
   "count" : 3
 }</code></pre>
 </div>
@@ -756,11 +756,11 @@ Host: localhost:8080
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 63
+Content-Length: 66
 
 {
   "cartDetail" : {
-    "productId" : 1,
+    "cartDetailId" : 1,
     "count" : 5
   }
 }</code></pre>
@@ -770,7 +770,7 @@ Content-Length: 63
 <div class="sect2">
 <h3 id="_path_parameters_2">3.3. Path-parameters</h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. /{member-id}/cart/{cartDetail-id}</caption>
+<caption class="title">Table 2. /{member-id}/cart</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -785,10 +785,6 @@ Content-Length: 63
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>member-id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">회원 식별자</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cartDetail-id</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">장바구니 제품 식별자</p></td>
 </tr>
 </tbody>
 </table>
@@ -810,9 +806,9 @@ Content-Length: 63
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>productId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cartDetailId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">제품 식별자</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장바구니 제품 식별자</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>count</code></p></td>
@@ -844,9 +840,9 @@ Content-Length: 63
 <td class="tableblock halign-left valign-top"><p class="tableblock">장바구니에 담긴 제품 데이터</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cartDetail.productId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cartDetail.cartDetailId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">제품 식별자</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장바구니 제품 식별자</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cartDetail.count</code></p></td>

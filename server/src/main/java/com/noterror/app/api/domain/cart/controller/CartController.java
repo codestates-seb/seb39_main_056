@@ -1,9 +1,9 @@
 package com.noterror.app.api.domain.cart.controller;
 
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
+import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.service.CartService;
-import com.noterror.app.api.domain.entity.CartDetail;
 import com.noterror.app.api.global.response.MultiCartResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
 import lombok.RequiredArgsConstructor;
@@ -51,16 +51,15 @@ public class CartController {
     /**
      * 장바구니 제품 수량 변경
      * @param memberId
-     * @param cartDetailId
-     * @param cartProductDto
+     * @param cartPatchDto
      * @return
      */
-    @PatchMapping("{member-id}/cart/{cartDetail-id}")
-    public @ResponseBody ResponseEntity updateCartProduct(@PathVariable("member-id") Long memberId, @PathVariable("cartDetail-id") Long cartDetailId, @RequestBody CartProductDto cartProductDto) {
-        if(cartProductDto.getCount() < 0) {
+    @PatchMapping("{member-id}/cart")
+    public @ResponseBody ResponseEntity updateCartProduct(@PathVariable("member-id") Long memberId, @RequestBody CartPatchDto cartPatchDto) {
+        if(cartPatchDto.getCount() < 0) {
             return new ResponseEntity<String>("최소 1개 이상 담아주세요", HttpStatus.BAD_REQUEST);
         }
-        CartProductDto cartDetail = cartService.updateCart(cartDetailId, cartProductDto);
+        CartPatchDto cartDetail = cartService.updateCart(cartPatchDto);
         return new ResponseEntity(new SingleCartResponse(cartDetail), HttpStatus.OK);
     }
 

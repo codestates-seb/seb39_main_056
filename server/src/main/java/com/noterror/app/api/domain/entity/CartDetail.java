@@ -19,18 +19,18 @@ public class CartDetail {
 
     private int count;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    public void addCart(Cart cart) {
+    public void getCart(Cart cart) {
         this.cart = cart;
     }
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public void addProduct(Product product) {
+    public void getProduct(Product product) {
         this.product = product;
     }
 
