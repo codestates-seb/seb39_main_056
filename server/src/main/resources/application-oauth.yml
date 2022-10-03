@@ -1,0 +1,22 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 168883878507-baobefrju8ott00dsdqgme60fl2im107.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile
+
+jwt:
+  access-token-expiration-minutes: 30
+  refresh-token-expiration-minutes: 420
+  key:
+    secret-key: noterrorvegetarian7894431123412341234qwerjameshongyun
+
+
+mail:
+  address:
+    admin: admin056@gmail.com

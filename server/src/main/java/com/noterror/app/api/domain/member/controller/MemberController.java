@@ -49,7 +49,7 @@ public class MemberController {
 
         return new ResponseEntity(
                 new SingleMemberResponse<>(response)
-                , HttpStatus.CREATED);
+                , HttpStatus.OK);
     }
 
     /**

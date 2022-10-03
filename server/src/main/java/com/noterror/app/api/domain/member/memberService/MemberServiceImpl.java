@@ -50,7 +50,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberResponseDto updateMember(Long memberId, UpdateInfoDto updateInfoDto) {
         Member findMember = findExistsMember(memberId);
-        findMember.updateMemberInfo(updateInfoDto);
+        VegetarianType type = getVegetarianTypeInDb(updateInfoDto.getVegetarianType());
+        findMember.updateMemberInfo(updateInfoDto, type);
         Member updateMember = memberRepository.save(findMember);
         return mapper.memberToMemberResponseDto(updateMember);
     }
@@ -75,8 +76,8 @@ public class MemberServiceImpl implements MemberService {
 
     private Member proceedSignUp(SignUpDto signUpDto) {
 
-        String email = signUpDto.getEmail();
         Member newMember = new Member();
+        String email = signUpDto.getEmail();
 
         if (verifyExistsEmail(email)) {
             newMember = findMemberByEmail(email);

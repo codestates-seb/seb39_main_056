@@ -3,8 +3,7 @@ package com.noterror.app.infra.filter;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.api.global.exception.ExceptionCode;
 import com.noterror.app.infra.auth.CustomAuthorityUtils;
-import com.noterror.app.infra.auth.JwTokenizer;
-import io.jsonwebtoken.Claims;
+import com.noterror.app.infra.auth.JwtTokenizer;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.SignatureException;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +24,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JwtVerificationFilter extends OncePerRequestFilter {
 
-    private final JwTokenizer jwTokenizer;
+    private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
 
     @Override
@@ -56,8 +54,8 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
     private Map<String, Object> verifyJws(HttpServletRequest request) {
         String jws = request.getHeader("Authorization").replace("Bearer ","");
-        String secretKey = jwTokenizer.encodeBase64SecretKey(jwTokenizer.getSecretKey());
-        Map<String, Object> claims = jwTokenizer.getClaims(jws, secretKey).getBody();
+        String secretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        Map<String, Object> claims = jwtTokenizer.getClaims(jws, secretKey).getBody();
 
         return claims;
     }

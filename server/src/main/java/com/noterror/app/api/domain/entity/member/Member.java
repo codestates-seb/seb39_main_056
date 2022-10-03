@@ -16,8 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
+@Getter @Setter
 public class Member implements Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,13 +60,14 @@ public class Member implements Principal {
     }
 
     //== BUSINESS LOGIC ==//
-    public void updateMemberInfo(UpdateInfoDto updateInfoDto) {
+    public void updateMemberInfo(UpdateInfoDto updateInfoDto, VegetarianType type) {
         this.phone = updateInfoDto.getPhone();
         new Address(
                 updateInfoDto.getZipCode(),
                 updateInfoDto.getCity(),
                 updateInfoDto.getDetailAddress()
         );
+        this.vegetarianType = type;
     }
 
     public void proceedSocialSignUp(SignUpDto signUpDto) {

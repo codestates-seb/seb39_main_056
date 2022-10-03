@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.member.dto;
 
+import com.noterror.app.api.domain.entity.VegetarianType;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -31,4 +32,6 @@ public class UpdateInfoDto {
     /** 상세 주소(사용자 입력) */
     private String detailAddress;
 
+    // TODO 채식 유형
+    private String vegetarianType;
 }

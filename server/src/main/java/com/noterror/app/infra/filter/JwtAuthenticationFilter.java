@@ -3,7 +3,7 @@ package com.noterror.app.infra.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.noterror.app.api.domain.entity.member.Member;
 import com.noterror.app.api.domain.member.dto.GeneralLoginDto;
-import com.noterror.app.infra.auth.JwTokenizer;
+import com.noterror.app.infra.auth.JwtTokenizer;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
-    private final JwTokenizer jwTokenizer;
+    private final JwtTokenizer jwtTokenizer;
 
     @SneakyThrows
     @Override
@@ -64,17 +64,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         claims.put("roles", member.getRoles());
 
         String subject = member.getMemberName();
-        Date expiration = jwTokenizer.getTokenExpiration(jwTokenizer.getAccessTokenExpirationMinutesInfo());
-        String secretKey = jwTokenizer.encodeBase64SecretKey(jwTokenizer.getSecretKey());
+        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutesInfo());
+        String secretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
 
-        return jwTokenizer.generateAccessToken(claims, subject, expiration, secretKey);
+        return jwtTokenizer.generateAccessToken(claims, subject, expiration, secretKey);
     }
 
     private String delegateRefreshToken(Member member) {
         String subject = member.getMemberName();
-        Date expiration = jwTokenizer.getTokenExpiration(jwTokenizer.getRefreshTokenExpirationMinutesInfo());
-        String secretKey = jwTokenizer.encodeBase64SecretKey(jwTokenizer.getSecretKey());
+        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutesInfo());
+        String secretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
 
-        return jwTokenizer.generateRefreshToken(subject, expiration, secretKey);
+        return jwtTokenizer.generateRefreshToken(subject, expiration, secretKey);
     }
 }

@@ -1,19 +1,14 @@
 package com.noterror.app.infra;
 
 import com.noterror.app.api.global.exception.BusinessLogicException;
-import com.noterror.app.api.global.exception.ExceptionCode;
-import com.noterror.app.infra.auth.JwTokenizer;
+import com.noterror.app.infra.auth.JwtTokenizer;
 
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.io.Decoders;
 import org.junit.jupiter.api.*;
-import org.opentest4j.AssertionFailedError;
 
-import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static com.noterror.app.api.global.exception.ExceptionCode.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -21,13 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class JwtTokenizerTest {
-    private static JwTokenizer jwtTokenizer;
+    private static JwtTokenizer jwtTokenizer;
     private String secretKey;
     private String base64EncodedSecretKey;
 
     @BeforeAll
     public void init() {
-        jwtTokenizer = new JwTokenizer();
+        jwtTokenizer = new JwtTokenizer();
         secretKey = "kevin1234123412341234123412341234";
         base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(secretKey);
     }
@@ -82,18 +77,18 @@ public class JwtTokenizerTest {
                 () -> jwtTokenizer.getClaims(accessToken, base64EncodedSecretKey));
     }
 
-//    @Test
-//    @DisplayName("expired 만료됨으로 인한 검증 실패 - throw '만료된 토큰입니다.' when jws verify")
-//    void verifyExpirationTest() throws Exception {
-//        String accessToken = getAccessToken(Calendar.SECOND, 1);
-//        assertDoesNotThrow(() -> jwtTokenizer.getClaims(accessToken, base64EncodedSecretKey));
-//
-//        TimeUnit.MILLISECONDS.sleep(1500);
-//
-//        assertThrows(BusinessLogicException.class,
-//                ()-> jwtTokenizer.getClaims(accessToken, base64EncodedSecretKey));
-//
-//    }
+/*    @Test
+    @DisplayName("expired 만료됨으로 인한 검증 실패 - throw '만료된 토큰입니다.' when jws verify")
+    void verifyExpirationTest() throws Exception {
+        String accessToken = getAccessToken(Calendar.SECOND, 1);
+        assertDoesNotThrow(() -> jwtTokenizer.getClaims(accessToken, base64EncodedSecretKey));
+
+        TimeUnit.MILLISECONDS.sleep(1500);
+
+        assertThrows(BusinessLogicException.class,
+                ()-> jwtTokenizer.getClaims(accessToken, base64EncodedSecretKey));
+
+    }*/
 
     private String getAccessToken(int timeUnit, int timeAmount) {
 

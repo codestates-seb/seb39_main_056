@@ -33,7 +33,7 @@ public interface MemberService {
 
      /**
       * 개별 회원 정보 조회 기능
-      * @param id
+      * @param email
       * @return MemberResponseDto
       */
      MemberResponseDto findMember(String email);
