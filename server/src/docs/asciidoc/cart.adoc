@@ -104,4 +104,30 @@ include::{snippets}/update-cart-product-count/response-fields.adoc[]
 
 == 장바구니 제품 조회
 
+=== Http-request
+Note: Host는 변경될 수 있습니다.
+
+include::{snippets}/get-cart-products/http-request.adoc[]
+
+=== Http-response
+include::{snippets}/get-cart-products/http-response.adoc[]
+
+=== Path-parameters
+include::{snippets}/get-cart-products/path-parameters.adoc[]
+
+=== Response-fields
+include::{snippets}/get-cart-products/response-fields.adoc[]
+
 == 장바구니 제품 삭제
+
+=== Http-request
+Note: Host는 변경될 수 있습니다.
+
+include::{snippets}/delete-cart-product/http-request.adoc[]
+
+=== Http-response
+include::{snippets}/delete-cart-product/http-response.adoc[]
+
+=== Path-parameters
+include::{snippets}/delete-cart-product/path-parameters.adoc[]
+

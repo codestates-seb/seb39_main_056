@@ -18,18 +18,19 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CartController.class)
@@ -130,5 +131,52 @@ public class CartControllerRestDocs {
     @Test
     @DisplayName("장바구니 제품 조회 API 문서화")
     void viewCartProduct() throws Exception {
+        Long memberId = 1L;
+        CartDetailDto response1 = new CartDetailDto(1L, "카레라면", 20000, 3);
+        CartDetailDto response2 = new CartDetailDto(2L, "가지튀김", 10000, 5);
+        List<CartDetailDto> response = new ArrayList<>();
+        response.add(response1);
+        response.add(response2);
 
+        given(cartService.listCart(anyLong())).willReturn(response);
+
+        ResultActions actions = mockMvc.perform(
+                get("/{member-id}/cart", memberId));
+
+        actions.andExpect(status().isOk())
+                .andDo(document("get-cart-products",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        pathParameters(
+                                parameterWithName("member-id").description("회원 식별자")
+                        ),
+                        responseFields(
+                                List.of(
+                                        fieldWithPath("cartProducts").type(JsonFieldType.ARRAY).description("전체 장바구니 제품 데이터"),
+                                        fieldWithPath("cartProducts[].cartDetailId").type(JsonFieldType.NUMBER).description("제품 식별자"),
+                                        fieldWithPath("cartProducts[].productName").type(JsonFieldType.STRING).description("제품명"),
+                                        fieldWithPath("cartProducts[].price").type(JsonFieldType.NUMBER).description("제품 가격"),
+                                        fieldWithPath("cartProducts[].count").type(JsonFieldType.NUMBER).description("구매 수량")
+                                )
+                        )));
+    }
+
+    @Test
+    @DisplayName("장바구니 제품 삭제 API 문서화")
+    void deleteCartProduct() throws Exception {
+        Long memberId = 1L;
+        Long cartDetailId = 2L;
+
+        doNothing().when(cartService).deleteCart(anyLong());
+
+        ResultActions actions = mockMvc.perform(
+                delete("/{member-id}/cart/{cartDetail-id}", memberId, cartDetailId));
+
+        actions.andExpect(status().isOk())
+                .andDo(document("delete-cart-product",
+                        pathParameters(
+                                parameterWithName("member-id").description("회원 식별자"),
+                                parameterWithName("cartDetail-id").description("장바구니 제품 식별자")
+                        )));
+    }
 }
