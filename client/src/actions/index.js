@@ -8,9 +8,9 @@ export const setLoginChange = result => {
   };
 };
 
-export const setVege = type => {
+export const setVege = vege => {
   return {
     type: SET_VEGE_TYPE,
-    payload: type,
+    payload: vege,
   };
 };

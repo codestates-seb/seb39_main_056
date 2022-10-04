@@ -12,7 +12,7 @@ const GoogleBtn = ({ onGoogleSignIn, text }) => {
     window.google.accounts.id.renderButton(googleSignInButton.current, {
       size: 'large',
       text,
-      width: '400',
+      width: '300',
     });
   });
 

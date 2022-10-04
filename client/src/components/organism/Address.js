@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import StyledInput from './StyledInput';
+import StyledInput from '../atom/StyledInput';
 import PopupDom from './Popupdom';
 import PopupPostCode from './PopupPostCode';
 
