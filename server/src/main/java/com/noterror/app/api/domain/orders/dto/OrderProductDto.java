@@ -21,7 +21,7 @@ public class OrderProductDto {
         this.productId = orderProduct.getProduct().getProductId();
         this.productName = orderProduct.getProduct().getProductName();
         this.quantity = orderProduct.getQuantity();
-        this.productPrice = orderProduct.getOrdersPrice();
+        this.productPrice = orderProduct.getProduct().getPrice();
 
     }
 }

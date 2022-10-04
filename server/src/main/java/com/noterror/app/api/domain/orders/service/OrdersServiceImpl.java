@@ -12,7 +12,6 @@ import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
 import com.noterror.app.api.domain.orders.repository.OrdersRepository;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,35 +31,28 @@ public class OrdersServiceImpl implements OrdersService {
     @Transactional(readOnly = true)
     public List<OrderInfoDto> getOrderList(Long memberId){
         List<Orders> orders = ordersRepository.findAll();
+
         List<Orders> memberOrder = new ArrayList<>();
-        int total=0 ;
+
         for (Orders data : orders) {
             if (data.getMember().getMemberId() == memberId) {
                 memberOrder.add(data);
             }
-            total = data.getTotalPrice();
         }
-
-        /*List<OrderProduct> orderProductList = new ArrayList<>();
-        for(OrderProduct data: orderProductList){
-            int totalCounts = 0;
-            totalCounts += data.getQuantity();
-        }
-         */
-
-        List<OrderInfoDto> orderInfoDtoList = new ArrayList<>();
+        List<OrderInfoDto> result = new ArrayList<>();
+        List<OrderProductDto> orderDtoList = new ArrayList<>();
 
         for (Orders order : memberOrder) {
-            OrderInfoDto orderInfoDto = new OrderInfoDto(order);
             List<OrderProduct> orderProducts = order.getOrderProducts();
             for(OrderProduct orderProduct : orderProducts) {
-                OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
-                orderInfoDto.addOrderProductDto(orderProductDto);
+                OrderProductDto orderProductDto = new OrderProductDto(orderProduct.getProduct().getProductId(),orderProduct.getProduct().getProductName(), orderProduct.getQuantity(), orderProduct.getProduct().getPrice());
+                orderDtoList.add(orderProductDto);
             }
-            orderInfoDto.setTotalPrice(total);
-            orderInfoDtoList.add(orderInfoDto);
+            OrderInfoDto infoDto = new OrderInfoDto(order.getOrdersId(), order.getOrdersDate(), order.getOrdersStatus(), order.getTotalPrice(), orderDtoList);
+            result.add(infoDto);
         }
-        return orderInfoDtoList;
+
+        return result;
 
     }
      //제품 상세페이지에서 주문

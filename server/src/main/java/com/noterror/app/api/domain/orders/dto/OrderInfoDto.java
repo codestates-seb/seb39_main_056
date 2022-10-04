@@ -4,6 +4,7 @@ import com.noterror.app.api.domain.entity.order.Orders;
 import com.noterror.app.api.domain.entity.order.OrdersStatus;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +18,16 @@ import java.util.List;
 @Getter @Setter
 public class OrderInfoDto {
     private Long orderId;
-    private String orderDate;
+    private LocalDateTime orderDate;
     private OrdersStatus ordersStatus;
 
     private int totalPrice;
 
     public OrderInfoDto(Orders order) {
         this.orderId = order.getOrdersId();
-        this.orderDate = order.getOrdersDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.orderDate = order.getOrdersDate();
         this.ordersStatus = order.getOrdersStatus();
+        this.totalPrice = order.getTotalPrice();
     }
 
     //주문한 상품들을 담을 리스트

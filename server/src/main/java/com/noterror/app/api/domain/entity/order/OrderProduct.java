@@ -37,10 +37,13 @@ public class OrderProduct {
         orderProduct.setOrdersProductId(product.getProductId());
         orderProduct.setQuantity(quantity);
         orderProduct.setOrdersPrice(product.getPrice());
+
         product.removeStock(quantity);
         return orderProduct;
     }
-    public int getTotalPrice(){return ordersPrice*quantity;}
+    public int getTotalPrice(){
+        return ordersPrice*quantity;
+    }
 
     public void addOrders(Orders orders) {
         this.orders = orders;
