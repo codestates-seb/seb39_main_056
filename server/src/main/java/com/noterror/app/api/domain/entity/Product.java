@@ -55,6 +55,9 @@ public class Product {
     // TODO : 식재료
     // TODO : 카테고리
 
+    @OneToMany(mappedBy = "product")
+    private List<CartDetail> cartProduct = new ArrayList<>();
+
     //== BUSINESS LOGIC ==//
     public void updateProductInfo(ProductRequestDto productPatchDto) {
         this.productName = productPatchDto.getProductName();

@@ -7,7 +7,11 @@ spring :
   datasource:
     url: jdbc:h2:mem:test
 
+  sql:
+    init:
+      data-location: classpath*:db/h2/data.sql
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
     properties:
@@ -24,5 +28,5 @@ logging:
 
 server:
   port:
-    9050
+    9090
 
