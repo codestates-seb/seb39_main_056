@@ -3,6 +3,7 @@ package com.noterror.app.api.global.exception;
 
 import lombok.Getter;
 
+@Getter
 public enum ExceptionCode {
     //Product
     PRODUCT_BAD_REQUEST(400, "잘못된 요청입니다. (제품)"),
@@ -18,6 +19,11 @@ public enum ExceptionCode {
     MEMBER_NOT_FOUND(404, "존재하지 않는 회원입니다."),
     MEMBER_NOT_AUTHENTICATION(403, "인증 혹은 권한이 없습니다."),
 
+    //VegetarianType
+    TYPE_BAD_REQUEST(400,"잘못된 채식 유형입니다."),
+
+    //Global
+    BAD_REQUEST(400, "잘못된 요청입니다."),
     //Server
     INTERNAL_SERVER_ERROR(500, "서버 에러"),
     NOT_IMPLEMENTATION(501, "아직 구현되지 않았습니다.");

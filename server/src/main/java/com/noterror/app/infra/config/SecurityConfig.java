@@ -5,12 +5,14 @@ import com.noterror.app.infra.auth.CustomAuthorityUtils;
 import com.noterror.app.infra.auth.JwtTokenizer;
 import com.noterror.app.infra.auth.MemberAccessDeniedHandler;
 import com.noterror.app.infra.auth.MemberAuthenticationEntryPoint;
+import com.noterror.app.infra.filter.JwtAuthenticationFilter;
 import com.noterror.app.infra.filter.JwtVerificationFilter;
 import com.noterror.app.infra.oauth2.OAuth2MemberSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -38,10 +40,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                //.headers().frameOptions().sameOrigin() // 동일 출처로부터 들어오는 request 만 페이지 렌더링
-                //.and()
+                .headers().frameOptions().sameOrigin() // 동일 출처로부터 들어오는 request 만 페이지 렌더링
+                .and()
                 .csrf().disable() // CSRF 공격 방지 비활성화
-                //.cors(withDefaults()) // corsConfigurationSource 이름으로 등록된 Bean 이용 -> Cors Filter 적용 -> cors 처리 -> merge 이후 컨트롤러의 cors 애너테이션 제거
+                .cors(withDefaults()) // corsConfigurationSource 이름으로 등록된 Bean 이용 -> Cors Filter 적용 -> cors 처리 -> merge 이후 컨트롤러의 cors 애너테이션 제거
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션을 생성하지 않도록 설정
                 .and()
                 .formLogin().disable()
@@ -53,12 +55,7 @@ public class SecurityConfig {
                 .apply(new CustomFilterConfigure())
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers(HttpMethod.POST, "/products/**").permitAll()
-                        .antMatchers(HttpMethod.GET, "/products/*").permitAll()
-                        .antMatchers(HttpMethod.POST, "*/members/**").permitAll()
-                        .antMatchers(HttpMethod.DELETE, "*/members/**").permitAll()
-                        .antMatchers(HttpMethod.PUT, "*/members/**").permitAll()
-                        .anyRequest().permitAll())
+                        .antMatchers("members/**").permitAll())
                 .oauth2Login(oauth2 -> oauth2.successHandler(
                         new OAuth2MemberSuccessHandler(
                                 jwtTokenizer, authorityUtils, memberService
@@ -66,11 +63,6 @@ public class SecurityConfig {
                 ));
 
         return http.build();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     // CORS 정책

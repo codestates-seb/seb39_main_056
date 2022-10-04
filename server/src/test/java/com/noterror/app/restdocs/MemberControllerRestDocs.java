@@ -5,7 +5,6 @@ import com.noterror.app.api.domain.member.controller.MemberController;
 import com.noterror.app.api.domain.member.dto.MemberResponseDto;
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
-import com.noterror.app.api.domain.member.dto.VegetarianTypeDto;
 import com.noterror.app.api.domain.member.memberService.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,8 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -46,7 +44,6 @@ public class MemberControllerRestDocs {
 
     @Test
     @DisplayName("일반 회원 정보 등록 API 문서화")
-    @WithMockUser
     void postMemberApiDocs() throws Exception {
         //given
         SignUpDto signUpDto = new SignUpDto(
@@ -141,7 +138,7 @@ public class MemberControllerRestDocs {
     @DisplayName("채식 유형 등록 API 문서화")
     void postTypeOfMemberApiDocs() throws Exception {
         //given
-        VegetarianTypeDto vegetarianTypeDto = new VegetarianTypeDto("비건");
+        String vegetarianType = "비건";
 
         MemberResponseDto response = new MemberResponseDto(
                 1L,
@@ -155,9 +152,9 @@ public class MemberControllerRestDocs {
                 LocalDateTime.now()
         );
 
-        String request = gson.toJson(vegetarianTypeDto);
+        String request = gson.toJson(vegetarianType);
 
-        given(memberService.saveTypeOfNewMember(anyLong(),any(VegetarianTypeDto.class)))
+        given(memberService.saveTypeOfNewMember(anyLong(),any()))
                 .willReturn(response);
 
         //when

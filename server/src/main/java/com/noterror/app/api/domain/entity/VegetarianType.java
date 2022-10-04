@@ -12,9 +12,6 @@ import javax.persistence.*;
 public class VegetarianType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(unique = true)
     private String vegetarianTypeName;
 
@@ -22,6 +19,7 @@ public class VegetarianType {
     private int vegetarianTypeLevel;
 
     @OneToOne
+    @Transient
     private Member member;
 
     //== BUSINESS LOGIC ==//

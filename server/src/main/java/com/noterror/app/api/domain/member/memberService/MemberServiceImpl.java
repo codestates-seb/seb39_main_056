@@ -5,15 +5,18 @@ import com.noterror.app.api.domain.entity.member.Member;
 import com.noterror.app.api.domain.member.dto.MemberResponseDto;
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
-import com.noterror.app.api.domain.member.dto.VegetarianTypeDto;
-import com.noterror.app.api.domain.member.mapper.MemberMapper;
+import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
 import com.noterror.app.api.domain.member.repository.MemberRepository;
 import com.noterror.app.api.domain.vegetarianType.repository.VegetarianTypeRepository;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.api.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.noterror.app.api.global.exception.ExceptionCode.MEMBER_NOT_FOUND;
+import static com.noterror.app.api.global.exception.ExceptionCode.TYPE_BAD_REQUEST;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final VegetarianTypeRepository vegetarianTypeRepository;
-    private final MemberMapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
@@ -40,7 +43,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberResponseDto saveTypeOfNewMember(Long memberId, VegetarianTypeDto vegetarianType) {
+    public MemberResponseDto saveTypeOfNewMember(Long memberId, VegetarianTypeInputDto vegetarianType) {
         Member member = findExistsMember(memberId);
         VegetarianType type = getVegetarianTypeInDb(vegetarianType.getVegetarianType());
         member.setVegetarianType(type);
@@ -48,18 +51,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public MemberResponseDto updateMember(Long memberId, UpdateInfoDto updateInfoDto) {
         Member findMember = findExistsMember(memberId);
         VegetarianType type = getVegetarianTypeInDb(updateInfoDto.getVegetarianType());
         findMember.updateMemberInfo(updateInfoDto, type);
         Member updateMember = memberRepository.save(findMember);
-        return mapper.memberToMemberResponseDto(updateMember);
+        return new MemberResponseDto(updateMember);
     }
 
     @Override
     public MemberResponseDto findMember(String email) {
         Member existsMember = findMemberByEmail(email);
-        return mapper.memberToMemberResponseDto(existsMember);
+        return new MemberResponseDto(existsMember);
     }
 
     @Override
@@ -71,19 +75,18 @@ public class MemberServiceImpl implements MemberService {
 
     public Member findExistsMember(Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new BusinessLogicException(MEMBER_NOT_FOUND));
     }
 
     private Member proceedSignUp(SignUpDto signUpDto) {
-
         Member newMember = new Member();
         String email = signUpDto.getEmail();
-
         if (verifyExistsEmail(email)) {
             newMember = findMemberByEmail(email);
             newMember.proceedSocialSignUp(signUpDto);
         } else {
-            newMember.proceedGeneralSignUp(signUpDto);
+            String encodedPassword = passwordEncoder.encode(signUpDto.getPassword());
+            newMember.proceedGeneralSignUp(signUpDto, encodedPassword);
         }
         return newMember;
     }
@@ -97,7 +100,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     private VegetarianType getVegetarianTypeInDb(String inputText) {
-        return vegetarianTypeRepository.findByVegetarianTypeName(inputText).get();
+        return vegetarianTypeRepository.findById(inputText)
+                .orElseThrow(()-> new BusinessLogicException(TYPE_BAD_REQUEST));
     }
 }
 

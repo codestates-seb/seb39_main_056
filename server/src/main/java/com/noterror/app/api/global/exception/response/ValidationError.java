@@ -21,16 +21,4 @@ public class ValidationError {
     private String field;
     private Object rejectedValue;
     private String reason;
-
-    public static List<ValidationError> of(BindingResult bindingResult){
-        final List<FieldError> fieldErrors =
-                bindingResult.getFieldErrors();
-        return fieldErrors.stream()
-                .map(error -> new ValidationError(
-                        error.getField(),           //오류 필드를 가져옴
-                        error.getRejectedValue() == null ?      //사용자가 입력한 값 = 거절된 값
-                                "" : error.getRejectedValue().toString(),  //null값을 빈 문자열로 바꿀 수 있음
-                        error.getDefaultMessage()))  //기본 오류 메시지
-                            .collect(Collectors.toList());
-    }
 }

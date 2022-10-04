@@ -1,9 +1,10 @@
 package com.noterror.app.api.domain.member.controller;
 
+import com.noterror.app.api.domain.entity.VegetarianType;
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
 import com.noterror.app.api.domain.member.dto.MemberResponseDto;
-import com.noterror.app.api.domain.member.dto.VegetarianTypeDto;
+import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
 import com.noterror.app.api.domain.member.memberService.MemberService;
 import com.noterror.app.api.global.response.SingleMemberResponse;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 
@@ -32,7 +34,7 @@ public class MemberController {
      * 회원 정보 등록
      */
     @PostMapping("/sign-up")
-    public ResponseEntity<MemberResponseDto> postMember(@RequestBody SignUpDto signUpDto) {
+    public ResponseEntity<MemberResponseDto> postMember(@RequestBody @Valid SignUpDto signUpDto) {
         Long memberId = memberService.saveMemberInfo(signUpDto);
         return new ResponseEntity(memberId, HttpStatus.CREATED);
     }
@@ -43,9 +45,9 @@ public class MemberController {
     @PostMapping("/sign-up/type/{member-id}")
     public ResponseEntity<MemberResponseDto> postVegetarianTypeOfNewMember(
             @PathVariable("member-id") Long memberId,
-            @RequestBody VegetarianTypeDto vegetarianType) {
+            @RequestBody @Valid VegetarianTypeInputDto vegetarianType) {
         MemberResponseDto response =
-                memberService.saveTypeOfNewMember(memberId,vegetarianType);
+                memberService.saveTypeOfNewMember(memberId, vegetarianType);
 
         return new ResponseEntity(
                 new SingleMemberResponse<>(response)
@@ -56,7 +58,7 @@ public class MemberController {
      * 회원 정보 수정
      */
     @PutMapping("/info/{member-id}")
-    public ResponseEntity putMember(@PathVariable("member-id") Long memberId, @RequestBody UpdateInfoDto updateInfoDto) {
+    public ResponseEntity putMember(@PathVariable("member-id") Long memberId, @RequestBody @Valid UpdateInfoDto updateInfoDto) {
         MemberResponseDto response = memberService.updateMember(memberId, updateInfoDto);
         return new ResponseEntity<>(
                 new SingleMemberResponse<>(response)

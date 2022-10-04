@@ -4,7 +4,7 @@ import com.noterror.app.api.domain.entity.member.Member;
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
 import com.noterror.app.api.domain.member.dto.MemberResponseDto;
-import com.noterror.app.api.domain.member.dto.VegetarianTypeDto;
+import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
 
 public interface MemberService {
 
@@ -18,10 +18,10 @@ public interface MemberService {
      /**
       * 최초 회원 가입자의 채식 유형 저장 기능
       * @param memberId
-      * @param vegetarianTypeInputDto
+      * @param vegetarianType
       * @return
       */
-     MemberResponseDto saveTypeOfNewMember(Long memberId, VegetarianTypeDto vegetarianTypeInputDto);
+     MemberResponseDto saveTypeOfNewMember(Long memberId, VegetarianTypeInputDto vegetarianType);
 
      /**
       * 회원 정보 수정 기능

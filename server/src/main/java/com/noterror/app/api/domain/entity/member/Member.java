@@ -42,9 +42,6 @@ public class Member implements Principal {
 
     public void setVegetarianType(VegetarianType vegetarianType) {
         this.vegetarianType = vegetarianType;
-        if (vegetarianType.getMember() != this) {
-            vegetarianType.setMember(this);
-        }
     }
 
     @Column(nullable = true)
@@ -79,10 +76,10 @@ public class Member implements Principal {
         );
     }
 
-    public void proceedGeneralSignUp(SignUpDto signUpDto) {
+    public void proceedGeneralSignUp(SignUpDto signUpDto, String encodedPassword) {
         this.email = signUpDto.getEmail();
         this.memberName = signUpDto.getMemberName();
-        this.password = signUpDto.getPassword();
+        this.password = encodedPassword;
         this.phone = signUpDto.getPhone();
         this.address = new Address(
                 signUpDto.getZipCode(),
