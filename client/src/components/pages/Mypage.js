@@ -25,35 +25,57 @@ const Mypage = () => {
     fetchData();
   }, []);
 
+  //전역변수 a를 선언
+  let a = '';
+  //onClick 함수는 어떤버튼을 클릭했는지 확인하는 함수
+  const onClick = e => {
+    a = e.target.name;
+    console.log('내가클릭한버튼은', a);
+  };
+  //onSubmit함수는 버튼에 따라 함수를 분기
   const onSubmit = e => {
     e.preventDefault();
-    // input에 있는 정보들을 변수에 담아서 fetch요청을 한다.
-    const phoneNum = e.target.phone.value;
-    const zipCode = e.target.zipcode.value;
-    const address = e.target.firstAdress.value;
-    const addressDetail = e.target.secondAdress.value;
-    const type = { selects }.selects;
-    // console.log(phoneNum, zipCode, address, addressDetail, type);
-    //정보수정: patch요청을 한다.
-
-    try {
-      fetch(`http://localhost:3001/user`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          phoneNum,
-          zipCode,
-          address,
-          addressDetail,
-          type,
-        }),
-      })
-        .then(alert('정보가 성공적으로 수정되었습니다'))
-        .then(window.location.reload());
-    } catch (error) {
-      console.error(error);
+    if (a === 'updateBtn') {
+      console.log('정보수정');
+      //input에 있는 정보들을 가져온다.
+      const phoneNum = e.target.phone.value;
+      const zipCode = e.target.zipcode.value;
+      const address = e.target.firstAdress.value;
+      const addressDetail = e.target.secondAdress.value;
+      const type = { selects }.selects;
+      console.log(phoneNum, zipCode, address, addressDetail, type);
+      //patch요청을 한다.
+      //정보수정: patch요청을 한다.
+      if (
+        phoneNum === '' ||
+        zipCode === '' ||
+        address === '' ||
+        addressDetail === '' ||
+        type === ''
+      ) {
+        alert('모든 정보를 입력해 주세요');
+      } else {
+        try {
+          fetch(`http://localhost:3001/user`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              phoneNum,
+              zipCode,
+              address,
+              addressDetail,
+              type,
+            }),
+          }).then(alert('정보가 성공적으로 수정되었습니다'));
+          // .then(window.location.reload());
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    } else if (a === 'delBtn') {
+      console.log('회원탈퇴');
     }
   };
 
@@ -93,7 +115,7 @@ const Mypage = () => {
             </td> */}
           </tr>
           <tr>
-            <td>배송조회</td>
+            <td>주문내역조회</td>
             <td>전화번호</td>
             <td>
               <input name="phone" type="text" defaultValue={info.phoneNum} />
@@ -104,12 +126,20 @@ const Mypage = () => {
             <td>주소</td>
             <td>
               <div>
-                <input name="zipcode" type="text" />
-                <button>우편번호찾기</button>
+                <input name="zipcode" type="text" defaultValue={info.zipCode} />
+                <button name="zipBtn">우편번호찾기</button>
               </div>
               <div>
-                <input name="firstAdress" type="text" />
-                <input name="secondAdress" type="text" />
+                <input
+                  name="firstAdress"
+                  type="text"
+                  defaultValue={info.address}
+                />
+                <input
+                  name="secondAdress"
+                  type="text"
+                  defaultValue={info.addressDetail}
+                />
               </div>
             </td>
           </tr>
@@ -118,7 +148,11 @@ const Mypage = () => {
             <td></td>
             <td>채식유형</td>
             <td>
-              <select value={selects} onChange={e => setSelect(e.target.value)}>
+              <select
+                value={selects}
+                defaultValue={info.type}
+                onChange={e => setSelect(e.target.value)}
+              >
                 <option>플렉시테리언</option>
                 <option>폴로-페스코</option>
                 <option>페스코</option>
@@ -135,8 +169,12 @@ const Mypage = () => {
             <td></td>
             <td></td>
             <td>
-              <button>정보수정</button>
-              <button>회원탈퇴</button>
+              <button name="updateBtn" onClick={onClick}>
+                정보수정
+              </button>
+              <button name="delBtn" onClick={onClick}>
+                회원탈퇴
+              </button>
               <Link to="/">
                 <button>메인으로</button>
               </Link>

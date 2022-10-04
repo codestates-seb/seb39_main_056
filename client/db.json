@@ -2,10 +2,10 @@
   "user": {
     "userId": 0,
     "userName": "제임스",
-    "phoneNum": "01023123qwe",
-    "zipCode": "qweqwe",
-    "address": "qweq",
-    "addressDetail": "qwe",
+    "phoneNum": "123123123",
+    "zipCode": "미국",
+    "address": "미국시",
+    "addressDetail": "미국아파트",
     "emailAdress": "James@google.com",
     "type": "페스코"
   },
