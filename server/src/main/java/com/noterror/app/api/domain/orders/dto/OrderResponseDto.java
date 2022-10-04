@@ -7,16 +7,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
-@Getter
-@Builder
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-public class OrdersResponseDto {
+@NoArgsConstructor
+@Getter @Setter
+public class OrderResponseDto {
     private Long ordersId;
     private OrdersStatus ordersStatus;
     private LocalDateTime ordersDate;
-    private List<OrdersProduct> ordersProducts = new ArrayList<>();
+    private int totalPrice;
+    private List<OrderProductDto> orderProductList = new ArrayList<>();
 }
 
 

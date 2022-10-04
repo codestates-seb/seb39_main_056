@@ -1,31 +1,69 @@
 package com.noterror.app.api.domain.orders.service;
 
 import com.noterror.app.api.domain.entity.Member;
+import com.noterror.app.api.domain.entity.Product;
 import com.noterror.app.api.domain.entity.order.Orders;
+import com.noterror.app.api.domain.entity.order.OrderProduct;
 import com.noterror.app.api.domain.member.repository.MemberRepository;
+import com.noterror.app.api.domain.orders.dto.OrderDto;
+import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
+import com.noterror.app.api.domain.orders.dto.OrderProductDto;
+import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
 import com.noterror.app.api.domain.orders.repository.OrdersRepository;
+import com.noterror.app.api.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class OrdersServiceImpl implements OrdersService {
 
     private final OrdersRepository ordersRepository;
+    private final MemberRepository memberRepository;
+    private final ProductRepository productRepository;
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Orders> findOrdersWithPage(int page, int size, Long memberId) {
+    public Page<OrderInfoDto> getOrderList(Long memberId, Pageable pageable){
+        List<Orders> orderList = ordersRepository.findOrders(memberId, pageable);
+        Long totalCount = ordersRepository.countOrder(memberId);
 
-        return ordersRepository.findAll(
-                PageRequest.of(page, size, Sort.by("ordersDate").descending()));
+        List<OrderInfoDto> orderInfoDtoList = new ArrayList<>();
+        for (Orders order : orderList) {
+            OrderInfoDto orderInfoDto = new OrderInfoDto(order);
+            List<OrderProduct> orderProducts = order.getOrderProducts();
+            for(OrderProduct orderProduct : orderProducts) {
+                OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
+                orderInfoDto.addOrderProductDto(orderProductDto);
+            }
+            orderInfoDtoList.add(orderInfoDto);
+        }
+        return new PageImpl<OrderInfoDto>(orderInfoDtoList, pageable, totalCount);
+
+    }
+     //제품 상세페이지에서 주문
+    public OrderResponseDto orderProduct(OrderDto orderDto, Long memberId) {
+        Product product = productRepository.findById(orderDto.getProductId()).get();
+        Member member = memberRepository.findById(memberId).get();
+
+        List<OrderProduct> orderProductList = new ArrayList<>();        //주문할 상품을 담을 리스트
+        OrderProduct orderProduct = OrderProduct.createOrderProduct(product, orderDto.getQuantity());   //주문상품 엔티티 생성
+        orderProductList.add(orderProduct);
+
+        Orders order = Orders.createOrder(member, orderProductList);
+        ordersRepository.save(order);
+        OrderProductDto productDto = new OrderProductDto(orderProduct.getProduct().getProductId(), orderProduct.getProduct().getProductName(),orderProduct.getQuantity(), orderProduct.getProduct().getPrice());
+        List<OrderProductDto> dtoList = new ArrayList<>();
+        dtoList.add(productDto);
+        OrderResponseDto responseDto = new OrderResponseDto(order.getOrdersId(), order.getOrdersStatus(), order.getOrdersDate(), order.getTotalPrice(), dtoList);
+
+        return responseDto;
     }
 
 }

@@ -2,7 +2,6 @@
 package com.noterror.app.api.domain.entity;
 
 import com.noterror.app.api.domain.entity.order.Orders;
-import com.noterror.app.api.domain.entity.order.OrdersProduct;
 import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import lombok.*;
 

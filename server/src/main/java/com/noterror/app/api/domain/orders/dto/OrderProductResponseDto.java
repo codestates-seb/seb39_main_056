@@ -1,13 +1,12 @@
 package com.noterror.app.api.domain.orders.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
-@Builder
-@Getter
+@Data
 @AllArgsConstructor
-public class OrdersProductResponseDto {
+@NoArgsConstructor
+@Getter @Setter
+public class OrderProductResponseDto {
     private Long productId;
     private int quantityOfProduct;
     private int priceOfProduct; // Todo 수량대비 제품 가격 로직 작성

@@ -1,7 +1,8 @@
 package com.noterror.app.api.domain.entity;
 
-import com.noterror.app.api.domain.entity.order.OrdersProduct;
+import com.noterror.app.api.domain.entity.order.OrderProduct;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
+import com.noterror.app.api.global.exception.OutOfStockException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -44,12 +45,12 @@ public class Product {
      * 제품 상세와 매핑
      */
     @OneToMany(mappedBy = "product")
-    private List<OrdersProduct> ordersProducts = new ArrayList<>();
+    private List<OrderProduct> orderProducts = new ArrayList<>();
 
-    public void addOrdersDetail(OrdersProduct ordersProduct) {
-        this.ordersProducts.add(ordersProduct);
-        if (ordersProduct.getProduct() != this) {
-            ordersProduct.addProduct(this);
+    public void addOrdersDetail(OrderProduct orderProduct) {
+        this.orderProducts.add(orderProduct);
+        if (orderProduct.getProduct() != this) {
+            orderProduct.addProduct(this);
         }
     }
     // TODO : 식재료
@@ -65,5 +66,18 @@ public class Product {
         this.price = productPatchDto.getPrice();
         this.thumbnailImage = productPatchDto.getThumbnailImage();
         this.detailImage = productPatchDto.getDetailImage();
+    }
+
+    public void removeStock(int quantity) {
+        int restStock = this.quantity - quantity; //남은 재고
+        if(restStock < 0) {
+            throw new OutOfStockException("상품의 재고가 부족합니다. (현재 재고 수량 : " + this.quantity + ")");
+        }
+        this.quantity = restStock;
+    }
+
+    //주문 취소시 상품 개수 다시 증가
+    public void addStock(int quantity) {
+        this.quantity += quantity;
     }
 }
