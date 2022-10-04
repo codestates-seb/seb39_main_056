@@ -1,6 +1,13 @@
 import * as Styled from './style';
 
-export const ProductInfoContainer = ({ productData }) => {
+export const ProductInfoContainer = ({ productData, count, setCount }) => {
+  const plusCount = () => {
+    if (count < productData?.quantity) setCount(prev => prev + 1);
+  };
+  const minusCount = () => {
+    if (count === 0) return;
+    setCount(prev => prev - 1);
+  };
   return (
     <Styled.ProductInfoContainer>
       <Styled.ProductImgBox>
@@ -15,6 +22,10 @@ export const ProductInfoContainer = ({ productData }) => {
           </Styled.ProductContent>
           <Styled.ProductContent>
             재고수: {productData?.quantity}개
+          </Styled.ProductContent>
+          <Styled.ProductContent>
+            수량: <button onClick={minusCount}>-</button>
+            {count} 개<button onClick={plusCount}>+</button>
           </Styled.ProductContent>
         </Styled.ProductDescBox>
       </Styled.ProductDesc>
