@@ -2,9 +2,17 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Address from '../organism/Address';
 import { useNavigate } from 'react-router-dom';
-import StyledInput from '../organism/StyledInput';
-import InfoBox from '../templates/InfoBox';
+import StyledInput from '../atom/StyledInput';
+import CenterBox from '../templates/CenterBox';
 import InputContainer from '../organism/InputContainer';
+import styled from 'styled-components';
+import MainColorBtn from '../atom/MainColorBtn';
+
+const Title = styled.div`
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+`;
 
 const Info = () => {
   const navigate = useNavigate();
@@ -51,7 +59,7 @@ const Info = () => {
       },
     );
 
-    if (zipcode === '' || address === '') {
+    if (zipcode === '' || address === '' || userInfo.phoneNum === '') {
       alert('빈칸을 채워주세요!');
     } else {
       axios
@@ -75,9 +83,9 @@ const Info = () => {
   };
 
   return (
-    <InfoBox>
+    <CenterBox>
       <form onSubmit={e => signUp(e)}>
-        <h1>추가정보입력</h1>
+        <Title>추가정보입력</Title>
 
         <InputContainer>
           <p>이름 &nbsp; &nbsp;</p>
@@ -91,9 +99,9 @@ const Info = () => {
           <p>핸드폰 번호</p>
           <StyledInput
             type="tel"
-            pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-            maxLength="13"
-            placeholder="***-****-**** 형태로 입력"
+            pattern="[0-9]{3}[0-9]{4}[0-9]{4}"
+            maxLength="11"
+            placeholder="- 뺴고 번호만 입력해주세요"
           ></StyledInput>
         </InputContainer>
         <InputContainer>
@@ -105,9 +113,9 @@ const Info = () => {
             setAddress={setAddress}
           />
         </InputContainer>
-        <button>등록하기</button>
+        <MainColorBtn>등록하기</MainColorBtn>
       </form>
-    </InfoBox>
+    </CenterBox>
   );
 };
 
