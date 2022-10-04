@@ -19,7 +19,7 @@ function App() {
       <BrowserRouter>
         <BodyContainer>
           <Routes>
-          <Header />
+            <Header />
             <Route path="/" element={<MainPage />} />
             <Route path="/mypage/:id" element={<Mypage />} />
             <Route path="/product/:id" element={<ProductDetail />} />

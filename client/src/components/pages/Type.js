@@ -1,154 +1,86 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import TypeTable from '../organism/TypeTable';
-import { useDispatch, useSelector } from 'react-redux';
-import { setVege } from '../../actions';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import Test from '../templates/Type/Type';
+import paul from '../../assets/paul.jpg';
+import ariana from '../../assets/ariana.jpg';
+import brian from '../../assets/brian.png';
+import chris from '../../assets/chris.png';
+import franz from '../../assets/franz.jpg';
+import steven from '../../assets/steven.png';
+import toby from '../../assets/toby.jpg';
+import tolstoy from '../../assets/tolstoy.jpg';
+import tyson from '../../assets/tyson.jpg';
 
 const Type = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const vegeState = useSelector(state => state.vegeTypeReducer);
-  const [selected, setSelected] = useState();
+  const [explanation, setExplanation] = useState({});
 
-  const trSelcte = e => {
-    // e.target.classList.add('selcted');
-    console.log(e.target.parentNode);
-    if (e.target.parentNode.className !== 'thead') {
-      e.target.parentNode.classList.add('selected');
+  const printSuitableExplanation = vegeType => {
+    switch (vegeType) {
+      case '플렉시테리언':
+        return {
+          name: '폴 매카트니',
+          ment: '“만약 도살장 벽이 유리로 되어 있다면 사람들은 모두 채식주의자가 될 것입니다.“',
+          imgUrl: paul,
+        };
+      case '폴로-페스코':
+        return {
+          name: '아리아나 그란데',
+          ment: '“농담이 아니라, 저는 대부분의 사람들을 좋아하는 것보다 동물들을 더 좋아해요.”',
+          imgUrl: ariana,
+        };
+      case '페스코':
+        return {
+          name: '크리스 스몰링',
+          ment: '“공장식 축산은, 동물에게는 불행을 인류에게는 불필요함을, 환경에는 큰피해를 준다는 것을 깨달았습니다.”',
+          imgUrl: chris,
+        };
+      case '폴로':
+        return {
+          name: '스티븐 스필버그',
+          ment: '“인간은 배고프지 않을 때에도 사냥하는 유일한 동물입니다.”',
+          imgUrl: steven,
+        };
+      case '락토-오보':
+        return {
+          name: '마이크 타이슨',
+          ment: '“코카인, 고혈압으로 인해 힘들었떤 삶에서 벗어날 수 있었던 것은 채식 덕분입니다.”',
+          imgUrl: tyson,
+        };
+      case '락토':
+        return {
+          name: '토비 맥과이어',
+          ment: '“어릴 적 동물의 삶에 대해 상상하며 채식을 시작했어요.“',
+          imgUrl: toby,
+        };
+      case '오보':
+        return {
+          name: '톨스토이',
+          ment: '“어떤 말로 채식을 반대하든, 우리 인간은 양과 닭을 죽이는 것을 불쌍히 여깁니다. 제 손으로 죽일 바에는 차라리 고기를 먹지 않겠다는 사람이 대부분일 것입니다.”',
+          imgUrl: tolstoy,
+        };
+      case '비건':
+        return {
+          name: '프란츠 카프카',
+          ment: '“수족관 물고기의 평화로움을 바라보다 결국 채식주의를 결심했습니다.”',
+          imgUrl: franz,
+        };
+      case '프루테리언':
+        return {
+          name: '브라이언 메이',
+          ment: '“지구의 모든 생명은 좋은 삶을 영위해야 한다고 생각해요. 사람은 다른 생명체의 사용자나 학대자가 되어서는 안 되죠.”',
+          imgUrl: brian,
+        };
+      default:
+        return;
     }
   };
 
-  const decideType = () => {
-    console.log(vegeState);
-    axios
-      .patch(
-        `${process.env_REACT_APP_API_URL}backendURL`,
-        {
-          vegeType: vegeState,
-        },
-        { withCredentials: true },
-      )
-      .then(res => {
-        if (res.ok) {
-          navigate('/');
-        }
-      });
-  };
+  useEffect(() => {
+    setExplanation(printSuitableExplanation(vegeState));
+  }, [vegeState]);
 
-  return (
-    <div>
-      <h1>채식유형 선택</h1>
-      <TypeTable>
-        <thead className="thead">
-          <tr>
-            <td>허용식품</td>
-            <td>적색육🥩</td>
-            <td>백색육🍗</td>
-            <td>어패류🦪</td>
-            <td>난류🥚</td>
-            <td>유지류🥛</td>
-            <td>균류, 해조류, 채소류🥒</td>
-            <td>과일류🍎</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="flexi" onClick={e => trSelcte(e)}>
-            <td>플렉시테리언</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-          </tr>
-          <tr className="polllo-pesco" onClick={e => trSelcte(e)}>
-            <td>폴로-페스코</td>
-            <td>x</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-          </tr>
-          <tr className="pesco" onClick={e => trSelcte(e)}>
-            <td>페스코</td>
-            <td>x</td>
-            <td>x</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-          </tr>
-          <tr className="polo" onClick={e => trSelcte(e)}>
-            <td>폴로</td>
-            <td>x</td>
-            <td>o</td>
-            <td>x</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-          </tr>
-          <tr className="lacto-ovo" onClick={e => trSelcte(e)}>
-            <td>락토-오보</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-          </tr>
-          <tr className="lacto" onClick={e => trSelcte(e)}>
-            <td>락토</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>o</td>
-            <td>o</td>
-            <td>o</td>
-          </tr>
-          <tr className="ovo" onClick={e => trSelcte(e)}>
-            <td>오보</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>o</td>
-            <td>x</td>
-            <td>o</td>
-            <td>o</td>
-          </tr>
-          <tr className="vegan" onClick={e => trSelcte(e)}>
-            <td>비건</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>o</td>
-            <td>o</td>
-          </tr>
-          <tr className="fruit" onClick={e => trSelcte(e)}>
-            <td>프루테리언</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>o</td>
-          </tr>
-        </tbody>
-      </TypeTable>
-      <h2>{vegeState}</h2>
-      <button onClick={() => decideType()}>가입 완료</button>
-    </div>
-  );
+  return <Test explanation={explanation} />;
 };
 
 export default Type;
