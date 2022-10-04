@@ -35,8 +35,8 @@ public class MemberController {
      */
     @PostMapping("/sign-up")
     public ResponseEntity<MemberResponseDto> postMember(@RequestBody @Valid SignUpDto signUpDto) {
-        Long memberId = memberService.saveMemberInfo(signUpDto);
-        return new ResponseEntity(memberId, HttpStatus.CREATED);
+        Long newMemberId = memberService.saveMemberInfo(signUpDto);
+        return new ResponseEntity(newMemberId, HttpStatus.CREATED);
     }
 
     /**

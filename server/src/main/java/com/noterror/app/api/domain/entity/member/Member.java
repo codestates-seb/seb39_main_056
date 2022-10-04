@@ -76,10 +76,9 @@ public class Member implements Principal {
         );
     }
 
-    public void proceedGeneralSignUp(SignUpDto signUpDto, String encodedPassword) {
+    public void proceedGeneralSignUp(SignUpDto signUpDto) {
         this.email = signUpDto.getEmail();
         this.memberName = signUpDto.getMemberName();
-        this.password = encodedPassword;
         this.phone = signUpDto.getPhone();
         this.address = new Address(
                 signUpDto.getZipCode(),
