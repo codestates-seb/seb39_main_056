@@ -2,12 +2,12 @@
   "user": {
     "userId": 0,
     "userName": "제임스",
-    "phoneNum": "123123123",
-    "zipCode": "미국",
-    "address": "미국시",
-    "addressDetail": "미국아파트",
+    "phoneNum": "010-2890-8340",
+    "zipCode": "제주",
+    "address": "제주시",
+    "addressDetail": "제주아파트",
     "emailAdress": "James@google.com",
-    "type": "페스코"
+    "type": "비건"
   },
   "products": [
     {

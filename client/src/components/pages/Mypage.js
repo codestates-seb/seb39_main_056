@@ -1,15 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-// import { axios } from 'axios';
+//import { axios } from 'axios';
 
 const Container = styled.table`
-  width: 100%;
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  align-items: stretch;
+  /* align-items: center; */
   border-top: 1px solid #444444;
   border-bottom: 1px solid #444444;
   border-collapse: collapse;
 `;
 
+const Td = styled.td`
+  padding: 10px;
+  height: 10px;
+  flex-grow: 1;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  flex-grow: 1;
+  height: 40px;
+  margin-bottom: 5px;
+  /* box-sizing: border-box; */
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Btn = styled.button`
+  height: 40px;
+  margin-left: 3px;
+  width: 90px;
+`;
+
+const Select = styled.select`
+  width: 100%;
+  height: 40px;
+`;
 const Mypage = () => {
   // 맨처음 가져오는 GET 정보 저장된 state
   const [info, setInfo] = useState('');
@@ -35,6 +70,7 @@ const Mypage = () => {
   //onSubmit함수는 버튼에 따라 함수를 분기
   const onSubmit = e => {
     e.preventDefault();
+    let url = 'http://localhost:3001/user';
     if (a === 'updateBtn') {
       console.log('정보수정');
       //input에 있는 정보들을 가져온다.
@@ -45,7 +81,7 @@ const Mypage = () => {
       const type = { selects }.selects;
       console.log(phoneNum, zipCode, address, addressDetail, type);
       //patch요청을 한다.
-      //정보수정: patch요청을 한다.
+      //정보수정요청을 한다.
       if (
         phoneNum === '' ||
         zipCode === '' ||
@@ -55,8 +91,9 @@ const Mypage = () => {
       ) {
         alert('모든 정보를 입력해 주세요');
       } else {
+        //fetch 요청
         try {
-          fetch(`http://localhost:3001/user`, {
+          fetch(url, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -69,13 +106,19 @@ const Mypage = () => {
               type,
             }),
           }).then(alert('정보가 성공적으로 수정되었습니다'));
-          // .then(window.location.reload());
         } catch (error) {
           console.error(error);
         }
       }
     } else if (a === 'delBtn') {
-      console.log('회원탈퇴');
+      if (window.confirm('회원 탈퇴 하시겠습니까?')) {
+        fetch(url, {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }).then(alert('정상적으로 회원 탈퇴 되었습니다.'));
+      }
     }
   };
 
@@ -91,64 +134,70 @@ const Mypage = () => {
         </thead>
         <tbody>
           <tr>
-            <td>회원정보</td>
-            <td>회원이름</td>
-            <td>
-              <input
+            <Link to="/mypage/:id">
+              <Td>회원정보</Td>
+            </Link>
+            <Td>회원이름</Td>
+            <Td>
+              <Input
                 disabled="disabled"
                 value={info?.userName === undefined ? '' : info?.userName}
               />
-            </td>
+            </Td>
           </tr>
+
           <tr>
-            <td></td>
-            <td>이메일</td>
-            <td>
-              <input
+            <Link to="/order">
+              <Td>주문내역조회</Td>
+            </Link>
+            <Td>이메일</Td>
+            <Td>
+              <Input
                 disabled="disabled"
                 value={info?.emailAdress === undefined ? '' : info?.emailAdress}
               />
-            </td>
+            </Td>
             {/* 블로깅할거니까 지우지말자 */}
-            {/* <td>
+            {/* <Td>
               <input disabled="disabled" value={info[0]?.emailAdress} />
-            </td> */}
-          </tr>
-          <tr>
-            <td>주문내역조회</td>
-            <td>전화번호</td>
-            <td>
-              <input name="phone" type="text" defaultValue={info.phoneNum} />
-            </td>
+            </Td> */}
           </tr>
           <tr>
             <td></td>
-            <td>주소</td>
-            <td>
+
+            <Td>전화번호</Td>
+            <Td>
+              <Input name="phone" type="text" defaultValue={info.phoneNum} />
+            </Td>
+          </tr>
+          <tr>
+            <Td></Td>
+            <Td>주소</Td>
+            <Td>
+              <Wrap>
+                <Input name="zipcode" type="text" defaultValue={info.zipCode} />
+                <Btn name="zipBtn">주소찾기</Btn>
+              </Wrap>
               <div>
-                <input name="zipcode" type="text" defaultValue={info.zipCode} />
-                <button name="zipBtn">우편번호찾기</button>
-              </div>
-              <div>
-                <input
+                <Input
                   name="firstAdress"
                   type="text"
                   defaultValue={info.address}
                 />
-                <input
+                <Input
                   name="secondAdress"
                   type="text"
                   defaultValue={info.addressDetail}
                 />
               </div>
-            </td>
+            </Td>
           </tr>
 
           <tr>
-            <td></td>
-            <td>채식유형</td>
-            <td>
-              <select
+            <Td></Td>
+            <Td>채식유형</Td>
+            <Td>
+              <Select
                 value={selects}
                 defaultValue={info.type}
                 onChange={e => setSelect(e.target.value)}
@@ -162,23 +211,26 @@ const Mypage = () => {
                 <option>오보</option>
                 <option>비건</option>
                 <option>프루테리언</option>
-              </select>
-            </td>
+              </Select>
+            </Td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td>
-              <button name="updateBtn" onClick={onClick}>
-                정보수정
-              </button>
-              <button name="delBtn" onClick={onClick}>
-                회원탈퇴
-              </button>
-              <Link to="/">
-                <button>메인으로</button>
-              </Link>
-            </td>
+            <Td></Td>
+            <Td></Td>
+
+            <Td>
+              <Wrap>
+                <Btn name="updateBtn" onClick={onClick}>
+                  정보수정
+                </Btn>
+                <Btn name="delBtn" onClick={onClick}>
+                  회원탈퇴
+                </Btn>
+                <Link to="/">
+                  <Btn>메인으로</Btn>
+                </Link>
+              </Wrap>
+            </Td>
           </tr>
         </tbody>
       </Container>
