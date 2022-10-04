@@ -20,9 +20,11 @@ public class OrderInfoDto {
     private String orderDate;
     private OrdersStatus ordersStatus;
 
+    private int totalPrice;
+
     public OrderInfoDto(Orders order) {
         this.orderId = order.getOrdersId();
-        this.orderDate = order.getOrdersDate().format(DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm"));
+        this.orderDate = order.getOrdersDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.ordersStatus = order.getOrdersStatus();
     }
 

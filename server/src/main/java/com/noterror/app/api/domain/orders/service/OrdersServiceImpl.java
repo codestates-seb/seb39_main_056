@@ -30,21 +30,37 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<OrderInfoDto> getOrderList(Long memberId, Pageable pageable){
-        List<Orders> orderList = ordersRepository.findOrders(memberId, pageable);
-        Long totalCount = ordersRepository.countOrder(memberId);
+    public List<OrderInfoDto> getOrderList(Long memberId){
+        List<Orders> orders = ordersRepository.findAll();
+        List<Orders> memberOrder = new ArrayList<>();
+        int total=0 ;
+        for (Orders data : orders) {
+            if (data.getMember().getMemberId() == memberId) {
+                memberOrder.add(data);
+            }
+            total = data.getTotalPrice();
+        }
+
+        /*List<OrderProduct> orderProductList = new ArrayList<>();
+        for(OrderProduct data: orderProductList){
+            int totalCounts = 0;
+            totalCounts += data.getQuantity();
+        }
+         */
 
         List<OrderInfoDto> orderInfoDtoList = new ArrayList<>();
-        for (Orders order : orderList) {
+
+        for (Orders order : memberOrder) {
             OrderInfoDto orderInfoDto = new OrderInfoDto(order);
             List<OrderProduct> orderProducts = order.getOrderProducts();
             for(OrderProduct orderProduct : orderProducts) {
                 OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
                 orderInfoDto.addOrderProductDto(orderProductDto);
             }
+            orderInfoDto.setTotalPrice(total);
             orderInfoDtoList.add(orderInfoDto);
         }
-        return new PageImpl<OrderInfoDto>(orderInfoDtoList, pageable, totalCount);
+        return orderInfoDtoList;
 
     }
      //제품 상세페이지에서 주문

@@ -28,13 +28,10 @@ import java.util.Optional;
 public class OrdersController {
     private final OrdersService ordersService;
 
-    @GetMapping({"{member-id}/orders", "{member-id}/orders/{page}"})
-    public ResponseEntity getOrders(@PathVariable("member-id") Long memberId,
-                                    @PathVariable("page")Optional<Integer> page) {
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5); //한번에 가져올 주문 5개
-
-        Page<OrderInfoDto> orderInfoDtoList = ordersService.getOrderList(memberId, pageable);
-        return new ResponseEntity(new MultiOrdersResponse<>(orderInfoDtoList, pageable), HttpStatus.OK);
+    @GetMapping("{member-id}/orders")
+    public ResponseEntity getOrders(@PathVariable("member-id") Long memberId){
+        List<OrderInfoDto> pageRequest = ordersService.getOrderList(memberId);
+        return new ResponseEntity(new MultiOrdersResponse(pageRequest), HttpStatus.OK);
     }
 
     @PostMapping("{member-id}/orders")
@@ -42,4 +39,5 @@ public class OrdersController {
         OrderResponseDto orderResponseDto = ordersService.orderProduct(orderDto, memberId);
         return new ResponseEntity(new SingleOrderResponse<>(orderResponseDto),HttpStatus.OK);
     }
+
 }

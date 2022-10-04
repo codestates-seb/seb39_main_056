@@ -77,7 +77,4 @@ public class Member {
         this.city = memberRequestDto.getCity();
         this.detailAddress = memberRequestDto.getDetailAddress();
     }
-    @OneToMany(mappedBy = "member",cascade = CascadeType.PERSIST)
-    private List<Orders> orders = new ArrayList<>();
-
 }

@@ -21,18 +21,20 @@ public class Orders {
     @Column(name = "orders_id")
     private Long ordersId;
 
+    @Column(name = "orders_date")
     private LocalDateTime ordersDate;
 
     /**
      * 주문 상태
      */
     @Enumerated(EnumType.STRING)
+    @Column(name = "orders_status")
     private OrdersStatus ordersStatus = OrdersStatus.ORDER_REQUEST;
 
     /**
      * 회원과 다대일 매핑
      */
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
