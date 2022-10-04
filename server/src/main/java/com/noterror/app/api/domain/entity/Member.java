@@ -1,11 +1,15 @@
 
 package com.noterror.app.api.domain.entity;
 
+import com.noterror.app.api.domain.entity.order.Orders;
+import com.noterror.app.api.domain.entity.order.OrdersProduct;
 import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -67,4 +71,7 @@ public class Member {
         this.city = memberRequestDto.getCity();
         this.detailAddress = memberRequestDto.getDetailAddress();
     }
+    @OneToMany(mappedBy = "member",cascade = CascadeType.PERSIST)
+    private List<Orders> orders = new ArrayList<>();
+
 }
