@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.entity;
 
+import com.noterror.app.api.domain.entity.order.OrdersProduct;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import lombok.*;
 
@@ -29,7 +30,8 @@ public class Product {
     @Column(nullable = false)
     private int quantity;
 
-    private LocalDateTime signDate = LocalDateTime.now();
+
+    private LocalDateTime signDate;
 
     @Lob
     @Basic(fetch = FetchType.EAGER)
@@ -38,7 +40,18 @@ public class Product {
     @Lob
     @Basic(fetch = FetchType.EAGER)
     private String detailImage;
+    /**
+     * 제품 상세와 매핑
+     */
+    @OneToMany(mappedBy = "product")
+    private List<OrdersProduct> ordersProducts = new ArrayList<>();
 
+    public void addOrdersDetail(OrdersProduct ordersProduct) {
+        this.ordersProducts.add(ordersProduct);
+        if (ordersProduct.getProduct() != this) {
+            ordersProduct.addProduct(this);
+        }
+    }
     // TODO : 식재료
     // TODO : 카테고리
 
