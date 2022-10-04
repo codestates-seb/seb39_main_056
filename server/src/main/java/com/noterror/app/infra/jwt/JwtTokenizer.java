@@ -1,9 +1,6 @@
-package com.noterror.app.infra.auth;
+package com.noterror.app.infra.jwt;
 
-import com.noterror.app.api.global.exception.BusinessLogicException;
-import com.noterror.app.api.global.exception.ExceptionCode;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -19,53 +16,49 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-import static com.noterror.app.api.global.exception.ExceptionCode.MEMBER_EXPIRED_TOKEN;
-
 /**
- * 담당자 : 강시혁
- *
- * @Class JWT 를 생성하고 검증하는 역할 수행
+ * JWT 생성 및 검증 역할
  */
 @Component
 public class JwtTokenizer {
 
     @Getter
-    @Value("${jwt.key.secret-key")
+    @Value("${jwt.key.secret}")
     private String secretKey;
 
     @Getter
     @Value("${jwt.access-token-expiration-minutes}")
-    private int accessTokenExpirationMinutesInfo; // AccessToken 만료 시간 정보
+    private int accessTokenExpirationMinutes;
 
     @Getter
     @Value("${jwt.refresh-token-expiration-minutes}")
-    private int refreshTokenExpirationMinutesInfo; // RefreshToken 만료 시간 정보
+    private int refreshTokenExpirationMinutes;
 
-    // Plain Text 형태인 Secret Key 의 byte[]를 Base64 형식의 문자열로 인코딩
+    // Plain Text 형태의 Secret Key 를 Base64 형식의 문자열로 인코딩
     public String encodeBase64SecretKey(String secretKey) {
         return Encoders.BASE64.encode(secretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    // JWT 최초 생성
+    // 인증된 사용자에게 JWT 최초 발급
     public String generateAccessToken(Map<String, Object> claims,
                                       String subject,
                                       Date expiration,
-                                      String base64EncoderSecretKey) {
-        Key key = getKeyFromBase64EncodedKey(base64EncoderSecretKey);
-
+                                      String base64EncodedSecretKey) {
+        Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
         return Jwts.builder()
-                .setClaims(claims) // 인증된 사용자와 관련된 정보 추가
-                .setSubject(subject) // JWT 제목
+                .setClaims(claims) // 인증된 사용자의 정보
+                .setSubject(subject) // 제목
                 .setIssuedAt(Calendar.getInstance().getTime()) // 발행일자
                 .setExpiration(expiration) // 만료일시
                 .signWith(key) // 서명
-                .compact(); // JWT 생성과 직렬화
+                .compact();
     }
 
-    // Refresh Token 생성
-    public String generateRefreshToken(String subject, Date expiration, String base64EncodedSecretKey) {
+    // Access Token 만료되었을 경우, Access Token 을 새로 생성할 수 있게 해주는 메서드
+    public String generateRefreshToken(String subject,
+                                       Date expiration,
+                                       String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
-
         return Jwts.builder()
                 .setSubject(subject)
                 .setIssuedAt(Calendar.getInstance().getTime())
@@ -74,30 +67,24 @@ public class JwtTokenizer {
                 .compact();
     }
 
-    // Secret Key 생성(HMAC 알고리즘 적용)
+    // JWT 의 서명에 사용할 Secret Key를 생성
     private Key getKeyFromBase64EncodedKey(String base64EncodedSecretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(base64EncodedSecretKey);
-        Key key = Keys.hmacShaKeyFor(keyBytes);
-
-        return key;
+        return Keys.hmacShaKeyFor(keyBytes); // HMAC 알고리즘
     }
 
-    // 검증 후, Claims 반환
-    public Jws<Claims> getClaims(String jws, String encodedSecretKey) {
-        Key key = getKeyFromBase64EncodedKey(encodedSecretKey);
+    // 검증 후, Claims을 반환 하는 용도
+    public Jws<Claims> getClaims(String jws, String base64EncodedSecretKey) {
+        Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
-        Jws<Claims> claims;
-        try {
-            claims = Jwts.parserBuilder()
-                    .setSigningKey(key)
-                    .build()
-                    .parseClaimsJws(jws);
-        } catch (ExpiredJwtException e) {
-            throw new BusinessLogicException(MEMBER_EXPIRED_TOKEN);
-        }
+        Jws<Claims> claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(jws);
         return claims;
     }
 
+    // 단순히 검증만 하는 용도로 쓰일 경우
     public void verifySignature(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
@@ -111,7 +98,7 @@ public class JwtTokenizer {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, expirationMinutes);
         Date expiration = calendar.getTime();
+
         return expiration;
     }
-
 }

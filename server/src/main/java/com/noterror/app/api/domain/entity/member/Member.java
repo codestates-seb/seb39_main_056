@@ -51,8 +51,8 @@ public class Member implements Principal {
     private List<String> roles = new ArrayList<>();
 
     //== Constructor ==//
-    public Member(String email, String memberName) {
-        this.memberName = memberName;
+
+    public Member(String email) {
         this.email = email;
     }
 
