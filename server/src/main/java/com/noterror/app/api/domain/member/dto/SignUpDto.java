@@ -22,7 +22,7 @@ public class SignUpDto {
     /** 회원 이름 */
     @NotEmpty(message = "이름을 공백없이 입력해주세요.")
     @Length(min=3,max=5)
-    @Pattern(regexp = "^[ㄱ-ㅎ가-힣]{3,5}$")
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣]{2,5}$")
     private String memberName;
 
     @Nullable
