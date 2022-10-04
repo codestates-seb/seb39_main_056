@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -39,6 +41,9 @@ public class Product {
 
     // TODO : 식재료
     // TODO : 카테고리
+
+    @OneToMany(mappedBy = "product")
+    private List<CartDetail> cartProduct = new ArrayList<>();
 
     //== BUSINESS LOGIC ==//
     public void updateProductInfo(ProductRequestDto productPatchDto) {

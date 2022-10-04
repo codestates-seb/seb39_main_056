@@ -49,4 +49,5 @@ public interface ProductService {
      */
     void removeProduct(long id);
 
+    Product findExistProduct(Long productId);
 }

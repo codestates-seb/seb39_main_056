@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
-@Table(name = "member")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long memberId;
 
     @Column(nullable = false)
@@ -53,6 +53,13 @@ public class Member {
 
     @Column(nullable = true)
     private LocalDateTime regDate = LocalDateTime.now();
+
+    @OneToOne(mappedBy = "member")
+    private Cart cart;
+
+    public void addCart(Cart cart) {
+        this.cart = cart;
+    }
 
     /**
      * Admin/User 역할

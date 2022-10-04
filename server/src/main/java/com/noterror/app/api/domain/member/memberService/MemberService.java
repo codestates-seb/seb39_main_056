@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.member.memberService;
 
+import com.noterror.app.api.domain.entity.Member;
 import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import com.noterror.app.api.domain.member.dto.MemberResponseDto;
 
@@ -32,4 +33,6 @@ public interface MemberService {
       * @param id
       */
      void removeMember(Long id);
+
+    Member findExistsMember(Long memberId);
 }
