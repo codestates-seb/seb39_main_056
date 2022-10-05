@@ -89,10 +89,6 @@ public class SecurityConfig {
                     .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
         }
     }
-<<<<<<< HEAD
-}
-=======
-
 
 }
->>>>>>> 3ccc649b13e31b48388eeebf66b5113d94af03ad
+
