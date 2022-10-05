@@ -12,7 +12,6 @@ import java.util.List;
 public class MultiOrdersResponse<T> {
     private List<OrderInfoDto> orders;
 
-
     public MultiOrdersResponse(List<OrderInfoDto> orders) {
         this.orders = orders;
 

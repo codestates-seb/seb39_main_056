@@ -14,7 +14,7 @@ public class CartDetailDto {
     private Long cartDetailId; //장바구니에 담긴 상품 id
     private String productName; //장바구니에 담긴 상품 이름
     private int price;
-    private int count;
+    private int purchaseQuantity;
     private String thumbnailImage;
 }
 

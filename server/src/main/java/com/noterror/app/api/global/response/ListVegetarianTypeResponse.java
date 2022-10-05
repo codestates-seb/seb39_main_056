@@ -7,6 +7,6 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class ListVegeTypeResponse<T> {
-    List<T> vegeTypeList;
+public class ListVegetarianTypeResponse<T> {
+    List<T> vegetarianTypeList;
 }

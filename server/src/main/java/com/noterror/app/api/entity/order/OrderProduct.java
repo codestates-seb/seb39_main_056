@@ -19,30 +19,31 @@ public class OrderProduct {
     private Long ordersProductId;
 
     @Column(nullable = false)
-    private int quantity;
+    private int ordersQuantity;
 
     private int ordersPrice;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "orders_id") //테이블에 ordersId 라는 컬럼명이 정의되는 것
+
+    @ManyToOne
+    @JoinColumn(name = "orders_id")
     private Orders orders;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public static OrderProduct createOrderProduct(Product product, int quantity){
+    public static OrderProduct createOrderProduct(Product product, int ordersQuantity){
 
         OrderProduct orderProduct = new OrderProduct();
         orderProduct.setProduct(product);
         orderProduct.setOrdersProductId(orderProduct.getOrdersProductId());
-        orderProduct.setQuantity(quantity);
+        orderProduct.setOrdersQuantity(ordersQuantity);
         orderProduct.setOrdersPrice(product.getPrice());
 
-        product.removeStock(quantity);
+        product.removeStock(ordersQuantity);
         return orderProduct;
     }
     public int getTotalPrice(){
-        return ordersPrice*quantity;
+        return ordersPrice* ordersQuantity;
     }
 
     public void addOrders(Orders orders) {

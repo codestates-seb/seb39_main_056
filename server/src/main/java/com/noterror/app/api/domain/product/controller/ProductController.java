@@ -22,7 +22,7 @@ import java.util.List;
  * 담당자 : 강시혁, 황윤준
  * SCOPE : 제품 조회
  * 리팩토링 : 강시혁
- * 대상 : PRODCUT
+ * 대상 : PRODUCTS
  */
 @RestController
 @CrossOrigin
