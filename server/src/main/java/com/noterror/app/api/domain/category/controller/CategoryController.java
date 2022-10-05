@@ -12,14 +12,14 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping
+@RequestMapping(value = "/")
 public class CategoryController {
     private final CategoryService categoryService;
 
     /**
      * 카테고리 전체조회
      */
-    @GetMapping
+    @GetMapping(value = "category")
     public ResponseEntity getCategoryList() {
         List <CategoryResponseDto> response = categoryService.findCategoryList();
         return new ResponseEntity(

@@ -46,6 +46,10 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "vegetarian_type_name")
+    private VegetarianType vegetarianType;
+
     public void addOrdersDetail(OrderProduct orderProduct) {
         this.orderProducts.add(orderProduct);
         if (orderProduct.getProduct() != this) {
