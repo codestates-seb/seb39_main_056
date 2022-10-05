@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     /**
-     * 제품 전체 조회
+     * 제품 전체 조회,
      */
     @GetMapping("/list")
     public ResponseEntity getProducts(@RequestParam(required = false, defaultValue = "1") int page,

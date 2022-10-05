@@ -56,8 +56,7 @@ public class MemberController {
     @PutMapping("/info")
     public ResponseEntity putMember(
             @RequestBody @Valid UpdateInfoDto updateInfoDto) {
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        MemberResponseDto response = memberService.updateMember(currentUserEmail, updateInfoDto);
+        MemberResponseDto response = memberService.updateMember(currentUserEmail(), updateInfoDto);
 
         return new ResponseEntity<>(
                 new SingleMemberResponse<>(response), HttpStatus.OK);
@@ -68,8 +67,7 @@ public class MemberController {
      */
     @GetMapping("/info")
     public ResponseEntity getMember() {
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        MemberResponseDto response = memberService.findMember(currentUserEmail);
+        MemberResponseDto response = memberService.findMember(currentUserEmail());
         return new ResponseEntity<>(
                 new SingleMemberResponse(response), HttpStatus.OK);
     }
@@ -79,8 +77,11 @@ public class MemberController {
      */
     @DeleteMapping("/info")
     public ResponseEntity deleteProduct() {
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        memberService.removeMember(currentUserEmail);
+        memberService.removeMember(currentUserEmail());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private String currentUserEmail() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

@@ -53,6 +53,12 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(
                         authorize -> authorize
+                                .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers(HttpMethod.PUT, "/members/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers(HttpMethod.DELETE, "/members/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers("/admin/**").hasRole("ADMIN")
+                                .antMatchers("/cart/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers("/orders").hasAnyRole("USER","ADMIN")
                                 .anyRequest().permitAll()
                 );
         return http.build();
@@ -62,7 +68,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

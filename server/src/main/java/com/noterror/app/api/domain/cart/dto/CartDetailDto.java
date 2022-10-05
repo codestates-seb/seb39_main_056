@@ -17,3 +17,4 @@ public class CartDetailDto {
     private int count;
     private String thumbnailImage;
 }
+

@@ -32,3 +32,4 @@ public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
     List<CartDetailDto> findCartDetailDtoList(@Param("cartId") Long cartId);
 
 }
+
