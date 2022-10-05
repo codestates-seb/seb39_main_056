@@ -1,6 +1,5 @@
 package com.noterror.app.infra;
 
-
 import com.noterror.app.infra.jwt.JwtTokenizer;
 import io.jsonwebtoken.io.Decoders;
 import org.junit.jupiter.api.*;

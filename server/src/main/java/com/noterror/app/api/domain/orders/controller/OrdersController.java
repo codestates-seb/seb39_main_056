@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,21 +18,26 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @Slf4j
-@RequestMapping("/")
+@RequestMapping("/orders")
 @RequiredArgsConstructor
 public class OrdersController {
     private final OrdersService ordersService;
 
-    @GetMapping("{member-id}/orders")
-    public ResponseEntity getOrders(@PathVariable("member-id") Long memberId){
-        List<OrderInfoDto> pageRequest = ordersService.getOrderList(memberId);
+    @GetMapping
+    public ResponseEntity getOrders(){
+        List<OrderInfoDto> pageRequest = ordersService.getOrderList(currentUserEmail());
         return new ResponseEntity(new MultiOrdersResponse(pageRequest), HttpStatus.OK);
     }
 
-    @PostMapping("{member-id}/orders")
-    public ResponseEntity addOrder(@PathVariable("member-id") Long memberId, @RequestBody OrderDto orderDto) {
-        OrderResponseDto orderResponseDto = ordersService.orderProduct(orderDto, memberId);
+    @PostMapping
+    public ResponseEntity addOrder(@RequestBody OrderDto orderDto) {
+
+        OrderResponseDto orderResponseDto = ordersService.orderProduct(orderDto, currentUserEmail());
         return new ResponseEntity(new SingleOrderResponse<>(orderResponseDto),HttpStatus.OK);
+    }
+
+    private String currentUserEmail() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
 }
