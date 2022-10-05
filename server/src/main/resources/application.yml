@@ -22,6 +22,10 @@ spring :
         format_sql: true
     show-sql: true
 
+  sql:
+    init:
+      data-locations: classpath*:db/h2/data.sql
+
 logging:
   level:
     org:

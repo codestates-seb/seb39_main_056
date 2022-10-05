@@ -3,6 +3,8 @@ package com.noterror.app.api.admin;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.service.ProductService;
+import com.noterror.app.api.domain.vegeType.dto.VegeTypeResponseDto;
+import com.noterror.app.api.domain.vegeType.service.VegeTypeService;
 import com.noterror.app.api.global.response.SingleProductResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 담당자 : 이현석, 홍민정
@@ -26,6 +29,7 @@ import javax.validation.Valid;
 public class AdminProductController {
 
     private final ProductService productService;
+    private final VegeTypeService vegeTypeService;
 
     /**
      * 제품 등록
@@ -35,6 +39,7 @@ public class AdminProductController {
     public ResponseEntity<ProductResponseDto> postProduct(@RequestBody ProductRequestDto productRequestDto) {
 
         ProductResponseDto response = productService.createProduct(productRequestDto);
+        List<VegeTypeResponseDto> findVegeTypes = vegeTypeService.getVegeTypes("프루테리언");
 
         return new ResponseEntity(
                 new SingleProductResponse(response), HttpStatus.CREATED);
