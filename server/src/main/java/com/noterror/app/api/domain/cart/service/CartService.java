@@ -13,7 +13,7 @@ public interface CartService {
      * @param memberId
      * @return
      */
-    CartDetailDto addCart(CartProductDto cartProductDto, Long memberId) ;
+    CartDetailDto addCart(CartProductDto cartProductDto, String email) ;
 
     /**
      * 장바구니 수량 변경
@@ -27,7 +27,7 @@ public interface CartService {
      * @param memberId
      * @return
      */
-    List<CartDetailDto> listCart(Long memberId);
+    List<CartDetailDto> listCart(String email);
 
     /**
      * 장바구니 제품 삭제

@@ -22,8 +22,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -54,7 +53,7 @@ public class CartControllerRestDocs {
 
         CartDetailDto response = new CartDetailDto(1L, "카레라면", 20000, 3);
         Long memberId = 1L;
-        given(cartService.addCart(any(), anyLong()))
+        given(cartService.addCart(any(), anyString()))
                 .willReturn(response);
 
         ResultActions action = mockMvc.perform(
@@ -138,7 +137,7 @@ public class CartControllerRestDocs {
         response.add(response1);
         response.add(response2);
 
-        given(cartService.listCart(anyLong())).willReturn(response);
+        given(cartService.listCart(anyString())).willReturn(response);
 
         ResultActions actions = mockMvc.perform(
                 get("/{member-id}/cart", memberId));

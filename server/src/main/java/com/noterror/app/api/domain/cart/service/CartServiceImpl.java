@@ -30,9 +30,9 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public CartDetailDto addCart(CartProductDto cartProductDto, Long memberId) {
+    public CartDetailDto addCart(CartProductDto cartProductDto, String email) {
 
-        Member member= memberRepository.findById(memberId).get();
+        Member member= memberRepository.findByEmail(email).get();
         Product product = productRepository.findById(cartProductDto.getProductId()).get();
         Cart cart = member.getCart();
 
@@ -72,10 +72,10 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<CartDetailDto> listCart(Long memberId) {
+    public List<CartDetailDto> listCart(String email) {
         List<CartDetailDto> cartDetailDtoList = new ArrayList<>();
 
-        Member member = memberRepository.findById(memberId).get();
+        Member member = memberRepository.findByEmail(email).get();
         Cart cart = member.getCart();
 
         if(cart == null) {

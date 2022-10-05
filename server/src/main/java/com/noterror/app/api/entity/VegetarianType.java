@@ -22,4 +22,8 @@ public class VegetarianType {
     @Transient
     private Member member;
 
+    @OneToOne
+    @Transient
+    private Product product;
+
 }
