@@ -1,12 +1,16 @@
 import * as Styled from './style';
 
-export const ProductInfoContainer = ({ productData, count, setCount }) => {
+export const ProductInfoContainer = ({
+  productData,
+  quantity,
+  setQuantity,
+}) => {
   const plusCount = () => {
-    if (count < productData?.quantity) setCount(prev => prev + 1);
+    if (quantity < productData?.quantity) setQuantity(prev => prev + 1);
   };
   const minusCount = () => {
-    if (count === 0) return;
-    setCount(prev => prev - 1);
+    if (quantity === 0) return;
+    setQuantity(prev => prev - 1);
   };
   return (
     <Styled.ProductInfoContainer>
@@ -15,7 +19,6 @@ export const ProductInfoContainer = ({ productData, count, setCount }) => {
       </Styled.ProductImgBox>
       <Styled.ProductDesc>
         <Styled.ProductTitle>{productData?.productName}</Styled.ProductTitle>
-        {/* <Styled.ProductContent>제품설명: 제품 한줄 설명</Styled.ProductContent> */}
         <Styled.ProductDescBox>
           <Styled.ProductContent>
             가격 : {productData?.price}원
@@ -25,7 +28,7 @@ export const ProductInfoContainer = ({ productData, count, setCount }) => {
           </Styled.ProductContent>
           <Styled.ProductContent>
             수량: <button onClick={minusCount}>-</button>
-            {count} 개<button onClick={plusCount}>+</button>
+            {quantity} 개<button onClick={plusCount}>+</button>
           </Styled.ProductContent>
         </Styled.ProductDescBox>
       </Styled.ProductDesc>
