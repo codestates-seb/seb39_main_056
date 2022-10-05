@@ -1,7 +1,7 @@
 package com.noterror.app.api.domain.orders.mapper;
 
 import com.noterror.app.api.domain.entity.order.Orders;
-import com.noterror.app.api.domain.orders.dto.OrdersResponseDto;
+import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component;
 public class OrdersMapperImpl implements OrdersMapper {
 
     @Override
-    public List<OrdersResponseDto> ordersToOrderResponseDtos(List<Orders> orders) {
+    public List<OrderResponseDto> ordersToOrderResponseDtos(List<Orders> orders) {
         if ( orders == null ) {
             return null;
         }
 
-        List<OrdersResponseDto> list = new ArrayList<OrdersResponseDto>( orders.size() );
+        List<OrderResponseDto> list = new ArrayList<OrderResponseDto>( orders.size() );
         for ( Orders orders1 : orders ) {
             list.add( ordersToOrdersResponseDto( orders1 ) );
         }
