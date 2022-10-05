@@ -43,8 +43,11 @@ public class CartControllerRestDocs {
 
     @Autowired
     Gson gson;
+
+
     @MockBean
     private CartService cartService;
+
 
     @Test
     @DisplayName("장바구니 제품 추가 API 문서화")
@@ -52,7 +55,7 @@ public class CartControllerRestDocs {
         CartProductDto request = new CartProductDto(1L, 3);
         String jsonRequest = gson.toJson(request);
 
-        CartDetailDto response = new CartDetailDto(1L, "카레라면", 20000, 3);
+        CartDetailDto response = new CartDetailDto(1L, "카레라면", 20000, 3,"@!@#!%@%$#@#$@%#$%");
         Long memberId = 1L;
         given(cartService.addCart(any(), anyLong()))
                 .willReturn(response);
@@ -74,15 +77,17 @@ public class CartControllerRestDocs {
                                 List.of(
                                         fieldWithPath("productId").type(JsonFieldType.NUMBER).description("제품 식별자"),
                                         fieldWithPath("count").type(JsonFieldType.NUMBER).description("제품 수량")
+
                                 )
                         ),
                         responseFields(
                                 List.of(
-                                        fieldWithPath("cartDetail").type(JsonFieldType.OBJECT).description("장바구니에 담긴 제품 데이터"),
-                                        fieldWithPath("cartDetail.cartDetailId").type(JsonFieldType.NUMBER).description("장바구니에 담긴 제품 식별자"),
-                                        fieldWithPath("cartDetail.productName").type(JsonFieldType.STRING).description("장바구니에 담긴 제품명"),
-                                        fieldWithPath("cartDetail.price").type(JsonFieldType.NUMBER).description("장바구니에 담긴 제품의 가격"),
-                                        fieldWithPath("cartDetail.count").type(JsonFieldType.NUMBER).description("장바구니에 담긴 제품의 수량")
+                                        fieldWithPath("cartDetail").type(JsonFieldType.OBJECT).description("장바구니 상세 제품 데이터"),
+                                        fieldWithPath("cartDetail.cartDetailId").type(JsonFieldType.NUMBER).description("장바구니 상세 제품 식별자"),
+                                        fieldWithPath("cartDetail.productName").type(JsonFieldType.STRING).description("장바구니 상세 제품명"),
+                                        fieldWithPath("cartDetail.price").type(JsonFieldType.NUMBER).description("장바구니 상세 제품 가격"),
+                                        fieldWithPath("cartDetail.count").type(JsonFieldType.NUMBER).description("장바구니 상세 제품 수량"),
+                                        fieldWithPath("cartDetail.thumbnailImage").type(JsonFieldType.STRING).description("장바구니 제품 썸네일 이미지")
                                 )
                         )
                 ));
@@ -132,8 +137,8 @@ public class CartControllerRestDocs {
     @DisplayName("장바구니 제품 조회 API 문서화")
     void viewCartProduct() throws Exception {
         Long memberId = 1L;
-        CartDetailDto response1 = new CartDetailDto(1L, "카레라면", 20000, 3);
-        CartDetailDto response2 = new CartDetailDto(2L, "가지튀김", 10000, 5);
+        CartDetailDto response1 = new CartDetailDto(1L, "카레라면", 20000, 3, "@!@#!%@%$#@#$@%#$%");
+        CartDetailDto response2 = new CartDetailDto(2L, "가지튀김", 10000, 5, "@!@#!%@%$#@#$@%#$%");
         List<CartDetailDto> response = new ArrayList<>();
         response.add(response1);
         response.add(response2);
@@ -156,7 +161,8 @@ public class CartControllerRestDocs {
                                         fieldWithPath("cartProducts[].cartDetailId").type(JsonFieldType.NUMBER).description("제품 식별자"),
                                         fieldWithPath("cartProducts[].productName").type(JsonFieldType.STRING).description("제품명"),
                                         fieldWithPath("cartProducts[].price").type(JsonFieldType.NUMBER).description("제품 가격"),
-                                        fieldWithPath("cartProducts[].count").type(JsonFieldType.NUMBER).description("구매 수량")
+                                        fieldWithPath("cartProducts[].count").type(JsonFieldType.NUMBER).description("구매 수량"),
+                                        fieldWithPath("cartProducts[].thumbNailImage").type(JsonFieldType.STRING).description("썸네일 이미지")
                                 )
                         )));
     }
