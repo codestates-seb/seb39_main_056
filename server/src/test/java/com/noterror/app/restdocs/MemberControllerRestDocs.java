@@ -1,3 +1,4 @@
+/*
 package com.noterror.app.restdocs;
 
 import com.google.gson.Gson;
@@ -276,3 +277,4 @@ public class MemberControllerRestDocs {
                 ));
     }
 }
+*/

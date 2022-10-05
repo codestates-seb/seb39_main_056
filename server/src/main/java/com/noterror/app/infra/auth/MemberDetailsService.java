@@ -26,7 +26,6 @@ public class MemberDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member findMember = memberRepository.findByEmail(username)
                 .orElseThrow(() -> new BusinessLogicException(MEMBER_NOT_FOUND));
-
         return new MemberDetails(findMember, authorityUtils);
     }
 

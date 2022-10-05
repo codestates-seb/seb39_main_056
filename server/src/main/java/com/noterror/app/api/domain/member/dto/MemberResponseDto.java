@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 public class MemberResponseDto {
-    private Long memberId;
     private String memberName;
     private String email;
     private String phone;
@@ -23,7 +22,6 @@ public class MemberResponseDto {
     private LocalDateTime signDate;
 
     public MemberResponseDto(Member member) {
-        this.memberId = member.getMemberId();
         this.memberName = member.getMemberName();
         this.email = member.getEmail();
         this.phone = member.getPhone();

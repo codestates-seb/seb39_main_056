@@ -52,14 +52,10 @@ public class Member implements Principal {
 
     //== Constructor ==//
 
-    public Member(String email) {
-        this.email = email;
-    }
-
     //== BUSINESS LOGIC ==//
     public void updateMemberInfo(UpdateInfoDto updateInfoDto, VegetarianType type) {
         this.phone = updateInfoDto.getPhone();
-        new Address(
+        this.address = new Address(
                 updateInfoDto.getZipCode(),
                 updateInfoDto.getCity(),
                 updateInfoDto.getDetailAddress()
@@ -67,24 +63,17 @@ public class Member implements Principal {
         this.vegetarianType = type;
     }
 
-    public void proceedSocialSignUp(SignUpDto signUpDto) {
-        this.phone = signUpDto.getPhone();
-        this.address = new Address(
-                signUpDto.getZipCode(),
-                signUpDto.getCity(),
-                signUpDto.getDetailAddress()
-        );
-    }
-
-    public void proceedGeneralSignUp(SignUpDto signUpDto) {
+    public void proceedGeneralSignUp(SignUpDto signUpDto, List<String> roles, String password) {
         this.email = signUpDto.getEmail();
         this.memberName = signUpDto.getMemberName();
         this.phone = signUpDto.getPhone();
+        this.password = password;
         this.address = new Address(
                 signUpDto.getZipCode(),
                 signUpDto.getCity(),
                 signUpDto.getDetailAddress()
         );
+        this.roles = roles;
     }
 
     // Principal 기능
@@ -92,6 +81,4 @@ public class Member implements Principal {
     public String getName() {
         return getEmail();
     }
-
-
 }

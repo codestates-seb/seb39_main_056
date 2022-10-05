@@ -5,8 +5,9 @@ import com.noterror.app.infra.auth.CustomAuthorityUtils;
 import com.noterror.app.infra.filter.JwtAuthenticationFilter;
 import com.noterror.app.infra.filter.JwtVerificationFilter;
 import com.noterror.app.infra.handler.MemberAccessDeniedHandler;
+import com.noterror.app.infra.handler.MemberAuthFailureHandler;
+import com.noterror.app.infra.handler.MemberAuthSuccessHandler;
 import com.noterror.app.infra.handler.MemberAuthenticationEntryPoint;
-import com.noterror.app.infra.handler.OAuth2MemberSuccessHandler;
 import com.noterror.app.infra.jwt.JwtTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -28,9 +28,11 @@ import java.util.Arrays;
 public class SecurityConfig {
 
     private final JwtTokenizer jwtTokenizer;
+    private final CustomAuthorityUtils authorityUtils;
 
-    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils, MemberService memberService) {
+    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils) {
         this.jwtTokenizer = jwtTokenizer;
+        this.authorityUtils = authorityUtils;
     }
 
     @Bean
@@ -40,15 +42,24 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable()
                 .cors(Customizer.withDefaults())
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .formLogin().disable()
                 .httpBasic().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(new MemberAuthenticationEntryPoint())
+                .accessDeniedHandler(new MemberAccessDeniedHandler())
+                .and()
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .antMatchers("/members").permitAll()
+                                .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers(HttpMethod.PUT, "/members/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers(HttpMethod.DELETE, "/members/**").hasAnyRole("USER","ADMIN")
                                 .antMatchers(HttpMethod.GET,"/products").permitAll()
                                 .antMatchers("/admin/**").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.POST,"/members/sign-up/**").permitAll()
                                 .anyRequest().permitAll()
                 );
         return http.build();
@@ -64,7 +75,6 @@ public class SecurityConfig {
         return source;
     }
 
-    // 추가
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
@@ -72,7 +82,12 @@ public class SecurityConfig {
 
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
             jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login");
-            builder.addFilter(jwtAuthenticationFilter);
+            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthSuccessHandler());
+            jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthFailureHandler());
+
+            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
+            builder.addFilter(jwtAuthenticationFilter)
+                    .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
         }
     }
 

@@ -1,10 +1,7 @@
 package com.noterror.app.api.domain.member.memberService;
 
 import com.noterror.app.api.domain.entity.member.Member;
-import com.noterror.app.api.domain.member.dto.SignUpDto;
-import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
-import com.noterror.app.api.domain.member.dto.MemberResponseDto;
-import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
+import com.noterror.app.api.domain.member.dto.*;
 
 public interface MemberService {
 
@@ -25,11 +22,11 @@ public interface MemberService {
 
      /**
       * 회원 정보 수정 기능
-      * @param id
+      * @param email
       * @param updateInfoDto
       * @return MemberResponseDto
       */
-     MemberResponseDto updateMember(Long id, UpdateInfoDto updateInfoDto);
+     MemberResponseDto updateMember(String email, UpdateInfoDto updateInfoDto);
 
      /**
       * 개별 회원 정보 조회 기능
@@ -42,11 +39,5 @@ public interface MemberService {
       * 회원 정보 삭제 기능
       * @param id
       */
-     void removeMember(Long id);
-
-     /**
-      * 비회원 소셜 인증 후, 회원 데이터 db 저장
-      * @param member
-      */
-     void saveMemberBySocial(Member member);
+     void removeMember(String email);
 }
