@@ -5,7 +5,6 @@ import com.noterror.app.api.domain.entity.order.OrdersStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +30,9 @@ public class OrderInfoDto {
     }
 
     //주문한 상품들을 담을 리스트
-    public List<OrderProductDto> orderProductDtoList = new ArrayList<>();
+    public List<OrderProductDto> orderProductList = new ArrayList<>();
 
     public void addOrderProductDto(OrderProductDto orderProductDto) {
-        orderProductDtoList.add(orderProductDto);
+        orderProductList.add(orderProductDto);
     }
 }

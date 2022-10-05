@@ -7,8 +7,8 @@ import lombok.*;
  * 주문 상품 정보를 담을 dto
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter @Setter
 public class OrderProductDto {
     private Long productId;

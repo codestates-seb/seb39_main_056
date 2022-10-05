@@ -9,6 +9,7 @@ import com.noterror.app.api.domain.orders.dto.OrderDto;
 import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
 import com.noterror.app.api.domain.orders.dto.OrderProductDto;
 import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
+import com.noterror.app.api.domain.orders.repository.OrderProductRepository;
 import com.noterror.app.api.domain.orders.repository.OrdersRepository;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import java.util.List;
 public class OrdersServiceImpl implements OrdersService {
 
     private final OrdersRepository ordersRepository;
+    private final OrderProductRepository orderProductRepository;
     private final MemberRepository memberRepository;
     private final ProductRepository productRepository;
 
@@ -40,20 +42,21 @@ public class OrdersServiceImpl implements OrdersService {
             }
         }
         List<OrderInfoDto> result = new ArrayList<>();
-        List<OrderProductDto> orderDtoList = new ArrayList<>();
+        //List<OrderProductDto> orderDtoList = new ArrayList<>();
 
         for (Orders order : memberOrder) {
-            List<OrderProduct> orderProducts = order.getOrderProducts();
-            for(OrderProduct orderProduct : orderProducts) {
-                OrderProductDto orderProductDto = new OrderProductDto(orderProduct.getProduct().getProductId(),orderProduct.getProduct().getProductName(), orderProduct.getQuantity(), orderProduct.getProduct().getPrice());
-                orderDtoList.add(orderProductDto);
+            //List<OrderProduct> orderProducts = order.getOrderProducts();
+
+            OrderInfoDto infoDto = new OrderInfoDto(order);
+
+            for(OrderProduct orderProduct : order.getOrderProducts()) {
+                OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
+                infoDto.addOrderProductDto(orderProductDto);
             }
-            OrderInfoDto infoDto = new OrderInfoDto(order.getOrdersId(), order.getOrdersDate(), order.getOrdersStatus(), order.getTotalPrice(), orderDtoList);
             result.add(infoDto);
         }
 
         return result;
-
     }
      //제품 상세페이지에서 주문
     public OrderResponseDto orderProduct(OrderDto orderDto, Long memberId) {
@@ -62,6 +65,7 @@ public class OrdersServiceImpl implements OrdersService {
 
         List<OrderProduct> orderProductList = new ArrayList<>();        //주문할 상품을 담을 리스트
         OrderProduct orderProduct = OrderProduct.createOrderProduct(product, orderDto.getQuantity());   //주문상품 엔티티 생성
+        orderProductRepository.save(orderProduct);
         orderProductList.add(orderProduct);
 
         Orders order = Orders.createOrder(member, orderProductList);

@@ -34,7 +34,7 @@ public class OrderProduct {
 
         OrderProduct orderProduct = new OrderProduct();
         orderProduct.setProduct(product);
-        orderProduct.setOrdersProductId(product.getProductId());
+        orderProduct.setOrdersProductId(orderProduct.getOrdersProductId());
         orderProduct.setQuantity(quantity);
         orderProduct.setOrdersPrice(product.getPrice());
 
