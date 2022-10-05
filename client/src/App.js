@@ -1,7 +1,6 @@
 import React from 'react';
 import Mypage from './components/pages/Mypage';
 import ProductDetail from './components/pages/ProductDetail';
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyles from './style/GlobalStyles';
 import BodyContainer from './components/atom/BodyContainer';
@@ -23,9 +22,9 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/mypage/:id" element={<Mypage />} />
           <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="type/" element={<Type />} />
+          <Route path="/type" element={<Type />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          {/* <Route path="/signup" element={<Signup />} /> */}
           <Route path="/info" element={<Info />} />
           <Route path="/test" element={<Test />} />
         </Routes>
