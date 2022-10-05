@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react';
-import GoogleBtn from '../molecule/GoogleBtn';
 import { postLoginToken } from '../../hooks/postLoginToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoginChange } from '../../actions';
 import { useNavigate } from 'react-router-dom';
-import CenterBox from '../templates/CenterBox';
-import H1 from '../atom/H1';
-import CenterInnerBox from '../templates/CenterInnerBox';
-import SocialBtnContainer from '../templates/SocialBtnContainer';
+import Index from '../templates/Login/Login';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,19 +21,7 @@ const Login = () => {
     navigate('/');
   }, [loginState]);
 
-  return (
-    <CenterBox width="30vw">
-      <CenterInnerBox>
-        <H1>로그인</H1>
-        <SocialBtnContainer>
-          <GoogleBtn
-            onGoogleSignIn={onGoogleSign}
-            text="signin_with"
-          ></GoogleBtn>
-        </SocialBtnContainer>
-      </CenterInnerBox>
-    </CenterBox>
-  );
+  return <Index />;
 };
 
 export default Login;
