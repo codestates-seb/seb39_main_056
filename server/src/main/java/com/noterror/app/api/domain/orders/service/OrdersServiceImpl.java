@@ -31,13 +31,15 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrderInfoDto> getOrderList(Long memberId){
+    public List<OrderInfoDto> getOrderList(String email){
         List<Orders> orders = ordersRepository.findAll();
 
         List<Orders> memberOrder = new ArrayList<>();
 
+        Member member = memberRepository.findByEmail(email).get();
+
         for (Orders data : orders) {
-            if (data.getMember().getMemberId() == memberId) {
+            if (data.getMember().getMemberId() == member.getMemberId()) {
                 memberOrder.add(data);
             }
         }
@@ -59,9 +61,9 @@ public class OrdersServiceImpl implements OrdersService {
         return result;
     }
      //제품 상세페이지에서 주문
-    public OrderResponseDto orderProduct(OrderDto orderDto, Long memberId) {
+    public OrderResponseDto orderProduct(OrderDto orderDto, String email) {
         Product product = productRepository.findById(orderDto.getProductId()).get();
-        Member member = memberRepository.findById(memberId).get();
+        Member member = memberRepository.findByEmail(email).get();
 
         List<OrderProduct> orderProductList = new ArrayList<>();        //주문할 상품을 담을 리스트
         OrderProduct orderProduct = OrderProduct.createOrderProduct(product, orderDto.getQuantity());   //주문상품 엔티티 생성
@@ -79,4 +81,3 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
 }
-
