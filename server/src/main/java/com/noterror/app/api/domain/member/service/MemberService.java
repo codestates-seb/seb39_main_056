@@ -9,7 +9,7 @@ public interface MemberService {
      /**
       * 일반 회원 정보 등록 기능
       * @param signUpDto
-      * @return Long : ID of new member
+      * @return Long : new member ID
       */
      Long saveMemberInfo(SignUpDto signUpDto);
 

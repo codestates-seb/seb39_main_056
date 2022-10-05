@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface OrdersService {
 
-    List<OrderInfoDto> getOrderList(Long memberId);
-    OrderResponseDto orderProduct(OrderDto orderDto, Long memberId);
+    List<OrderInfoDto> getOrderList(String email);
+    OrderResponseDto orderProduct(OrderDto orderDto, String email);
 }

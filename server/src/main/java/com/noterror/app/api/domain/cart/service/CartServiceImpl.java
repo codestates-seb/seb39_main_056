@@ -54,6 +54,7 @@ public class CartServiceImpl implements CartService {
             cartDetailDto.setProductName(existProduct.getProduct().getProductName());
             cartDetailDto.setPrice(existProduct.getProduct().getPrice());
             cartDetailDto.setCount(existProduct.getCount());
+            cartDetailDto.setThumbnailImage(existProduct.getProduct().getThumbnailImage());
             return cartDetailDto;
         }
         else { // 아니면은 CartItem 에 상품 저장
@@ -65,10 +66,10 @@ public class CartServiceImpl implements CartService {
             cartDetailDto.setProductName(cartItem.getProduct().getProductName());
             cartDetailDto.setPrice(cartItem.getProduct().getPrice());
             cartDetailDto.setCount(cartItem.getCount());
+            cartDetailDto.setThumbnailImage(cartItem.getProduct().getThumbnailImage());
             return cartDetailDto;
         }
     }
-
 
     @Override
     @Transactional(readOnly = true)
