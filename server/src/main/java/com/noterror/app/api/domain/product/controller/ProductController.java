@@ -1,8 +1,10 @@
 package com.noterror.app.api.domain.product.controller;
 
-import com.noterror.app.api.domain.entity.Product;
+import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.service.ProductService;
+import com.noterror.app.api.domain.vegetarian.dto.VegetarianTypeResponseDto;
+import com.noterror.app.api.domain.vegetarian.service.VegetarianTypeService;
 import com.noterror.app.api.global.response.MultiProductResponse;
 import com.noterror.app.api.global.response.SingleProductResponse;
 import com.noterror.app.api.global.sort.Sort;
@@ -31,13 +33,15 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final VegetarianTypeService vegetarianTypeService;
 
     /**
      * 제품 개별 조회
      * @param : productId
      */
     @GetMapping("/detail/{product-id}")
-    public ResponseEntity getProduct(@PathVariable("product-id") Long productId) {
+    public ResponseEntity getProduct(@PathVariable("product-id") Long productId,
+                                     @RequestParam(required = false, defaultValue = "플렉시테리언", value = "vegeTypeName") String vegeTypeName) {
 
         ProductResponseDto response = productService.findProduct(productId);
 
@@ -53,17 +57,20 @@ public class ProductController {
     public ResponseEntity getProducts(@RequestParam(required = false, defaultValue = "1") int page,
                                       @RequestParam(required = false, defaultValue = "20") int size,
                                       @RequestParam(required = false, defaultValue = "signDate") String sort,
-                                      @RequestParam(required = false, defaultValue = "desc") String orderBy) {
-
+                                      @RequestParam(required = false, defaultValue = "desc") String orderBy,
+                                      @RequestParam(required = false, defaultValue = "플렉시테리언", value = "vegeTypeName") String vegeTypeName
+                                    )
+        {
         Page<Product> productInPage =
                 productService.findProductsWithPageAndSort(page-1,size,sort,orderBy);
         List<Product> productsInList = productInPage.getContent();
+        List<VegetarianTypeResponseDto> findVegeTypes = vegetarianTypeService.getVegetarianType(vegeTypeName);
 
         Sort sortInfo = new Sort(sort, orderBy);
 
         return new ResponseEntity(
                 new MultiProductResponse(
-                        productsInList,productInPage,sortInfo
+                        productsInList,productInPage,sortInfo, findVegeTypes
                 ),
                 HttpStatus.OK
         );

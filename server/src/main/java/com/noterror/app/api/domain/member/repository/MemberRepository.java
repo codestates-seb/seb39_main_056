@@ -1,7 +1,7 @@
 
 package com.noterror.app.api.domain.member.repository;
 
-import com.noterror.app.api.domain.entity.member.Member;
+import com.noterror.app.api.entity.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package com.noterror.app.restdocs;
 
 import com.google.gson.Gson;
-import com.noterror.app.api.admin.AdminProductController;
+import com.noterror.app.api.domain.admin.AdminProductController;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.service.ProductService;
 import org.junit.jupiter.api.DisplayName;

@@ -1,21 +1,22 @@
 package com.noterror.app.infra.auth;
 
-import com.noterror.app.api.domain.entity.member.Member;
+
+import com.noterror.app.api.entity.member.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public final class MemberDetails extends Member implements UserDetails {
+public class MemberDetails extends Member implements UserDetails {
 
     private final CustomAuthorityUtils authorityUtils;
 
-    MemberDetails(Member member, CustomAuthorityUtils authorityUtils) {
+    public MemberDetails(Member member, CustomAuthorityUtils authorityUtils) {
+        this.authorityUtils = authorityUtils;
         setMemberId(member.getMemberId());
         setEmail(member.getEmail());
         setPassword(member.getPassword());
         setRoles(member.getRoles());
-        this.authorityUtils = authorityUtils;
     }
 
     @Override
@@ -25,26 +26,26 @@ public final class MemberDetails extends Member implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return getEmail();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

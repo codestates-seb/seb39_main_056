@@ -1,10 +1,7 @@
 package com.noterror.app.api.domain.member.dto;
 
-import com.noterror.app.api.domain.entity.VegetarianType;
 import lombok.*;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 

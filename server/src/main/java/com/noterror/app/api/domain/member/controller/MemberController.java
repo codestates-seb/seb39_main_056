@@ -1,26 +1,24 @@
 package com.noterror.app.api.domain.member.controller;
 
-import com.noterror.app.api.domain.entity.VegetarianType;
+import com.noterror.app.api.domain.member.dto.MemberResponseDto;
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
-import com.noterror.app.api.domain.member.dto.MemberResponseDto;
 import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
-import com.noterror.app.api.domain.member.memberService.MemberService;
+import com.noterror.app.api.domain.member.service.MemberService;
 import com.noterror.app.api.global.response.SingleMemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
-
 
 /**
- * 담당자 : 황윤준, 이현석
+ * 담당자 : 강시혁, 황윤준, 이현석
  * SCOPE : 일반 회원 관리
- * 리팩토링 : 이현석, 강시혁
+ * 리팩토링 : 강시혁
  * 대상 : MEMBER
  */
 @Controller
@@ -35,8 +33,8 @@ public class MemberController {
      */
     @PostMapping("/sign-up")
     public ResponseEntity<MemberResponseDto> postMember(@RequestBody @Valid SignUpDto signUpDto) {
-        Long memberId = memberService.saveMemberInfo(signUpDto);
-        return new ResponseEntity(memberId, HttpStatus.CREATED);
+        Long newMemberId = memberService.saveMemberInfo(signUpDto);
+        return new ResponseEntity(newMemberId, HttpStatus.CREATED);
     }
 
     /**
@@ -46,31 +44,32 @@ public class MemberController {
     public ResponseEntity<MemberResponseDto> postVegetarianTypeOfNewMember(
             @PathVariable("member-id") Long memberId,
             @RequestBody @Valid VegetarianTypeInputDto vegetarianType) {
-        MemberResponseDto response =
-                memberService.saveTypeOfNewMember(memberId, vegetarianType);
 
+        MemberResponseDto response = memberService.saveTypeOfNewMember(memberId, vegetarianType);
         return new ResponseEntity(
-                new SingleMemberResponse<>(response)
-                , HttpStatus.OK);
+                new SingleMemberResponse<>(response), HttpStatus.OK);
     }
 
     /**
      * 회원 정보 수정
      */
-    @PutMapping("/info/{member-id}")
-    public ResponseEntity putMember(@PathVariable("member-id") Long memberId, @RequestBody @Valid UpdateInfoDto updateInfoDto) {
-        MemberResponseDto response = memberService.updateMember(memberId, updateInfoDto);
+    @PutMapping("/info")
+    public ResponseEntity putMember(
+            @RequestBody @Valid UpdateInfoDto updateInfoDto) {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        MemberResponseDto response = memberService.updateMember(currentUserEmail, updateInfoDto);
+
         return new ResponseEntity<>(
-                new SingleMemberResponse<>(response)
-                , HttpStatus.OK);
+                new SingleMemberResponse<>(response), HttpStatus.OK);
     }
 
     /**
      * 개별 회원 정보 조회
      */
-    @GetMapping("/info/{member-id}")
-    public ResponseEntity getMember(@PathVariable("member-id") Long memberId, Principal principal) {
-        MemberResponseDto response = memberService.findMember(principal.getName());
+    @GetMapping("/info")
+    public ResponseEntity getMember() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        MemberResponseDto response = memberService.findMember(currentUserEmail);
         return new ResponseEntity<>(
                 new SingleMemberResponse(response), HttpStatus.OK);
     }
@@ -78,9 +77,10 @@ public class MemberController {
     /**
      * 회원 탈퇴
      */
-    @DeleteMapping("/info/{member-id}")
-    public ResponseEntity deleteProduct(@PathVariable("member-id") long memberId) {
-        memberService.removeMember(memberId);
+    @DeleteMapping("/info")
+    public ResponseEntity deleteProduct() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        memberService.removeMember(currentUserEmail);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

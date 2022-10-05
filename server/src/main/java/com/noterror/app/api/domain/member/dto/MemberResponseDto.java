@@ -1,7 +1,6 @@
 package com.noterror.app.api.domain.member.dto;
 
-import com.noterror.app.api.domain.entity.VegetarianType;
-import com.noterror.app.api.domain.entity.member.Member;
+import com.noterror.app.api.entity.member.Member;
 import lombok.*;
 
 import java.time.LocalDateTime;
