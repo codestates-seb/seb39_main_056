@@ -1,7 +1,7 @@
 package com.noterror.app.api.domain.cart.repository;
 
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
-import com.noterror.app.api.domain.entity.CartDetail;
+import com.noterror.app.api.entity.CartDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

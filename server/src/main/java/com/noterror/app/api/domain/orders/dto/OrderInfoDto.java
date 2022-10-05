@@ -1,7 +1,7 @@
 package com.noterror.app.api.domain.orders.dto;
 
-import com.noterror.app.api.domain.entity.order.Orders;
-import com.noterror.app.api.domain.entity.order.OrdersStatus;
+import com.noterror.app.api.entity.order.Orders;
+import com.noterror.app.api.entity.order.OrdersStatus;
 import lombok.*;
 
 import java.time.LocalDateTime;

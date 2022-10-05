@@ -1,9 +1,9 @@
 package com.noterror.app.api.domain.orders.service;
 
-import com.noterror.app.api.domain.entity.Member;
-import com.noterror.app.api.domain.entity.Product;
-import com.noterror.app.api.domain.entity.order.Orders;
-import com.noterror.app.api.domain.entity.order.OrderProduct;
+import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.member.Member;
+import com.noterror.app.api.entity.order.Orders;
+import com.noterror.app.api.entity.order.OrderProduct;
 import com.noterror.app.api.domain.member.repository.MemberRepository;
 import com.noterror.app.api.domain.orders.dto.OrderDto;
 import com.noterror.app.api.domain.orders.dto.OrderInfoDto;

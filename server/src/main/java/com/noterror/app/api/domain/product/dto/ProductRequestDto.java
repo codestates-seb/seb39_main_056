@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +19,11 @@ public class ProductRequestDto {
     private String productName;
 
     @Min(1)
+    @Positive
     private int quantity;
 
     @Min(100)
+    @Positive
     private int price;
 
     @NotBlank(message = "썸네일 이미지를 첨부해주세요.")

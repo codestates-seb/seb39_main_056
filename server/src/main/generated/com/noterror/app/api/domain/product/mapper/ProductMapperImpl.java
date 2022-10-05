@@ -1,17 +1,15 @@
-
 package com.noterror.app.api.domain.product.mapper;
 
-import com.noterror.app.api.domain.entity.Product;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
+import com.noterror.app.api.entity.Product;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-28T14:41:51+0900",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.15 (Azul Systems, Inc.)"
-
+    date = "2022-10-05T15:23:46+0900",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.11 (Oracle Corporation)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
@@ -52,4 +50,3 @@ public class ProductMapperImpl implements ProductMapper {
         return productResponseDto.build();
     }
 }
-

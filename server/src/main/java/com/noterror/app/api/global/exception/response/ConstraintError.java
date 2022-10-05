@@ -19,13 +19,4 @@ public class ConstraintError {
     private String propertyPath;
     private Object rejectedValue;
     private String reason;
-
-    public static List<ConstraintError> of(Set<ConstraintViolation<?>> constraintViolation){
-        return constraintViolation.stream()
-                .map(error -> new ConstraintError(
-                        error.getPropertyPath().toString(), //경로
-                        error.getInvalidValue().toString(), //잘못된 값
-                        error.getMessage()))
-                .collect(Collectors.toList());
-    }
 }

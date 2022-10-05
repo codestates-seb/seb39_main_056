@@ -1,10 +1,10 @@
 package com.noterror.app.api.domain.product.controller;
 
-import com.noterror.app.api.domain.entity.Product;
+import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.service.ProductService;
-import com.noterror.app.api.domain.vegeType.dto.VegeTypeResponseDto;
-import com.noterror.app.api.domain.vegeType.service.VegeTypeService;
+import com.noterror.app.api.domain.vegetarian.dto.VegetarianTypeResponseDto;
+import com.noterror.app.api.domain.vegetarian.service.VegetarianTypeService;
 import com.noterror.app.api.global.response.MultiProductResponse;
 import com.noterror.app.api.global.response.SingleProductResponse;
 import com.noterror.app.api.global.sort.Sort;
@@ -33,7 +33,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    private final VegeTypeService vegeTypeService;
+    private final VegetarianTypeService vegetarianTypeService;
 
     /**
      * 제품 개별 조회
@@ -64,7 +64,7 @@ public class ProductController {
         Page<Product> productInPage =
                 productService.findProductsWithPageAndSort(page-1,size,sort,orderBy);
         List<Product> productsInList = productInPage.getContent();
-        List<VegeTypeResponseDto> findVegeTypes = vegeTypeService.getVegeTypes(vegeTypeName);
+        List<VegetarianTypeResponseDto> findVegeTypes = vegetarianTypeService.getVegetarianType(vegeTypeName);
 
         Sort sortInfo = new Sort(sort, orderBy);
 

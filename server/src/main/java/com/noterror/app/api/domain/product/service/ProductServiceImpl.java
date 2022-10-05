@@ -1,6 +1,6 @@
 package com.noterror.app.api.domain.product.service;
 
-import com.noterror.app.api.domain.entity.Product;
+import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.mapper.ProductMapper;
@@ -25,7 +25,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public ProductResponseDto findProduct(Long productId) {
-
         return mapper.productToProductResponseDto(findExistProduct(productId));
     }
 
@@ -33,12 +32,15 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy) {
 
-        if (orderBy.equals("desc") || orderBy.equals(null)) {
-            return productRepository.findAll(
-                    PageRequest.of(page, size, Sort.by(sort).descending()));
+        if (isAscending(orderBy)) {
+            return productRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
         }
+        return productRepository.findAll(
+                PageRequest.of(page, size, Sort.by(sort).descending()));
+    }
 
-        return productRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
+    private boolean isAscending(String orderBy) {
+        return orderBy.equals("asc");
     }
 
     @Override

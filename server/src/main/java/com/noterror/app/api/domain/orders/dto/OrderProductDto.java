@@ -1,6 +1,6 @@
 package com.noterror.app.api.domain.orders.dto;
 
-import com.noterror.app.api.domain.entity.order.OrderProduct;
+import com.noterror.app.api.entity.order.OrderProduct;
 import lombok.*;
 
 /**

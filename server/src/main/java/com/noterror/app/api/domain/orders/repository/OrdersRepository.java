@@ -1,15 +1,9 @@
 package com.noterror.app.api.domain.orders.repository;
 
-import com.noterror.app.api.domain.entity.order.Orders;
-import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
-import org.springframework.data.domain.Pageable;
+import com.noterror.app.api.entity.order.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
-
-import java.util.List;
 
 public interface OrdersRepository extends JpaRepository<Orders, Long> {
     /*@Query(value = "select orders_id, orders_date, orders_status" +

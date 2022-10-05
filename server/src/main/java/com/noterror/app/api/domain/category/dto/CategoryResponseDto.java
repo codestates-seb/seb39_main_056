@@ -1,6 +1,6 @@
 package com.noterror.app.api.domain.category.dto;
 
-import com.noterror.app.api.domain.entity.Category;
+import com.noterror.app.api.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
