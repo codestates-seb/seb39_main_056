@@ -1,11 +1,14 @@
 
 package com.noterror.app.api.domain.entity;
 
+import com.noterror.app.api.domain.entity.order.Orders;
 import com.noterror.app.api.domain.member.dto.MemberRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -13,10 +16,10 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
-@Table(name = "member")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long memberId;
 
     @Column(nullable = false)
@@ -53,6 +56,13 @@ public class Member {
 
     @Column(nullable = true)
     private LocalDateTime regDate = LocalDateTime.now();
+
+    @OneToOne(mappedBy = "member")
+    private Cart cart;
+
+    public void addCart(Cart cart) {
+        this.cart = cart;
+    }
 
     /**
      * Admin/User 역할

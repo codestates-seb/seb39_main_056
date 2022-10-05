@@ -7,6 +7,12 @@ spring :
   datasource:
     url: jdbc:h2:mem:test
 
+  session:
+    jdbc: initialize-schema=always
+
+  sql:
+    init:
+      data-location: classpath*:db/h2/data.sql
   jpa:
     defer-datasource-initialization: true
     hibernate:
@@ -29,5 +35,5 @@ logging:
 
 server:
   port:
-    9050
+    9090
 
