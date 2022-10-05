@@ -1,17 +1,15 @@
 package com.noterror.app.api.domain.member.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@Data
+@Getter
 @NoArgsConstructor
 public class SignUpDto {
 
@@ -21,8 +19,7 @@ public class SignUpDto {
 
     /** 회원 이름 */
     @NotEmpty(message = "이름을 공백없이 입력해주세요.")
-    @Length(min=3,max=5)
-    @Pattern(regexp = "^[ㄱ-ㅎ가-힣]{3,5}$")
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣]{2,5}$")
     private String memberName;
 
     @Nullable
@@ -46,7 +43,7 @@ public class SignUpDto {
     private String detailAddress;
 
     // 일반 회원 정보 등록
-    public SignUpDto(String email, String memberName, @Nullable String password, String phone, String zipCode, String city, String detailAddress) {
+    public SignUpDto(String email, String memberName, String password, String phone, String zipCode, String city, String detailAddress) {
         this.email = email;
         this.memberName = memberName;
         this.password = password;

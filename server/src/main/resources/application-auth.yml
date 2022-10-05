@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 jwt:
   access-token-expiration-minutes: 30
   refresh-token-expiration-minutes: 420
@@ -7,4 +8,15 @@ jwt:
 
 mail:
   address:
+=======
+jwt:
+  access-token-expiration-minutes: 3600
+  refresh-token-expiration-minutes: 420
+  key:
+    secret: noterrorvegetarian7894431123412341234qwerjameshongyunAAgErt
+
+
+mail:
+  address:
+>>>>>>> 3ccc649b13e31b48388eeebf66b5113d94af03ad
     admin: admin056@gmail.com
