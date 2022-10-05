@@ -18,8 +18,6 @@ public class Cart {
     @Column(name = "cart_id")
     private Long cartId;
 
-    private int count;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -40,7 +38,6 @@ public class Cart {
     public static Cart createCart(Member member) {
         Cart cart = new Cart();
         cart.member = member;
-        cart.count = 0;
 
         return cart;
     }
