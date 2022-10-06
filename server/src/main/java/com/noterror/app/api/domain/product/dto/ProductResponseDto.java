@@ -13,19 +13,21 @@ import java.time.LocalDateTime;
 public class ProductResponseDto {
     private Long productId;
     private String productName;
-    private int quantity;
+    private int StockQuantity;
     private int price;
     private LocalDateTime createDate;
     private LocalDateTime editDate;
     private String thumbnailImage;
-    private  String detailImage;
+    private String detailImage;
+    private String vegetarianType;
 
     public ProductResponseDto(Product product) {
         this.productId = product.getProductId();
         this.productName = product.getProductName();
-        this.quantity = product.getStockQuantity();
+        this.StockQuantity = product.getStockQuantity();
         this.price = product.getPrice();
         this.createDate = product.getCreateDate();
         this.editDate = product.getEditDate();
+        this.vegetarianType = product.getVegetarianType().getVegetarianTypeName();
     }
 }

@@ -60,7 +60,7 @@ public class Product extends Auditable {
 
     public void registProduct(ProductRequestDto productRequestDto) {
         this.productName = productRequestDto.getProductName();
-        this.stockQuantity = productRequestDto.getQuantity();
+        this.stockQuantity = productRequestDto.getStockQuantity();
         this.price = productRequestDto.getPrice();
         this.thumbnailImage = productRequestDto.getThumbnailImage();
         this.detailImage = productRequestDto.getDetailImage();
@@ -68,7 +68,7 @@ public class Product extends Auditable {
 
     public void updateProductInfo(ProductRequestDto productPatchDto) {
         this.productName = productPatchDto.getProductName();
-        this.stockQuantity = productPatchDto.getQuantity();
+        this.stockQuantity = productPatchDto.getStockQuantity();
         this.price = productPatchDto.getPrice();
         this.thumbnailImage = productPatchDto.getThumbnailImage();
         this.detailImage = productPatchDto.getDetailImage();
