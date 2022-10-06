@@ -1,0 +1,10 @@
+jwt:
+  access-token-expiration-minutes: 30
+  refresh-token-expiration-minutes: 420
+  key:
+    secret: noterrorvegetarian7894431123412341234qwerjameshongyunAAgErt
+
+
+mail:
+  address:
+    admin: admin056@gmail.com
