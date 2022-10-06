@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
+import GoogleBtn from '../organism/GoogleBtn';
 import { postLoginToken } from '../../hooks/postLoginToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoginChange } from '../../actions';
 import { useNavigate } from 'react-router-dom';
-import Index from '../templates/Login/Login';
 
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginState = useSelector(state => state.loginReducer);
@@ -17,10 +17,15 @@ const Login = () => {
 
   useEffect(() => {
     if (!loginState) return;
-    navigate('/');
+    navigate('/info');
   }, [loginState]);
 
-  return <Index />;
+  return (
+    <div>
+      <h1>회원가입</h1>
+      <GoogleBtn onGoogleSignIn={onGoogleSign} text="signup_with"></GoogleBtn>
+    </div>
+  );
 };
 
-export default Login;
+export default Register;

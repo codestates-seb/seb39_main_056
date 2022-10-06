@@ -1,9 +1,6 @@
 package com.noterror.app.api.domain.member.controller;
 
-import com.noterror.app.api.domain.member.dto.MemberResponseDto;
-import com.noterror.app.api.domain.member.dto.SignUpDto;
-import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
-import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
+import com.noterror.app.api.domain.member.dto.*;
 import com.noterror.app.api.domain.member.service.MemberService;
 import com.noterror.app.api.global.response.SingleMemberResponse;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +31,8 @@ public class MemberController {
     @PostMapping("/sign-up")
     public ResponseEntity<MemberResponseDto> postMember(@RequestBody @Valid SignUpDto signUpDto) {
         Long newMemberId = memberService.saveMemberInfo(signUpDto);
-        return new ResponseEntity(newMemberId, HttpStatus.CREATED);
+
+        return new ResponseEntity(new MemberIdResponseDto(newMemberId), HttpStatus.CREATED);
     }
 
     /**

@@ -66,18 +66,17 @@ public class OrdersServiceImpl implements OrdersService {
         Member member = memberRepository.findByEmail(email).get();
 
         List<OrderProduct> orderProductList = new ArrayList<>();        //주문할 상품을 담을 리스트
-        OrderProduct orderProduct = OrderProduct.createOrderProduct(product, orderDto.getQuantity());   //주문상품 엔티티 생성
+        OrderProduct orderProduct = OrderProduct.createOrderProduct(product, orderDto.getOrdersQuantity());   //주문상품 엔티티 생성
         orderProductRepository.save(orderProduct);
         orderProductList.add(orderProduct);
 
         Orders order = Orders.createOrder(member, orderProductList);
         ordersRepository.save(order);
-        OrderProductDto productDto = new OrderProductDto(orderProduct.getProduct().getProductId(), orderProduct.getProduct().getProductName(),orderProduct.getQuantity(), orderProduct.getProduct().getPrice());
+        OrderProductDto productDto = new OrderProductDto(orderProduct.getProduct().getProductId(), orderProduct.getProduct().getProductName(),orderProduct.getOrdersQuantity(), orderProduct.getProduct().getPrice());
         List<OrderProductDto> dtoList = new ArrayList<>();
         dtoList.add(productDto);
-        OrderResponseDto responseDto = new OrderResponseDto(order.getOrdersId(), order.getOrdersStatus(), order.getOrdersDate(), order.getTotalPrice(), dtoList);
+        OrderResponseDto responseDto = new OrderResponseDto(order.getOrdersId(), order.getOrdersStatus(), order.getTotalPrice(), order.getCreateDate(), dtoList);
 
         return responseDto;
     }
-
 }

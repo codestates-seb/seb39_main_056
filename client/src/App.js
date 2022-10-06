@@ -15,22 +15,22 @@ import Test from './components/templates/Type/Type';
 function App() {
   return (
     <BodyContainer>
-    <GlobalStyles />
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/mypage/:id" element={<Mypage />} />
-        <Route path="/mypage/:id/history" element={<History />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/type" element={<Type />} />
-        <Route path="/login" element={<Login />} />
-        {/* <Route path="/signup" element={<Signup />} /> */}
-        <Route path="/info" element={<Info />} />
-        <Route path="/test" element={<Test />} />
-      </Routes>
-    </BrowserRouter>
-  </BodyContainer>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/mypage/:id" element={<Mypage />} />
+          <Route path="/mypage/:id/history" element={<History />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/type" element={<Type />} />
+          <Route path="/login" element={<Login />} />
+          {/* <Route path="/signup" element={<Signup />} /> */}
+          <Route path="/info" element={<Info />} />
+          <Route path="/test" element={<Test />} />
+        </Routes>
+      </BrowserRouter>
+    </BodyContainer>
   );
 }
 
