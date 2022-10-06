@@ -11,6 +11,7 @@ import Signup from './components/pages/Signup';
 import Info from './components/pages/Info';
 import Header from './components/organism/Header';
 import Test from './components/templates/Type/Type';
+import Cart from './components/pages/Cart';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           {/* <Route path="/signup" element={<Signup />} /> */}
           <Route path="/info" element={<Info />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </BodyContainer>

@@ -35,18 +35,19 @@ const Test = ({ explanation }) => {
   const decideType = () => {
     axios({
       method: 'post',
-      url: `${process.env.REACT_APP_URL}${backEndPoint}`,
+      url: `http://192.168.5.67:8080/members/sign-up/type/1`,
       headers: {
-        Accept: 'application/type',
-        'Content-type': 'application/type',
+        Accept: 'application/json',
+        'Content-type': 'application/json',
       },
       data: JSON.stringify({
         vegeterianType: vegeState,
       }),
-      // withCredentials: true,
+      withCredentials: true,
     })
       .then(res => {
-        if (res.statusText === 'OK') {
+        console.log('it works!');
+        if (res.status === 200) {
           navigate('/');
         }
       })
