@@ -1,5 +1,8 @@
 export const SET_LOGIN_CHANGE = 'SET_LOGIN_CHANGE';
 export const SET_VEGE_TYPE = 'SET_VEGE_TYPE';
+export const INCREASE = 'INCREASE';
+export const DECREASE = 'DECREASE';
+export const SET_NUMBER = 'SET_NUMBER';
 
 export const setLoginChange = result => {
   return {
@@ -8,9 +11,28 @@ export const setLoginChange = result => {
   };
 };
 
-export const setVege = type => {
+export const setVege = vege => {
   return {
     type: SET_VEGE_TYPE,
-    payload: type,
+    payload: vege,
+  };
+};
+
+export const increase = () => {
+  return {
+    type: INCREASE,
+  };
+};
+
+export const decrease = () => {
+  return {
+    type: DECREASE,
+  };
+};
+
+export const setNumber = num => {
+  return {
+    type: SET_NUMBER,
+    payload: num,
   };
 };
