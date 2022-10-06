@@ -18,7 +18,7 @@ public class CartProductDto {
     private Long productId;
 
     @Min(1)
-    private int count;
+    private int purchaseQuantity;
 
 
 }

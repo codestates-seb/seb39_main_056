@@ -24,7 +24,7 @@ public class OrderInfoDto {
 
     public OrderInfoDto(Orders order) {
         this.orderId = order.getOrdersId();
-        this.orderDate = order.getOrdersDate();
+        this.orderDate = order.getCreateDate();
         this.ordersStatus = order.getOrdersStatus();
         this.totalPrice = order.getTotalPrice();
     }

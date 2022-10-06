@@ -40,7 +40,7 @@ public class FeatureTestOfAdminProductController {
         preProduct = Product.builder()
                 .productName("카레라면")
                 .price(10000)
-                .quantity(3)
+                .stockQuantity(3)
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();

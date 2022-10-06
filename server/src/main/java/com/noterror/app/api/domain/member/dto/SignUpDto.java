@@ -41,25 +41,4 @@ public class SignUpDto {
 
     /** 상세 주소(사용자 입력) */
     private String detailAddress;
-
-    // 일반 회원 정보 등록
-    public SignUpDto(String email, String memberName, String password, String phone, String zipCode, String city, String detailAddress) {
-        this.email = email;
-        this.memberName = memberName;
-        this.password = password;
-        this.phone = phone;
-        this.zipCode = zipCode;
-        this.city = city;
-        this.detailAddress = detailAddress;
-    }
-
-    // 소셜 회원 정보 등록
-    public SignUpDto(String email, String memberName, String phone, String zipCode, String city, String detailAddress) {
-        this.email = email;
-        this.memberName = memberName;
-        this.phone = phone;
-        this.zipCode = zipCode;
-        this.city = city;
-        this.detailAddress = detailAddress;
-    }
 }

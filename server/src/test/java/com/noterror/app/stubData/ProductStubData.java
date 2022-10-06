@@ -29,6 +29,7 @@ public class ProductStubData {
                 "카레라면",
                 3, 10000,
                 LocalDateTime.now(),
+                LocalDateTime.now(),
                 "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA",
                 "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
         );
@@ -43,10 +44,9 @@ public class ProductStubData {
                 .productId(1L)
                 .productName("카레라면")
                 .price(10000)
-                .quantity(3)
+                .stockQuantity(3)
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .signDate(LocalDateTime.now())
                 .build();
     }
 
@@ -59,10 +59,9 @@ public class ProductStubData {
                 .productId(2L)
                 .productName("옥수수식빵")
                 .price(2000)
-                .quantity(2)
+                .stockQuantity(2)
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
-                .signDate(LocalDateTime.now().plusDays(1))
                 .build();
     }
 

@@ -1,6 +1,7 @@
 package com.noterror.app.api.entity.order;
 
 import com.noterror.app.api.entity.member.Member;
+import com.noterror.app.api.global.audit.Auditable;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,32 +16,20 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "ORDERS")
-public class Orders {
+public class Orders extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orders_id")
     private Long ordersId;
 
-    @Column(name = "orders_date")
-    private LocalDateTime ordersDate;
-
-    /**
-     * 주문 상태
-     */
     @Enumerated(EnumType.STRING)
     @Column(name = "orders_status")
     private OrdersStatus ordersStatus = OrdersStatus.ORDER_REQUEST;
 
-    /**
-     * 회원과 다대일 매핑
-     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    /**
-     * 주문상세와 일대다 매핑
-     */
     @OneToMany(mappedBy = "orders")
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
@@ -57,11 +46,9 @@ public class Orders {
         Orders order = new Orders();
         order.setMember(member);
         order.setOrdersStatus(OrdersStatus.ORDER_REQUEST);
-        order.setOrdersDate(LocalDateTime.now());
         for(OrderProduct orderProduct : orderProductList) {
             order.addOrderProduct(orderProduct);
         }
-
         return order;
     }
 
