@@ -10,7 +10,7 @@ const InfoTemplate = ({ zipcode, address, setZipcode, setAddress, signUp }) => {
     <CenterBox height="70vh">
       <Styled.InnerBox>
         <form onSubmit={e => signUp(e)}>
-          <Styled.Title>추가정보입력</Styled.Title>
+          <Styled.Title>회원가입</Styled.Title>
 
           <Styled.InputContainer>
             <p>이름</p>

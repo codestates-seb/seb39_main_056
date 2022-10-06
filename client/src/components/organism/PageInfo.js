@@ -10,7 +10,7 @@ const Container = styled.div`
 const PageInfo = () => {
   return (
     <Container>
-      <H2> 현재 페이지의 제품을 보여줍니다. </H2>
+      <H2> 전체 상품을 보여줍니다. </H2>
     </Container>
   );
 };

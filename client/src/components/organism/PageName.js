@@ -9,7 +9,7 @@ const Wrap = styled.div`
 const PageName = () => {
   return (
     <Wrap>
-      <H1>현재 품목</H1>
+      <H1>All Proucts</H1>
     </Wrap>
   );
 };
