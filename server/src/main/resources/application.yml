@@ -1,4 +1,7 @@
-spring :
+spring:
+  profiles:
+    include: auth
+
   h2:
     console:
       enabled: true
@@ -9,11 +12,16 @@ spring :
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
-    show-sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      data-locations: classpath*:db/h2/data.sql
 
 logging:
   level:
@@ -21,8 +29,3 @@ logging:
       springframework:
         orm:
           jpa: DEBUG
-
-server:
-  port:
-    9050
-
