@@ -6,12 +6,15 @@ import BodyContainer from './components/atom/BodyContainer';
 import MainPage from './components/pages/MainPage';
 import Type from './components/pages/Type.js';
 import Login from './components/pages/Login';
-import Register from './components/pages/Register';
+import Signup from './components/pages/Signup';
 import Info from './components/pages/Info';
 import Header from './components/organism/Header';
+import Test from './components/templates/Type/Type';
 import ProductDetail from './components/pages/ProductDetail';
 import History from './components/pages/History';
 import Test from './components/templates/Type/Type';
+import Cart from './components/pages/Cart';
+
 function App() {
   return (
     <BodyContainer>
@@ -28,6 +31,7 @@ function App() {
           {/* <Route path="/signup" element={<Signup />} /> */}
           <Route path="/info" element={<Info />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </BodyContainer>

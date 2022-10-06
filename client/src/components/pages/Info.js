@@ -11,16 +11,14 @@ const Info = () => {
 
   const signUp = e => {
     e.preventDefault();
-    console.log(e.target[0].value);
     const userInfo = {
-      phoneNum: e.target[2].value,
-      // 상세주소가 없을경우 서버에 뒤에 빈 칸 하나 붙어서 감
-      zipcode: zipcode,
-      roadAddress: address,
-      // 상세주소
-      // 이름
-      // 이메일
-      // 등등
+      email: e.target[1].value,
+      memberName: e.target[0].value,
+      password: e.target[2].value,
+      phone: e.target[3].value,
+      zipCode: zipcode,
+      city: address,
+      detailAddress: e.target[7].value,
     };
 
     axios({
@@ -41,23 +39,22 @@ const Info = () => {
     if (zipcode === '' || address === '' || userInfo.phoneNum === '') {
       alert('빈칸을 채워주세요!');
     } else {
-      axios
-        .post(
-          `${process.env.REACT_APP_API_URL}/api/auth/google`,
-          {
-            userInfo,
-          },
-          {
-            Accept: 'application/json',
-            'Content-type': 'application/json',
-            withCredentials: true,
-          },
-        )
+      axios({
+        method: 'post',
+        url: `http://192.168.5.67:8080/members/sign-up`,
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+        },
+        data: JSON.stringify(userInfo),
+        // withCredentials: true,
+      })
         .then(res => {
-          if (res.ok) {
+          if (res.status === 201) {
             navigate('/type');
           }
-        });
+        })
+        .catch(e => alert(e));
     }
   };
 
