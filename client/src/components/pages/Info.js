@@ -23,41 +23,23 @@ const Info = () => {
       // 등등
     };
 
-    axios({
-      method: 'post',
-      url: `${process.env.REACT_APP_URL}`,
-      headers: {
-        Accept: 'application/type',
-        'Content-type': 'application/type',
-      },
-      data: JSON.stringify(userInfo),
-      // withCredentials: true,
-    }).then(res => {
-      if (res.statusText === 'OK') {
-        navigate('/type');
-      }
-    });
-
     if (zipcode === '' || address === '' || userInfo.phoneNum === '') {
       alert('빈칸을 채워주세요!');
     } else {
-      axios
-        .post(
-          `${process.env.REACT_APP_API_URL}/api/auth/google`,
-          {
-            userInfo,
-          },
-          {
-            Accept: 'application/json',
-            'Content-type': 'application/json',
-            withCredentials: true,
-          },
-        )
-        .then(res => {
-          if (res.ok) {
-            navigate('/type');
-          }
-        });
+      axios({
+        method: 'post',
+        url: `http://192.168.5.122:8080/members/sign-up`,
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+        },
+        data: JSON.stringify(userInfo),
+        // withCredentials: true,
+      }).then(res => {
+        if (res.status === 201) {
+          navigate(`/type/${res.data.memberId}`);
+        }
+      });
     }
   };
 
