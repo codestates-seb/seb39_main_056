@@ -1,7 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.7.3'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-    id 'org.asciidoctor.convert' version '1.5.8'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
     id 'java'
 }
 
@@ -13,6 +13,7 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    asciidoctorExtensions
 }
 
 repositories {
@@ -20,7 +21,11 @@ repositories {
 }
 
 ext {
-    set('snippetsDir', file("build/generated-snippets"))
+    snippetsDir = file('build/generated-snippets')
+}
+
+configurations {
+    asciidoctorExtensions
 }
 
 dependencies {
@@ -32,8 +37,10 @@ dependencies {
 
     //Spring web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.projectlombok:lombok:1.18.20'
 
     //lombok
+    implementation 'org.projectlombok:lombok:1.18.20'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
@@ -42,9 +49,24 @@ dependencies {
 
     //test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    //Security& OAuth2 & JWT
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
     //rest docs
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    implementation 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    implementation 'com.google.code.gson:gson'
+
+    //mapstruct
+    // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+    implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
 }
 
 tasks.named('test') {
@@ -53,6 +75,25 @@ tasks.named('test') {
 }
 
 tasks.named('asciidoctor') {
+    configurations "asciidoctorExtensions"
     inputs.dir snippetsDir
     dependsOn test
+}
+
+task copyDocument(type: Copy) {
+    dependsOn asciidoctor
+    println "asciidoctor output: ${asciidoctor.outputDir}"
+    from file("${asciidoctor.outputDir}")
+    into file("src/main/resources/static/docs")
+}
+
+build {
+    dependsOn copyDocument
+}
+
+bootJar {
+    dependsOn copyDocument
+    from ("${asciidoctor.outputDir}") {
+        into 'static/docs'
+    }
 }

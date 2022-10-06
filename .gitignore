@@ -34,3 +34,7 @@ HELP.md
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+### NPM ###
+server/src/main/resources/static/node_modules
+server/src/main/resources/static/node

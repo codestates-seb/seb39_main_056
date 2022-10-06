@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import GoogleBtn from '../organism/GoogleBtn';
 import { postLoginToken } from '../../hooks/postLoginToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoginChange } from '../../actions';
 import { useNavigate } from 'react-router-dom';
+import Index from '../templates/Login/Login';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,12 +20,7 @@ const Login = () => {
     navigate('/');
   }, [loginState]);
 
-  return (
-    <div>
-      <h1>로그인</h1>
-      <GoogleBtn onGoogleSignIn={onGoogleSign} text="signin_with"></GoogleBtn>
-    </div>
-  );
+  return <Index />;
 };
 
 export default Login;
