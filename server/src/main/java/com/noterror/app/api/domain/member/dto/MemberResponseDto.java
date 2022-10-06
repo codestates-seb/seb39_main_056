@@ -18,7 +18,8 @@ public class MemberResponseDto {
     private String city;
     private String detailAddress;
     private String vegetarianType;
-    private LocalDateTime signDate;
+    private LocalDateTime createDate;
+    private LocalDateTime editDate;
 
     public MemberResponseDto(Member member) {
         this.memberName = member.getMemberName();
@@ -28,6 +29,7 @@ public class MemberResponseDto {
         this.city = member.getAddress().getCity();
         this.detailAddress = member.getAddress().getDetailAddress();
         this.vegetarianType = member.getVegetarianType().getVegetarianTypeName();
-        this.signDate = member.getSignDate();
+        this.createDate = member.getCreateDate();
+        this.editDate = member.getEditDate();
     }
 }

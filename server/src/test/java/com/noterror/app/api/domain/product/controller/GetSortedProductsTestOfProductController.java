@@ -39,7 +39,7 @@ public class GetSortedProductsTestOfProductController {
                 = Product.builder()
                 .productName("카레라면")
                 .price(10000)
-                .quantity(3)
+                .stockQuantity(3)
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();
@@ -52,7 +52,7 @@ public class GetSortedProductsTestOfProductController {
                 = Product.builder()
                 .productName("옥수수식빵")
                 .price(2000)
-                .quantity(2)
+                .stockQuantity(2)
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();
@@ -65,7 +65,7 @@ public class GetSortedProductsTestOfProductController {
                 = Product.builder()
                 .productName("가지돈까스")
                 .price(500)
-                .quantity(7)
+                .stockQuantity(7)
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();

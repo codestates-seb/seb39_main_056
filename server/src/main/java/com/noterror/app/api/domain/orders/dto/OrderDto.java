@@ -13,5 +13,5 @@ import lombok.*;
 public class OrderDto {
     private Long productId;
 
-    private int quantity;
+    private int ordersQuantity;
 }

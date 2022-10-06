@@ -2,14 +2,13 @@
 package com.noterror.app.api.entity.member;
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
-import com.noterror.app.api.entity.Cart;
+import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.VegetarianType;
-import com.noterror.app.api.entity.member.Address;
+import com.noterror.app.api.global.audit.Auditable;
 import lombok.*;
 
 import javax.persistence.*;
 import java.security.Principal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Getter @Setter
-public class Member implements Principal {
+public class Member extends Auditable implements Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
@@ -40,26 +39,22 @@ public class Member implements Principal {
     @OneToOne(mappedBy = "member")
     private Cart cart;
 
-    public void addCart(Cart cart) {
-        this.cart = cart;
-    }
     @OneToOne
     @JoinColumn(name = "vegetarian_type_name")
     private VegetarianType vegetarianType;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+
+    //== BUSINESS LOGIC ==//
+    public void addCart(Cart cart) {
+        this.cart = cart;
+    }
 
     public void setVegetarianType(VegetarianType vegetarianType) {
         this.vegetarianType = vegetarianType;
     }
 
-    @Column(nullable = true)
-    private LocalDateTime signDate = LocalDateTime.now();
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles = new ArrayList<>();
-
-    //== Constructor ==//
-
-    //== BUSINESS LOGIC ==//
     public void updateMemberInfo(UpdateInfoDto updateInfoDto, VegetarianType type) {
         this.phone = updateInfoDto.getPhone();
         this.address = new Address(
@@ -78,8 +73,7 @@ public class Member implements Principal {
         this.address = new Address(
                 signUpDto.getZipCode(),
                 signUpDto.getCity(),
-                signUpDto.getDetailAddress()
-        );
+                signUpDto.getDetailAddress());
         this.roles = roles;
     }
 

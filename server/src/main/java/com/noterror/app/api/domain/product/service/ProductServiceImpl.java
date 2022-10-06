@@ -1,10 +1,9 @@
 package com.noterror.app.api.domain.product.service;
 
-import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
-import com.noterror.app.api.domain.product.mapper.ProductMapper;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
+import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.api.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final ProductMapper mapper;
 
     @Override
     @Transactional(readOnly = true)
     public ProductResponseDto findProduct(Long productId) {
-        return mapper.productToProductResponseDto(findExistProduct(productId));
+        Product findProduct = findExistProduct(productId);
+        return new ProductResponseDto(findProduct);
     }
 
     @Override
@@ -39,29 +38,20 @@ public class ProductServiceImpl implements ProductService {
                 PageRequest.of(page, size, Sort.by(sort).descending()));
     }
 
-    private boolean isAscending(String orderBy) {
-        return orderBy.equals("asc");
-    }
-
     @Override
     public ProductResponseDto createProduct(ProductRequestDto productRequestDto) {
-
-        Product mappingProduct = mapper.productRequestDtoToProduct(productRequestDto);
-        Product newProduct = productRepository.save(mappingProduct);
-        ProductResponseDto result = mapper.productToProductResponseDto(newProduct);
-
-        return result;
+        Product product = new Product();
+        product.registProduct(productRequestDto);
+        Product newProduct = productRepository.save(product);
+        return new ProductResponseDto(newProduct);
     }
 
     @Override
-    // @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE) - 공부
     public ProductResponseDto updateProduct(Long productId, ProductRequestDto productRequestDto) {
-
         Product findProduct = findExistProduct(productId);
         findProduct.updateProductInfo(productRequestDto);
         Product updatedProduct = productRepository.save(findProduct);
-
-        return mapper.productToProductResponseDto(updatedProduct);
+        return new ProductResponseDto(updatedProduct);
     }
 
     @Override
@@ -73,5 +63,9 @@ public class ProductServiceImpl implements ProductService {
     public Product findExistProduct(Long productId) {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.PRODUCT_NOT_FOUND));
+    }
+
+    private boolean isAscending(String orderBy) {
+        return orderBy.equals("asc");
     }
 }

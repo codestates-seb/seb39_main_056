@@ -14,8 +14,8 @@ import java.util.List;
 public class OrderResponseDto {
     private Long ordersId;
     private OrdersStatus ordersStatus;
-    private LocalDateTime ordersDate;
     private int totalPrice;
+    private LocalDateTime orderDate;
     private List<OrderProductDto> orderProductList = new ArrayList<>();
 }
 

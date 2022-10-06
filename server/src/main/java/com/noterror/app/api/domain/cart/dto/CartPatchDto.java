@@ -16,8 +16,7 @@ import javax.validation.constraints.NotNull;
 public class CartPatchDto {
     @NotNull
     private Long cartDetailId;
-
     @Min(1)
-    private int count;
+    private int purchaseQuantity;
 
 }

@@ -1,5 +1,6 @@
-package com.noterror.app.api.entity;
+package com.noterror.app.api.entity.cart;
 
+import com.noterror.app.api.entity.Product;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,39 +18,38 @@ public class CartDetail {
     @Column(name = "cart_detail_id")
     private Long cartDetailId; // CART_DETAIL_ID
 
-    private int count;
+    private int purchaseQuantity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    public void getCart(Cart cart) {
-        this.cart = cart;
-    }
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
+    //== BUSINESS LOGIC ==//
+    public void getCart(Cart cart) {
+        this.cart = cart;
+    }
+
     public void getProduct(Product product) {
         this.product = product;
+    }
+
+    public void addPurchaseQuantity(int purchaseQuantity){
+        this.purchaseQuantity += purchaseQuantity;
+    }
+
+    public void updatePurchaseQuantity(int purchaseQuntity) {
+        this.purchaseQuantity = purchaseQuntity;
     }
 
     public static CartDetail createCartDetail(Cart cart, Product product, int count){
         CartDetail cartDetail = new CartDetail();
         cartDetail.setCart(cart);
         cartDetail.setProduct(product);
-        cartDetail.setCount(count);
-
+        cartDetail.setPurchaseQuantity(count);
         return cartDetail;
-    }
-
-    //장바구니에 상품 수량 추가
-    public void addCount(int count){
-        this.count += count;
-    }
-
-    //장바구니에 담을 수량 변경
-    public void updateCount(int count) {
-        this.count = count;
     }
 }
