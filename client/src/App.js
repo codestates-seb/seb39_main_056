@@ -11,26 +11,26 @@ import Info from './components/pages/Info';
 import Header from './components/organism/Header';
 import ProductDetail from './components/pages/ProductDetail';
 import History from './components/pages/History';
+import Test from './components/templates/Type/Type';
 function App() {
   return (
-    <div>
-      <GlobalStyles />
-      <BrowserRouter>
-        <BodyContainer>
-          <Header />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/mypage/:id" element={<Mypage />} />
-            <Route path="/mypage/:id/history" element={<History />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="type/" element={<Type />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/info" element={<Info />} />
-          </Routes>
-        </BodyContainer>
-      </BrowserRouter>
-    </div>
+    <BodyContainer>
+    <GlobalStyles />
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/mypage/:id" element={<Mypage />} />
+        <Route path="/mypage/:id/history" element={<History />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/type" element={<Type />} />
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/signup" element={<Signup />} /> */}
+        <Route path="/info" element={<Info />} />
+        <Route path="/test" element={<Test />} />
+      </Routes>
+    </BrowserRouter>
+  </BodyContainer>
   );
 }
 

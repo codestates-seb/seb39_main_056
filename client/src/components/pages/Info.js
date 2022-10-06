@@ -1,35 +1,17 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import Address from '../organism/Address';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StyledInput from '../organism/StyledInput';
-import InfoBox from '../templates/InfoBox';
-import InputContainer from '../organism/InputContainer';
+import InfoTemplate from '../templates/Info/Info';
 
 const Info = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/oauth/user/info`, {
-        headers: {
-          withCredentials: true,
-        },
-      })
-      .then(data => console.log(data));
-  }, []);
-  // .then(data => {
-  // reponse 오면
-  // id랑 email 뽑아내서
-  // 변수 할당 후, input에 value값으로 넣어줄 것
-  // const id =
-  // });
-
   const [zipcode, setZipcode] = useState('');
   const [address, setAddress] = useState('');
 
+  const navigate = useNavigate();
+
   const signUp = e => {
     e.preventDefault();
-
+    console.log(e.target[0].value);
     const userInfo = {
       phoneNum: e.target[2].value,
       // 상세주소가 없을경우 서버에 뒤에 빈 칸 하나 붙어서 감
@@ -41,17 +23,22 @@ const Info = () => {
       // 등등
     };
 
-    axios.post(
-      `${process.env.REACT_APP}backendURL`,
-      {
-        userInfo,
+    axios({
+      method: 'post',
+      url: `${process.env.REACT_APP_URL}`,
+      headers: {
+        Accept: 'application/type',
+        'Content-type': 'application/type',
       },
-      {
-        withCredentials: true,
-      },
-    );
+      data: JSON.stringify(userInfo),
+      // withCredentials: true,
+    }).then(res => {
+      if (res.statusText === 'OK') {
+        navigate('/type');
+      }
+    });
 
-    if (zipcode === '' || address === '') {
+    if (zipcode === '' || address === '' || userInfo.phoneNum === '') {
       alert('빈칸을 채워주세요!');
     } else {
       axios
@@ -75,39 +62,13 @@ const Info = () => {
   };
 
   return (
-    <InfoBox>
-      <form onSubmit={e => signUp(e)}>
-        <h1>추가정보입력</h1>
-
-        <InputContainer>
-          <p>이름 &nbsp; &nbsp;</p>
-          <StyledInput disabled />
-        </InputContainer>
-        <InputContainer>
-          <p>이메일</p>
-          <StyledInput disabled />
-        </InputContainer>
-        <InputContainer>
-          <p>핸드폰 번호</p>
-          <StyledInput
-            type="tel"
-            pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-            maxLength="13"
-            placeholder="***-****-**** 형태로 입력"
-          ></StyledInput>
-        </InputContainer>
-        <InputContainer>
-          <p>주소</p>
-          <Address
-            zipcode={zipcode}
-            address={address}
-            setZipcode={setZipcode}
-            setAddress={setAddress}
-          />
-        </InputContainer>
-        <button>등록하기</button>
-      </form>
-    </InfoBox>
+    <InfoTemplate
+      zipcode={zipcode}
+      setZipcode={setZipcode}
+      address={address}
+      setAddress={setAddress}
+      signUp={signUp}
+    />
   );
 };
 
