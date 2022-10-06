@@ -35,7 +35,7 @@ const Test = ({ explanation }) => {
   const decideType = () => {
     axios({
       method: 'post',
-      url: `http://192.168.5.67:8080/members/sign-up/type/1`,
+      url: `${process.env.REACT_APP_URL}${backEndPoint}`,
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/json',
@@ -46,7 +46,7 @@ const Test = ({ explanation }) => {
       withCredentials: true,
     })
       .then(res => {
-        console.log('it works!');
+        // console.log('it works!');
         if (res.status === 200) {
           navigate('/');
         }

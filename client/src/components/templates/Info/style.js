@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import MainColorBtn from '../../atom/MainColorBtn';
 
 export const InnerBox = styled.div`
   top: 0;
@@ -19,4 +20,8 @@ export const Title = styled.div`
 
 export const InputContainer = styled.div`
   margin: 10px 0;
+`;
+
+export const SignUpBtn = styled(MainColorBtn)`
+  margin-top: 2rem;
 `;

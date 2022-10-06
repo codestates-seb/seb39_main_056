@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import CenterBox from '../../templates/CenterBox';
 import StyledInput from '../../atom/StyledInput';
 import MaincolorBtn from '../../atom/MainColorBtn';
-import axios from 'axios';
 import H1 from '../../atom/H1';
 import H3 from '../../atom/H3';
 import * as Styled from './Style';
@@ -25,29 +24,6 @@ const Index = () => {
     dispatch(setLoginChange(result));
   };
 
-  const login = e => {
-    axios({
-      method: 'post',
-      url: `http://192.168.5.67:8080/members/sign-up/type/1`,
-      headers: {
-        Accept: 'application/type',
-        'Content-type': 'application/type',
-      },
-      data: JSON.stringify({
-        email: e.target[0].value,
-        password: e.target[1].value,
-      }),
-      // withCredentials: true,
-    })
-      .then(res => {
-        console.log('it works!');
-        if (res.status === 200) {
-          navigate('/');
-        }
-      })
-      .catch(error => alert(error));
-  };
-
   useEffect(() => {
     if (!loginState) return;
     navigate('/');
@@ -58,7 +34,7 @@ const Index = () => {
       <Styled.InnerBox>
         <H1>로그인</H1>
         <Styled.LoginContainer>
-          <form onSubmit={e => login(e)}>
+          <form>
             <Styled.LoginInput
               type="email"
               placeholder="이메일"
