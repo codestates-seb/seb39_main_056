@@ -6,7 +6,7 @@ export const ProductPage = ({ productId, productData }) => {
   const [quantity, setQuantity] = useState(0);
   const token = localStorage.getItem('token');
 
-  const url = `${process.env.REACT_APP_API_URL}/orders`;
+  const url = `${process.env.REACT_APP_API_URL}/cart`;
   //장바구니에 담기 눌렀을때
   const BuyProduct = async () => {
     fetch(url, {
@@ -17,7 +17,7 @@ export const ProductPage = ({ productId, productData }) => {
       },
       body: JSON.stringify({
         productId,
-        quantity,
+        purchaseQuantity: quantity,
       }),
     }).then(response => console.log(response.json()));
   };
