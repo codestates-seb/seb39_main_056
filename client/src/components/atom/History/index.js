@@ -5,7 +5,7 @@ const OrderTable = ({ orderProductList }) => {
     <Styled.OrderContainer>
       <Styled.OrderName>이름 : {orderProductList.productName}</Styled.OrderName>
       <Styled.OrderQuntity>
-        수량 : {orderProductList.quantity}
+        수량 : {orderProductList.ordersQuantity}
       </Styled.OrderQuntity>
       <Styled.OrderPrice>
         가격 : ₩{orderProductList.productPrice}

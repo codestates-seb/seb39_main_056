@@ -4,6 +4,7 @@ jwt:
   key:
     secret: ${JWT_SECRET_KEY}
 
+
 mail:
   address:
     admin: admin056@gmail.com
