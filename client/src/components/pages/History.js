@@ -11,7 +11,7 @@ const History = () => {
       const data = await fetch(url, {
         method: 'GET',
         header: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       }).then(res => {
         if (!res.ok) throw new Error('No Response');
