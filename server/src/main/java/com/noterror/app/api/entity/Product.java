@@ -39,7 +39,6 @@ public class Product extends Auditable {
     @Lob
     @Basic(fetch = FetchType.EAGER)
     private String detailImage;
-
     @OneToMany(mappedBy = "product")
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
