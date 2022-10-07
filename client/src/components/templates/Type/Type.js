@@ -2,14 +2,14 @@ import axios from 'axios';
 import TypeTable from '../../organism/TypeTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { setVege } from '../../../actions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MainColorBtn from '../../atom/MainColorBtn';
 import * as Styled from './style';
 
 const Test = ({ explanation }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const backEndPoint = '';
+  const { id } = useParams();
   const vegeState = useSelector(state => state.vegeTypeReducer);
   const { name, ment, imgUrl } = explanation;
 
@@ -35,20 +35,19 @@ const Test = ({ explanation }) => {
   const decideType = () => {
     axios({
       method: 'post',
-      url: `${process.env.REACT_APP_URL}${backEndPoint}`,
+      url: `${process.env.REACT_APP_API_URL}/members/sign-up/type/${id}`,
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/json',
       },
       data: JSON.stringify({
-        vegeterianType: vegeState,
+        vegetarianType: vegeState,
       }),
-      withCredentials: true,
+      // withCredentials: true,
     })
       .then(res => {
-        // console.log('it works!');
         if (res.status === 200) {
-          navigate('/');
+          navigate('/login');
         }
       })
       .catch(error => alert(error));
