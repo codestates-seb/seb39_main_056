@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-//import { axios } from 'axios';
+import axios from 'axios';
 
 const Container = styled.table`
   margin: 20px;
@@ -51,10 +51,13 @@ const Mypage = () => {
   // 채식유형 저장하는 state
   const [selects, setSelect] = useState();
   // 회원정보에 따라 데이터 고정하는 get요청
+  //setInfo에 데이터 담아주면 됨
   const fetchData = () => {
-    fetch(`http://localhost:3001/user`)
-      .then(res => res.json())
-      .then(data => setInfo(data));
+    let url = `${process.env.REACt_APP_API_URL}/members/info`;
+    axios.get(url).then(res => console.log(res));
+    // fetch(`http://localhost:3001/user`)
+    //   .then(res => res.json())
+    //   .then(data => setInfo(data));
   };
   useEffect(() => {
     fetchData();
@@ -70,7 +73,7 @@ const Mypage = () => {
   //onSubmit함수는 버튼에 따라 함수를 분기
   const onSubmit = e => {
     e.preventDefault();
-    let url = 'http://localhost:3001/user';
+    let url = `http://localhost:3001/user`;
     if (a === 'updateBtn') {
       console.log('정보수정');
       //input에 있는 정보들을 가져온다.
@@ -134,9 +137,9 @@ const Mypage = () => {
         </thead>
         <tbody>
           <tr>
-            <Link to="/mypage/:id">
-              <Td>회원정보</Td>
-            </Link>
+            <Td>
+              <Link to="/mypage/:id">회원정보</Link>
+            </Td>
             <Td>회원이름</Td>
             <Td>
               <Input
@@ -147,9 +150,9 @@ const Mypage = () => {
           </tr>
 
           <tr>
-            <Link to="/order">
-              <Td>주문내역조회</Td>
-            </Link>
+            <Td>
+              <Link to="/order">주문내역조회</Link>
+            </Td>
             <Td>이메일</Td>
             <Td>
               <Input
