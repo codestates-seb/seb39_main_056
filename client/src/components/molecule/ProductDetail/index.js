@@ -6,7 +6,7 @@ export const ProductInfoContainer = ({
   setQuantity,
 }) => {
   const plusCount = () => {
-    if (quantity < productData?.quantity) setQuantity(prev => prev + 1);
+    if (quantity < productData?.stockQuantity) setQuantity(prev => prev + 1);
   };
   const minusCount = () => {
     if (quantity === 0) return;
@@ -15,7 +15,7 @@ export const ProductInfoContainer = ({
   return (
     <Styled.ProductInfoContainer>
       <Styled.ProductImgBox>
-        <Styled.ProductImg src={productData?.thumbnailImage} />
+        <Styled.ProductImg src={productData?.detailImage} />
       </Styled.ProductImgBox>
       <Styled.ProductDesc>
         <Styled.ProductTitle>{productData?.productName}</Styled.ProductTitle>
@@ -24,7 +24,7 @@ export const ProductInfoContainer = ({
             가격 : {productData?.price}원
           </Styled.ProductContent>
           <Styled.ProductContent>
-            재고수: {productData?.quantity}개
+            재고수: {productData?.stockQuantity}개
           </Styled.ProductContent>
           <Styled.ProductContent>
             수량: <button onClick={minusCount}>-</button>

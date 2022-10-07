@@ -11,6 +11,7 @@ const Info = () => {
 
   const signUp = e => {
     e.preventDefault();
+
     const userInfo = {
       email: e.target[1].value,
       memberName: e.target[0].value,
@@ -21,40 +22,23 @@ const Info = () => {
       detailAddress: e.target[7].value,
     };
 
-    axios({
-      method: 'post',
-      url: `${process.env.REACT_APP_URL}`,
-      headers: {
-        Accept: 'application/type',
-        'Content-type': 'application/type',
-      },
-      data: JSON.stringify(userInfo),
-      // withCredentials: true,
-    }).then(res => {
-      if (res.statusText === 'OK') {
-        navigate('/type');
-      }
-    });
-
     if (zipcode === '' || address === '' || userInfo.phoneNum === '') {
       alert('빈칸을 채워주세요!');
     } else {
       axios({
         method: 'post',
-        url: `http://192.168.5.67:8080/members/sign-up`,
+        url: `${process.env.REACT_APP_API_URL}/members/sign-up`,
         headers: {
-          Accept: 'application/json',
-          'Content-type': 'application/json',
+          Accept: 'application/type',
+          'Content-type': 'application/type',
         },
         data: JSON.stringify(userInfo),
         // withCredentials: true,
-      })
-        .then(res => {
-          if (res.status === 201) {
-            navigate('/type');
-          }
-        })
-        .catch(e => alert(e));
+      }).then(res => {
+        if (res.status === 201) {
+          navigate(`/type/${res.data.memberId}`);
+        }
+      });
     }
   };
 

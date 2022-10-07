@@ -1,6 +1,5 @@
 import * as Styled from './style';
 import OrderTable from '../../atom/History/index';
-import BorderBotom from './style';
 
 export const UserHistoryContainer = ({ HistoryData }) => {
   return (

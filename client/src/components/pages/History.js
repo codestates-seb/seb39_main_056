@@ -3,14 +3,13 @@ import { UserHistory } from '../organism/History/index';
 
 const History = () => {
   const [productHistory, setProductHistory] = useState();
-  const token = localStorage.getItem('token');
-
+  const token = localStorage.getItem('JWT TOKEN');
   const getData = async () => {
     let url = `${process.env.REACT_APP_API_URL}/orders`;
     try {
       const data = await fetch(url, {
         method: 'GET',
-        header: {
+        headers: {
           Authorization: `Bearer ${token}`,
         },
       }).then(res => {
