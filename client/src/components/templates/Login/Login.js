@@ -29,7 +29,7 @@ const Index = () => {
 
     axios({
       method: 'post',
-      url: 'http://192.168.5.122:8080/auth/login',
+      url: `${process.env.REACT_APP_API_URL}/auth/login`,
       header: {
         Accept: 'application/json',
         'Content-type': 'application/json',

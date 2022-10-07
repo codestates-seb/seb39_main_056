@@ -13,14 +13,14 @@ import lombok.*;
 public class OrderProductDto {
     private Long productId;
     private String productName;
-    private int quantity;
+    private int ordersQuantity;
 
     private int productPrice;
 
     public OrderProductDto(OrderProduct orderProduct){
         this.productId = orderProduct.getProduct().getProductId();
         this.productName = orderProduct.getProduct().getProductName();
-        this.quantity = orderProduct.getQuantity();
+        this.ordersQuantity = orderProduct.getOrdersQuantity();
         this.productPrice = orderProduct.getProduct().getPrice();
 
     }

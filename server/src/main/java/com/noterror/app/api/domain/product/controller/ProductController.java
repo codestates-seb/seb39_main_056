@@ -22,7 +22,7 @@ import java.util.List;
  * 담당자 : 강시혁, 황윤준
  * SCOPE : 제품 조회
  * 리팩토링 : 강시혁
- * 대상 : PRODCUT
+ * 대상 : PRODUCTS
  */
 @RestController
 @CrossOrigin
@@ -40,8 +40,7 @@ public class ProductController {
      * @param : productId
      */
     @GetMapping("/detail/{product-id}")
-    public ResponseEntity getProduct(@PathVariable("product-id") Long productId,
-                                     @RequestParam(required = false, defaultValue = "플렉시테리언", value = "vegeTypeName") String vegeTypeName) {
+    public ResponseEntity getProduct(@PathVariable("product-id") Long productId) {
 
         ProductResponseDto response = productService.findProduct(productId);
 
@@ -58,13 +57,12 @@ public class ProductController {
                                       @RequestParam(required = false, defaultValue = "20") int size,
                                       @RequestParam(required = false, defaultValue = "signDate") String sort,
                                       @RequestParam(required = false, defaultValue = "desc") String orderBy,
-                                      @RequestParam(required = false, defaultValue = "플렉시테리언", value = "vegeTypeName") String vegeTypeName
-                                    )
+                                      @RequestParam(required = false, defaultValue = "플렉시테리언", value = "vegetarianTypeName") String vegetarianTypeName)
         {
         Page<Product> productInPage =
                 productService.findProductsWithPageAndSort(page-1,size,sort,orderBy);
         List<Product> productsInList = productInPage.getContent();
-        List<VegetarianTypeResponseDto> findVegeTypes = vegetarianTypeService.getVegetarianType(vegeTypeName);
+        List<VegetarianTypeResponseDto> findVegeTypes = vegetarianTypeService.getVegetarianType(vegetarianTypeName);
 
         Sort sortInfo = new Sort(sort, orderBy);
 

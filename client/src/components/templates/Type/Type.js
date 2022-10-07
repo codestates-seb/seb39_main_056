@@ -35,11 +35,10 @@ const Test = ({ explanation }) => {
   const decideType = () => {
     axios({
       method: 'post',
-      url: `http://192.168.5.122:8080/members/sign-up/type/${id}`,
+      url: `${process.env.REACT_APP_API_URL}/members/sign-up/type/${id}`,
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/json',
-        // Origin: 'http://192.168.5.122:8080',
       },
       data: JSON.stringify({
         vegetarianType: vegeState,
@@ -47,7 +46,6 @@ const Test = ({ explanation }) => {
       // withCredentials: true,
     })
       .then(res => {
-        console.log('it works!');
         if (res.status === 200) {
           navigate('/login');
         }

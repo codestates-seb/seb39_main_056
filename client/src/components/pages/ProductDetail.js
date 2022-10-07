@@ -6,7 +6,7 @@ const ProductDetail = () => {
   const [productData, setProductData] = useState();
   const { id } = useParams();
   const getData = async () => {
-    let url = `${process.env.REACT_APP_API_URL}/detail/${id}`;
+    let url = `${process.env.REACT_APP_API_URL}/products/detail/${id}`;
 
     try {
       const data = await fetch(url).then(res => {

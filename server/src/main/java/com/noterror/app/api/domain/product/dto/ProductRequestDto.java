@@ -20,7 +20,7 @@ public class ProductRequestDto {
 
     @Min(1)
     @Positive
-    private int quantity;
+    private int StockQuantity;
 
     @Min(100)
     @Positive
@@ -31,4 +31,7 @@ public class ProductRequestDto {
 
     @NotBlank(message = "상세 설명 이미지를 첨부해주세요.")
     private  String detailImage;
+
+    @NotBlank(message = "제품의 채식 유형을 선택해주세요.")
+    String vegetarianType;
 }
