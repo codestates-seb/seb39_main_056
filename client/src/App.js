@@ -6,7 +6,7 @@ import BodyContainer from './components/atom/BodyContainer';
 import MainPage from './components/pages/MainPage';
 import Type from './components/pages/Type.js';
 import Login from './components/pages/Login';
-import Signup from './components/pages/Signup';
+// import Signup from './components/pages/Signup';
 import Info from './components/pages/Info';
 import Header from './components/organism/Header';
 import Test from './components/templates/Type/Type';
