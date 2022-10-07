@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import loginReducer from './loginReducer';
-import vegetTypeReducer from './vegeTypeReducer';
+import vegeTypeReducer from './vegeTypeReducer';
+import cartReducer from './cartReducer';
 
 const rootReducer = combineReducers({
   loginReducer,
-  vegetTypeReducer,
+  vegeTypeReducer,
+  cartReducer,
 });
 
 export default rootReducer;
