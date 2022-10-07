@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { setTokenHeader } from '../../service/setTokenHeader';
 
 const Container = styled.table`
   margin: 20px;
@@ -46,6 +47,7 @@ const Select = styled.select`
   height: 40px;
 `;
 const Mypage = () => {
+  const token = setTokenHeader();
   // 맨처음 가져오는 GET 정보 저장된 state
   const [info, setInfo] = useState('');
   // 채식유형 저장하는 state
@@ -53,8 +55,8 @@ const Mypage = () => {
   // 회원정보에 따라 데이터 고정하는 get요청
   //setInfo에 데이터 담아주면 됨
   const fetchData = () => {
-    let url = `${process.env.REACt_APP_API_URL}/members/info`;
-    axios.get(url).then(res => console.log(res));
+    let url = `${process.env.REACT_APP_API_URL}/members/info`;
+    axios.get(url, { header: { ...token } }).then(res => console.log(res));
     // fetch(`http://localhost:3001/user`)
     //   .then(res => res.json())
     //   .then(data => setInfo(data));
@@ -138,7 +140,7 @@ const Mypage = () => {
         <tbody>
           <tr>
             <Td>
-              <Link to="/mypage/:id">회원정보</Link>
+              <Link to="/mypage">회원정보</Link>
             </Td>
             <Td>회원이름</Td>
             <Td>

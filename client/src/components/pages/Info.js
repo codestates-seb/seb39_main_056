@@ -29,8 +29,8 @@ const Info = () => {
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/members/sign-up`,
         headers: {
-          Accept: 'application/type',
-          'Content-type': 'application/type',
+          Accept: 'application/json',
+          'Content-type': 'application/json',
         },
         data: JSON.stringify(userInfo),
         // withCredentials: true,
