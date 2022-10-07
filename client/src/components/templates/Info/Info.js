@@ -2,15 +2,14 @@ import React from 'react';
 import Address from '../../organism/Address';
 import StyledInput from '../../atom/StyledInput';
 import CenterBox from '../../templates/CenterBox';
-import MainColorBtn from '../../atom/MainColorBtn';
 import * as Styled from './style';
 
 const InfoTemplate = ({ zipcode, address, setZipcode, setAddress, signUp }) => {
   return (
-    <CenterBox>
+    <CenterBox height="70vh">
       <Styled.InnerBox>
         <form onSubmit={e => signUp(e)}>
-          <Styled.Title>추가정보입력</Styled.Title>
+          <Styled.Title>회원가입</Styled.Title>
 
           <Styled.InputContainer>
             <p>이름</p>
@@ -30,11 +29,11 @@ const InfoTemplate = ({ zipcode, address, setZipcode, setAddress, signUp }) => {
               type="tel"
               pattern="[0-9]{3}[0-9]{4}[0-9]{4}"
               maxLength="11"
-              placeholder="- 뺴고 번호만 입력해주세요"
+              placeholder="- 빼고 번호만 입력해주세요"
             ></StyledInput>
           </Styled.InputContainer>
           <Styled.InputContainer>
-            <p>주소</p>
+            <div>주소</div>
             <Address
               zipcode={zipcode}
               address={address}
@@ -42,7 +41,7 @@ const InfoTemplate = ({ zipcode, address, setZipcode, setAddress, signUp }) => {
               setAddress={setAddress}
             />
           </Styled.InputContainer>
-          <MainColorBtn>등록하기</MainColorBtn>
+          <Styled.SignUpBtn>등록하기</Styled.SignUpBtn>
         </form>
       </Styled.InnerBox>
     </CenterBox>

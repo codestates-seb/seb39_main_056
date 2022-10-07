@@ -9,16 +9,21 @@ const Container = styled.div`
   margin: 10px;
   cursor: pointer;
   transition: all 0.2s linear;
+  text-decoration: none;
   :hover {
     transform: scale(1.1);
   }
-  text-decoration: none;
 `;
 const Img = styled.img`
   width: 210px;
   margin: 0px auto;
   height: 210px;
   border-radius: 10px;
+`;
+
+const Text = styled.text`
+  text-decoration: none;
+  text-align: center;
 `;
 
 const FoodCard = ({ card }) => {
@@ -29,8 +34,12 @@ const FoodCard = ({ card }) => {
     <Link to="/product/:id">
       <Container>
         <Img src={card?.thumbnailImage} />
-        <H2 style={style}>{card?.productName}</H2>
-        <H3>{card?.price}원</H3>
+        <Text>
+          <H2 style={style}>{card?.productName}</H2>
+        </Text>
+        <Text>
+          <H3>{card?.price}원</H3>
+        </Text>
       </Container>
     </Link>
   );

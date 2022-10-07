@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const CenterBox = styled.div`
   min-width: 450px;
   width: ${props => props.width || '40vw'};
-  height: 60vh;
+  height: ${props => props.height || '60vh'};
   background-color: #f6f9fc;
   margin: 0 auto;
   padding: 5vh;
