@@ -22,7 +22,6 @@ axios.defaults.withCredentials = true;
 function App() {
   const dispatch = useDispatch();
   const tokenHeader = setTokenHeader();
-  console.log(tokenHeader);
 
   useEffect(() => {
     axios({
@@ -47,7 +46,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/mypage/:id" element={<Mypage />} />
+          <Route path="/mypage" element={<Mypage />} />
           <Route path="/mypage/history" element={<History />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/type/:id" element={<Type />} />

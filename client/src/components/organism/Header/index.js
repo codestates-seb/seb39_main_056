@@ -12,6 +12,7 @@ const HeaderComponent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const logoutButton = () => {
+    localStorage.removeItem('JWT TOKEN');
     dispatch(setLoginChange(false));
     navigate('/');
   };
@@ -37,12 +38,24 @@ const HeaderComponent = () => {
             <Styled.TextLink>로그인 </Styled.TextLink>
           </Link>
         )}
-        <Link to="/resister">
-          <Styled.TextLink>회원가입</Styled.TextLink>
-        </Link>
-        <Link to="/cart">
-          <Styled.TextLink>장바구니</Styled.TextLink>
-        </Link>
+        {loginState ? (
+          <Link to="/mypage">
+            <Styled.TextLink>마이페이지</Styled.TextLink>
+          </Link>
+        ) : (
+          <Link to="/signup">
+            <Styled.TextLink>회원가입</Styled.TextLink>
+          </Link>
+        )}
+        {loginState ? (
+          <Link to="/cart">
+            <Styled.TextLink>장바구니</Styled.TextLink>
+          </Link>
+        ) : (
+          <Link to="/login">
+            <Styled.TextLink>장바구니</Styled.TextLink>
+          </Link>
+        )}
       </Styled.ButtonContainer>
     </Styled.HeaderContainer>
   );

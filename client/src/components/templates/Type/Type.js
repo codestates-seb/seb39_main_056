@@ -44,13 +44,15 @@ const Test = ({ explanation }) => {
         vegetarianType: vegeState,
       }),
       // withCredentials: true,
-    })
-      .then(res => {
-        if (res.status === 200) {
-          navigate('/login');
-        }
-      })
-      .catch(error => alert(error));
+    }).then(res => {
+      if (res.status === 200) {
+        alert(
+          `${vegeState}를 선택한 ${res.data.member.memberName}님. 가입을 축하드립니다.`,
+        );
+        navigate('/login');
+      }
+    });
+    // .catch(error => alert(error));
   };
 
   return (

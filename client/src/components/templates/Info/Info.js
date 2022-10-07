@@ -2,7 +2,6 @@ import React from 'react';
 import Address from '../../organism/Address';
 import StyledInput from '../../atom/StyledInput';
 import CenterBox from '../../templates/CenterBox';
-import MainColorBtn from '../../atom/MainColorBtn';
 import * as Styled from './style';
 
 const InfoTemplate = ({ zipcode, address, setZipcode, setAddress, signUp }) => {

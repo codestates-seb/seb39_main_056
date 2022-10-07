@@ -11,7 +11,7 @@ const Info = () => {
 
   const signUp = e => {
     e.preventDefault();
-
+    // console.log(e.target[7].value);
     const userInfo = {
       email: e.target[1].value,
       memberName: e.target[0].value,
@@ -29,8 +29,8 @@ const Info = () => {
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/members/sign-up`,
         headers: {
-          Accept: 'application/type',
-          'Content-type': 'application/type',
+          Accept: 'application/json',
+          'Content-type': 'application/json',
         },
         data: JSON.stringify(userInfo),
         // withCredentials: true,
