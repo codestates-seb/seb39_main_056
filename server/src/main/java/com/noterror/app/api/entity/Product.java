@@ -43,7 +43,7 @@ public class Product extends Auditable {
     @OneToMany(mappedBy = "product")
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vegetarian_type_name")
     private VegetarianType vegetarianType;
 
@@ -64,6 +64,7 @@ public class Product extends Auditable {
         this.price = productRequestDto.getPrice();
         this.thumbnailImage = productRequestDto.getThumbnailImage();
         this.detailImage = productRequestDto.getDetailImage();
+        this.vegetarianType = productRequestDto.getVegetarianType();
     }
 
     public void updateProductInfo(ProductRequestDto productPatchDto) {
@@ -72,6 +73,7 @@ public class Product extends Auditable {
         this.price = productPatchDto.getPrice();
         this.thumbnailImage = productPatchDto.getThumbnailImage();
         this.detailImage = productPatchDto.getDetailImage();
+        this.vegetarianType = productPatchDto.getVegetarianType();
     }
 
     public void removeStock(int quantity) {

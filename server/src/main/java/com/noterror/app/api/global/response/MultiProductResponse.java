@@ -15,7 +15,7 @@ public class MultiProductResponse<T> {
 
     private List<T> vegeTypeList;
 
-    public MultiProductResponse(List<T> products, Page page, Sort sort, List<T> vegeTypeList) {
+    public MultiProductResponse(List<T> products, Page page, Sort sort) {
         this.products = products;
         this.pageInfo = new PageInfo(
                 page.getNumber() + 1,

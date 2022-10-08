@@ -1,6 +1,7 @@
 package com.noterror.app.api.domain.product.dto;
 
 import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.VegetarianType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ public class ProductResponseDto {
     private LocalDateTime editDate;
     private String thumbnailImage;
     private String detailImage;
-    private String vegetarianType;
+    private VegetarianType vegetarianType;
 
     public ProductResponseDto(Product product) {
         this.productId = product.getProductId();
@@ -28,6 +29,6 @@ public class ProductResponseDto {
         this.price = product.getPrice();
         this.createDate = product.getCreateDate();
         this.editDate = product.getEditDate();
-        this.vegetarianType = product.getVegetarianType().getVegetarianTypeName();
+        this.vegetarianType = product.getVegetarianType();
     }
 }

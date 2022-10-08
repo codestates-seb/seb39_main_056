@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.product.dto;
 
+import com.noterror.app.api.entity.VegetarianType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,5 +34,5 @@ public class ProductRequestDto {
     private  String detailImage;
 
     @NotBlank(message = "제품의 채식 유형을 선택해주세요.")
-    String vegetarianType;
+    private VegetarianType vegetarianType;
 }

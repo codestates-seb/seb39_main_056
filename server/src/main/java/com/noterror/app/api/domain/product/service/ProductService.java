@@ -25,7 +25,7 @@ public interface ProductService {
      * @param orderBy
      * @return Page
      */
-    Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy);
+    Page<Product> findProductsWithPageAndSortByVegetarianTypeName(int page, int size, String sort, String orderBy, String vegetarianTypeName);
 
     /**
      * @Method 제품 등록 기능

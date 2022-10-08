@@ -29,13 +29,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Product> findProductsWithPageAndSort(int page, int size, String sort, String orderBy) {
+    public Page<Product> findProductsWithPageAndSortByVegetarianTypeName(int page, int size, String sort, String orderBy, String vegetarianTypeName) {
 
         if (isAscending(orderBy)) {
             return productRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
         }
-        return productRepository.findAll(
-                PageRequest.of(page, size, Sort.by(sort).descending()));
+        return productRepository.findAllByVegetarianType(
+                PageRequest.of(page, size, Sort.by(sort).descending()), vegetarianTypeName);
     }
 
     @Override
