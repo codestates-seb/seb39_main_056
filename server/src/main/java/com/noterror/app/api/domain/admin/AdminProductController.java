@@ -29,32 +29,29 @@ import java.util.List;
 public class AdminProductController {
 
     private final ProductService productService;
-    private final VegetarianTypeService vegetarianTypeService;
 
     /**
      * 제품 등록
+     *
      * @RequestBody 제품명, 수량, 금액, 썸네일 이미지, 상세 이미지
      */
     @PostMapping("/registration")
     public ResponseEntity<ProductResponseDto> postProduct(@RequestBody ProductRequestDto productRequestDto) {
-
         ProductResponseDto response = productService.createProduct(productRequestDto);
-        List<VegetarianTypeResponseDto> findVegeTypes = vegetarianTypeService.getVegetarianType("프루테리언");
-
         return new ResponseEntity(
                 new SingleProductResponse(response), HttpStatus.CREATED);
     }
 
     /**
      * 제품 수정
+     *
      * @PathVariable 제품 식별자
      * @RequestBody 제품명, 수량, 금액, 썸네일 이미지, 상세 이미지
      */
     @PutMapping("/edit/{product-id}")
-    public ResponseEntity putProduct(@PathVariable("product-id") Long productId, @Valid @RequestBody ProductRequestDto productRequestDto) {
-
+    public ResponseEntity putProduct(@PathVariable("product-id") Long productId,
+                                     @Valid @RequestBody ProductRequestDto productRequestDto) {
         ProductResponseDto response = productService.updateProduct(productId, productRequestDto);
-
         return new ResponseEntity<>(
                 new SingleProductResponse<>(response),
                 HttpStatus.OK);
@@ -65,7 +62,6 @@ public class AdminProductController {
      */
     @DeleteMapping("/edit/{product-id}")
     public ResponseEntity deleteProduct(@PathVariable("product-id") Long productId) {
-
         productService.removeProduct(productId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

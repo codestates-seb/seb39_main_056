@@ -47,6 +47,4 @@ public interface ProductService {
      * @param id
      */
     void removeProduct(long id);
-
-    Product findExistProduct(Long productId);
 }

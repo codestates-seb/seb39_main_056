@@ -19,11 +19,11 @@ public class ProductRequestDto {
     @Length(max=50)
     private String productName;
 
-    @Min(1)
+    @Min(value = 1, message = "수량은 최소 1개 이상이어야 합니다.")
     @Positive
     private int StockQuantity;
 
-    @Min(100)
+    @Min(value = 100, message = "금액은 100원 이상부터 등록가능합니다.")
     @Positive
     private int price;
 
@@ -33,6 +33,6 @@ public class ProductRequestDto {
     @NotBlank(message = "상세 설명 이미지를 첨부해주세요.")
     private  String detailImage;
 
-    @NotBlank(message = "제품의 채식 유형을 선택해주세요.")
-    private VegetarianType vegetarianType;
+    @NotBlank(message = "제품이 해당하는 채식 유형을 선택해주세요.")
+    private String vegetarianType;
 }
