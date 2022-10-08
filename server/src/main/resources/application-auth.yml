@@ -1,5 +1,5 @@
 jwt:
-  access-token-expiration-minutes: 30
+  access-token-expiration-minutes: 60
   refresh-token-expiration-minutes: 420
   key:
     secret: noterrorvegetarian7894431123412341234qwerjameshongyunAAgErt
