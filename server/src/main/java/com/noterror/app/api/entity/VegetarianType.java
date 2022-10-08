@@ -25,7 +25,8 @@ public class VegetarianType {
     @Transient
     private Member member;
 
-    // @OneToMany(mappedBy = "vegetarianType", targetEntity = Product.class, orphanRemoval = true)
-    // private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "vegetarianType", targetEntity = Product.class)
+    @Transient
+    private List<Product> products = new ArrayList<>();
 
 }
