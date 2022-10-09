@@ -1,0 +1,236 @@
+{
+  "detail": {
+    "product": {
+      "productId": 1,
+      "productName": "노르웨이 생연어",
+      "price": 2500,
+      "createDate": "2022-10-01T12:24:10",
+      "editDate": "2022-10-01T12:24:10",
+      "thumbnailImage": "https://www.oasis.co.kr/product/detail/52820-1056756?categoryId=113",
+      "detailImage": "https://oasis.co.kr:9888/view/se/?imagePath=2022/8/9/se_20222c2e2ebc-7a57-48e3-9373-a4cda421b5f7.jpg",
+      "vegetarianType": "비건",
+      "stockQuantity": 15
+    }
+  },
+  "products": [
+    {
+      "createDate": "2022-10-13T11:38:10",
+      "editDate": "2022-10-13T11:38:10",
+      "productId": 4,
+      "productName": "가지돈까스",
+      "price": 13500,
+      "stockQuantity": 7,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/26065/thumb/thumb_26065d1769902-32ce-4042-bba6-944b48d02665.jpg",
+      "detailImage": "https://oasis.co.kr:9888/view/se/?imagePath=2021/7/2/se_2021ae4186cc-3027-4d17-a1e4-dc082c9bcd89.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "비건",
+        "vegetarianTypeLevel": 2,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    },
+    {
+      "createDate": "2022-10-13T11:38:10",
+      "editDate": "2022-10-13T11:38:10",
+      "productId": 5,
+      "productName": "그레인트땅콩",
+      "price": 7200,
+      "stockQuantity": 7,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/2799/detail/detail_2799_0_ad7d3d0c-1180-4069-983b-80366f390670.jpg",
+      "detailImage": "https://oasis.co.kr:9888/view/se/?imagePath=2021/2/19/se_202141c31e1d-d721-4e80-88c2-db1c20c66156.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "오보",
+        "vegetarianTypeLevel": 3,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    },
+    {
+      "createDate": "2022-10-13T11:38:10",
+      "editDate": "2022-10-13T11:38:10",
+      "productId": 6,
+      "productName": "사과하세우",
+      "price": 13500,
+      "stockQuantity": 30,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/1794/detail/detail_1794_0_9ed01d33-1420-4a58-835c-7430c539c53e.jpg",
+      "detailImage": "https://oasis.co.kr:9888/view/se/?imagePath=2021/2/18/se_2021570c7cec-7991-4489-aa15-05da3dabffef.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "오보",
+        "vegetarianTypeLevel": 3,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    },
+    {
+      "createDate": "2022-10-13T11:38:10",
+      "editDate": "2022-10-13T11:38:10",
+      "productId": 7,
+      "productName": "더블치즈클래식 파니니",
+      "price": 5900,
+      "stockQuantity": 7,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/53222/detail/detail_53222_0_0d166ae9-79e8-430e-9bea-d541925b8748.jpg",
+      "detailImage": "https://www.oasis.co.kr:9888/view/se/?imagePath=2022/8/26/se_2022c9dc54f3-8cd0-45e9-8a9b-8ed1e0a00757.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "플렉시테리언",
+        "vegetarianTypeLevel": 7,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    },
+    {
+      "createDate": "2022-10-13T11:38:10",
+      "editDate": "2022-10-13T11:38:10",
+      "productId": 8,
+      "productName": "유기농 그린빈",
+      "price": 4900,
+      "stockQuantity": 120,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/53222/detail/detail_53222_0_0d166ae9-79e8-430e-9bea-d541925b8748.jpg",
+      "detailImage": "https://www.oasis.co.kr:9888/view/se/?imagePath=2022/8/26/se_2022c9dc54f3-8cd0-45e9-8a9b-8ed1e0a00757.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "프루테리언",
+        "vegetarianTypeLevel": 1,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    },
+    {
+      "createDate": "2022-10-13T11:38:10",
+      "editDate": "2022-10-13T11:38:10",
+      "productId": 9,
+      "productName": "집밥 꾸러미",
+      "price": 41260,
+      "stockQuantity": 120,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/30322/detail/detail_30322_0_bb392396-5194-4e0a-a4a7-8282f057407a.jpg",
+      "detailImage": "https://oasis.co.kr:9888/view/se/?imagePath=2021/12/15/se_20218562a4da-1fa6-48e3-893b-a693a45b7565.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "페스코",
+        "vegetarianTypeLevel": 5,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    },
+    {
+      "createDate": "2022-10-13T11:38:10",
+      "editDate": "2022-10-13T11:38:10",
+      "productId": 10,
+      "productName": "새콤달콤 오베리청",
+      "price": 29000,
+      "stockQuantity": 70,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/9232/detail/detail_9232_0_d1800979-8fa3-4b78-b5bb-b63f50ec4e4a.jpg",
+      "detailImage": "https://oasis.co.kr:9888/view/se/?imagePath=2021/1/6/se_20210d7df0c2-89d9-483e-b1dc-d038e14e417e.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "락토",
+        "vegetarianTypeLevel": 3,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    },
+    {
+      "createDate": "2022-10-09T07:24:10",
+      "editDate": "2022-10-09T07:24:10",
+      "productId": 3,
+      "productName": "옥수수식빵",
+      "price": 700,
+      "stockQuantity": 86,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/1113/thumb/thumb_111370bc7705-64ae-473a-a9cf-61413ae6e2ef.jpg_300",
+      "detailImage": "https://www.oasis.co.kr:48580//se/2019/8/13/se_800b0b4d-b27b-40dc-94f5-c948c83ee06d.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "비건",
+        "vegetarianTypeLevel": 2,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    },
+    {
+      "createDate": "2022-10-01T12:24:10",
+      "editDate": "2022-10-01T12:24:10",
+      "productId": 1,
+      "productName": "노르웨이 생연어",
+      "price": 2500,
+      "stockQuantity": 15,
+      "thumbnailImage": "https://www.oasis.co.kr/product/detail/52820-1056756?categoryId=113",
+      "detailImage": "https://oasis.co.kr:9888/view/se/?imagePath=2022/8/9/se_20222c2e2ebc-7a57-48e3-9373-a4cda421b5f7.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "비건",
+        "vegetarianTypeLevel": 2,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    },
+    {
+      "createDate": "2022-10-01T12:24:10",
+      "editDate": "2022-10-01T12:24:10",
+      "productId": 2,
+      "productName": "카레라면",
+      "price": 2500,
+      "stockQuantity": 15,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/50895/thumb/thumb_5089587865618-e9f7-4cd4-b968-f01e8a472230.jpg",
+      "detailImage": "https://oasis.co.kr:9888/view/se/?imagePath=2022/7/14/se_2022cf715675-db6c-4520-860a-a998eb09b100.jpg",
+      "orderProducts": [],
+      "vegetarianType": {
+        "vegetarianTypeName": "비건",
+        "vegetarianTypeLevel": 2,
+        "member": null,
+        "product": null
+      },
+      "cartProduct": []
+    }
+  ],
+  "pageInfo": {
+    "page": 1,
+    "size": 20,
+    "totalElements": 10,
+    "totalPages": 1
+  },
+  "sortInfo": {
+    "sort": "createDate",
+    "orderBy": "desc"
+  },
+  "vegeTypeList": [
+    {
+      "vegetarianName": "프루테리언"
+    },
+    {
+      "vegetarianName": "비건"
+    },
+    {
+      "vegetarianName": "오보"
+    },
+    {
+      "vegetarianName": "락토"
+    },
+    {
+      "vegetarianName": "락토-오보"
+    },
+    {
+      "vegetarianName": "폴로"
+    },
+    {
+      "vegetarianName": "페스코"
+    },
+    {
+      "vegetarianName": "폴로-페스코"
+    },
+    {
+      "vegetarianName": "플렉시테리언"
+    }
+  ]
+}
