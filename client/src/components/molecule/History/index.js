@@ -1,5 +1,5 @@
 import * as Styled from './style';
-import OrderTable from '../../atom/History/index';
+import OrderTable from '../../atom/OrderTable';
 
 export const UserHistoryContainer = ({ HistoryData }) => {
   return (

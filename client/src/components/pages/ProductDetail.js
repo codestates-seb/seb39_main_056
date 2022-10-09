@@ -1,27 +1,36 @@
 import { useState, useEffect } from 'react';
 import { ProductPage } from '../organism/ProductDetail';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { GetData } from '../../hooks/fetchApi';
+import { useDispatch } from 'react-redux';
+import { setProductListData } from '../../actions/index';
 
 const ProductDetail = () => {
   const [productData, setProductData] = useState();
+  const [thumnailImg, setThumnailImg] = useState();
   const { id } = useParams();
-  const getData = async () => {
-    let url = `${process.env.REACT_APP_API_URL}/products/detail/${id}`;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    try {
-      const data = await fetch(url).then(res => {
-        if (!res.ok) throw new Error('No Response');
-        return res.json();
-      });
-      setProductData(data.product);
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
+  let url = `${process.env.REACT_APP_API_URL}/products/detail/${id}`;
+  let thumnailUrl = `${process.env.REACT_APP_API_URL}/products/list`;
+
   useEffect(() => {
-    getData();
+    GetData(url, setProductData).then(result => {
+      if (result === 'fail') navigate('/noresponse');
+    });
+    GetData(thumnailUrl, setThumnailImg).then(result => {
+      if (result === 'fail') navigate('/noresponse');
+    });
   }, []);
 
-  return <ProductPage productId={id} productData={productData} />;
+  useEffect(() => {
+    if (thumnailImg?.products !== undefined) {
+      dispatch(setProductListData(thumnailImg.products));
+    }
+    console.log('1지워주세요');
+  }, [thumnailImg]);
+
+  return <ProductPage productId={id} productData={productData?.product} />;
 };
 export default ProductDetail;

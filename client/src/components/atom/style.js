@@ -19,3 +19,15 @@ export const OrderPrice = styled.div`
   flex-basis: 40%;
   text-align: right;
 `;
+
+export const ErrorPageText = styled.p`
+  font-weight: bold;
+  font-size: 2em;
+`;
+
+export const ErrorPageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+`;

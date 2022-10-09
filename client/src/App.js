@@ -16,6 +16,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setLoginChange } from './actions';
 import { setTokenHeader } from './service/setTokenHeader';
+import { NoResponse } from './components/atom/NoResponse';
 
 axios.defaults.withCredentials = true;
 
@@ -47,13 +48,14 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/mypage" element={<Mypage />} />
-          <Route path="/mypage/history" element={<History />} />
+          <Route path="/order" element={<History />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/type/:id" element={<Type />} />
           <Route path="/login" element={<Login />} />
           {/* <Route path="/signup" element={<Signup />} /> */}
           <Route path="/signup" element={<Info />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/noresponse" element={<NoResponse />} />
         </Routes>
       </BrowserRouter>
     </BodyContainer>
