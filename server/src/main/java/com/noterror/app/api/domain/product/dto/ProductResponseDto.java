@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class ProductResponseDto {
     private LocalDateTime editDate;
     private String thumbnailImage;
     private String detailImage;
-    private VegetarianType vegetarianType;
+    private String vegetarianType;
 
     public ProductResponseDto(Product product) {
         this.productId = product.getProductId();
@@ -29,6 +30,12 @@ public class ProductResponseDto {
         this.price = product.getPrice();
         this.createDate = product.getCreateDate();
         this.editDate = product.getEditDate();
-        this.vegetarianType = product.getVegetarianType();
+        this.thumbnailImage = product.getThumbnailImage();
+        this.detailImage = product.getDetailImage();
+        this.vegetarianType = product.getVegetarianType().getVegetarianTypeName();
+    }
+
+    public ProductResponseDto(List<Product> products) {
+
     }
 }

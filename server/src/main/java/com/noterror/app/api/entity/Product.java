@@ -1,5 +1,6 @@
 package com.noterror.app.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.order.OrderProduct;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
@@ -41,13 +42,16 @@ public class Product extends Auditable {
     private String detailImage;
 
     @OneToMany(mappedBy = "product")
+    @JsonBackReference
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "vegetarian_type_name")
+    @JsonBackReference
     private VegetarianType vegetarianType;
 
     @OneToMany(mappedBy = "product")
+    @JsonBackReference
     private List<CartDetail> cartDetail = new ArrayList<>();
 
     //== BUSINESS LOGIC ==//

@@ -4,7 +4,7 @@ import com.noterror.app.api.domain.cart.dto.CartDetailDto;
 import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.service.CartService;
-import com.noterror.app.api.global.response.MultiCartResponse;
+import com.noterror.app.api.global.response.MultiCartsResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ public class CartController {
 
         List<CartDetailDto> cartDetailList = cartService.listCart(getCurrentUserEmail());
 
-        return new ResponseEntity(new MultiCartResponse(cartDetailList), HttpStatus.OK);
+        return new ResponseEntity(new MultiCartsResponse(cartDetailList), HttpStatus.OK);
     }
 
     /**

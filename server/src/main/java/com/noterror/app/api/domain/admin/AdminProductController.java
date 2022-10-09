@@ -3,8 +3,6 @@ package com.noterror.app.api.domain.admin;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.service.ProductService;
-import com.noterror.app.api.domain.vegetarian.dto.VegetarianTypeResponseDto;
-import com.noterror.app.api.domain.vegetarian.service.VegetarianTypeService;
 import com.noterror.app.api.global.response.SingleProductResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * 담당자 : 이현석, 홍민정
