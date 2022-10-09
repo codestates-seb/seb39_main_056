@@ -90,6 +90,7 @@ public class OrdersServiceImpl implements OrdersService {
         for(OrderDto orderDto : orderDtoList) {
             Product product = productRepository.findById(orderDto.getProductId()).get();
             OrderProduct orderProduct = OrderProduct.createOrderProduct(product, orderDto.getOrdersQuantity());
+            orderProductRepository.save(orderProduct);
             orderProductList.add(orderProduct);
 
         }
