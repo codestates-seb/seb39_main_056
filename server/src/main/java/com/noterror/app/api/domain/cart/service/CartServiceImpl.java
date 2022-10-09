@@ -1,12 +1,12 @@
 package com.noterror.app.api.domain.cart.service;
 
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
-import com.noterror.app.api.domain.cart.dto.CartOrderDto;
 import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.repository.CartDetailRepository;
 import com.noterror.app.api.domain.cart.repository.CartRepository;
 import com.noterror.app.api.domain.orders.dto.OrderDto;
+import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
 import com.noterror.app.api.domain.orders.service.OrdersService;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.cart.CartDetail;
@@ -114,23 +114,39 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Long orderCartProduct(List<CartOrderDto> cartOrderDtoList, Long memberId) {
+    public OrderInfoDto orderCartProduct(Long cartId) {
+        Cart cart = cartRepository.findById(cartId).get();
+        Long memberId = cart.getMember().getMemberId();
+
+        List<CartDetail> cartDetailList = cart.getCartDetail();
+
         List<OrderDto> orderDtoList = new ArrayList<>();
+        for(CartDetail cartDetail : cartDetailList) {
+            OrderDto orderWishDto = new OrderDto(cartDetail.getProduct().getProductId(), cartDetail.getPurchaseQuantity());
+            orderDtoList.add(orderWishDto);
+        }
+
+       /* if(cartDetailList == null || cartDetailList.size() == 0) {
+            return new ResponseEntity<String>("주문할 상품을 선택해주세요", HttpStatus.FORBIDDEN);
+        }
+        */
+       /* List<OrderDto> orderDtoList = new ArrayList<>();
         for (CartOrderDto cartOrderDto : cartOrderDtoList) {
-            CartDetail cartDetail = cartDetailRepository.findById(cartOrderDto.getCartDetailId()).get();
+            CartDetail cartDetail = cartDetailRepository.findByCartId(cartId);
 
             OrderDto orderDto = new OrderDto();
             orderDto.setProductId(cartDetail.getProduct().getProductId());
             orderDto.setOrdersQuantity(cartDetail.getPurchaseQuantity());
-            orderDtoList.add(orderDto);
+          orderDtoList.add(orderDto);
+        }
+        */
+
+        OrderInfoDto orderProductId = ordersService.orderCartList(orderDtoList, memberId);
+
+        for(CartDetail cartDetail : cartDetailList) {
+             cartDetailRepository.deleteById(cartDetail.getCartDetailId());
         }
 
-        Long orderProductId = ordersService.orderCartList(orderDtoList, memberId);
-
-        for(CartOrderDto cartOrderDto : cartOrderDtoList) {
-            CartDetail cartDetail = cartDetailRepository.findById(cartOrderDto.getCartDetailId()).get();
-            cartDetailRepository.delete(cartDetail);
-        }
         return orderProductId;
     }
 }

@@ -10,5 +10,5 @@ public interface OrdersService {
 
     List<OrderInfoDto> getOrderList(String email);
     OrderResponseDto orderProduct(OrderDto orderDto, String email);
-    Long orderCartList(List<OrderDto> orderDtoList, Long memberId);
+    OrderInfoDto orderCartList(List<OrderDto> orderDtoList, Long memberId);
 }

@@ -29,7 +29,7 @@ public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
             "where ci.cart.cartId = :cartId ")
     List<CartDetailDto> findCartDetailDtoList(@Param("cartId") Long cartId);
 
-    @Query(value = "select cart_detail_id, cart_id, product_id, purchase_quantity from cart_detail where cart_detail.cart.member.member_id := memberId", nativeQuery = true)
-    CartDetail findByMemberId(@Param("memberId") Long memberId);
+    @Query(value = "select cart_detail_id, cart_id, product_id, purchase_quantity from cart_detail where cart_detail.cart.cart_id := cartId", nativeQuery = true)
+    CartDetail findByCartId(@Param("cartId") Long cartId);
 }
 

@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class CartOrderDto {
-    private Long cartDetailId;
+    //private Long cartDetailId;
 
     private List<CartOrderDto> cartOrderDtoList;
 }

@@ -5,6 +5,7 @@ import com.noterror.app.api.domain.cart.dto.CartOrderDto;
 import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.service.CartService;
+import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
 import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
 import com.noterror.app.api.global.response.MultiCartResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
@@ -77,15 +78,9 @@ public class CartController {
      * 장바구니 상품 수량 업데이트
      * 주문이 완료되면 제거되도록 !
      */
-    @PostMapping("/orders")
-    public @ResponseBody ResponseEntity orderCartProduct(@RequestBody CartOrderDto cartOrderDto, Long memberId) {
-        List<CartOrderDto> cartOrderDtoList = cartOrderDto.getCartOrderDtoList();
-
-        if(cartOrderDtoList == null || cartOrderDtoList.size() == 0) {
-            return new ResponseEntity<String>("주문할 상품을 선택해주세요", HttpStatus.FORBIDDEN);
-        }
-
-        Long orderId = cartService.orderCartProduct(cartOrderDtoList, memberId);
+    @PostMapping("/{cart-id}/orders")
+    public @ResponseBody ResponseEntity orderCartProduct(@PathVariable("cart-id") Long cartId) {
+        OrderInfoDto orderId = cartService.orderCartProduct(cartId);
         return new ResponseEntity(new SingleOrderResponse(orderId), HttpStatus.OK);
     }
 }
