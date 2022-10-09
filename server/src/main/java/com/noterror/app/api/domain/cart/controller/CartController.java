@@ -1,11 +1,14 @@
 package com.noterror.app.api.domain.cart.controller;
 
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
+import com.noterror.app.api.domain.cart.dto.CartOrderDto;
 import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.service.CartService;
+import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
 import com.noterror.app.api.global.response.MultiCartResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
+import com.noterror.app.api.global.response.SingleOrderResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,5 +71,21 @@ public class CartController {
     private String getCurrentUserEmail() {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         return currentUserEmail;
+    }
+
+    /**
+     * 장바구니 상품 수량 업데이트
+     * 주문이 완료되면 제거되도록 !
+     */
+    @PostMapping("/orders")
+    public @ResponseBody ResponseEntity orderCartProduct(@RequestBody CartOrderDto cartOrderDto, Long memberId) {
+        List<CartOrderDto> cartOrderDtoList = cartOrderDto.getCartOrderDtoList();
+
+        if(cartOrderDtoList == null || cartOrderDtoList.size() == 0) {
+            return new ResponseEntity<String>("주문할 상품을 선택해주세요", HttpStatus.FORBIDDEN);
+        }
+
+        Long orderId = cartService.orderCartProduct(cartOrderDtoList, memberId);
+        return new ResponseEntity(new SingleOrderResponse(orderId), HttpStatus.OK);
     }
 }

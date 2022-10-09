@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.cart.service;
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
+import com.noterror.app.api.domain.cart.dto.CartOrderDto;
 import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 
@@ -33,4 +34,6 @@ public interface CartService {
      * @param cartDetailId
      */
     void deleteCart(Long cartDetailId);
+
+    Long orderCartProduct(List<CartOrderDto> cartOrderDtoList, Long memberId);
 }

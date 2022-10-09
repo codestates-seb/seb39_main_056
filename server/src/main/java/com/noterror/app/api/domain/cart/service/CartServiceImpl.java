@@ -1,10 +1,13 @@
 package com.noterror.app.api.domain.cart.service;
 
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
+import com.noterror.app.api.domain.cart.dto.CartOrderDto;
 import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.repository.CartDetailRepository;
 import com.noterror.app.api.domain.cart.repository.CartRepository;
+import com.noterror.app.api.domain.orders.dto.OrderDto;
+import com.noterror.app.api.domain.orders.service.OrdersService;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.Product;
@@ -27,6 +30,8 @@ public class CartServiceImpl implements CartService {
     private final ProductRepository productRepository;
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
+
+    private final OrdersService ordersService;
 
     @Override
     @Transactional
@@ -106,5 +111,26 @@ public class CartServiceImpl implements CartService {
     public void deleteCart(Long cartDetailId) {
         CartDetail cartDetail = cartDetailRepository.findById(cartDetailId).get();
         cartDetailRepository.delete(cartDetail);
+    }
+
+    @Override
+    public Long orderCartProduct(List<CartOrderDto> cartOrderDtoList, Long memberId) {
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        for (CartOrderDto cartOrderDto : cartOrderDtoList) {
+            CartDetail cartDetail = cartDetailRepository.findById(cartOrderDto.getCartDetailId()).get();
+
+            OrderDto orderDto = new OrderDto();
+            orderDto.setProductId(cartDetail.getProduct().getProductId());
+            orderDto.setOrdersQuantity(cartDetail.getPurchaseQuantity());
+            orderDtoList.add(orderDto);
+        }
+
+        Long orderProductId = ordersService.orderCartList(orderDtoList, memberId);
+
+        for(CartOrderDto cartOrderDto : cartOrderDtoList) {
+            CartDetail cartDetail = cartDetailRepository.findById(cartOrderDto.getCartDetailId()).get();
+            cartDetailRepository.delete(cartDetail);
+        }
+        return orderProductId;
     }
 }
