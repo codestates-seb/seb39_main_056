@@ -19,12 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * 담당자 : 강시혁, 황윤준
- * SCOPE : 제품 조회
- * 리팩토링 : 강시혁
- * 대상 : PRODUCTS
- */
 @RestController
 @CrossOrigin
 @Slf4j

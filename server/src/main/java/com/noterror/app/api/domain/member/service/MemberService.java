@@ -3,7 +3,7 @@ package com.noterror.app.api.domain.member.service;
 import com.noterror.app.api.domain.member.dto.MemberResponseDto;
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
-import com.noterror.app.api.domain.member.dto.VegetarianInputDto;
+import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
 
 public interface MemberService {
 
@@ -22,7 +22,7 @@ public interface MemberService {
      * @param vegetarianType
      * @return
      */
-    MemberResponseDto saveTypeOfNewMember(Long memberId, VegetarianInputDto vegetarianType);
+    MemberResponseDto saveTypeOfNewMember(Long memberId, VegetarianTypeInputDto vegetarianType);
 
     /**
      * 회원 정보 수정 기능

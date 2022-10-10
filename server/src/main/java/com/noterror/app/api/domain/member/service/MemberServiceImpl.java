@@ -4,7 +4,7 @@ package com.noterror.app.api.domain.member.service;
 import com.noterror.app.api.domain.member.dto.MemberResponseDto;
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
-import com.noterror.app.api.domain.member.dto.VegetarianInputDto;
+import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
 import com.noterror.app.api.domain.member.repository.MemberRepository;
 import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.global.exception.BusinessLogicException;
@@ -39,9 +39,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberResponseDto saveTypeOfNewMember(Long memberId, VegetarianInputDto vegetarianInputDto) {
+    public MemberResponseDto saveTypeOfNewMember(Long memberId, VegetarianTypeInputDto vegetarianTypeInputDto) {
         Member member = findMemberById(memberId);
-        member.setVegetarianType(vegetarianInputDto.getVegetarianType());
+        member.setVegetarianType(vegetarianTypeInputDto.getVegetarianType());
         return new MemberResponseDto(member);
     }
 

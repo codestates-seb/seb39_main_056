@@ -42,8 +42,6 @@ public class OrdersController {
         return new ResponseEntity(new SingleOrderResponse<>(orderResponseDto), HttpStatus.OK);
     }
 
-    // TODO 장바구니 내용 전체 주문
-
     // TODO 주문 취소
 
     private String currentUserEmail() {

@@ -124,22 +124,6 @@ public class CartServiceImpl implements CartService {
             OrderDto orderWishDto = new OrderDto(cartDetail.getProduct().getProductId(), cartDetail.getPurchaseQuantity());
             orderDtoList.add(orderWishDto);
         }
-
-       /* if(cartDetailList == null || cartDetailList.size() == 0) {
-            return new ResponseEntity<String>("주문할 상품을 선택해주세요", HttpStatus.FORBIDDEN);
-        }
-        */
-       /* List<OrderDto> orderDtoList = new ArrayList<>();
-        for (CartOrderDto cartOrderDto : cartOrderDtoList) {
-            CartDetail cartDetail = cartDetailRepository.findByCartId(cartId);
-
-            OrderDto orderDto = new OrderDto();
-            orderDto.setProductId(cartDetail.getProduct().getProductId());
-            orderDto.setOrdersQuantity(cartDetail.getPurchaseQuantity());
-          orderDtoList.add(orderDto);
-        }
-        */
-
         OrderInfoDto orderProductId = ordersService.orderCartList(orderDtoList, memberId);
 
         for (CartDetail cartDetail : cartDetailList) {

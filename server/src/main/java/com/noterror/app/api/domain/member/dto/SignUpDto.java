@@ -2,6 +2,7 @@ package com.noterror.app.api.domain.member.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class SignUpDto {
 
