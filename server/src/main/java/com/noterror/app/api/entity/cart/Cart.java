@@ -3,6 +3,7 @@ package com.noterror.app.api.entity.cart;
 import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.global.audit.Auditable;
 import lombok.*;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Cart extends Auditable {
     private List<CartDetail> cartDetail = new ArrayList<>();
 
     //== BUSINESS LOGIC ==//
-    public void addCartDetail(CartDetail cartDetail){
+    public void addCartDetail(CartDetail cartDetail) {
         this.cartDetail.add(cartDetail);
     }
 

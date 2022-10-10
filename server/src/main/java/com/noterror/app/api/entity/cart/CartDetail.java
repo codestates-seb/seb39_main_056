@@ -37,7 +37,7 @@ public class CartDetail {
         this.product = product;
     }
 
-    public void addPurchaseQuantity(int purchaseQuantity){
+    public void addPurchaseQuantity(int purchaseQuantity) {
         this.purchaseQuantity += purchaseQuantity;
     }
 
@@ -45,7 +45,7 @@ public class CartDetail {
         this.purchaseQuantity = purchaseQuntity;
     }
 
-    public static CartDetail createCartDetail(Cart cart, Product product, int count){
+    public static CartDetail createCartDetail(Cart cart, Product product, int count) {
         CartDetail cartDetail = new CartDetail();
         cartDetail.setCart(cart);
         cartDetail.setProduct(product);

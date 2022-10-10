@@ -41,14 +41,11 @@ public class Product extends Auditable {
     @Basic(fetch = FetchType.EAGER)
     private String detailImage;
 
+    private String vegetarianType;
+
     @OneToMany(mappedBy = "product")
     @JsonBackReference
     private List<OrderProduct> orderProducts = new ArrayList<>();
-
-    @ManyToOne
-    @JoinColumn(name = "vegetarian_type_name")
-    @JsonBackReference
-    private VegetarianType vegetarianType;
 
     @OneToMany(mappedBy = "product")
     @JsonBackReference
@@ -62,28 +59,22 @@ public class Product extends Auditable {
         }
     }
 
-    public void addVegetarianType(VegetarianType vegetarianType) {
-        this.vegetarianType = vegetarianType;
-    }
-
-    public void registrationProduct(ProductRequestDto productRequestDto,
-                                    VegetarianType vegetarianType) {
+    public void registrationProduct(ProductRequestDto productRequestDto) {
         this.productName = productRequestDto.getProductName();
         this.stockQuantity = productRequestDto.getStockQuantity();
         this.price = productRequestDto.getPrice();
         this.thumbnailImage = productRequestDto.getThumbnailImage();
         this.detailImage = productRequestDto.getDetailImage();
-        this.vegetarianType = vegetarianType;
+        this.vegetarianType = productRequestDto.getVegetarianType();
     }
 
-    public void updateProductInfo(ProductRequestDto productRequestDto,
-                                  VegetarianType vegetarianType) {
+    public void updateProductInfo(ProductRequestDto productRequestDto) {
         this.productName = productRequestDto.getProductName();
         this.stockQuantity = productRequestDto.getStockQuantity();
         this.price = productRequestDto.getPrice();
         this.thumbnailImage = productRequestDto.getThumbnailImage();
         this.detailImage = productRequestDto.getDetailImage();
-        this.vegetarianType = vegetarianType;
+        this.vegetarianType = productRequestDto.getVegetarianType();
     }
 
     public void removeStock(int quantity) {

@@ -27,7 +27,7 @@ public class OrdersController {
      * 주문 내역 조회
      */
     @GetMapping
-    public ResponseEntity getOrders(){
+    public ResponseEntity getOrders() {
         List<OrderInfoDto> pageRequest = ordersService.getOrderList(currentUserEmail());
         return new ResponseEntity(new MultiOrdersResponse(pageRequest), HttpStatus.OK);
     }
@@ -39,10 +39,8 @@ public class OrdersController {
     public ResponseEntity addOrder(@RequestBody OrderDto orderDto) {
 
         OrderResponseDto orderResponseDto = ordersService.orderProduct(orderDto, currentUserEmail());
-        return new ResponseEntity(new SingleOrderResponse<>(orderResponseDto),HttpStatus.OK);
+        return new ResponseEntity(new SingleOrderResponse<>(orderResponseDto), HttpStatus.OK);
     }
-
-    // TODO 장바구니 내용 전체 주문
 
     // TODO 주문 취소
 

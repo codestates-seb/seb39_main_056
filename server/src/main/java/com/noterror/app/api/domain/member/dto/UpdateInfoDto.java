@@ -18,17 +18,22 @@ public class UpdateInfoDto {
             message = "휴대폰 번호는 010으로 시작하는 11자리 숫자를 구분자(-) 없이 입력해주세요.")
     private String phone;
 
-    /** 우편번호 */
+    /**
+     * 우편번호
+     */
     @NotEmpty
     private String zipCode;
 
-    /** 도로명 주소 */
+    /**
+     * 도로명 주소
+     */
     @NotEmpty
     private String city;
 
-    /** 상세 주소(사용자 입력) */
+    /**
+     * 상세 주소(사용자 입력)
+     */
     private String detailAddress;
 
-    // TODO 채식 유형
     private String vegetarianType;
 }

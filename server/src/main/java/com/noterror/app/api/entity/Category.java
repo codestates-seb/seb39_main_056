@@ -23,7 +23,7 @@ public class Category {
     @Column
     private String categoryName;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     @Nullable
     //@JsonManagedReference

@@ -31,7 +31,7 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrderInfoDto> getOrderList(String email){
+    public List<OrderInfoDto> getOrderList(String email) {
         List<Orders> orders = ordersRepository.findAll();
 
         List<Orders> memberOrder = new ArrayList<>();
@@ -51,7 +51,7 @@ public class OrdersServiceImpl implements OrdersService {
 
             OrderInfoDto infoDto = new OrderInfoDto(order);
 
-            for(OrderProduct orderProduct : order.getOrderProducts()) {
+            for (OrderProduct orderProduct : order.getOrderProducts()) {
                 OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
                 infoDto.addOrderProductDto(orderProductDto);
             }
@@ -60,7 +60,8 @@ public class OrdersServiceImpl implements OrdersService {
 
         return result;
     }
-     //제품 상세페이지에서 주문
+
+    //제품 상세페이지에서 주문
     public OrderResponseDto orderProduct(OrderDto orderDto, String email) {
         Product product = productRepository.findById(orderDto.getProductId()).get();
         Member member = memberRepository.findByEmail(email).get();
@@ -72,7 +73,7 @@ public class OrdersServiceImpl implements OrdersService {
 
         Orders order = Orders.createOrder(member, orderProductList);
         ordersRepository.save(order);
-        OrderProductDto productDto = new OrderProductDto(orderProduct.getProduct().getProductId(), orderProduct.getProduct().getProductName(),orderProduct.getOrdersQuantity(), orderProduct.getProduct().getPrice());
+        OrderProductDto productDto = new OrderProductDto(orderProduct.getProduct().getProductId(), orderProduct.getProduct().getProductName(), orderProduct.getOrdersQuantity(), orderProduct.getProduct().getPrice());
         List<OrderProductDto> dtoList = new ArrayList<>();
         dtoList.add(productDto);
         OrderResponseDto responseDto = new OrderResponseDto(order.getOrdersId(), order.getOrdersStatus(), order.getTotalPrice(), order.getCreateDate(), dtoList);
@@ -87,7 +88,7 @@ public class OrdersServiceImpl implements OrdersService {
 
         List<OrderProduct> orderProductList = new ArrayList<>();
 
-        for(OrderDto orderDto : orderDtoList) {
+        for (OrderDto orderDto : orderDtoList) {
             Product product = productRepository.findById(orderDto.getProductId()).get();
             OrderProduct orderProduct = OrderProduct.createOrderProduct(product, orderDto.getOrdersQuantity());
             orderProductRepository.save(orderProduct);
@@ -99,15 +100,15 @@ public class OrdersServiceImpl implements OrdersService {
         ordersRepository.save(order);
 
         List<OrderProductDto> listOrderProduct = new ArrayList<>();
-        for(OrderProduct orderProducts : orderProductList) {
+        for (OrderProduct orderProducts : orderProductList) {
             OrderProductDto orderProductDtos = new OrderProductDto(orderProducts.getProduct().getProductId(),
-                                                                    orderProducts.getProduct().getProductName(),
-                                                                    orderProducts.getOrdersQuantity(),
-                                                                    orderProducts.getProduct().getPrice());
+                    orderProducts.getProduct().getProductName(),
+                    orderProducts.getOrdersQuantity(),
+                    orderProducts.getProduct().getPrice());
             listOrderProduct.add(orderProductDtos);
         }
 
-        OrderInfoDto result = new OrderInfoDto(order.getOrdersId(), order.getCreateDate(),order.getOrdersStatus(),order.getTotalPrice(),listOrderProduct);
+        OrderInfoDto result = new OrderInfoDto(order.getOrdersId(), order.getCreateDate(), order.getOrdersStatus(), order.getTotalPrice(), listOrderProduct);
 
         return result;
     }

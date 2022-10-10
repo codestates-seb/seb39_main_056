@@ -1,13 +1,11 @@
 package com.noterror.app.api.domain.cart.controller;
 
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
-import com.noterror.app.api.domain.cart.dto.CartOrderDto;
 import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.service.CartService;
 import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
-import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
-import com.noterror.app.api.global.response.MultiCartResponse;
+import com.noterror.app.api.global.response.MultiCartsResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
 import com.noterror.app.api.global.response.SingleOrderResponse;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +31,7 @@ public class CartController {
      */
     @PostMapping
     public @ResponseBody ResponseEntity addCartProduct(@RequestBody @Valid CartProductDto cartProductDto) {
+
         CartDetailDto cartDetail = cartService.addCart(cartProductDto, getCurrentUserEmail());
         return new ResponseEntity(new SingleCartResponse(cartDetail), HttpStatus.OK);
     }
@@ -44,7 +43,6 @@ public class CartController {
     public @ResponseBody ResponseEntity viewCartProduct() {
 
         List<CartDetailDto> cartDetailList = cartService.listCart(getCurrentUserEmail());
-
         return new ResponseEntity(new MultiCartsResponse(cartDetailList), HttpStatus.OK);
     }
 
@@ -53,9 +51,6 @@ public class CartController {
      */
     @PutMapping
     public @ResponseBody ResponseEntity updateCartProduct(@RequestBody @Valid CartPatchDto cartPatchDto) {
-        if(cartPatchDto.getPurchaseQuantity() < 0) {
-            return new ResponseEntity<String>("최소 1개 이상 담아주세요", HttpStatus.BAD_REQUEST);
-        }
         CartPatchDto cartDetail = cartService.updateCart(cartPatchDto);
         return new ResponseEntity(new SingleCartResponse(cartDetail), HttpStatus.OK);
     }
@@ -65,13 +60,9 @@ public class CartController {
      */
     @DeleteMapping("/{cart-detail-id}")
     public @ResponseBody ResponseEntity deleteCartProduct(@PathVariable("cart-detail-id") Long cartDetailId) {
+
         cartService.deleteCart(cartDetailId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    private String getCurrentUserEmail() {
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        return currentUserEmail;
     }
 
     /**
@@ -80,7 +71,14 @@ public class CartController {
      */
     @PostMapping("/{cart-id}/orders")
     public @ResponseBody ResponseEntity orderCartProduct(@PathVariable("cart-id") Long cartId) {
+
         OrderInfoDto orderId = cartService.orderCartProduct(cartId);
         return new ResponseEntity(new SingleOrderResponse(orderId), HttpStatus.OK);
     }
+
+    private String getCurrentUserEmail() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        return currentUserEmail;
+    }
+
 }

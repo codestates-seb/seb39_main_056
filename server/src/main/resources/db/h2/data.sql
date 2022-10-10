@@ -1,4 +1,4 @@
-INSERT INTO VEGETARIAN_TYPE (vegetarian_type_name, vegetarian_type_level)
+INSERT INTO VEGETARIAN (vegetarian_type,level)
 VALUES ('프루테리언',1),
        ('비건', 2),
        ('오보', 3),
@@ -9,7 +9,7 @@ VALUES ('프루테리언',1),
        ('폴로-페스코', 6),
        ('플렉시테리언', 7);
 
-INSERT INTO PRODUCT (product_name, price, stock_quantity, create_date,edit_date, thumbnail_image, detail_image, vegetarian_type_name)
+INSERT INTO PRODUCT (product_name, price, stock_quantity, create_date,edit_date, thumbnail_image, detail_image, vegetarian_type)
 VALUES ('아삭빨강 대추방울토마토', 9900, 100, '2022-10-01T10:11:12','2022-10-01T10:11:12', 'https://www.oasis.co.kr:48581/product/1663/detail/thumb_1663b2d53ccd-1403-47e7-8ee1-f9f593b5bb4e.jpg', 'https://www.oasis.co.kr:48580//se/2018/10/8/se_2f83f139-e44b-4aec-a464-37736735de8e.jpg', '프루테리언'),
        ('맛있는 단감', 16200, 100, '2022-10-01T10:11:14','2022-10-01T10:11:14', 'https://www.oasis.co.kr:48581/product/2311/detail/thumb_2311ba1c0a35-3b88-4371-b625-4dc484bb427f.jpg', 'https://oasis.co.kr:9888/view/se/?imagePath=2020/10/13/se_2020a4dc3661-a64a-494b-9425-8430a8eaa4e2.gif', '프루테리언'),
        ('충북 영동 샤인머스캣', 14800, 100, '2022-10-01T10:11:16','2022-10-01T10:11:16', 'https://www.oasis.co.kr:48581/product/834/detail/thumb_8348c63ad7e-cb1b-4ceb-b4a0-257717417f5d.jpg', 'https://www.oasis.co.kr:9888/view/se/?imagePath=2022/8/28/se_202218226bc2-0c52-4fcd-b807-0c8b8763f726.jpg', '프루테리언'),

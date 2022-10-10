@@ -12,12 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-/**
- * 담당자 : 강시혁, 황윤준, 이현석
- * SCOPE : 일반 회원 관리
- * 리팩토링 : 강시혁
- * 대상 : MEMBER
- */
 @Controller
 @RequestMapping(value = "/members")
 @RequiredArgsConstructor
@@ -44,8 +38,7 @@ public class MemberController {
             @RequestBody @Valid VegetarianTypeInputDto vegetarianType) {
 
         MemberResponseDto response = memberService.saveTypeOfNewMember(memberId, vegetarianType);
-        return new ResponseEntity(
-                new SingleMemberResponse<>(response), HttpStatus.OK);
+        return new ResponseEntity(new SingleMemberResponse<>(response), HttpStatus.OK);
     }
 
     /**

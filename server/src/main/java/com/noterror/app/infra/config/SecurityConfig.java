@@ -50,12 +50,12 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER","ADMIN")
-                                .antMatchers(HttpMethod.PUT, "/members/**").hasAnyRole("USER","ADMIN")
-                                .antMatchers(HttpMethod.DELETE, "/members/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.PUT, "/members/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.DELETE, "/members/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/admin/**").hasRole("ADMIN")
-                                .antMatchers("/cart/**").hasAnyRole("USER","ADMIN")
-                                .antMatchers("/orders/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers("/cart/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/orders/**").hasAnyRole("USER", "ADMIN")
                                 .anyRequest().permitAll()
                 );
         return http.build();

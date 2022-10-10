@@ -10,7 +10,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class OrderResponseDto {
     private Long ordersId;
     private OrdersStatus ordersStatus;
