@@ -64,7 +64,7 @@
 
 ### ▪️ Frontend
 
-<img width="1151" alt="스크린샷 2022-10-10 오후 8 09 19" src="https://user-images.githubusercontent.com/95335294/194853665-2b0631fb-cc23-4926-80b7-0027cf7ef43e.png">
+<img width="800" alt="스크린샷 2022-10-10 오후 8 09 19" src="https://user-images.githubusercontent.com/95335294/194853665-2b0631fb-cc23-4926-80b7-0027cf7ef43e.png">
 
 ### ▪️ Backend 
 
