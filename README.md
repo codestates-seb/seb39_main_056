@@ -1,6 +1,5 @@
 # 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **채식이들 🥗**
-
-<img width="900" alt="스크린샷 2022-10-10 오후 5 57 07" src="https://user-images.githubusercontent.com/95335294/194830808-1122b293-33c3-4e61-aab9-f92db5d0622b.png">
+---
 
 <a href="">
   <img width="120" src="https://img.shields.io/badge/채식이들 배포 링크-000000?style=for-the-badge&logo=one&logoColor="white"></a>
@@ -14,7 +13,10 @@
 <a href="https://not-error-064.tistory.com/">
   <img width="90" src="https://img.shields.io/badge/팀 블로그-000000?style=for-the-badge&logo=tistory&logoColor="white"></a>
 
-<br>
+---
+
+<img width="900" alt="스크린샷 2022-10-10 오후 5 57 07" src="https://user-images.githubusercontent.com/95335294/194830808-1122b293-33c3-4e61-aab9-f92db5d0622b.png">
+
 
 ## ▪️ 프로젝트 기간
 
@@ -22,7 +24,7 @@
 
 ## ▪️ 프로젝트 설명
 
- `핵심 팀 목표 : 고객이 겪는 문제 해결하는 서비스를 만들자`
+ `핵심 팀 목표 : 고객이 겪는 문제를 해결하는 서비스를 만들자`
 
 ### ▫️ 기획 배경
 
@@ -46,15 +48,15 @@
 
 ## 👨🏻‍💻 Member
 
-|[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="160px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="160px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="160px" >](https://github.com/NR0617)|
-|:---:|:---:|:---:|
-|[FE 홍성권](https://github.com/Hong-sk) |[FE 정다운](https://github.com/git-daun) |[FE 오나래](https://github.com/NR0617)|
-|FE_CTO|팀블로그 관리|기록 및 AWS 담당|
-
 |[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="160px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="160px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="160px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="160px" >](https://github.com/HYUNSUK331)|
 |:---:|:---:|:---:|:---:|
 |[BE 강시혁](https://github.com/Si-Hyeak-KANG) |[BE 황윤준](https://github.com/YunJuniverse)|[BE 홍민정](https://github.com/hongmj37) |[BE 이현석](https://github.com/HYUNSUK331)|
 |🌟Team Leader|BE_CTO|기록 및 GitHub 관리|AWS 담당|
+
+|[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="160px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="160px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="160px" >](https://github.com/NR0617)|
+|:---:|:---:|:---:|
+|[FE 홍성권](https://github.com/Hong-sk) |[FE 정다운](https://github.com/git-daun) |[FE 오나래](https://github.com/NR0617)|
+|FE_CTO|팀블로그 관리|기록 및 AWS 담당|
 
 <br>
 
