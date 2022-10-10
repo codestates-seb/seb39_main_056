@@ -21,7 +21,7 @@ public class CategoryController {
      */
     @GetMapping
     public ResponseEntity getCategoryList() {
-        List <CategoryResponseDto> response = categoryService.findCategoryList();
+        List<CategoryResponseDto> response = categoryService.findCategoryList();
         return new ResponseEntity(
                 new SingleCategoryResponse(response),
                 HttpStatus.OK);

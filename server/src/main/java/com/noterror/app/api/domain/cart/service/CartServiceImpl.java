@@ -5,15 +5,15 @@ import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.repository.CartDetailRepository;
 import com.noterror.app.api.domain.cart.repository.CartRepository;
+import com.noterror.app.api.domain.member.repository.MemberRepository;
 import com.noterror.app.api.domain.orders.dto.OrderDto;
 import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
 import com.noterror.app.api.domain.orders.service.OrdersService;
+import com.noterror.app.api.domain.product.repository.ProductRepository;
+import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.cart.CartDetail;
-import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.entity.member.Member;
-import com.noterror.app.api.domain.member.repository.MemberRepository;
-import com.noterror.app.api.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,11 +37,11 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public CartDetailDto addCart(CartProductDto cartProductDto, String email) {
 
-        Member member= memberRepository.findByEmail(email).get();
+        Member member = memberRepository.findByEmail(email).get();
         Product product = productRepository.findById(cartProductDto.getProductId()).get();
         Cart cart = member.getCart();
 
-        if( cart == null ){
+        if (cart == null) {
             cart = Cart.createCart(member);
             cartRepository.save(cart);
         }
@@ -50,7 +50,7 @@ public class CartServiceImpl implements CartService {
         //CartDetail existProduct = cartDetailRepository.findByCartIdAndProductId(cart.getCartId(), cartProductDto.getProductId());
         CartDetail existProduct = cartDetailRepository.findByProductId(product.getProductId());
         // 만약 상품이 이미 있으면은 개수를 +
-        if(existProduct != null) {
+        if (existProduct != null) {
             existProduct.addPurchaseQuantity(cartProductDto.getPurchaseQuantity());
             //cartDetailRepository.save(existProduct);
 
@@ -61,8 +61,7 @@ public class CartServiceImpl implements CartService {
             cartDetailDto.setPurchaseQuantity(existProduct.getPurchaseQuantity());
             cartDetailDto.setThumbnailImage(existProduct.getProduct().getThumbnailImage());
             return cartDetailDto;
-        }
-        else { // 아니면은 CartItem 에 상품 저장
+        } else { // 아니면은 CartItem 에 상품 저장
             CartDetail cartItem = CartDetail.createCartDetail(cart, product, cartProductDto.getPurchaseQuantity());
             cartDetailRepository.save(cartItem);
 
@@ -84,7 +83,7 @@ public class CartServiceImpl implements CartService {
         Member member = memberRepository.findByEmail(email).get();
         Cart cart = member.getCart();
 
-        if(cart == null) {
+        if (cart == null) {
             return cartDetailDtoList;
         }
 
@@ -96,7 +95,7 @@ public class CartServiceImpl implements CartService {
 
     //장바구니 상품수량 up
     @Override
-    public CartPatchDto updateCart(CartPatchDto cartPatchDto){
+    public CartPatchDto updateCart(CartPatchDto cartPatchDto) {
         CartDetail cartDetail = cartDetailRepository.findById(cartPatchDto.getCartDetailId()).get();
         cartDetail.updatePurchaseQuantity(cartPatchDto.getPurchaseQuantity());
 
@@ -121,7 +120,7 @@ public class CartServiceImpl implements CartService {
         List<CartDetail> cartDetailList = cart.getCartDetail();
 
         List<OrderDto> orderDtoList = new ArrayList<>();
-        for(CartDetail cartDetail : cartDetailList) {
+        for (CartDetail cartDetail : cartDetailList) {
             OrderDto orderWishDto = new OrderDto(cartDetail.getProduct().getProductId(), cartDetail.getPurchaseQuantity());
             orderDtoList.add(orderWishDto);
         }
@@ -143,8 +142,8 @@ public class CartServiceImpl implements CartService {
 
         OrderInfoDto orderProductId = ordersService.orderCartList(orderDtoList, memberId);
 
-        for(CartDetail cartDetail : cartDetailList) {
-             cartDetailRepository.deleteById(cartDetail.getCartDetailId());
+        for (CartDetail cartDetail : cartDetailList) {
+            cartDetailRepository.deleteById(cartDetail.getCartDetailId());
         }
 
         return orderProductId;

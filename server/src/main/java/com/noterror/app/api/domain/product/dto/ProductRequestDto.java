@@ -16,7 +16,7 @@ import javax.validation.constraints.Positive;
 public class ProductRequestDto {
 
     @NotBlank(message = "이름을 입력해주세요.")
-    @Length(max=50)
+    @Length(max = 50)
     private String productName;
 
     @Min(value = 1, message = "수량은 최소 1개 이상이어야 합니다.")
@@ -31,7 +31,7 @@ public class ProductRequestDto {
     private String thumbnailImage;
 
     @NotBlank(message = "상세 설명 이미지를 첨부해주세요.")
-    private  String detailImage;
+    private String detailImage;
 
     @NotBlank(message = "제품이 해당하는 채식 유형을 선택해주세요.")
     private String vegetarianType;

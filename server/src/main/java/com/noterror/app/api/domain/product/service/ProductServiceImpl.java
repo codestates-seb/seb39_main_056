@@ -41,13 +41,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> findProductsWhenAnonymous(QueryParamDto queryParamDto) {
         String orderBy = queryParamDto.getOrderBy();
-        int page = queryParamDto.getPage()-1;
+        int page = queryParamDto.getPage() - 1;
         String sort = queryParamDto.getSort();
         int size = queryParamDto.getSize();
         String vegetarianTypeName = queryParamDto.getVegetarian();
 
-        if(isAscending(orderBy)){
-            return productRepository.findAllByVegetarianTypeName(vegetarianTypeName,PageRequest.of(page, size, Sort.by(sort)));
+        if (isAscending(orderBy)) {
+            return productRepository.findAllByVegetarianTypeName(vegetarianTypeName, PageRequest.of(page, size, Sort.by(sort)));
         }
         return productRepository.findAllByVegetarianTypeName(vegetarianTypeName, PageRequest.of(page, size, Sort.by(sort).descending()));
     }
@@ -56,15 +56,16 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, String email) {
 
         String orderBy = queryParamDto.getOrderBy();
-        int page = queryParamDto.getPage()-1;
+        int page = queryParamDto.getPage() - 1;
         String sort = queryParamDto.getSort();
         int size = queryParamDto.getSize();
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(MEMBER_NOT_FOUND));
 
-        String vegetarianTypeName = member.getVegetarianType().getVegetarianTypeName();;
+        String vegetarianTypeName = member.getVegetarianType().getVegetarianTypeName();
+        ;
 
-        if(isAscending(orderBy)){
-            return productRepository.findAllByVegetarianTypeName(vegetarianTypeName,PageRequest.of(page, size, Sort.by(sort)));
+        if (isAscending(orderBy)) {
+            return productRepository.findAllByVegetarianTypeName(vegetarianTypeName, PageRequest.of(page, size, Sort.by(sort)));
         }
         return productRepository.findAllByVegetarianTypeName(vegetarianTypeName, PageRequest.of(page, size, Sort.by(sort).descending()));
     }

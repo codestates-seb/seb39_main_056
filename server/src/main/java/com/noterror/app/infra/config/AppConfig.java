@@ -13,10 +13,14 @@ import org.springframework.web.filter.CorsFilter;
 public class AppConfig {
 
     @Bean
-    public PasswordEncoder passwordEncoder() { return PasswordEncoderFactories.createDelegatingPasswordEncoder(); }
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
     @Bean
-    public LogAop logAop() { return new LogAop(); }
+    public LogAop logAop() {
+        return new LogAop();
+    }
 
     @Bean
     public CorsFilter corsFilter() {

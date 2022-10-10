@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionAdvice {
     @ExceptionHandler
-    public ResponseEntity handleValidException(MethodArgumentNotValidException e){
+    public ResponseEntity handleValidException(MethodArgumentNotValidException e) {
         final List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
 
         List<ValidationError> errors =
@@ -38,26 +38,26 @@ public class GlobalExceptionAdvice {
         return new ResponseEntity(new ErrorResponse(
                 ExceptionCode.BAD_REQUEST.getStatus(),
                 ExceptionCode.BAD_REQUEST.getMessage()
-                , errors,null),
+                , errors, null),
                 HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
-    public ResponseEntity handleConstraintException(ConstraintViolationException e){
+    public ResponseEntity handleConstraintException(ConstraintViolationException e) {
         final Set<ConstraintViolation<?>> fieldErrors = e.getConstraintViolations();
 
         List<ConstraintError> errors =
                 fieldErrors.stream()
-                    .map(error -> new ConstraintError(
-                            error.getPropertyPath().toString(), //경로
-                            error.getInvalidValue().toString(), //잘못된 값
-                            error.getMessage()))
-                    .collect(Collectors.toList());
+                        .map(error -> new ConstraintError(
+                                error.getPropertyPath().toString(), //경로
+                                error.getInvalidValue().toString(), //잘못된 값
+                                error.getMessage()))
+                        .collect(Collectors.toList());
 
         return new ResponseEntity(new ErrorResponse(
                 ExceptionCode.BAD_REQUEST.getStatus(),
                 ExceptionCode.BAD_REQUEST.getMessage()
-                , null,errors),
+                , null, errors),
                 HttpStatus.BAD_REQUEST);
     }
 

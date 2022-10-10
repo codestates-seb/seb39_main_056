@@ -1,5 +1,6 @@
 
 package com.noterror.app.api.entity.member;
+
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
 import com.noterror.app.api.entity.cart.Cart;
@@ -16,7 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter @Setter
+@Getter
+@Setter
 public class Member extends Auditable implements Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

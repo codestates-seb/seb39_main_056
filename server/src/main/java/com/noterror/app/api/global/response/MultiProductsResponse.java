@@ -16,7 +16,7 @@ public class MultiProductsResponse<T> {
     public MultiProductsResponse(List<T> products, Page page, Sort sort) {
         this.products = products;
         this.pageInfo = new PageInfo(
-                page.getNumber()+1,
+                page.getNumber() + 1,
                 page.getSize(),
                 page.getTotalElements(),
                 page.getTotalPages());

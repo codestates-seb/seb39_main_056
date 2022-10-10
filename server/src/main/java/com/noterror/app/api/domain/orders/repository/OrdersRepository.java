@@ -12,7 +12,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
     List<Orders> findOrders(@Param("memberId") Long memberId);
      */
     @Query(value = "select count(orders_id) from orders " +
-            "where orders.member.member_id = :memberId ",nativeQuery = true)
+            "where orders.member.member_id = :memberId ", nativeQuery = true)
     int countOrder(@Param("memberId") Long memberId);
 
 }

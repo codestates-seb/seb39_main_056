@@ -14,7 +14,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class OrderInfoDto {
     private Long orderId;
     private LocalDateTime orderDate;

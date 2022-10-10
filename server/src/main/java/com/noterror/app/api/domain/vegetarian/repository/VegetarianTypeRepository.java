@@ -9,12 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
 @Transactional(readOnly = true)
 public interface VegetarianTypeRepository extends JpaRepository<VegetarianType, String> {
-  @Query(nativeQuery = true,
-          value = "select vegetarian_type_name from vegetarian_type where vegetarian_type_level < " +
-                  "(select vegetarian_type_level from vegetarian_type where vegetarian_type_name = :vegetarianTypeName) " +
-                  "or vegetarian_type_name = :vegetarianTypeName")
-  List<String> findVegetarianTypes(@Param("vegetarianTypeName") String vegetarianTypeName);
 }
