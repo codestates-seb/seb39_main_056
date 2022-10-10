@@ -6,7 +6,6 @@ import BodyContainer from './components/atom/BodyContainer';
 import MainPage from './components/pages/MainPage';
 import Type from './components/pages/Type.js';
 import Login from './components/pages/Login';
-// import Signup from './components/pages/Signup';
 import Info from './components/pages/Info';
 import Header from './components/organism/Header';
 import ProductDetail from './components/pages/ProductDetail';
@@ -16,6 +15,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setLoginChange } from './actions';
 import { setTokenHeader } from './service/setTokenHeader';
+import Footer from './components/organism/Footer';
 
 axios.defaults.withCredentials = true;
 
@@ -40,23 +40,26 @@ function App() {
   }, []);
 
   return (
-    <BodyContainer>
-      <GlobalStyles />
+    <>
       <BrowserRouter>
+        <GlobalStyles />
         <Header />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/mypage" element={<Mypage />} />
-          <Route path="/mypage/history" element={<History />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/type/:id" element={<Type />} />
-          <Route path="/login" element={<Login />} />
-          {/* <Route path="/signup" element={<Signup />} /> */}
-          <Route path="/signup" element={<Info />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
+        <BodyContainer>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/mypage/:id" element={<Mypage />} />
+            <Route path="/mypage/history" element={<History />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/type/:id" element={<Type />} />
+            <Route path="/login" element={<Login />} />
+            {/* <Route path="/signup" element={<Signup />} /> */}
+            <Route path="/signup" element={<Info />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+        </BodyContainer>
       </BrowserRouter>
-    </BodyContainer>
+      <Footer />
+    </>
   );
 }
 
