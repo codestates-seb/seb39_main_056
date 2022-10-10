@@ -45,7 +45,7 @@ public class CartController {
 
         List<CartDetailDto> cartDetailList = cartService.listCart(getCurrentUserEmail());
 
-        return new ResponseEntity(new MultiCartResponse(cartDetailList), HttpStatus.OK);
+        return new ResponseEntity(new MultiCartsResponse(cartDetailList), HttpStatus.OK);
     }
 
     /**

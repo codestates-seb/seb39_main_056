@@ -1,11 +1,13 @@
 package com.noterror.app.api.domain.product.dto;
 
 import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.VegetarianType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -28,6 +30,8 @@ public class ProductResponseDto {
         this.price = product.getPrice();
         this.createDate = product.getCreateDate();
         this.editDate = product.getEditDate();
+        this.thumbnailImage = product.getThumbnailImage();
+        this.detailImage = product.getDetailImage();
         this.vegetarianType = product.getVegetarianType().getVegetarianTypeName();
     }
 }

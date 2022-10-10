@@ -5,10 +5,10 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class MultiCartResponse<T> {
+public class MultiCartsResponse<T> {
     private List<T> carts;
 
-    public MultiCartResponse(List<T> cartProducts) {
+    public MultiCartsResponse(List<T> cartProducts) {
         this.carts = cartProducts;
     }
 }

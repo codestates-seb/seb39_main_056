@@ -7,18 +7,16 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 @Getter
-public class MultiProductResponse<T> {
+public class MultiProductsResponse<T> {
 
     private List<T> products;
     private PageInfo pageInfo;
     private SortInfo sortInfo;
 
-    private List<T> vegeTypeList;
-
-    public MultiProductResponse(List<T> products, Page page, Sort sort, List<T> vegeTypeList) {
+    public MultiProductsResponse(List<T> products, Page page, Sort sort) {
         this.products = products;
         this.pageInfo = new PageInfo(
-                page.getNumber() + 1,
+                page.getNumber()+1,
                 page.getSize(),
                 page.getTotalElements(),
                 page.getTotalPages());
@@ -26,6 +24,5 @@ public class MultiProductResponse<T> {
                 sort.getSort(),
                 sort.getOrderBy()
         );
-        this.vegeTypeList = vegeTypeList;
     }
 }

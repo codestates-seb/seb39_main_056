@@ -1,5 +1,6 @@
 package com.noterror.app.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.order.OrderProduct;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
@@ -41,14 +42,17 @@ public class Product extends Auditable {
     private String detailImage;
 
     @OneToMany(mappedBy = "product")
+    @JsonBackReference
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "vegetarian_type_name")
+    @JsonBackReference
     private VegetarianType vegetarianType;
 
     @OneToMany(mappedBy = "product")
-    private List<CartDetail> cartProduct = new ArrayList<>();
+    @JsonBackReference
+    private List<CartDetail> cartDetail = new ArrayList<>();
 
     //== BUSINESS LOGIC ==//
     public void addOrdersDetail(OrderProduct orderProduct) {
@@ -58,20 +62,28 @@ public class Product extends Auditable {
         }
     }
 
-    public void registProduct(ProductRequestDto productRequestDto) {
+    public void addVegetarianType(VegetarianType vegetarianType) {
+        this.vegetarianType = vegetarianType;
+    }
+
+    public void registrationProduct(ProductRequestDto productRequestDto,
+                                    VegetarianType vegetarianType) {
         this.productName = productRequestDto.getProductName();
         this.stockQuantity = productRequestDto.getStockQuantity();
         this.price = productRequestDto.getPrice();
         this.thumbnailImage = productRequestDto.getThumbnailImage();
         this.detailImage = productRequestDto.getDetailImage();
+        this.vegetarianType = vegetarianType;
     }
 
-    public void updateProductInfo(ProductRequestDto productPatchDto) {
-        this.productName = productPatchDto.getProductName();
-        this.stockQuantity = productPatchDto.getStockQuantity();
-        this.price = productPatchDto.getPrice();
-        this.thumbnailImage = productPatchDto.getThumbnailImage();
-        this.detailImage = productPatchDto.getDetailImage();
+    public void updateProductInfo(ProductRequestDto productRequestDto,
+                                  VegetarianType vegetarianType) {
+        this.productName = productRequestDto.getProductName();
+        this.stockQuantity = productRequestDto.getStockQuantity();
+        this.price = productRequestDto.getPrice();
+        this.thumbnailImage = productRequestDto.getThumbnailImage();
+        this.detailImage = productRequestDto.getDetailImage();
+        this.vegetarianType = vegetarianType;
     }
 
     public void removeStock(int quantity) {
@@ -80,10 +92,5 @@ public class Product extends Auditable {
             throw new OutOfStockException("상품의 재고가 부족합니다. (현재 재고 수량 : " + this.stockQuantity + ")");
         }
         this.stockQuantity = restStock;
-    }
-
-    //주문 취소시 상품 개수 다시 증가
-    public void addStock(int quantity) {
-        this.stockQuantity += quantity;
     }
 }
