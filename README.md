@@ -2,29 +2,33 @@
 
 <img width="900" alt="스크린샷 2022-10-10 오후 5 57 07" src="https://user-images.githubusercontent.com/95335294/194830808-1122b293-33c3-4e61-aab9-f92db5d0622b.png">
 
-## 🪴 Link
-
-<a href="https://not-error-064.tistory.com/">
-<img src="https://img.shields.io/badge/Tistory-ffffff?style=for-the-badge&logo=tistory&logoColor=black"></a>
-
+<a href="">
+  <img width="120" src="https://img.shields.io/badge/채식이들 배포 링크-000000?style=for-the-badge&logo=one&logoColor="white"></a>
+  
+<a href="https://www.youtube.com/watch?v=7s14aXx1vXM">
+  <img width="100" src="https://img.shields.io/badge/유튜브 영상-000000?style=for-the-badge&logo=youtube&logoColor=white"></a>
+  
 <a href="https://codestates.notion.site/Team-056-a086554278ae4be09455e1c62742efb2">
-  <img src="https://img.shields.io/badge/Notion-ffffff?style=for-the-badge&logo=notion&logoColor=black"></a>
+    <img width="80" src="https://img.shields.io/badge/팀 노션-000000?style=for-the-badge&logo=notion&logoColor=white"></a>
+  
+<a href="https://not-error-064.tistory.com/">
+  <img width="90" src="https://img.shields.io/badge/팀 블로그-000000?style=for-the-badge&logo=tistory&logoColor="white"></a>
 
 <br>
 
-### ▪️ 프로젝트 기간
+## ▪️ 프로젝트 기간
 
 #### `2022.09.07 ~ 2022.10.12`
 
-### ▪️ 프로젝트 설명
+## ▪️ 프로젝트 설명
 
- `핵심 목표 : 고객이 겪는 문제 해결하는 서비스를 만들자`
+ `핵심 팀 목표 : 고객이 겪는 문제 해결하는 서비스를 만들자`
 
-### 🛣  기획 배경
+### ▫️ 기획 배경
 
 * 소비자들의 채식 유형에 해당하는 제품을 편하게 구매할 수 있도록 제공하고자 함
 
-### 📝  서비스 특징
+### ▫️ 서비스 특징
 
 * 채식의 9가지 유형에 맞게 카테고리화하여, 개인 맞춤형으로 제품을 제공
 * 플렉시테리언, 폴로-페스코, 페스코, 폴로, 락토-오보, 락토, 오보, 비건, 프루테리언 등 다양한 종류의 채식에 맞게 상품 데이터 분류
@@ -32,10 +36,11 @@
 * UI//UX 부분에 채식 유형 정보를 알 수 있도록 제작하여 사용자 경험 극대화
 * 채식에 대한 정확한 인식으로 다양한 채식 유형의 소비자들에게 편한 쇼핑 서비스 제공
 
-### 🔑  핵심 기능
+### ▫️ 핵심 기능
 
-* 본인이 설정한 채식 유형에 맞게 식제품 위주 노출 기능
+* 본인이 설정한 **채식 유형**에 맞는 **식제품 노출** 기능
 
+<img width="800" alt="스크린샷 2022-10-10 오후 8 10 04" src="https://user-images.githubusercontent.com/95335294/194853396-37863935-c13e-4e51-b492-0c087e5bb570.png">
 
 <br>
 
@@ -53,6 +58,18 @@
 
 <br>
 
+## ⚙️ Skill
+
+### ▪️ Frontend
+
+<img width="1151" alt="스크린샷 2022-10-10 오후 8 09 19" src="https://user-images.githubusercontent.com/95335294/194853665-2b0631fb-cc23-4926-80b7-0027cf7ef43e.png">
+
+### ▪️ Backend 
+
+<img width="800" alt="스크린샷 2022-10-10 오후 6 58 01" src="https://user-images.githubusercontent.com/95335294/194841207-ce338cc0-affd-4dc6-96a4-71c435d56147.png">
+
+<br>
+
 ## 🔧 Collaboration Tools
 <p>
   <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
@@ -60,6 +77,7 @@
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
   <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
   <img src="https://img.shields.io/badge/zoom-0052CC?style=for-the-badge&logo=zoom&logoColor=white">
+   <br>
   <img src="https://img.shields.io/badge/discord-4d377b?style=for-the-badge&logo=discord&logoColor=white">
   <img src="https://img.shields.io/badge/kakao talk-fef01b?style=for-the-badge&logo=kakaotalk&logoColor=black">
   <img src="https://img.shields.io/badge/google calendar-ffffff?style=for-the-badge&logo=googlecalendar&logoColor=0052CC">
@@ -76,18 +94,6 @@
 ## 📝 Version
 
 <img width="800" alt="스크린샷 2022-10-10 오후 6 14 00" src="https://user-images.githubusercontent.com/95335294/194833583-9fa2f005-185f-48b0-94c7-a7baeff797cd.png">
-
-<br>
-
-## 🏗 Project Structure
-
-### ▪️ ERD
-
-<img width="800" alt="스크린샷_2022-10-08_오후_9 48 42" src="https://user-images.githubusercontent.com/95335294/194840459-9ed42400-837d-4bc6-8158-8363c98db1f8.png">
-
-### ▪️ Backend & CI/CD
-
-<img width="800" alt="스크린샷 2022-10-10 오후 6 58 01" src="https://user-images.githubusercontent.com/95335294/194841207-ce338cc0-affd-4dc6-96a4-71c435d56147.png">
 
 <br>
 
@@ -111,12 +117,11 @@
 
 (3) 해당 형식에 맞게 기록해주세요.
 
+<br>
+
 ### ▪️ branch strategy
 
-* main : 사용자에게 언제든 제품으로 출시할 수 있는 브랜치
-* dev/fe : 다음 버전 배포를 위한 "개발 중" 브랜치
-* dev/be : 다음 버전 배포를 위한 "개발 중" 브랜치
-* feature : 기능 개발, 리팩토링, 문서 작업 등 단위별 작업 관리를 위한 브랜치
+<img width="800" alt="스크린샷 2022-10-10 오후 8 09 42" src="https://user-images.githubusercontent.com/95335294/194853537-8f4d6c55-d1fe-4181-9adf-d6213f5140f3.png">
 
 (1) 각 개발자분들은 본 repository를 clone 합니다.
 
@@ -132,7 +137,3 @@
 
 (7) FE는 dev/fe로 BE는 dev/be로 pull request 를 합니다.
     (Pull request 시, 자동으로 템플릿이 뜨니 형식에 맞게 기록해주세요.)
-
-<br>
-
-
