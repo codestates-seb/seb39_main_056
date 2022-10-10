@@ -31,7 +31,7 @@ const FoodCard = ({ card }) => {
     fontWeight: '600',
   };
   return (
-    <Link to="/product/:id">
+    <Link to={`/product/${card.productId}`}>
       <Container>
         <Img src={card?.thumbnailImage} />
         <Text>

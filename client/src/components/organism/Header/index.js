@@ -23,6 +23,7 @@ const HeaderComponent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const logoutButton = () => {
+    localStorage.removeItem('JWT TOKEN');
     dispatch(setLoginChange(false));
     navigate('/');
   };
@@ -30,7 +31,6 @@ const HeaderComponent = () => {
   return (
     <>
       <HHeader>
-        {' '}
         채식유형만 선택하세요, 상품은 채식이들이 찾아드릴게요.🥕
       </HHeader>
       <Styled.HeaderContainer>
