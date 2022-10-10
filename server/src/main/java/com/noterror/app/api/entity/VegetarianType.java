@@ -28,5 +28,4 @@ public class VegetarianType {
     @OneToMany(mappedBy = "vegetarianType", targetEntity = Product.class)
     @Transient
     private List<Product> products = new ArrayList<>();
-
 }

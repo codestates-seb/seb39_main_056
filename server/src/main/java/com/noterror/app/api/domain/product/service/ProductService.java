@@ -6,10 +6,14 @@ import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 /**
  * @Interface 제품 CRUD 서비스
  */
 public interface ProductService {
+
+    // == GENERAL POLICY
 
     /**
      * @Method 제품 상세 조회 기능
@@ -32,7 +36,7 @@ public interface ProductService {
      * @param queryParamDto
      * @return Page
      */
-    Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto);
+    Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto,String email);
 
     /**
      * @Method 제품 등록 기능
@@ -54,4 +58,7 @@ public interface ProductService {
      * @param id
      */
     void removeProduct(long id);
+
+
+    // == PAGINATION POLICY
 }

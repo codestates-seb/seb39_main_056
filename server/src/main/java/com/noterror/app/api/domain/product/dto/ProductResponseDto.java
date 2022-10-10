@@ -34,8 +34,4 @@ public class ProductResponseDto {
         this.detailImage = product.getDetailImage();
         this.vegetarianType = product.getVegetarianType().getVegetarianTypeName();
     }
-
-    public ProductResponseDto(List<Product> products) {
-
-    }
 }

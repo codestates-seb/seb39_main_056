@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.product.service;
 
+import com.noterror.app.api.domain.member.repository.MemberRepository;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.dto.QueryParamDto;
@@ -7,20 +8,19 @@ import com.noterror.app.api.domain.product.repository.ProductRepository;
 import com.noterror.app.api.domain.vegetarian.repository.VegetarianTypeRepository;
 import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.entity.VegetarianType;
+import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.api.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.internal.util.collections.SingletonIterator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static com.noterror.app.api.global.exception.ExceptionCode.MEMBER_NOT_FOUND;
 import static com.noterror.app.api.global.exception.ExceptionCode.TYPE_BAD_REQUEST;
 
 @Transactional(readOnly = true)
@@ -30,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final VegetarianTypeRepository vegetarianTypeRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public ProductResponseDto findProduct(Long productId) {
@@ -43,19 +44,29 @@ public class ProductServiceImpl implements ProductService {
         int page = queryParamDto.getPage()-1;
         String sort = queryParamDto.getSort();
         int size = queryParamDto.getSize();
-        String vegetarianTypeName = queryParamDto.getVegetarianTypeName();
+        String vegetarianTypeName = queryParamDto.getVegetarian();
 
-        List<String> vegetarianTypes = vegetarianTypeRepository.findVegetarianTypes(vegetarianTypeName);
-
-            productRepository.findByVegetarianType(vegetarianTypes ,PageRequest.of(page, size, Sort.by(sort).descending()));
-
-        return null;
-
+        if(isAscending(orderBy)){
+            return productRepository.findAllByVegetarianTypeName(vegetarianTypeName,PageRequest.of(page, size, Sort.by(sort)));
+        }
+        return productRepository.findAllByVegetarianTypeName(vegetarianTypeName, PageRequest.of(page, size, Sort.by(sort).descending()));
     }
 
     @Override
-    public Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto) {
-        return null;
+    public Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, String email) {
+
+        String orderBy = queryParamDto.getOrderBy();
+        int page = queryParamDto.getPage()-1;
+        String sort = queryParamDto.getSort();
+        int size = queryParamDto.getSize();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(MEMBER_NOT_FOUND));
+
+        String vegetarianTypeName = member.getVegetarianType().getVegetarianTypeName();;
+
+        if(isAscending(orderBy)){
+            return productRepository.findAllByVegetarianTypeName(vegetarianTypeName,PageRequest.of(page, size, Sort.by(sort)));
+        }
+        return productRepository.findAllByVegetarianTypeName(vegetarianTypeName, PageRequest.of(page, size, Sort.by(sort).descending()));
     }
 
     @Override
