@@ -51,12 +51,12 @@
 |[<img src="https://avatars.githubusercontent.com/u/79829085?v=4" width="160px;" alt=""/>](https://github.com/Si-Hyeak-KANG) |[<img src="https://avatars.githubusercontent.com/u/98000922?v=4" width="160px" >](https://github.com/Juniverse)|[<img src="https://avatars.githubusercontent.com/u/95335294?v=4" width="160px">](https://github.com/hongmj37)|[<img src="https://avatars.githubusercontent.com/u/98211110?v=4" width="160px" >](https://github.com/HYUNSUK331)|
 |:---:|:---:|:---:|:---:|
 |[BE 강시혁](https://github.com/Si-Hyeak-KANG) |[BE 황윤준](https://github.com/YunJuniverse)|[BE 홍민정](https://github.com/hongmj37) |[BE 이현석](https://github.com/HYUNSUK331)|
-|🌟Team Leader|BE_CTO|기록 및 GitHub 관리|AWS 담당|
+|🌟Team Leader|BE_CTO| GitHub 책임자 |배포 담당자|
 
 |[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="160px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="160px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="160px" >](https://github.com/NR0617)|
 |:---:|:---:|:---:|
 |[FE 홍성권](https://github.com/Hong-sk) |[FE 정다운](https://github.com/git-daun) |[FE 오나래](https://github.com/NR0617)|
-|FE_CTO|팀블로그 관리|기록 및 AWS 담당|
+|FE_CTO|팀블로그 관리|회의록 |
 
 <br>
 
