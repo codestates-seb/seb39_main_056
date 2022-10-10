@@ -17,21 +17,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
 
 @Configuration
 public class SecurityConfig {
 
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
+    private final AppConfig appConfig;
 
-    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils) {
+    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils, AppConfig appConfig) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
+        this.appConfig = appConfig;
     }
 
     @Bean
@@ -53,25 +50,15 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER","ADMIN")
-                                .antMatchers(HttpMethod.PUT, "/members/**").hasAnyRole("USER","ADMIN")
-                                .antMatchers(HttpMethod.DELETE, "/members/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.PUT, "/members/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.DELETE, "/members/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers("/admin/**").hasRole("ADMIN")
-                                .antMatchers("/cart/**").hasAnyRole("USER","ADMIN")
-                                .antMatchers("/orders/**").hasAnyRole("USER","ADMIN")
+                                .antMatchers("/cart/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/orders/**").hasAnyRole("USER", "ADMIN")
                                 .anyRequest().permitAll()
                 );
         return http.build();
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
@@ -85,10 +72,11 @@ public class SecurityConfig {
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthFailureHandler());
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
-            builder.addFilter(jwtAuthenticationFilter)
+
+            builder.addFilter(appConfig.corsFilter())
+                    .addFilter(jwtAuthenticationFilter)
                     .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
         }
     }
 
 }
-

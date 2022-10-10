@@ -28,6 +28,8 @@ public class ProductResponseDto {
         this.price = product.getPrice();
         this.createDate = product.getCreateDate();
         this.editDate = product.getEditDate();
-        this.vegetarianType = product.getVegetarianType().getVegetarianTypeName();
+        this.thumbnailImage = product.getThumbnailImage();
+        this.detailImage = product.getDetailImage();
+        this.vegetarianType = product.getVegetarianType();
     }
 }

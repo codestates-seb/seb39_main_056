@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 
 /**
  * JPA 내장 타입, 스펙상 생성
+ *
  * @Field zipcode : 우편번호
  * @Field city : 도로명 및 도시 주소
  * @Field detailAddress : 상세주소
@@ -14,15 +15,15 @@ import javax.persistence.Embeddable;
 @Getter
 public class Address {
 
-    private String zipcode;
+    private String zipCode;
     private String city;
     private String detailAddress;
 
     protected Address() {
     }
 
-    public Address(String zipcode, String city, String detailAddress) {
-        this.zipcode = zipcode;
+    public Address(String zipCode, String city, String detailAddress) {
+        this.zipCode = zipCode;
         this.city = city;
         this.detailAddress = detailAddress;
     }

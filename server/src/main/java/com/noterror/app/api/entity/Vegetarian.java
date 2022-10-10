@@ -4,26 +4,20 @@ import com.noterror.app.api.entity.member.Member;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class VegetarianType {
-
+@Table(name = "vegetarian")
+public class Vegetarian {
     @Id
     @Column(unique = true)
-    private String vegetarianTypeName;
+    private String vegetarianType;
 
     @Column
-    private int vegetarianTypeLevel;
-
-    @OneToOne
-    @Transient
-    private Member member;
-
-    @OneToOne
-    @Transient
-    private Product product;
-
+    private Integer level;
 }
