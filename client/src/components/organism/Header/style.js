@@ -9,10 +9,12 @@ export const InputBox = styled.div`
   flex-basis: 30%;
   position: relative;
 `;
-export const Logo = styled.img``;
+export const Logo = styled.img`
+  width: 80px;
+`;
 export const HeaderContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 export const ButtonContainer = styled.div``;
