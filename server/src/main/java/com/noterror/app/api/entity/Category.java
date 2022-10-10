@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -29,11 +28,6 @@ public class Category {
     //@JsonManagedReference
     private Category parent;
 
-    /**
-     * 카테고리 깊이
-     */
-    @Column
-    private Long depth;
 
     /**
      * 자식 카테고리, 하위 카테고리를 List 형태로 호출
@@ -41,6 +35,13 @@ public class Category {
     @OneToMany(mappedBy = "parent")
     //@JsonBackReference
     private List<Category> children = new ArrayList<>();
+
+
+    /**
+     * 카테고리 깊이
+     */
+    @Column
+    private Long depth;
 
 
 }

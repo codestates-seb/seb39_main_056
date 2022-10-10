@@ -50,6 +50,7 @@ public class Product extends Auditable {
     @OneToMany(mappedBy = "product")
     private List<CartDetail> cartProduct = new ArrayList<>();
 
+
     //== BUSINESS LOGIC ==//
     public void addOrdersDetail(OrderProduct orderProduct) {
         this.orderProducts.add(orderProduct);

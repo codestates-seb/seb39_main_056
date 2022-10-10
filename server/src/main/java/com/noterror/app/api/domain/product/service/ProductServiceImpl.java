@@ -3,7 +3,9 @@ package com.noterror.app.api.domain.product.service;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
+import com.noterror.app.api.domain.vegetarian.repository.VegetarianTypeRepository;
 import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.VegetarianType;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.api.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +15,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final VegetarianTypeRepository vegetarianTypeRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -29,12 +34,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Product> findProductsWithPageAndSortByVegetarianTypeName(int page, int size, String sort, String orderBy, String vegetarianTypeName) {
-
+    public Page<Product> findProductsWithPageAndSortByVegetarianTypeNames(int page, int size, String sort, String orderBy, String vegetarianTypeName) {
         if (isAscending(orderBy)) {
-            return productRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
+            return productRepository.findAllByVegetarianTypeName(PageRequest.of(page, size, Sort.by(sort)), vegetarianTypeName);
         }
-        return productRepository.findAllByVegetarianType(
+        return productRepository.findAllByVegetarianTypeName(
                 PageRequest.of(page, size, Sort.by(sort).descending()), vegetarianTypeName);
     }
 

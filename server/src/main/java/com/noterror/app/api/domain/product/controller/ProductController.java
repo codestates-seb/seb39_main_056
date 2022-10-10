@@ -58,21 +58,20 @@ public class ProductController {
     @GetMapping("/list")
     public ResponseEntity getProducts(@RequestParam(required = false, defaultValue = "1") int page,
                                       @RequestParam(required = false, defaultValue = "20") int size,
-                                      @RequestParam(required = false, defaultValue = "createDate") String sort,
+                                      @RequestParam(required = false, defaultValue = "create_date") String sort,
                                       @RequestParam(required = false, defaultValue = "desc") String orderBy,
                                       @RequestParam(required = false, defaultValue = "플렉시테리언", value = "vegetarianTypeName") String vegetarianTypeName)
         {
 
             String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-            List<VegetarianTypeResponseDto> findVegeTypes = null;
             Page<Product> productInPage = null;
             if(currentUserEmail != "anonymousUser"){
                 String getMemberVegetarianType = memberService.findMember(currentUserEmail).getVegetarianType();
                 productInPage =
-                        productService.findProductsWithPageAndSortByVegetarianTypeName(page-1,size,sort,orderBy, getMemberVegetarianType);
+                        productService.findProductsWithPageAndSortByVegetarianTypeNames(page-1,size,sort,orderBy, getMemberVegetarianType);
             } else {
                 productInPage =
-                        productService.findProductsWithPageAndSortByVegetarianTypeName(page-1,size,sort,orderBy, vegetarianTypeName);
+                        productService.findProductsWithPageAndSortByVegetarianTypeNames(page-1,size,sort,orderBy, vegetarianTypeName);
             }
 
             List<Product> productsInList = productInPage.getContent();
