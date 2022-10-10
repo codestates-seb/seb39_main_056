@@ -1,6 +1,6 @@
-# 채식 유형에 따른 개인 맞춤 쇼핑몰 웹 애플리케이션 **채식이들 🥗 🍀**
+# 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **채식이들 🥗**
 
-( 이미지 삽입 )
+<img width="500" alt="스크린샷 2022-10-10 오후 5 57 07" src="https://user-images.githubusercontent.com/95335294/194830808-1122b293-33c3-4e61-aab9-f92db5d0622b.png">
 
 `핵심 목표 : 채식 유형 맞춤형 식품 구매`
 
@@ -14,13 +14,13 @@
 
  나아가 채식은 고기를 먹지않는 것'이라는 인식에서 벗어나, 본인만의 채식 유형을 선택할 수 있음
 
-#### 🛣 기획 배경
+### 🛣 기획 배경
 
 * 즉, 채식의 유통시장이 커지며 다양한 제품군이 출시되고 있지만 소비자들은 이를 인식하지 못하고 불편해 하고 있음
   * 비건 제품이 인기를 끌면서 연관성이 높은 유통업계에선 시장을 공략해 성장동력 확보와 매출 다변화라는 효과를 얻기 위해 대체육 뿐만 아니라 다양한 제품군의 신제품 출시에 분주한 상황
   * 국내 소비자들의 비거니즘 실천이 어려운 이유로 높은 가격과 적은 유통채널, 제품의 다양성 부족을 뽑음
 
-#### 📝 서비스 특징
+### 📝 서비스 특징
 
 * 채식의 9가지 유형에 맞게 카테고리화하여, 개인 맞춤형으로 제품을 제공
 * 플렉시테리언, 폴로-페스코, 페스코, 폴로, 락토-오보, 락토, 오보, 비건, 프루테리언 등 다야한 종류의 채식에 맞게 상품 데이터 분류
@@ -29,14 +29,16 @@
 * 채식에 대한 정확한 인식으로 다양한 채식 유형의 소비자들에게 편한 쇼핑 서비스 제공
 * 웹 또는 모바일로 서비스 이용 가능
 
-#### ✨ 핵심 기능
+### 🔑 핵심 기능
 
 * 제품을 조회하고, 결제하여 구매하는 쇼핑몰 기능
 * 본인이 설정한 채식 유형에 맞게 식제품 위주 노출 기능
 * 개인의 채식 유형 관리 기능
 * 채식 유형에 맞는 정보 제공 기능
 
-### 👨🏻‍💻 Member
+<br>
+
+## 👨🏻‍💻 Member
 
 |[<img src="https://avatars.githubusercontent.com/u/61141988?v=4" width="225px;" alt=""/>](https://github.com/Hong-sk) |[<img src="https://avatars.githubusercontent.com/u/94218285?v=4" width="225px">](https://github.com/git-daun)|[<img src="https://avatars.githubusercontent.com/u/94212747?v=4" width="225px" >](https://github.com/NR0617)|
 |:---:|:---:|:---:|
@@ -50,31 +52,45 @@
 
 <br>
 
-### (로고) 협업 Tool
+## 🔧 Collaboration Tools
 <p>
   <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
   <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
-
+  <img src="https://img.shields.io/badge/zoom-0052CC?style=for-the-badge&logo=zoom&logoColor=white">
+  <img src="https://img.shields.io/badge/discord-4d377b?style=for-the-badge&logo=discord&logoColor=white">
+  <img src="https://img.shields.io/badge/kakao talk-fef01b?style=for-the-badge&logo=kakaotalk&logoColor=black">
+  <img src="https://img.shields.io/badge/google calendar-ffffff?style=for-the-badge&logo=googlecalendar&logoColor=0052CC">
 </p>
 
 <br>
 
-### (로고) 작업 예상 기간
-(이미지 삽입)
+## 🗓 Schedule
+
+<img width="500" alt="스크린샷 2022-10-10 오후 6 12 46" src="https://user-images.githubusercontent.com/95335294/194833392-e2e80799-6152-4e2d-af85-cf9b011d5ffd.png">
 
 <br>
 
-### (로고) Project Structure
+## 📝 Version
 
-#### ▪️ CI/CD
-
-(이미지 삽입)
+<img width="500" alt="스크린샷 2022-10-10 오후 6 14 00" src="https://user-images.githubusercontent.com/95335294/194833583-9fa2f005-185f-48b0-94c7-a7baeff797cd.png">
 
 <br>
 
-### (로고) 브랜치 전략 & 커밋 메시지 규칙
+## 🏗 Project Structure
+
+### ▪️ ERD
+
+<img width="500" alt="스크린샷_2022-10-08_오후_9 48 42" src="https://user-images.githubusercontent.com/95335294/194840459-9ed42400-837d-4bc6-8158-8363c98db1f8.png">
+
+### ▪️ Backend & CI/CD
+
+<img width="500" alt="스크린샷 2022-10-10 오후 6 58 01" src="https://user-images.githubusercontent.com/95335294/194841207-ce338cc0-affd-4dc6-96a4-71c435d56147.png">
+
+<br>
+
+## 🏆 Strategy & Rule
 
 ### ▪️ Commit Message Rule
 
@@ -118,8 +134,10 @@
 
 <br>
 
-### Team Community
+## 🪴 Team Community
 
-#### Blog
+<a href="https://not-error-064.tistory.com/">
+<img src="https://img.shields.io/badge/Tistory-000000?style=for-the-badge&logo=tistory&logoColor=white"></a>
 
-#### Notion
+<a href="https://codestates.notion.site/Team-056-a086554278ae4be09455e1c62742efb2">
+  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white"></a>
