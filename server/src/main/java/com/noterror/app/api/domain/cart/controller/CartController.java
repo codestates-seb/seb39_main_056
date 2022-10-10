@@ -1,11 +1,15 @@
 package com.noterror.app.api.domain.cart.controller;
 
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
+import com.noterror.app.api.domain.cart.dto.CartOrderDto;
 import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
 import com.noterror.app.api.domain.cart.service.CartService;
+import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
+import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
 import com.noterror.app.api.global.response.MultiCartResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
+import com.noterror.app.api.global.response.SingleOrderResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,5 +72,15 @@ public class CartController {
     private String getCurrentUserEmail() {
         String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         return currentUserEmail;
+    }
+
+    /**
+     * 장바구니 상품 수량 업데이트
+     * 주문이 완료되면 제거되도록 !
+     */
+    @PostMapping("/{cart-id}/orders")
+    public @ResponseBody ResponseEntity orderCartProduct(@PathVariable("cart-id") Long cartId) {
+        OrderInfoDto orderId = cartService.orderCartProduct(cartId);
+        return new ResponseEntity(new SingleOrderResponse(orderId), HttpStatus.OK);
     }
 }

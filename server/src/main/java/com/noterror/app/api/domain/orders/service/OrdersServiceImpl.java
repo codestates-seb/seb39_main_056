@@ -79,4 +79,36 @@ public class OrdersServiceImpl implements OrdersService {
 
         return responseDto;
     }
+
+    //장바구니에서 주문할 상품 데이터를 전달받아 주문 생성
+    @Override
+    public OrderInfoDto orderCartList(List<OrderDto> orderDtoList, Long memberId) {
+        Member member = memberRepository.findById(memberId).get();
+
+        List<OrderProduct> orderProductList = new ArrayList<>();
+
+        for(OrderDto orderDto : orderDtoList) {
+            Product product = productRepository.findById(orderDto.getProductId()).get();
+            OrderProduct orderProduct = OrderProduct.createOrderProduct(product, orderDto.getOrdersQuantity());
+            orderProductRepository.save(orderProduct);
+            orderProductList.add(orderProduct);
+
+        }
+
+        Orders order = Orders.createOrder(member, orderProductList);
+        ordersRepository.save(order);
+
+        List<OrderProductDto> listOrderProduct = new ArrayList<>();
+        for(OrderProduct orderProducts : orderProductList) {
+            OrderProductDto orderProductDtos = new OrderProductDto(orderProducts.getProduct().getProductId(),
+                                                                    orderProducts.getProduct().getProductName(),
+                                                                    orderProducts.getOrdersQuantity(),
+                                                                    orderProducts.getProduct().getPrice());
+            listOrderProduct.add(orderProductDtos);
+        }
+
+        OrderInfoDto result = new OrderInfoDto(order.getOrdersId(), order.getCreateDate(),order.getOrdersStatus(),order.getTotalPrice(),listOrderProduct);
+
+        return result;
+    }
 }
