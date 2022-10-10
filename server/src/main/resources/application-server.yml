@@ -12,10 +12,10 @@ spring:
       mode: always
 
   datasource:
-    password: seb39main1
-    url: jdbc:mysql://database-3.cn22higluw0t.ap-northeast-2.rds.amazonaws.com:13306/test
-    username: admin
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    password:
+    url:
+    username:
+    driver-class-name:
 
 logging:
   level:
@@ -25,11 +25,11 @@ logging:
           jpa: DEBUG
 
 jwt:
-  access-token-expiration-minutes: 60
-  refresh-token-expiration-minutes: 420
+  access-token-expiration-minutes:
+  refresh-token-expiration-minutes:
   key:
-    secret: noterrorvegetarian7894431123412341234qwerjameshongyunAAgErt
+    secret:
 
 mail:
   address:
-    admin: admin056@admin.com
+    admin:
