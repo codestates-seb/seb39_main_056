@@ -753,7 +753,7 @@ Host 는 변경될 수 있습니다.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight nowrap"><code data-lang="http">GET /products/list?page=1&amp;size=20&amp;sort=signDate&amp;orderBy=desc HTTP/1.1
+<pre class="prettyprint highlight nowrap"><code data-lang="http">GET /products/list?page=1&amp;size=20&amp;sortInfo=signDate&amp;orderBy=desc HTTP/1.1
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -794,7 +794,7 @@ Content-Length: 995
     "totalPages" : 1
   },
   "sortInfo" : {
-    "sort" : "signDate",
+    "sortInfo" : "signDate",
     "orderBy" : "desc"
   }
 }</code></pre>
@@ -836,7 +836,7 @@ Content-Length: 995
 <td class="tableblock halign-left valign-top"><p class="tableblock">Page 내의 데이터 개수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sortInfo</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">정렬 기준</p></td>
 </tr>
 <tr>
@@ -957,7 +957,7 @@ Content-Length: 995
 <td class="tableblock halign-left valign-top"><p class="tableblock">정렬 정보</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sortInfo.sort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sortInfo.sortInfo</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">정렬 기준</p></td>
 </tr>

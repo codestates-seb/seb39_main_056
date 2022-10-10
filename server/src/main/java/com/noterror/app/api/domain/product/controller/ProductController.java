@@ -6,7 +6,7 @@ import com.noterror.app.api.domain.product.service.ProductService;
 import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.global.response.MultiProductsResponse;
 import com.noterror.app.api.global.response.SingleProductResponse;
-import com.noterror.app.api.global.sort.Sort;
+import com.noterror.app.api.global.response.SortInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -57,15 +57,17 @@ public class ProductController {
                                       @RequestParam(required = false, defaultValue = "create_date") String sort,
                                       @RequestParam(required = false, defaultValue = "desc") String orderBy,
                                       @RequestParam(required = false, defaultValue = "플렉시테리언") String vegetarian) {
-
         QueryParamDto queryParamDto = new QueryParamDto(page, size, sort, orderBy, vegetarian);
         String currentUserEmail = getCurrentUserEmail();
         Page<Product> productsInPage = findProducts(queryParamDto, currentUserEmail);
-        Sort sortInfo = new Sort(sort, orderBy);
-        List<ProductResponseDto> products = productsInPage.stream().map(ProductResponseDto::new).collect(Collectors.toList());
+        List<ProductResponseDto> results = productsInPage.stream().map(ProductResponseDto::new).collect(Collectors.toList());
 
         return new ResponseEntity(
-                new MultiProductsResponse(products, productsInPage, sortInfo), HttpStatus.OK);
+                new MultiProductsResponse(
+                        results,
+                        productsInPage,
+                        new SortInfo(sort, orderBy)),
+                HttpStatus.OK);
     }
 
     private Page<Product> findProducts(QueryParamDto queryParamDto, String email) {

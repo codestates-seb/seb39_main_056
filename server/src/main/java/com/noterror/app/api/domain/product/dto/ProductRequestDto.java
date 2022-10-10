@@ -1,6 +1,5 @@
 package com.noterror.app.api.domain.product.dto;
 
-import com.noterror.app.api.entity.VegetarianType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

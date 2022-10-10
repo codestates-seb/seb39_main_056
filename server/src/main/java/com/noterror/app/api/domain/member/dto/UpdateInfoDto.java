@@ -35,6 +35,5 @@ public class UpdateInfoDto {
      */
     private String detailAddress;
 
-    // TODO 채식 유형
     private String vegetarianType;
 }

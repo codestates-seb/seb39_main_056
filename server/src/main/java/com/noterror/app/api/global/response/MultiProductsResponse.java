@@ -1,6 +1,5 @@
 package com.noterror.app.api.global.response;
 
-import com.noterror.app.api.global.sort.Sort;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 
@@ -13,7 +12,7 @@ public class MultiProductsResponse<T> {
     private PageInfo pageInfo;
     private SortInfo sortInfo;
 
-    public MultiProductsResponse(List<T> products, Page page, Sort sort) {
+    public MultiProductsResponse(List<T> products, Page page, SortInfo sortInfo) {
         this.products = products;
         this.pageInfo = new PageInfo(
                 page.getNumber() + 1,
@@ -21,8 +20,8 @@ public class MultiProductsResponse<T> {
                 page.getTotalElements(),
                 page.getTotalPages());
         this.sortInfo = new SortInfo(
-                sort.getSort(),
-                sort.getOrderBy()
+                sortInfo.getSort(),
+                sortInfo.getOrderBy()
         );
     }
 }

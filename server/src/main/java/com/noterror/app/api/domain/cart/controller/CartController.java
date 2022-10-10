@@ -67,11 +67,6 @@ public class CartController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    private String getCurrentUserEmail() {
-        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        return currentUserEmail;
-    }
-
     /**
      * 장바구니 상품 수량 업데이트
      * 주문이 완료되면 제거되도록 !
@@ -81,4 +76,10 @@ public class CartController {
         OrderInfoDto orderId = cartService.orderCartProduct(cartId);
         return new ResponseEntity(new SingleOrderResponse(orderId), HttpStatus.OK);
     }
+
+    private String getCurrentUserEmail() {
+        String currentUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        return currentUserEmail;
+    }
+
 }

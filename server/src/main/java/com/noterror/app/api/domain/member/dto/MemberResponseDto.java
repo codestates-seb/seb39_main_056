@@ -28,7 +28,7 @@ public class MemberResponseDto {
         this.zipCode = member.getAddress().getZipcode();
         this.city = member.getAddress().getCity();
         this.detailAddress = member.getAddress().getDetailAddress();
-        this.vegetarianType = member.getVegetarianType().getVegetarianTypeName();
+        this.vegetarianType = member.getVegetarianType();
         this.createDate = member.getCreateDate();
         this.editDate = member.getEditDate();
     }

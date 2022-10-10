@@ -4,7 +4,6 @@ package com.noterror.app.api.entity.member;
 import com.noterror.app.api.domain.member.dto.SignUpDto;
 import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
 import com.noterror.app.api.entity.cart.Cart;
-import com.noterror.app.api.entity.VegetarianType;
 import com.noterror.app.api.global.audit.Auditable;
 import lombok.*;
 
@@ -38,12 +37,10 @@ public class Member extends Auditable implements Principal {
     @Embedded
     private Address address;
 
+    private String vegetarianType;
+
     @OneToOne(mappedBy = "member")
     private Cart cart;
-
-    @OneToOne
-    @JoinColumn(name = "vegetarian_type_name")
-    private VegetarianType vegetarianType;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
@@ -53,18 +50,14 @@ public class Member extends Auditable implements Principal {
         this.cart = cart;
     }
 
-    public void setVegetarianType(VegetarianType vegetarianType) {
-        this.vegetarianType = vegetarianType;
-    }
-
-    public void updateMemberInfo(UpdateInfoDto updateInfoDto, VegetarianType type) {
+    public void updateMemberInfo(UpdateInfoDto updateInfoDto) {
         this.phone = updateInfoDto.getPhone();
         this.address = new Address(
                 updateInfoDto.getZipCode(),
                 updateInfoDto.getCity(),
                 updateInfoDto.getDetailAddress()
         );
-        this.vegetarianType = type;
+        this.vegetarianType = updateInfoDto.getVegetarianType();
     }
 
     public void proceedGeneralSignUp(SignUpDto signUpDto, List<String> roles, String password) {

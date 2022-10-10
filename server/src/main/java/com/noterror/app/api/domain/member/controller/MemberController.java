@@ -41,7 +41,7 @@ public class MemberController {
     @PostMapping("/sign-up/type/{member-id}")
     public ResponseEntity<MemberResponseDto> postVegetarianTypeOfNewMember(
             @PathVariable("member-id") Long memberId,
-            @RequestBody @Valid VegetarianTypeInputDto vegetarianType) {
+            @RequestBody @Valid VegetarianInputDto vegetarianType) {
 
         MemberResponseDto response = memberService.saveTypeOfNewMember(memberId, vegetarianType);
         return new ResponseEntity(
