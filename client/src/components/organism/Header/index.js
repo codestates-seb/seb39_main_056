@@ -1,4 +1,4 @@
-import logo from '../../../assets/headerLogo.png';
+import logo from '../../../assets/5.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -19,9 +19,12 @@ const HeaderComponent = () => {
 
   return (
     <Styled.HeaderContainer>
-      <Link to="/">
-        <Styled.Logo src={logo} />
-      </Link>
+      <Styled.LogoBox>
+        <Link to="/">
+          <Styled.Logo src={logo} />
+        </Link>
+      </Styled.LogoBox>
+
       <Styled.InputBox>
         <FontAwesomeIcon
           icon={faMagnifyingGlass}

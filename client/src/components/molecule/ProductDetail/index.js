@@ -15,7 +15,7 @@ export const ProductInfoContainer = ({
       el => el.productId === Number(productId),
     );
     setThumnailImg(filtered[0]?.thumbnailImage);
-    console.log('2지워주세요');
+    console.log('useEffect');
   }, [productListData]);
 
   const plusCount = () => {

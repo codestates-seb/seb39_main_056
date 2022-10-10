@@ -15,6 +15,9 @@ const ProductDetail = () => {
   let url = `${process.env.REACT_APP_API_URL}/products/detail/${id}`;
   let thumnailUrl = `${process.env.REACT_APP_API_URL}/products/list`;
 
+  // let url = 'http://localhost:3001/detail';
+  // let thumnailUrl = 'http://localhost:3001/products';
+
   useEffect(() => {
     GetData(url, setProductData).then(result => {
       if (result === 'fail') navigate('/noresponse');
@@ -25,10 +28,13 @@ const ProductDetail = () => {
   }, []);
 
   useEffect(() => {
+    // if (thumnailImg !== undefined) {
+    //   dispatch(setProductListData(thumnailImg));
+    // }
     if (thumnailImg?.products !== undefined) {
       dispatch(setProductListData(thumnailImg.products));
     }
-    console.log('1지워주세요');
+    console.log('useEffect');
   }, [thumnailImg]);
 
   return <ProductPage productId={id} productData={productData?.product} />;
