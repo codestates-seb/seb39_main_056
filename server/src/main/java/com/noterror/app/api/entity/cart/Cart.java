@@ -17,7 +17,6 @@ import java.util.List;
 public class Cart extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_id")
     private Long cartId;
 
     @OneToOne(fetch = FetchType.LAZY)

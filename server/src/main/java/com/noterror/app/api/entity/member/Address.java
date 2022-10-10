@@ -15,15 +15,15 @@ import javax.persistence.Embeddable;
 @Getter
 public class Address {
 
-    private String zipcode;
+    private String zipCode;
     private String city;
     private String detailAddress;
 
     protected Address() {
     }
 
-    public Address(String zipcode, String city, String detailAddress) {
-        this.zipcode = zipcode;
+    public Address(String zipCode, String city, String detailAddress) {
+        this.zipCode = zipCode;
         this.city = city;
         this.detailAddress = detailAddress;
     }
