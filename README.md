@@ -1,6 +1,6 @@
 # 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **채식이들 🥗**
 
-<img width="500" alt="스크린샷 2022-10-10 오후 5 57 07" src="https://user-images.githubusercontent.com/95335294/194830808-1122b293-33c3-4e61-aab9-f92db5d0622b.png">
+<img width="800" alt="스크린샷 2022-10-10 오후 5 57 07" src="https://user-images.githubusercontent.com/95335294/194830808-1122b293-33c3-4e61-aab9-f92db5d0622b.png">
 
 `핵심 목표 : 채식 유형 맞춤형 식품 구매`
 
@@ -137,7 +137,7 @@
 ## 🪴 Team Community
 
 <a href="https://not-error-064.tistory.com/">
-<img src="https://img.shields.io/badge/Tistory-000000?style=for-the-badge&logo=tistory&logoColor=white"></a>
+<img src="https://img.shields.io/badge/Tistory-ffffff?style=for-the-badge&logo=tistory&logoColor=black"></a>
 
 <a href="https://codestates.notion.site/Team-056-a086554278ae4be09455e1c62742efb2">
-  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white"></a>
+  <img src="https://img.shields.io/badge/Notion-ffffff?style=for-the-badge&logo=notion&logoColor=black"></a>
