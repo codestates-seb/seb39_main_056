@@ -11,19 +11,45 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const FoodList = () => {
-  const token = setTokenHeader;
+const FoodList = ({ searchParams, setPages }) => {
+  const selectedPage =
+    searchParams.get('page') === null ? '' : `page=${searchParams.get('page')}`;
+  const selectedSize =
+    searchParams.get('size') === null ? '' : `size=${searchParams.get('size')}`;
+  const selectedSort =
+    searchParams.get('sort') === null ? '' : `sort=${searchParams.get('sort')}`;
+  const selectedOrderBy =
+    searchParams.get('orderBy') === null
+      ? ''
+      : `orderBy=${searchParams.get('orderBy')}`;
+  const selectedVegetarian =
+    searchParams.get('vegetarian') === null
+      ? ''
+      : `vegetarian=${searchParams.get('vegetarian')}`;
+  const token = setTokenHeader();
   const [cardList, setCardList] = useState([]);
-  const getProducts = async () => {
-    let url = `${process.env.REACT_APP_API_URL}/products/list`;
+  const getProducts = () => {
+    let url = `${process.env.REACT_APP_API_URL}/products/list?${selectedPage}&${selectedSize}&${selectedSort}&${selectedOrderBy}&${selectedVegetarian}`;
     // axios로 get요청하기
     axios
-      .get(url, { header: { ...token } })
-      .then(res => setCardList(res.data.products));
+      .get(url, { headers: { ...token } }) //
+      .then(res => {
+        setCardList(res.data.products);
+        setPages(res.data.pageInfo.totalPages);
+      });
+    // .then(data => {
+    //   console.log(cardList);
+    // });
   };
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [
+    selectedPage,
+    selectedSize,
+    selectedSort,
+    selectedOrderBy,
+    selectedVegetarian,
+  ]);
 
   return (
     <>

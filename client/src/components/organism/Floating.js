@@ -23,9 +23,21 @@ const Item = styled.div`
   font-size: x-small;
 `;
 
-const Floating = ({ Types }) => {
+const Floating = ({ Types, setSearchParams, searchParams }) => {
   const onClick = e => {
-    console.log(e.target.textContent);
+    const params = [];
+    const paramsObj = {};
+    for (let entry of searchParams.entries()) {
+      params.push(entry);
+    }
+    for (let i = 0; i < params.length; i++) {
+      paramsObj[`${params[i][0]}`] = params[i][1];
+    }
+    setSearchParams({
+      ...paramsObj,
+      page: '1',
+      vegetarian: `${e.target.textContent}`,
+    });
   };
   return (
     <Container>

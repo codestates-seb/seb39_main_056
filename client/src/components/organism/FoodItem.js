@@ -13,14 +13,15 @@ const FoodCategoryBtn = styled.div`
   :hover {
     background-color: beige;
   }
-  background-color: ${props => props.isClick || 'beige'};
+  /* background-color: ${props => props.isClick || 'beige'}; */
 `;
 
 const FoodItem = ({ item }) => {
   const [isClick, setIsClick] = useState(true);
   const onClick = e => {
     setIsClick(!isClick);
-    console.log(e.target.textContent, isClick);
+    // console.log(e.target.textContent, isClick);
+    alert(`${e.target.textContent} 카테고리 이동 기능은 추후 구현 예정입니다.`);
   };
   return (
     <FoodCategoryBtn onClick={onClick} isClick={isClick}>

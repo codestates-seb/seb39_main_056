@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { setTokenHeader } from '../../service/setTokenHeader';
+import { useDispatch } from 'react-redux';
+import { setLoginChange } from '../../actions';
 
 const Container = styled.table`
   margin: 20px;
@@ -47,6 +49,8 @@ const Select = styled.select`
   height: 40px;
 `;
 const Mypage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const token = setTokenHeader();
   // 맨처음 가져오는 GET 정보 저장된 state
   const [info, setInfo] = useState('');
@@ -56,10 +60,21 @@ const Mypage = () => {
   //setInfo에 데이터 담아주면 됨
   const fetchData = () => {
     let url = `${process.env.REACT_APP_API_URL}/members/info`;
-    axios.get(url, { header: { ...token } }).then(res => console.log(res));
-    // fetch(`http://localhost:3001/user`)
-    //   .then(res => res.json())
-    //   .then(data => setInfo(data));
+    axios
+      .get(url, { headers: { ...token } }) //
+      .then(res => {
+        setInfo(res.data.member);
+        // console.log(info);
+        // const selectedOption = document.querySelector(
+        //   `#${info.vegetarianType}`,
+        // );
+        // selectedOption.setAttribute('selected', 'selected');
+      })
+      .catch(e => {
+        console.error(e);
+        alert('유저 정보가 없습니다. 로그인 후 이용해주세요.');
+        navigate('/login');
+      });
   };
   useEffect(() => {
     fetchData();
@@ -70,49 +85,46 @@ const Mypage = () => {
   //onClick 함수는 어떤버튼을 클릭했는지 확인하는 함수
   const onClick = e => {
     a = e.target.name;
-    console.log('내가클릭한버튼은', a);
   };
   //onSubmit함수는 버튼에 따라 함수를 분기
   const onSubmit = e => {
     e.preventDefault();
-    let url = `http://localhost:3001/user`;
+    let url = `${process.env.REACT_APP_API_URL}/members/info`;
     if (a === 'updateBtn') {
-      console.log('정보수정');
       //input에 있는 정보들을 가져온다.
-      const phoneNum = e.target.phone.value;
+      const phone = e.target.phone.value;
       const zipCode = e.target.zipcode.value;
-      const address = e.target.firstAdress.value;
-      const addressDetail = e.target.secondAdress.value;
-      const type = { selects }.selects;
-      console.log(phoneNum, zipCode, address, addressDetail, type);
+      const city = e.target.firstAdress.value;
+      const detailAddress = e.target.secondAdress.value;
+      const vegetarianType = { selects }.selects;
       //patch요청을 한다.
       //정보수정요청을 한다.
       if (
-        phoneNum === '' ||
+        phone === '' ||
         zipCode === '' ||
-        address === '' ||
-        addressDetail === '' ||
-        type === ''
+        city === '' ||
+        vegetarianType === ''
       ) {
         alert('모든 정보를 입력해 주세요');
       } else {
         //fetch 요청
         try {
           fetch(url, {
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
-              'Content-Type': 'application/json',
+              'Content-type': 'application/json',
+              ...token,
             },
             body: JSON.stringify({
-              phoneNum,
+              phone,
               zipCode,
-              address,
-              addressDetail,
-              type,
+              city,
+              detailAddress,
+              vegetarianType,
             }),
           }).then(alert('정보가 성공적으로 수정되었습니다'));
         } catch (error) {
-          console.error(error);
+          alert(error);
         }
       }
     } else if (a === 'delBtn') {
@@ -121,8 +133,13 @@ const Mypage = () => {
           method: 'DELETE',
           headers: {
             'Content-type': 'application/json',
+            ...token,
           },
-        }).then(alert('정상적으로 회원 탈퇴 되었습니다.'));
+        }).then(res => {
+          localStorage.removeItem('JWT TOKEN');
+          dispatch(setLoginChange(false));
+          navigate('/');
+        });
       }
     }
   };
@@ -146,20 +163,22 @@ const Mypage = () => {
             <Td>
               <Input
                 disabled="disabled"
-                value={info?.userName === undefined ? '' : info?.userName}
+                defaultValue={info.memberName}
+                // value={info?.userName === undefined ? '' : info.memberName}
               />
             </Td>
           </tr>
 
           <tr>
             <Td>
-              <Link to="/order">주문내역조회</Link>
+              <Link to="/mypage/history">주문내역조회</Link>
             </Td>
             <Td>이메일</Td>
             <Td>
               <Input
                 disabled="disabled"
-                value={info?.emailAdress === undefined ? '' : info?.emailAdress}
+                defaultValue={info.email}
+                // value={info?.emailAdress === undefined ? '' : info?.email}
               />
             </Td>
             {/* 블로깅할거니까 지우지말자 */}
@@ -172,7 +191,7 @@ const Mypage = () => {
 
             <Td>전화번호</Td>
             <Td>
-              <Input name="phone" type="text" defaultValue={info.phoneNum} />
+              <Input name="phone" type="text" defaultValue={info.phone} />
             </Td>
           </tr>
           <tr>
@@ -187,12 +206,12 @@ const Mypage = () => {
                 <Input
                   name="firstAdress"
                   type="text"
-                  defaultValue={info.address}
+                  defaultValue={info.city}
                 />
                 <Input
                   name="secondAdress"
                   type="text"
-                  defaultValue={info.addressDetail}
+                  defaultValue={info.detailAddress}
                 />
               </div>
             </Td>
@@ -203,19 +222,19 @@ const Mypage = () => {
             <Td>채식유형</Td>
             <Td>
               <Select
-                value={selects}
-                defaultValue={info.type}
+                // value={info.vegetarianType}
+                defaultValue={info.vegetarianType}
                 onChange={e => setSelect(e.target.value)}
               >
-                <option>플렉시테리언</option>
-                <option>폴로-페스코</option>
-                <option>페스코</option>
-                <option>폴로</option>
-                <option>락토-오보</option>
-                <option>락토</option>
-                <option>오보</option>
-                <option>비건</option>
-                <option>프루테리언</option>
+                <option id="플렉시테리언">플렉시테리언</option>
+                <option id="폴로-페스코">폴로-페스코</option>
+                <option id="페스코">페스코</option>
+                <option id="폴로">폴로</option>
+                <option id="락토-오보">락토-오보</option>
+                <option id="락토">락토</option>
+                <option id="오보">오보</option>
+                <option id="비건">비건</option>
+                <option id="프루테리언">프루테리언</option>
               </Select>
             </Td>
           </tr>

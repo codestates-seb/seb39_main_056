@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { postLoginToken } from '../../hooks/postLoginToken';
+import { postLoginToken } from '../../service/postLoginToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoginChange } from '../../actions';
 import { useNavigate } from 'react-router-dom';

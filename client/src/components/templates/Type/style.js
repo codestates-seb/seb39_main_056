@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Title = styled.div`
   text-align: center;
-  font-weight: 700;
+  font-family: 'MICEGothic_Bold';
 `;
 
 export const ContentContainer = styled.div`
@@ -24,7 +24,7 @@ export const Img = styled.img`
 `;
 
 export const VegeType = styled.div`
-  font-weight: 600;
+  font-family: 'MICEGothic_Bold';
   font-size: 1.2rem;
   text-align: center;
   line-height: 1.2rem;

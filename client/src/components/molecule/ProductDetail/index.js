@@ -6,16 +6,18 @@ export const ProductInfoContainer = ({
   setQuantity,
 }) => {
   const plusCount = () => {
-    if (quantity < productData?.stockQuantity) setQuantity(prev => prev + 1);
+    // if (quantity < productData?.stockQuantity)
+    setQuantity(prev => prev + 1);
   };
   const minusCount = () => {
-    if (quantity === 0) return;
+    if (quantity === 1) return;
     setQuantity(prev => prev - 1);
   };
+
   return (
     <Styled.ProductInfoContainer>
       <Styled.ProductImgBox>
-        <Styled.ProductImg src={productData?.detailImage} />
+        <Styled.ProductImg src={productData?.thumbnailImage} />
       </Styled.ProductImgBox>
       <Styled.ProductDesc>
         <Styled.ProductTitle>{productData?.productName}</Styled.ProductTitle>
@@ -24,7 +26,7 @@ export const ProductInfoContainer = ({
             가격 : {productData?.price}원
           </Styled.ProductContent>
           <Styled.ProductContent>
-            재고수: {productData?.stockQuantity}개
+            채식유형: {productData?.vegetarianType}
           </Styled.ProductContent>
           <Styled.ProductContent>
             수량: <button onClick={minusCount}>-</button>

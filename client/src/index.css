@@ -6,19 +6,36 @@ body {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
+  /* monospace; */
 }
 
 #root {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+}
+
+@font-face {
+  font-family: 'MICEGothic_Bold';
+  src: url('./assets/MICEGothic Bold.ttf');
+}
+@font-face {
+  font-family: 'MICEGothic';
+  src: url('./assets/MICEGothic.ttf');
+}
+@font-face {
+  font-family: 'MICEGothic_OTF_Bold';
+  src: url('./assets/MICEGothic OTF Bold.otf');
+}
+@font-face {
+  font-family: 'MICEGothic_OTF';
+  src: url('./assets/MICEGothic OTF.otf');
 }

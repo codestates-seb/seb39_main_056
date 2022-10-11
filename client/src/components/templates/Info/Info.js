@@ -21,7 +21,12 @@ const InfoTemplate = ({ zipcode, address, setZipcode, setAddress, signUp }) => {
           </Styled.InputContainer>
           <Styled.InputContainer>
             <p>비밀번호</p>
-            <StyledInput type="password" minLength="8" maxLength="16" />
+            <StyledInput
+              type="password"
+              minLength="8"
+              maxLength="16"
+              placeholder="8자리 이상 16자리 이하"
+            />
           </Styled.InputContainer>
           <Styled.InputContainer>
             <p>핸드폰 번호</p>

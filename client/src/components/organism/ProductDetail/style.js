@@ -21,7 +21,21 @@ export const MoveToCartBtn = styled.button`
   border-radius: 5px;
   padding: 10px;
   font-size: 1.2em;
-  font-weight: bold;
+  font-family: 'MICEGothic_Bold';
+  &:hover {
+    background-color: lightgray;
+  }
+`;
+
+export const BuyBtn = styled.button`
+  width: fit-content;
+  margin: 10px 0px 10px auto;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1.2em;
+  font-family: 'MICEGothic_Bold';
   &:hover {
     background-color: lightgray;
   }

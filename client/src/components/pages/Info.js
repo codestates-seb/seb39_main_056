@@ -22,7 +22,16 @@ const Info = () => {
       detailAddress: e.target[7].value,
     };
 
-    if (zipcode === '' || address === '' || userInfo.phoneNum === '') {
+    const { memberName, email, phoneNum, password } = userInfo;
+
+    if (
+      password === '' ||
+      email === '' ||
+      memberName === '' ||
+      zipcode === '' ||
+      address === '' ||
+      phoneNum === ''
+    ) {
       alert('빈칸을 채워주세요!');
     } else {
       axios({
@@ -34,11 +43,15 @@ const Info = () => {
         },
         data: JSON.stringify(userInfo),
         // withCredentials: true,
-      }).then(res => {
-        if (res.status === 201) {
-          navigate(`/type/${res.data.memberId}`);
-        }
-      });
+      })
+        .then(res => {
+          if (res.status === 201) {
+            navigate(`/type/${res.data.memberId}`);
+          }
+        })
+        .catch(e => {
+          alert('이미 등록된 회원이거나 인터넷 연결이 올바르지 않습니다.');
+        });
     }
   };
 

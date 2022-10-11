@@ -47,7 +47,7 @@ function App() {
         <BodyContainer>
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="/mypage/:id" element={<Mypage />} />
+            <Route path="/mypage" element={<Mypage />} />
             <Route path="/mypage/history" element={<History />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/type/:id" element={<Type />} />

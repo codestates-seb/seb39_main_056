@@ -7,16 +7,19 @@ const History = () => {
   const getData = async () => {
     let url = `${process.env.REACT_APP_API_URL}/orders`;
     try {
-      const data = await fetch(url, {
+      fetch(url, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then(res => {
-        if (!res.ok) throw new Error('No Response');
-        return res.json();
-      });
-      setProductHistory(data);
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('No Response');
+          return res.json();
+        })
+        .then(data => {
+          setProductHistory(data.orders);
+        });
     } catch (e) {
       console.log(e.message);
     }

@@ -6,7 +6,7 @@ const MainColorBtn = styled.button`
   color: #33272a;
   border-radius: 0.2rem;
   padding: 0.3rem 0.8rem;
-  font-weight: 700;
+  font-family: 'MICEGothic_Bold';
   text-align: center;
   cursor: pointer;
   outline: none;

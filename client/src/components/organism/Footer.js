@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  margin-top: 50px;
   background-color: #33272a;
   box-sizing: border-box;
   display: flex;
@@ -12,7 +13,7 @@ const Container = styled.div`
 const Box = styled.div`
   /* color: #faeee7; */
   color: #c3f0ca;
-  font-weight: 600;
+  font-family: 'MICEGothic_Bold';
 `;
 
 const Item = styled.div`

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
+  width: 210px;
   display: flex;
   flex-direction: column;
   margin: 10px;
@@ -15,13 +16,13 @@ const Container = styled.div`
   }
 `;
 const Img = styled.img`
-  width: 210px;
+  width: 100%;
   margin: 0px auto;
   height: 210px;
   border-radius: 10px;
 `;
 
-const Text = styled.text`
+const Text = styled.div`
   text-decoration: none;
   text-align: center;
 `;
@@ -30,6 +31,7 @@ const FoodCard = ({ card }) => {
   const style = {
     fontWeight: '600',
   };
+
   return (
     <Link to={`/product/${card.productId}`}>
       <Container>

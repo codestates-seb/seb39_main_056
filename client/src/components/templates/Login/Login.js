@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import GoogleBtn from '../../molecule/GoogleBtn';
-import { postLoginToken } from '../../../hooks/postLoginToken';
+import { postLoginToken } from '../../../service/postLoginToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoginChange } from '../../../actions';
 import { useNavigate } from 'react-router-dom';
@@ -35,14 +35,17 @@ const Index = () => {
         'Content-type': 'application/json',
       },
       data: JSON.stringify(authInfo),
-    }).then(res => {
-      if (res.status === 200) {
-        localStorage.setItem('JWT TOKEN', res.headers.authorization.slice(6));
-        navigate('/');
-      } else {
-        alert('비밀번호나 이메일이 일치하지 않습니다.');
-      }
-    });
+    })
+      .then(res => {
+        if (res.status === 200) {
+          localStorage.setItem('JWT TOKEN', res.headers.authorization.slice(6));
+          dispatch(setLoginChange(true));
+          navigate('/');
+        }
+      })
+      .catch(e => {
+        alert('이메일이나 비밀번호가 일치하지 않습니다.');
+      });
   };
 
   const onGoogleSign = async res => {
