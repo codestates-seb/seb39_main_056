@@ -29,6 +29,7 @@ public class Member extends Auditable implements Principal {
     @Column(nullable = false)
     private String memberName;
 
+    @Column
     private String password;
 
     @Column(nullable = false)
@@ -37,12 +38,17 @@ public class Member extends Auditable implements Principal {
     @Embedded
     private Address address;
 
+    @Column
     private String vegetarianType;
 
     @OneToOne(mappedBy = "member")
     private Cart cart;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
+    @CollectionTable(
+            name = "roles",
+            joinColumns = @JoinColumn(name = "member_id")
+    )
     private List<String> roles = new ArrayList<>();
 
     //== BUSINESS LOGIC ==//

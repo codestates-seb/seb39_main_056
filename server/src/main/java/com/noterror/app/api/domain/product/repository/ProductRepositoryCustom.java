@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ProductRepositoryCustom {
 
     @Query(nativeQuery = true, value = "SELECT * FROM product WHERE vegetarian_type IN " +
-            "(SELECT vegetarian_type FROM vegetarian WHERE level " +
-            "< (SELECT level FROM vegetarian WHERE vegetarian_type = :vegetarianType) " +
+            "(SELECT vegetarian_type FROM vegetarian WHERE levels " +
+            "< (SELECT levels FROM vegetarian WHERE vegetarian_type = :vegetarianType) " +
             "OR vegetarian_type = :vegetarianType)")
     Page<Product> findAllByVegetarianTypeName(@Param("vegetarianType") String vegetarianType, Pageable pageable);
 }

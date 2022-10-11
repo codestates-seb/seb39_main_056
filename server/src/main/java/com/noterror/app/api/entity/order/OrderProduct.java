@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
+@Table(name = "order_product")
 public class OrderProduct {
 
     @Id

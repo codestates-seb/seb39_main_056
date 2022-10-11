@@ -2,6 +2,7 @@ package com.noterror.app.api.entity.member;
 
 import lombok.Getter;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -16,7 +17,9 @@ import javax.persistence.Embeddable;
 public class Address {
 
     private String zipCode;
+
     private String city;
+
     private String detailAddress;
 
     protected Address() {
