@@ -1,19 +1,18 @@
 # 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **채식이들 🥗**
----
 
 <a href="">
-  <img width="120" src="https://img.shields.io/badge/채식이들 배포 링크-000000?style=for-the-badge&logo=one&logoColor="white"></a>
+  <img width="150" src="https://img.shields.io/badge/채식이들 배포 링크-ffffff?style=for-the-badge&logo=one&logoColor=black"></a>
   
 <a href="https://www.youtube.com/watch?v=7s14aXx1vXM">
-  <img width="100" src="https://img.shields.io/badge/유튜브 영상-000000?style=for-the-badge&logo=youtube&logoColor=white"></a>
+  <img width="175" src="https://img.shields.io/badge/채식이들 유튜브 영상-ffffff?style=for-the-badge&logo=youtube&logoColor=black"></a>
   
 <a href="https://codestates.notion.site/Team-056-a086554278ae4be09455e1c62742efb2">
-    <img width="80" src="https://img.shields.io/badge/팀 노션-000000?style=for-the-badge&logo=notion&logoColor=white"></a>
+    <img width="150" src="https://img.shields.io/badge/채식이들 팀 노션-ffffff?style=for-the-badge&logo=notion&logoColor=black"></a>
   
 <a href="https://not-error-064.tistory.com/">
-  <img width="90" src="https://img.shields.io/badge/팀 블로그-000000?style=for-the-badge&logo=tistory&logoColor="white"></a>
+  <img width="160" src="https://img.shields.io/badge/채식이들 팀 블로그-ffffff?style=for-the-badge&logo=tistory&logoColor=black"></a>
 
----
+<br>
 
 <img width="900" alt="스크린샷 2022-10-10 오후 5 57 07" src="https://user-images.githubusercontent.com/95335294/194830808-1122b293-33c3-4e61-aab9-f92db5d0622b.png">
 
@@ -30,19 +29,20 @@
 
 * 소비자들의 채식 유형에 해당하는 제품을 편하게 구매할 수 있도록 제공하고자 함
 
-### ▫️ 서비스 특징
-
-* 채식의 9가지 유형에 맞게 카테고리화하여, 개인 맞춤형으로 제품을 제공
-* 플렉시테리언, 폴로-페스코, 페스코, 폴로, 락토-오보, 락토, 오보, 비건, 프루테리언 등 다양한 종류의 채식에 맞게 상품 데이터 분류
-* 대체품, 야채류 제품만 나열되어 있는 기존 채식 쇼핑몰과 다른 차별점 보유
-* UI//UX 부분에 채식 유형 정보를 알 수 있도록 제작하여 사용자 경험 극대화
-* 채식에 대한 정확한 인식으로 다양한 채식 유형의 소비자들에게 편한 쇼핑 서비스 제공
-
 ### ▫️ 핵심 기능
 
 * 본인이 설정한 **채식 유형**에 맞는 **식제품 노출** 기능
 
 <img width="800" alt="스크린샷 2022-10-10 오후 8 10 04" src="https://user-images.githubusercontent.com/95335294/194853396-37863935-c13e-4e51-b492-0c087e5bb570.png">
+
+### ▫️ 서비스 특징
+
+* 플렉시테리언, 폴로-페스코, 페스코, 폴로, 락토-오보, 락토, 오보, 비건, 프루테리언 등 채식 유형에 맞게 상품 데이터 분류
+* 대체품, 야채류 제품만 나열되어 있는 기존 채식 쇼핑몰과 다른 차별점 보유
+* UI//UX 부분에 채식 유형 정보를 알 수 있도록 제작하여 사용자 경험 극대화
+* 채식에 대한 정확한 인식으로 다양한 채식 유형의 소비자들에게 편한 쇼핑 서비스 제공
+
+
 
 <br>
 
@@ -60,11 +60,13 @@
 
 <br>
 
-## ⚙️ Skill
+## 🫧 Skill
 
 ### ▪️ Frontend
 
 <img width="800" alt="스크린샷 2022-10-10 오후 8 09 19" src="https://user-images.githubusercontent.com/95335294/194853665-2b0631fb-cc23-4926-80b7-0027cf7ef43e.png">
+
+<br>
 
 ### ▪️ Backend 
 
@@ -72,7 +74,7 @@
 
 <br>
 
-## 🔧 Collaboration Tools
+## 💌 Collaboration Tools
 <p>
   <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
@@ -121,7 +123,7 @@
 
 <br>
 
-### ▪️ branch strategy
+### ▪️ Branch strategy
 
 <img width="800" alt="스크린샷 2022-10-10 오후 8 09 42" src="https://user-images.githubusercontent.com/95335294/194853537-8f4d6c55-d1fe-4181-9adf-d6213f5140f3.png">
 
