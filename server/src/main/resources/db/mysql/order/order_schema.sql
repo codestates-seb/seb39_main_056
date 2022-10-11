@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS `orders` CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
 
-CREATE TABLE `orders`
-(
-    orders_id         bigint     not null,
-    created_date    timestamp,
-    edit_date       timestamp,
-    orders_status   varchar     not null
-);
+create table orders (
+                        orders_id bigint,
+                        create_date datetime(6),
+                        edit_date datetime(6),
+                        orders_status varchar(255),
+                        member_id bigint
+) engine=InnoDB;

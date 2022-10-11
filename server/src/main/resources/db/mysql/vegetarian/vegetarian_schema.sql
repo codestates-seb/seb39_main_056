@@ -1,7 +1,6 @@
-DROP TABLE IF EXISTS `vegetarian` CASCADE;
+DROP TABLE IF EXISTS vegetarian CASCADE;
 
-CREATE TABLE `vegetarian`
-(
-    vegetarian_type    varchar     not null,
-    levels             int         not null
-);
+create table vegetarian (
+                            vegetarian_type varchar(255),
+                            levels integer
+) engine=InnoDB;

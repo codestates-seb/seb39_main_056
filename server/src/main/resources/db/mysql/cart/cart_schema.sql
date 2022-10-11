@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS `cart` CASCADE;
+DROP TABLE IF EXISTS cart CASCADE;
 
-CREATE TABLE `cart`
-(
-    cart_id         bigint     not null,
-    created_date    timestamp,
-    edit_date       timestamp
-);
+create table cart (
+                      cart_id bigint,
+                      create_date datetime(6),
+                      edit_date datetime(6),
+                      member_id bigint
+) engine=InnoDB;

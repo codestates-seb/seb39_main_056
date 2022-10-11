@@ -11,13 +11,13 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "CART_DETAIL")
+@Table(name = "cart_detail")
 public class CartDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_detail_id")
     private Long cartDetailId; // CART_DETAIL_ID
 
+    @Column
     private int purchaseQuantity;
 
     @ManyToOne
@@ -41,8 +41,8 @@ public class CartDetail {
         this.purchaseQuantity += purchaseQuantity;
     }
 
-    public void updatePurchaseQuantity(int purchaseQuntity) {
-        this.purchaseQuantity = purchaseQuntity;
+    public void updatePurchaseQuantity(int purchaseQuantity) {
+        this.purchaseQuantity = purchaseQuantity;
     }
 
     public static CartDetail createCartDetail(Cart cart, Product product, int count) {

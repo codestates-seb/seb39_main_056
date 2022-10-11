@@ -1,7 +1,8 @@
-DROP TABLE IF EXISTS `cart_detail` CASCADE;
+DROP TABLE IF EXISTS cart_detail CASCADE;
 
-CREATE TABLE `cart_detail`
-(
-    cart_detail_id      bigint     not null,
-    purchase_quantity   int        not null
-);
+create table cart_detail (
+                             cart_detail_id bigint,
+                             purchase_quantity integer,
+                             cart_id bigint,
+                             product_id bigint
+) engine=InnoDB;
