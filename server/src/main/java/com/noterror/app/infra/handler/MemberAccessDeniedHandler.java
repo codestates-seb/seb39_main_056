@@ -1,5 +1,6 @@
 package com.noterror.app.infra.handler;
 
+import com.noterror.app.api.global.exception.ExceptionCode;
 import com.noterror.app.api.global.exception.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,5 +22,6 @@ public class MemberAccessDeniedHandler implements AccessDeniedHandler {
                        AccessDeniedException accessDeniedException) throws IOException, ServletException {
         ErrorResponse.sendErrorResponse(response, HttpStatus.FORBIDDEN);
         log.warn("Forbidden error happened: {}", accessDeniedException.getMessage());
+        ErrorResponse.of(ExceptionCode.MEMBER_FORBIDDEN);
     }
 }
