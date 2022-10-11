@@ -81,9 +81,3 @@ CREATE TABLE IF NOT EXISTS VEGETARIAN
     levels integer,
     PRIMARY KEY (vegetarian_type)
 );
-
-
-
-
-
-
