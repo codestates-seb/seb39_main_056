@@ -1,11 +1,8 @@
 package com.noterror.app.api.entity;
 
-import com.noterror.app.api.entity.member.Member;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -18,5 +15,5 @@ public class Vegetarian {
     private String vegetarianType;
 
     @Column
-    private Integer level;
+    private Integer levels;
 }

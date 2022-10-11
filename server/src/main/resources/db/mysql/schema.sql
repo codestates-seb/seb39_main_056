@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS CATEGORY
 CREATE TABLE IF NOT EXISTS VEGETARIAN
 (
     vegetarian_type int NOT NULL,
-    level integer,
+    levels integer,
     PRIMARY KEY (vegetarian_type)
 );
 
