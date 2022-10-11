@@ -50,7 +50,7 @@ public class ProductController {
                                       @RequestParam(required = false, defaultValue = "20") int size,
                                       @RequestParam(required = false, defaultValue = "create_date") String sort,
                                       @RequestParam(required = false, defaultValue = "desc") String orderBy,
-                                      @RequestParam(required = false, defaultValue = "플렉시테리언") String vegetarian) {
+                                      @RequestParam(required = false) String vegetarian) {
         QueryParamDto queryParamDto = new QueryParamDto(page, size, sort, orderBy, vegetarian);
         String currentUserEmail = getCurrentUserEmail();
         Page<Product> productsInPage = findProducts(queryParamDto, currentUserEmail);
@@ -66,9 +66,14 @@ public class ProductController {
 
     private Page<Product> findProducts(QueryParamDto queryParamDto, String email) {
         if (isAnonymousUser(email)) {
+            if(queryParamDto.getVegetarian()==null){queryParamDto.setVegetarian("플렉시테리언");}
+            return productService.findProductsWhenAnonymous(queryParamDto);
+        } else if(isAnonymousUser(email)==false && queryParamDto.getVegetarian()!=null){
             return productService.findProductsWhenAnonymous(queryParamDto);
         }
-        return productService.findProductsWhenAuthenticated(queryParamDto, email);
+        else {
+                return productService.findProductsWhenAuthenticated(queryParamDto, email);
+        }
     }
 
     private String getCurrentUserEmail() {
