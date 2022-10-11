@@ -1,4 +1,4 @@
-INSERT INTO VEGETARIAN (vegetarian_type,level)
+INSERT INTO VEGETARIAN (vegetarian_type, levels)
 VALUES ('프루테리언',1),
        ('비건', 2),
        ('오보', 3),

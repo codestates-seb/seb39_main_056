@@ -1,9 +1,23 @@
-CREATE TABLE IF NOT EXISTS `member` (
-                                      member_id bigint not null,
-                                      email varchar not null,
-                                      member_name varchar not null,
+CREATE TABLE IF NOT EXISTS PRODUCT
+(
+    product_id bigint NOT NULL AUTO_INCREMENT,
+    product_name varchar NOT NULL,
+    price int NOT NULL,
+    stock_quantity int NOT NULL,
+    thumbnail_image clob,
+    detail_image clob,
+    vegetarian_type varchar,
+    create_date timestamp,
+    edit_date timestamp,
+    PRIMARY KEY (product_id)
+    );
+
+CREATE TABLE IF NOT EXISTS MEMBER (
+                                      member_id bigint NOT NULL AUTO_INCREMENT,
+                                      email varchar NOT NULL UNIQUE,
+                                      member_name varchar NOT NULL,
                                       password varchar,
-                                      phone varchar not null,
+                                      phone varchar NOT NULL,
                                       zip_code varchar,
                                       city varchar,
                                       detail_address varchar,
@@ -13,43 +27,29 @@ CREATE TABLE IF NOT EXISTS `member` (
                                       PRIMARY KEY (member_id)
     );
 
-CREATE TABLE IF NOT EXISTS PRODUCT
-(
-    product_id bigint not null AUTO_INCREMENT,
-    product_name varchar not null,
-    price int not null,
-    stock_quantity int not null,
-    thumbnail_image clob,
-    detail_image clob,
-    vegetarian_type varchar,
-    create_date timestamp,
-    edit_date timestamp,
-    PRIMARY KEY (product_id)
-    );
-
 CREATE TABLE IF NOT EXISTS MEMBER_ROLES (
                                             member_member_id bigint not null,
                                             roles varchar(255)
     );
 
 CREATE TABLE IF NOT EXISTS CART (
-   cart_id bigint not null AUTO_INCREMENT,
+   cart_id bigint NOT NULL AUTO_INCREMENT,
    create_date timestamp,
    edit_date timestamp,
-   PRIMARY KEY (cart_id),
+   PRIMARY KEY (cart_id)
    FOREIGN KEY (mamber_id) REFERENCES member(member_id)
 );
 
 CREATE TABLE IF NOT EXISTS CART_DETAIL (
-    cart_detail_id bigint not null AUTO_INCREMENT,
-    purchase_quantity int not null,
+    cart_detail_id bigint NOT NULL AUTO_INCREMENT,
+    purchase_quantity int NOT NULL,
     PRIMARY KEY (cart_detail_id),
     FOREIGN KEY (cart_id) REFERENCES cart (cart_id),
     FOREIGN KEY (product_id) REFERENCES product (product_id)
 );
 
 CREATE TABLE IF NOT EXISTS ORDERS (
-                                      orders_id bigint not null AUTO_INCREMENT,
+                                      orders_id bigint NOT NULL AUTO_INCREMENT,
                                       create_date timestamp,
                                       edit_date timestamp,
                                       orders_status varchar,
@@ -58,9 +58,9 @@ CREATE TABLE IF NOT EXISTS ORDERS (
     );
 
 CREATE TABLE IF NOT EXISTS ORDER_PRODUCT (
-    orders_product_id bigint not null AUTO_INCREMENT,
-    orders_quantity int not null,
-    orders_price int not null,
+    orders_product_id bigint NOT NULL AUTO_INCREMENT,
+    orders_qantity integer NOT NULL,
+    orders_price integer NOT NULL,
     PRIMARY KEY (orders_product_id),
     FOREIGN KEY (orders_id) REFERENCES orders (orders_id),
     FOREIGN KEY (product_id) REFERENCES product (product_id)
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS ORDER_PRODUCT (
 
 CREATE TABLE IF NOT EXISTS CATEGORY
 (
-    category_id bigint not null AUTO_INCREMENT,
+    category_id bigint NOT NULL AUTO_INCREMENT,
     category_name varchar,
     depth bigint,
     parent_category_id bigint,
@@ -77,13 +77,7 @@ CREATE TABLE IF NOT EXISTS CATEGORY
 
 CREATE TABLE IF NOT EXISTS VEGETARIAN
 (
-    vegetarian_type int not null,
-    level int,
+    vegetarian_type int NOT NULL,
+    levels integer,
     PRIMARY KEY (vegetarian_type)
 );
-
-
-
-
-
-
