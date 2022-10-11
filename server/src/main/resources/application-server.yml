@@ -1,21 +1,19 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: validate
-    defer-datasource-initialization: true
-    generate-ddl: false
+      ddl-auto: create
+    #defer-datasource-initialization: true
+
+  datasource:
+    password: seb39main1
+    url: jdbc:mysql://database-3.cn22higluw0t.ap-northeast-2.rds.amazonaws.com:13306/test
+    username: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   sql:
     init:
-      data-locations: classpath*:db/mysql/data.sql
-      schema-locations: classpath*:db/mysql/schema.sql
       mode: always
 
-  datasource:
-    password:
-    url:
-    username:
-    driver-class-name:
 
 logging:
   level:
@@ -25,11 +23,11 @@ logging:
           jpa: DEBUG
 
 jwt:
-  access-token-expiration-minutes:
-  refresh-token-expiration-minutes:
+  access-token-expiration-minutes: 60
+  refresh-token-expiration-minutes: 420
   key:
-    secret:
+    secret: noterrorvegetarian7894431123412341234qwerjameshongyunAAgErt
 
 mail:
   address:
-    admin:
+    admin: admin056@admin.com
