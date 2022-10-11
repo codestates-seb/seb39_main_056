@@ -35,5 +35,5 @@ public interface CartService {
      */
     void deleteCart(Long cartDetailId);
 
-    OrderInfoDto orderCartProduct(Long cartId);
+
 }

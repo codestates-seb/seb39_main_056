@@ -1,6 +1,9 @@
 package com.noterror.app.api.domain.orders.service;
 
+import com.noterror.app.api.domain.cart.repository.CartDetailRepository;
 import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.cart.Cart;
+import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.entity.order.Orders;
 import com.noterror.app.api.entity.order.OrderProduct;
@@ -28,6 +31,7 @@ public class OrdersServiceImpl implements OrdersService {
     private final OrderProductRepository orderProductRepository;
     private final MemberRepository memberRepository;
     private final ProductRepository productRepository;
+    private final CartDetailRepository cartDetailRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -62,6 +66,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     //제품 상세페이지에서 주문
+    @Override
     public OrderResponseDto orderProduct(OrderDto orderDto, String email) {
         Product product = productRepository.findById(orderDto.getProductId()).get();
         Member member = memberRepository.findByEmail(email).get();
@@ -81,11 +86,28 @@ public class OrdersServiceImpl implements OrdersService {
         return responseDto;
     }
 
-    //장바구니에서 주문할 상품 데이터를 전달받아 주문 생성
     @Override
-    public OrderInfoDto orderCartList(List<OrderDto> orderDtoList, Long memberId) {
-        Member member = memberRepository.findById(memberId).get();
+    public OrderInfoDto orderCartProducts(String email) {
+        Member findMember = memberRepository.findByEmail(email).get();
+        List<CartDetail> cartDetailList = findMember.getCart().getCartDetail();
 
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        for (CartDetail cartDetail : cartDetailList) {
+            OrderDto orderWishDto = new OrderDto();
+            orderWishDto.of(cartDetail);
+            orderDtoList.add(orderWishDto);
+        }
+        OrderInfoDto orderProductId = orderCartList(orderDtoList, findMember);
+
+        for (CartDetail cartDetail : cartDetailList) {
+            cartDetailRepository.deleteById(cartDetail.getCartDetailId());
+        }
+
+        return orderProductId;
+    }
+
+    //장바구니에서 주문할 상품 데이터를 전달받아 주문 생성
+    public OrderInfoDto orderCartList(List<OrderDto> orderDtoList, Member member) {
         List<OrderProduct> orderProductList = new ArrayList<>();
 
         for (OrderDto orderDto : orderDtoList) {

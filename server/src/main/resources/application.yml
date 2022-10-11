@@ -28,11 +28,11 @@ logging:
           jpa: DEBUG
 
 jwt:
-  access-token-expiration-minutes:
-  refresh-token-expiration-minutes:
+  access-token-expiration-minutes: 60
+  refresh-token-expiration-minutes: 420
   key:
-    secret:
+    secret: noterrorvegetarian7894431123412341234qwerjameshongyunAAgErt
 
 mail:
   address:
-    admin:
+    admin: admin056@admin.com

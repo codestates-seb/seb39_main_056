@@ -30,7 +30,7 @@ public class AdminProductController {
      * @RequestBody 제품명, 수량, 금액, 썸네일 이미지, 상세 이미지
      */
     @PostMapping("/registration")
-    public ResponseEntity<ProductResponseDto> postProduct(@RequestBody ProductRequestDto productRequestDto) {
+    public ResponseEntity<ProductResponseDto> postProduct(@RequestBody @Valid ProductRequestDto productRequestDto) {
         ProductResponseDto response = productService.createProduct(productRequestDto);
         return new ResponseEntity(
                 new SingleProductResponse(response), HttpStatus.CREATED);
