@@ -13,7 +13,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Category {
+public class
+Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,6 @@ public class Category {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     @Nullable
-    //@JsonManagedReference
     private Category parent;
 
     /**

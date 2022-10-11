@@ -5,7 +5,8 @@ import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.order.OrderProduct;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.global.audit.Auditable;
-import com.noterror.app.api.global.exception.OutOfStockException;
+import com.noterror.app.api.global.exception.BusinessLogicException;
+import com.noterror.app.api.global.exception.ExceptionCode;
 import lombok.*;
 
 import javax.persistence.*;
@@ -80,7 +81,7 @@ public class Product extends Auditable {
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity; //남은 재고
         if (restStock < 0) {
-            throw new OutOfStockException("상품의 재고가 부족합니다. (현재 재고 수량 : " + this.stockQuantity + ")");
+            throw new BusinessLogicException(ExceptionCode.PRODUCT_SOLD_OUT);
         }
         this.stockQuantity = restStock;
     }

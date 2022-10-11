@@ -1,6 +1,9 @@
 package com.noterror.app.infra.jwt;
 
+import com.noterror.app.api.global.exception.ExceptionCode;
+import com.noterror.app.api.global.exception.response.ErrorResponse;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -76,11 +79,10 @@ public class JwtTokenizer {
     // 검증 후, Claims을 반환 하는 용도
     public Jws<Claims> getClaims(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
-
         Jws<Claims> claims = Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(jws);
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(jws);
         return claims;
     }
 

@@ -34,34 +34,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> findProductsWhenAnonymous(QueryParamDto queryParamDto) {
-        String orderBy = queryParamDto.getOrderBy();
-        int page = queryParamDto.getPage() - 1;
-        String sort = queryParamDto.getSort();
-        int size = queryParamDto.getSize();
-        String vegetarianType = queryParamDto.getVegetarian();
-
-        if (isAscending(orderBy)) {
-            return productRepository.findAllByVegetarianTypeName(vegetarianType, PageRequest.of(page, size, Sort.by(sort)));
+        if (isNullInputType(queryParamDto.getVegetarian())) {
+            queryParamDto.setVegetarian("플렉시테리언");
         }
-        return productRepository.findAllByVegetarianTypeName(vegetarianType, PageRequest.of(page, size, Sort.by(sort).descending()));
+        return getAllByVegetarianType(queryParamDto);
     }
 
     @Override
     public Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, String email) {
-
-        String orderBy = queryParamDto.getOrderBy();
-        int page = queryParamDto.getPage() - 1;
-        String sort = queryParamDto.getSort();
-        int size = queryParamDto.getSize();
-
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new BusinessLogicException(MEMBER_NOT_FOUND));
-        String vegetarianTypeName = member.getVegetarianType();
-
-        if (isAscending(orderBy)) {
-            return productRepository.findAllByVegetarianTypeName(vegetarianTypeName, PageRequest.of(page, size, Sort.by(sort)));
+        if (isNullInputType(queryParamDto.getVegetarian())) {
+            Member member = getMember(email);
+            queryParamDto.setVegetarian(member.getVegetarianType());
         }
-        return productRepository.findAllByVegetarianTypeName(vegetarianTypeName, PageRequest.of(page, size, Sort.by(sort).descending()));
+        return getAllByVegetarianType(queryParamDto);
     }
 
     @Override
@@ -95,7 +80,29 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.PRODUCT_NOT_FOUND));
     }
 
-    private boolean isAscending(String orderBy) {
-        return orderBy.equals("asc");
+    private boolean isDescending(String orderBy) {
+        return orderBy.equals("desc");
+    }
+
+    private boolean isNullInputType(String vegetarianType) {
+        return vegetarianType == null;
+    }
+
+    private Member getMember(String email) {
+        return memberRepository.findByEmail(email)
+                .orElseThrow(() -> new BusinessLogicException(MEMBER_NOT_FOUND));
+    }
+
+    private Page<Product> getAllByVegetarianType(QueryParamDto queryParamDto) {
+
+        Sort sort = Sort.by(queryParamDto.getSort());
+
+        if (isDescending(queryParamDto.getOrderBy())) {
+            sort = Sort.by(queryParamDto.getSort()).descending();
+        }
+        return productRepository.findAllByVegetarianTypeName(
+                queryParamDto.getVegetarian(),
+                PageRequest.of(queryParamDto.getPage(), queryParamDto.getSize(), sort)
+        );
     }
 }

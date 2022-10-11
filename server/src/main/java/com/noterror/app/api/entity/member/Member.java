@@ -44,7 +44,7 @@ public class Member extends Auditable implements Principal {
     @OneToOne(mappedBy = "member")
     private Cart cart;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "roles",
             joinColumns = @JoinColumn(name = "member_id")

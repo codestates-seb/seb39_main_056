@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import static com.noterror.app.api.global.exception.ExceptionCode.MEMBER_AUTH_FAIL;
 import static com.noterror.app.api.global.exception.ExceptionCode.MEMBER_NOT_FOUND;
 
 @Component
@@ -24,7 +25,7 @@ public class MemberDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member findMember = memberRepository.findByEmail(username)
-                .orElseThrow(() -> new BusinessLogicException(MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new BusinessLogicException(MEMBER_AUTH_FAIL));
         return new MemberDetails(findMember, authorityUtils);
     }
 }

@@ -1,5 +1,8 @@
 package com.noterror.app.infra.filter;
 
+import com.noterror.app.api.global.exception.BusinessLogicException;
+import com.noterror.app.api.global.exception.ExceptionCode;
+import com.noterror.app.api.global.exception.response.ErrorResponse;
 import com.noterror.app.infra.auth.CustomAuthorityUtils;
 import com.noterror.app.infra.jwt.JwtTokenizer;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -57,7 +60,13 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         // header 에서 JWT를 얻음
         String jws = request.getHeader("Authorization").replace("Bearer ", "");
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-        Map<String, Object> claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+        Map<String, Object> claims = null;
+        try {
+            claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+        } catch (Exception e) {
+            ErrorResponse.of(ExceptionCode.MEMBER_EXPIRED_TOKEN);
+        }
+
         return claims;
     }
 
