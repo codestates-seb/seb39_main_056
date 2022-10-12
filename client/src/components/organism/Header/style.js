@@ -18,9 +18,14 @@ export const Logo = styled.img`
   width: 100%;
   height: 30%;
 `;
+
+export const Logo = styled.img`
+  width: 80px;
+`;
+
 export const HeaderContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 export const ButtonContainer = styled.div``;
