@@ -48,6 +48,12 @@ const Select = styled.select`
   width: 100%;
   height: 40px;
 `;
+
+const Option = styled.option`
+  &:first-child {
+    display: none;
+  }
+`;
 const Mypage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -58,17 +64,28 @@ const Mypage = () => {
   const [selects, setSelect] = useState();
   // 회원정보에 따라 데이터 고정하는 get요청
   //setInfo에 데이터 담아주면 됨
+
+  const [vegeTypes, setVegeTypes] = useState([
+    '플렉시테리언',
+    '폴로-페스코',
+    '페스코',
+    '폴로',
+    '락토-오보',
+    '락토',
+    '오보',
+    '비건',
+    '프루테리언',
+  ]);
+
   const fetchData = () => {
     let url = `${process.env.REACT_APP_API_URL}/members/info`;
     axios
       .get(url, { headers: { ...token } }) //
       .then(res => {
         setInfo(res.data.member);
-        // console.log(info);
-        // const selectedOption = document.querySelector(
-        //   `#${info.vegetarianType}`,
-        // );
-        // selectedOption.setAttribute('selected', 'selected');
+        // console.log(res.data.member.vegetarianType);
+        // vegeTypes.unshift(info.vegetarianType);
+        setVegeTypes([res.data.member.vegetarianType, ...vegeTypes]);
       })
       .catch(e => {
         console.error(e);
@@ -224,9 +241,18 @@ const Mypage = () => {
               <Select
                 // value={info.vegetarianType}
                 defaultValue={info.vegetarianType}
-                onChange={e => setSelect(e.target.value)}
+                onChange={e => {
+                  setSelect(e.target.value);
+                }}
               >
-                <option id="플렉시테리언">플렉시테리언</option>
+                {vegeTypes.map((el, idx) => {
+                  return (
+                    <Option id={el} key={idx}>
+                      {el}
+                    </Option>
+                  );
+                })}
+                {/* <option id="플렉시테리언">플렉시테리언</option>
                 <option id="폴로-페스코">폴로-페스코</option>
                 <option id="페스코">페스코</option>
                 <option id="폴로">폴로</option>
@@ -234,7 +260,7 @@ const Mypage = () => {
                 <option id="락토">락토</option>
                 <option id="오보">오보</option>
                 <option id="비건">비건</option>
-                <option id="프루테리언">프루테리언</option>
+                <option id="프루테리언">프루테리언</option> */}
               </Select>
             </Td>
           </tr>

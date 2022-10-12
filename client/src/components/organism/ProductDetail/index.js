@@ -30,8 +30,8 @@ export const ProductPage = ({ productId, productData }) => {
           }),
         })
           .then(response => {
-            // if (!response.ok) throw new Error('No Response');
-            // console.log(response.json());
+            if (!response.ok) throw new Error('No Response');
+            console.log(response.json());
             response.json();
           })
           .then(data => {

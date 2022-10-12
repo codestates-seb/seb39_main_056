@@ -6,6 +6,9 @@ const FoodCategory = ({
   AssortArr,
   searchParams,
   setSearchParams,
+  assortArr,
+  setAssortArr,
+  changeAssortArr,
 }) => {
   return (
     <>
@@ -14,6 +17,9 @@ const FoodCategory = ({
         AssortArr={AssortArr}
         searchParams={searchParams}
         setSearchParams={setSearchParams}
+        assortArr={assortArr}
+        setAssortArr={setAssortArr}
+        changeAssortArr={changeAssortArr}
       />
     </>
   );

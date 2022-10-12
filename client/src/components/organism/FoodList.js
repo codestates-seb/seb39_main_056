@@ -11,7 +11,13 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const FoodList = ({ searchParams, setPages }) => {
+const FoodList = ({
+  searchParams,
+  setPages,
+  assortArr,
+  setAssortArr,
+  changeAssortArr,
+}) => {
   const selectedPage =
     searchParams.get('page') === null ? '' : `page=${searchParams.get('page')}`;
   const selectedSize =
@@ -36,6 +42,10 @@ const FoodList = ({ searchParams, setPages }) => {
       .then(res => {
         setCardList(res.data.products);
         setPages(res.data.pageInfo.totalPages);
+        // setAssortArr(changeAssortArr(assortArr));
+        const result = changeAssortArr(assortArr);
+        setAssortArr(result);
+        console.log(assortArr);
       });
     // .then(data => {
     //   console.log(cardList);

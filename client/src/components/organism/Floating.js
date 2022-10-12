@@ -13,7 +13,7 @@ const Container = styled.div`
 const Item = styled.div`
   color: #594a4e;
   text-align: center;
-  width: 80px;
+  width: 100px;
   height: 30px;
   line-height: 20px;
   padding: 10px;

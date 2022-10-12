@@ -20,6 +20,13 @@ const Item = styled.div`
   /* color: orange; */
   color: #faeee7;
   margin-top: 5px;
+  > a,
+  a:hover,
+  a:active,
+  a:visited {
+    color: #faeee7;
+    text-decoration: none;
+  }
 `;
 const Intro = styled.div`
   background-color: #33272a;
@@ -34,13 +41,26 @@ const Footer = () => {
     <>
       <Container>
         <Box>
-          회사소개
-          <Item>오시는길</Item>
-          <Item>회사연혁</Item>
+          프로젝트 소개
+          <Item>
+            <a href="https://www.youtube.com/watch?v=7s14aXx1vXM">youtube</a>
+          </Item>
+          <Item>
+            <a href="https://codestates.notion.site/39-Team-cbcc6beff32a4ba1bfac9e8a12cf41ad">
+              notion
+            </a>
+          </Item>
         </Box>
         <Box>
-          매장안내 <Item>매장찾기</Item>
-          <Item>재고안내</Item>
+          링크
+          <Item>
+            <a href="https://not-error-064.tistory.com/">팀블로그</a>
+          </Item>
+          <Item>
+            <a href="https://github.com/codestates-seb/seb39_main_056">
+              github
+            </a>
+          </Item>
         </Box>
 
         <Box>
@@ -48,10 +68,11 @@ const Footer = () => {
           <Item>약관보기</Item>
         </Box>
         <Box>
-          회원사들<Item>회원신청</Item>
+          팀명<Item>NOT ERROR팀</Item>
         </Box>
         <Box>
-          입점문의<Item>James@google.com</Item>
+          문의사항
+          <Item>zlcls456@google.com</Item>
         </Box>
       </Container>
       <Intro>

@@ -17,7 +17,18 @@ const SortSelect = styled.select`
   border-radius: 5px;
 `;
 
-const FoodCategorySort = ({ AssortArr, searchParams, setSearchParams }) => {
+const Option = styled.option`
+  &:first-child {
+    display: none;
+  }
+`;
+
+const FoodCategorySort = ({
+  AssortArr,
+  searchParams,
+  setSearchParams,
+  assortArr,
+}) => {
   const onChangeSize = e => {
     const params = [];
     const paramsObj = {};
@@ -50,12 +61,12 @@ const FoodCategorySort = ({ AssortArr, searchParams, setSearchParams }) => {
         sort: 'create_date',
         orderBy: 'asc',
       });
-      const selectedOption = document.querySelector(`#${e.target.value}`);
-      selectedOption.setAttribute('selected', 'selected');
 
       // 추후 리팩토링할 것
-      selectedOption.nextSibling.setAttribute('selected', '');
-      selectedOption.nextSibling.nextSibling.setAttribute('selected', '');
+      // const selectedOption = document.querySelector(`#${e.target.value}`);
+      // selectedOption.setAttribute('selected', 'selected');
+      // selectedOption.nextSibling.setAttribute('selected', '');
+      // selectedOption.nextSibling.nextSibling.setAttribute('selected', '');
     } else if (e.target.value === '낮은가격순') {
       setSearchParams({
         ...paramsObj,
@@ -63,12 +74,12 @@ const FoodCategorySort = ({ AssortArr, searchParams, setSearchParams }) => {
         sort: 'price',
         orderBy: 'asc',
       });
-      const selectedOption = document.querySelector(`#${e.target.value}`);
-      selectedOption.setAttribute('selected', 'selected');
 
       // 추후 리팩토링할 것
-      selectedOption.nextSibling.setAttribute('selected', '');
-      selectedOption.previousSibling.setAttribute('selected', '');
+      // const selectedOption = document.querySelector(`#${e.target.value}`);
+      // selectedOption.setAttribute('selected', 'selected');
+      // selectedOption.nextSibling.setAttribute('selected', '');
+      // selectedOption.previousSibling.setAttribute('selected', '');
     } else {
       setSearchParams({
         ...paramsObj,
@@ -76,23 +87,24 @@ const FoodCategorySort = ({ AssortArr, searchParams, setSearchParams }) => {
         sort: 'price',
         orderBy: 'desc',
       });
-      const selectedOption = document.querySelector(`#${e.target.value}`);
-      selectedOption.setAttribute('selected', 'selected');
 
       // 추후 리팩토링할 것
-      selectedOption.previousSibling.setAttribute('selected', '');
-      selectedOption.previousSibling.previousSibling.setAttribute(
-        'selected',
-        '',
-      );
+      // const selectedOption = document.querySelector(`#${e.target.value}`);
+      // selectedOption.setAttribute('selected', 'selected');
+      // selectedOption.previousSibling.setAttribute('selected', '');
+      // selectedOption.previousSibling.previousSibling.setAttribute(
+      //   'selected',
+      //   '',
+      // );
     }
   };
 
   return (
     <SortContainer>
       <SortSelect onChange={e => onChangeSize(e)}>
-        <option>20개씩 보기</option>
-        <option>40개씩 보기</option>
+        {assortArr.map((el, i) => {
+          return <Option key={i}>{el}</Option>;
+        })}
       </SortSelect>
       <SortSelect onChange={e => onChangeSort(e)}>
         {AssortArr.map((btn, i) => {
