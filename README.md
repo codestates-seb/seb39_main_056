@@ -1,12 +1,12 @@
 # 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **채식이들 🥗**
 
-<a href="">
+<a href="http://chaesik2s.shop/">
   <img width="150" src="https://img.shields.io/badge/채식이들 배포 링크-ffffff?style=for-the-badge&logo=one&logoColor=black"></a>
   
 <a href="https://www.youtube.com/watch?v=7s14aXx1vXM">
   <img width="175" src="https://img.shields.io/badge/채식이들 유튜브 영상-ffffff?style=for-the-badge&logo=youtube&logoColor=black"></a>
   
-<a href="https://codestates.notion.site/Team-056-a086554278ae4be09455e1c62742efb2">
+<a href="https://codestates.notion.site/39-Team-cbcc6beff32a4ba1bfac9e8a12cf41ad">
     <img width="150" src="https://img.shields.io/badge/채식이들 팀 노션-ffffff?style=for-the-badge&logo=notion&logoColor=black"></a>
   
 <a href="https://not-error-064.tistory.com/">
