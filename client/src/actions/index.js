@@ -3,6 +3,7 @@ export const SET_VEGE_TYPE = 'SET_VEGE_TYPE';
 export const INCREASE = 'INCREASE';
 export const DECREASE = 'DECREASE';
 export const SET_NUMBER = 'SET_NUMBER';
+export const SET_PRODUCT_LIST_DATA = 'SET_PRODUCT_LIST_DATA';
 
 export const setLoginChange = result => {
   return {
@@ -34,5 +35,12 @@ export const setNumber = num => {
   return {
     type: SET_NUMBER,
     payload: num,
+  };
+};
+
+export const setProductListData = data => {
+  return {
+    type: SET_PRODUCT_LIST_DATA,
+    payload: data,
   };
 };

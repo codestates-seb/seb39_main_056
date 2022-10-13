@@ -9,11 +9,23 @@ export const ProductInfoContainer = styled.div`
 `;
 export const ProductImgBox = styled.div`
   flex-basis: 50%;
+  position: relative;
+  width: 100px; // 자를 사이즈를 명시해준다.
+  height: 500px;
+  overflow: hidden;
 `;
-
-export const ProductImg = styled.img`
+export const ThumbnailImage = styled.img`
   width: 100%;
   height: 100%;
+`;
+export const ProductImg = styled.img`
+  width: 100%;
+  //height: 400%;
+  position: absolute; // 포지션을 주고,
+  top: 0; // 보이기 원하는 위치를 지정
+  left: 0;
+  //width: 500px; // 오리지널 사이즈
+  height: 1500px;
 `;
 export const ProductDesc = styled.div`
   width: 100%;

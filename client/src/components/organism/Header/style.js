@@ -4,14 +4,25 @@ export const SerchBar = styled.input`
   height: 50px;
   font-size: 1.5em;
   padding-left: 50px;
+  border-radius: 25px;
 `;
+export const LogoBox = styled.div`
+  flex-basis: 15%;
+`;
+
 export const InputBox = styled.div`
-  flex-basis: 30%;
-  position: relative;
+  flex-basis: 42%;
+  //position: relative;
 `;
+export const Logo = styled.img`
+  width: 100%;
+  height: 30%;
+`;
+
 export const Logo = styled.img`
   width: 80px;
 `;
+
 export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-around;
