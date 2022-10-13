@@ -20,7 +20,7 @@ public class CategoryResponseDto {
     /**
      * 카테고리를 전달할 DTO 정의한 정적 메서드
      */
-    public static CategoryResponseDto of(Category category){
+    public static CategoryResponseDto of(Category category) {
         return new CategoryResponseDto(
                 category.getCategoryId(),
                 category.getCategoryName(),

@@ -1,7 +1,13 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.7.3'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
 }
 
@@ -13,24 +19,18 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-    asciidoctorExtensions
 }
 
 repositories {
     mavenCentral()
 }
 
-ext {
-    snippetsDir = file('build/generated-snippets')
-}
-
-configurations {
-    asciidoctorExtensions
-}
-
 dependencies {
     //jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //querydsl
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
     //validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -44,7 +44,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    //db : h2
+    //db : h2, mysql
+    implementation 'mysql:mysql-connector-java'
     runtimeOnly 'com.h2database:h2'
 
     //test
@@ -57,42 +58,35 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
     //rest docs
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     implementation 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     implementation 'com.google.code.gson:gson'
-
-    //mapstruct
-    // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
-    implementation 'org.mapstruct:mapstruct:1.5.2.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
 }
 
 tasks.named('test') {
-    outputs.dir snippetsDir
     useJUnitPlatform()
 }
 
-tasks.named('asciidoctor') {
-    configurations "asciidoctorExtensions"
-    inputs.dir snippetsDir
-    dependsOn test
-}
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
 
-task copyDocument(type: Copy) {
-    dependsOn asciidoctor
-    println "asciidoctor output: ${asciidoctor.outputDir}"
-    from file("${asciidoctor.outputDir}")
-    into file("src/main/resources/static/docs")
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
 }
-
-build {
-    dependsOn copyDocument
+sourceSets {
+    main.java.srcDir querydslDir
 }
-
-bootJar {
-    dependsOn copyDocument
-    from ("${asciidoctor.outputDir}") {
-        into 'static/docs'
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
     }
+    querydsl.extendsFrom compileClasspath
 }
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+// querydsl 추가 끝

@@ -2,6 +2,7 @@ package com.noterror.app.api.domain.cart.service;
 import com.noterror.app.api.domain.cart.dto.CartDetailDto;
 import com.noterror.app.api.domain.cart.dto.CartPatchDto;
 import com.noterror.app.api.domain.cart.dto.CartProductDto;
+import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
 
 import java.util.List;
 
@@ -33,4 +34,6 @@ public interface CartService {
      * @param cartDetailId
      */
     void deleteCart(Long cartDetailId);
+
+
 }

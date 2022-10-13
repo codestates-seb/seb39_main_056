@@ -1,5 +1,6 @@
 package com.noterror.app.infra.handler;
 
+import com.noterror.app.api.global.exception.ExceptionCode;
 import com.noterror.app.api.global.exception.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class MemberAuthenticationEntryPoint implements AuthenticationEntryPoint 
                          AuthenticationException authException) throws IOException, ServletException {
         Exception exception = (Exception) request.getAttribute("exception");
         ErrorResponse.sendErrorResponse(response, HttpStatus.UNAUTHORIZED);
-
+        ErrorResponse.of(ExceptionCode.MEMBER_UNAUTHORIZED);
         logExceptionMessage(authException, exception);
     }
 

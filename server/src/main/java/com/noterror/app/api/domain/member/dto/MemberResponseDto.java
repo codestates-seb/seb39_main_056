@@ -25,10 +25,10 @@ public class MemberResponseDto {
         this.memberName = member.getMemberName();
         this.email = member.getEmail();
         this.phone = member.getPhone();
-        this.zipCode = member.getAddress().getZipcode();
+        this.zipCode = member.getAddress().getZipCode();
         this.city = member.getAddress().getCity();
         this.detailAddress = member.getAddress().getDetailAddress();
-        this.vegetarianType = member.getVegetarianType().getVegetarianTypeName();
+        this.vegetarianType = member.getVegetarianType();
         this.createDate = member.getCreateDate();
         this.editDate = member.getEditDate();
     }

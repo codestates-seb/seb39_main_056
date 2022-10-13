@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class CartPatchDto {
     @NotNull
     private Long cartDetailId;
-    @Min(1)
+    @Min(value = 1, message = "최소 1개 이상 담아주세요")
     private int purchaseQuantity;
 
 }

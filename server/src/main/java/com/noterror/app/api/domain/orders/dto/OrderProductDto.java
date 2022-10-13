@@ -9,7 +9,8 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class OrderProductDto {
     private Long productId;
     private String productName;
@@ -17,7 +18,7 @@ public class OrderProductDto {
 
     private int productPrice;
 
-    public OrderProductDto(OrderProduct orderProduct){
+    public OrderProductDto(OrderProduct orderProduct) {
         this.productId = orderProduct.getProduct().getProductId();
         this.productName = orderProduct.getProduct().getProductName();
         this.ordersQuantity = orderProduct.getOrdersQuantity();

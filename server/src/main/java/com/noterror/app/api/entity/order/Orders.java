@@ -15,15 +15,15 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@Table(name = "ORDERS")
+@Table(name = "orders")
 public class Orders extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "orders_id")
+    @Column
     private Long ordersId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "orders_status")
+    @Column
     private OrdersStatus ordersStatus = OrdersStatus.ORDER_REQUEST;
 
     @ManyToOne(fetch = FetchType.LAZY)
