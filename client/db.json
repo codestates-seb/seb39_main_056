@@ -1,0 +1,114 @@
+{
+  "user": {
+    "userId": 0,
+    "userName": "제임스",
+    "phoneNum": "12312312313213",
+    "zipCode": "제주",
+    "address": "제주시",
+    "addressDetail": "제주아파트",
+    "emailAdress": "James@google.com",
+    "type": "비건"
+  },
+  "products": [
+    {
+      "productId": 0,
+      "productName": "샤인머스켓",
+      "price": 2000,
+      "quantity": 2,
+      "signDate": "2022-09-25T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/52688/detail/detail_52688_0_ca68763b-efbf-4fea-bf23-439ebbc27e69.jpg",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    },
+    {
+      "productId": 1,
+      "productName": "국내산 생 홍합",
+      "price": 10000,
+      "quantity": 3,
+      "signDate": "2022-09-24T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/22817/detail/detail_22817_0_e9f2e4ab-07d6-4d2c-a28e-7011557a09f3.jpg",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    },
+    {
+      "productId": 2,
+      "productName": "파스타 부오돈노 ",
+      "price": 7800,
+      "quantity": 3,
+      "signDate": "2022-09-24T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/51742/thumb/thumb_5174233869d7a-2aa4-48f5-9b10-d5adba28b345.jpg_300",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    },
+    {
+      "productId": 3,
+      "productName": "밀키요 플레인 요거트",
+      "price": 7800,
+      "quantity": 3,
+      "signDate": "2022-09-24T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/38280/detail/detail_38280_0_ad58fdb1-1874-4587-be18-bee0fc9e1edf.jpg",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    },
+    {
+      "productId": 4,
+      "productName": "파스타 부오돈노",
+      "price": 7800,
+      "quantity": 3,
+      "signDate": "2022-09-24T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/51742/thumb/thumb_5174233869d7a-2aa4-48f5-9b10-d5adba28b345.jpg_300",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    },
+    {
+      "productId": 5,
+      "productName": "파스타 부오돈노",
+      "price": 7800,
+      "quantity": 3,
+      "signDate": "2022-09-24T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/51742/thumb/thumb_5174233869d7a-2aa4-48f5-9b10-d5adba28b345.jpg_300",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    },
+    {
+      "productId": 6,
+      "productName": "파스타 부오돈노",
+      "price": 7800,
+      "quantity": 3,
+      "signDate": "2022-09-24T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/51742/thumb/thumb_5174233869d7a-2aa4-48f5-9b10-d5adba28b345.jpg_300",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    },
+    {
+      "productId": 7,
+      "productName": "파스타 부오돈노",
+      "price": 7800,
+      "quantity": 3,
+      "signDate": "2022-09-24T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/51742/thumb/thumb_5174233869d7a-2aa4-48f5-9b10-d5adba28b345.jpg_300",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    },
+    {
+      "productId": 8,
+      "productName": "파스타 부오돈노",
+      "price": 7800,
+      "quantity": 3,
+      "signDate": "2022-09-24T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/51742/thumb/thumb_5174233869d7a-2aa4-48f5-9b10-d5adba28b345.jpg_300",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    },
+    {
+      "productId": 9,
+      "productName": "파스타 부오돈노",
+      "price": 7800,
+      "quantity": 3,
+      "signDate": "2022-09-24T18:32:20.1467401",
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/51742/thumb/thumb_5174233869d7a-2aa4-48f5-9b10-d5adba28b345.jpg_300",
+      "detailImage": "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+    }
+  ],
+  "pageInfo": {
+    "page": 1,
+    "size": 2,
+    "totalElements": 2,
+    "totalPages": 1
+  },
+  "sortInfo": {
+    "sort": "signDate",
+    "orderBy": "desc"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "cartProducts": [
+    {
+      "cartDetailId": 1,
+      "productName": "카레라면",
+      "price": 20000,
+      "count": 3,
+      "purchaseQuantity": 5,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/52688/detail/detail_52688_0_ca68763b-efbf-4fea-bf23-439ebbc27e69.jpg"
+    },
+    {
+      "cartDetailId": 2,
+      "productName": "가지튀김",
+      "price": 10000,
+      "count": 5,
+      "purchaseQuantity": 5,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/52688/detail/detail_52688_0_ca68763b-efbf-4fea-bf23-439ebbc27e69.jpg"
+    },
+    {
+      "cartDetailId": 3,
+      "productName": "호랑이무침",
+      "price": 5000,
+      "count": 10,
+      "purchaseQuantity": 5,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/52688/detail/detail_52688_0_ca68763b-efbf-4fea-bf23-439ebbc27e69.jpg"
+    },
+    {
+      "cartDetailId": 4,
+      "productName": "새우장아찌",
+      "price": 15000,
+      "count": 8,
+      "purchaseQuantity": 5,
+      "thumbnailImage": "https://www.oasis.co.kr:48581/product/52688/detail/detail_52688_0_ca68763b-efbf-4fea-bf23-439ebbc27e69.jpg"
+    }
+  ]
+}
