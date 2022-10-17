@@ -13,8 +13,6 @@ import java.util.List;
  */
 public interface ProductService {
 
-    // == GENERAL POLICY
-
     /**
      * @param id
      * @return Product
@@ -60,7 +58,4 @@ public interface ProductService {
      * @param id
      */
     void removeProduct(long id);
-
-
-    // == PAGINATION POLICY
 }
