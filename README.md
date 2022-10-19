@@ -80,10 +80,8 @@
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
   <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
-  <img src="https://img.shields.io/badge/zoom-0052CC?style=for-the-badge&logo=zoom&logoColor=white">
    <br>
   <img src="https://img.shields.io/badge/discord-4d377b?style=for-the-badge&logo=discord&logoColor=white">
-  <img src="https://img.shields.io/badge/kakao talk-fef01b?style=for-the-badge&logo=kakaotalk&logoColor=black">
   <img src="https://img.shields.io/badge/google calendar-ffffff?style=for-the-badge&logo=googlecalendar&logoColor=0052CC">
 </p>
 
