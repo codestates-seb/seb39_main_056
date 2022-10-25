@@ -60,22 +60,13 @@ public class Product extends Auditable {
         }
     }
 
-    public void registrationProduct(ProductRequestDto productRequestDto) {
-        this.productName = productRequestDto.getProductName();
-        this.stockQuantity = productRequestDto.getStockQuantity();
-        this.price = productRequestDto.getPrice();
-        this.thumbnailImage = productRequestDto.getThumbnailImage();
-        this.detailImage = productRequestDto.getDetailImage();
-        this.vegetarianType = productRequestDto.getVegetarianType();
-    }
-
-    public void updateProductInfo(ProductRequestDto productRequestDto) {
-        this.productName = productRequestDto.getProductName();
-        this.stockQuantity = productRequestDto.getStockQuantity();
-        this.price = productRequestDto.getPrice();
-        this.thumbnailImage = productRequestDto.getThumbnailImage();
-        this.detailImage = productRequestDto.getDetailImage();
-        this.vegetarianType = productRequestDto.getVegetarianType();
+    public void updateInfo(Product request) {
+        this.productName = request.getProductName();
+        this.stockQuantity = request.getStockQuantity();
+        this.price = request.getPrice();
+        this.thumbnailImage = request.getThumbnailImage();
+        this.detailImage = request.getDetailImage();
+        this.vegetarianType = request.getVegetarianType();
     }
 
     public void removeStock(int quantity) {

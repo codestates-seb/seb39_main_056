@@ -16,5 +16,5 @@ public interface ProductRepositoryCustom {
             "(SELECT vegetarian_type FROM vegetarian WHERE levels " +
             "< (SELECT levels FROM vegetarian WHERE vegetarian_type = :vegetarianType) " +
             "OR vegetarian_type = :vegetarianType)")
-    Page<Product> findAllByVegetarianTypeName(@Param("vegetarianType") String vegetarianType, Pageable pageable);
+    Page<Product> findAllByVegetarian(@Param("vegetarianType") String vegetarianType, Pageable pageable);
 }

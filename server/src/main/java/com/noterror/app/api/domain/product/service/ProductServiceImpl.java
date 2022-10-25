@@ -1,8 +1,6 @@
 package com.noterror.app.api.domain.product.service;
 
 import com.noterror.app.api.domain.member.repository.MemberRepository;
-import com.noterror.app.api.domain.product.dto.ProductRequestDto;
-import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.dto.QueryParamDto;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import com.noterror.app.api.entity.Product;
@@ -27,50 +25,44 @@ public class ProductServiceImpl implements ProductService {
     private final MemberRepository memberRepository;
 
     @Override
-    public ProductResponseDto findProduct(Long productId) {
-        Product findProduct = findExistProduct(productId);
-        return new ProductResponseDto(findProduct);
+    public Product findProduct(Long productId) {
+        return findExistProduct(productId);
     }
 
     @Override
     public Page<Product> findProductsWhenAnonymous(QueryParamDto queryParamDto) {
-        if (isNullInputType(queryParamDto.getVegetarian())) {
+        if (isNull(queryParamDto.getVegetarian())) {
             queryParamDto.setVegetarian("플렉시테리언");
         }
-        return getAllByVegetarianType(queryParamDto);
+        return getAllByQueryParam(queryParamDto);
     }
 
     @Override
     public Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, String email) {
-        if (isNullInputType(queryParamDto.getVegetarian())) {
+        if (isNull(queryParamDto.getVegetarian())) {
             Member member = getMember(email);
             queryParamDto.setVegetarian(member.getVegetarianType());
         }
-        return getAllByVegetarianType(queryParamDto);
+        return getAllByQueryParam(queryParamDto);
     }
 
     @Override
     @Transactional
-    public ProductResponseDto createProduct(ProductRequestDto productRequestDto) {
-        Product product = new Product();
-        product.registrationProduct(productRequestDto);
-        Product newProduct = productRepository.save(product);
-
-        return new ProductResponseDto(newProduct);
+    public Product createProduct(Product request) {
+        return productRepository.save(request);
     }
 
     @Override
     @Transactional
-    public ProductResponseDto updateProduct(Long productId, ProductRequestDto productRequestDto) {
+    public Product updateProduct(Long productId, Product request) {
         Product findProduct = findExistProduct(productId);
-        findProduct.updateProductInfo(productRequestDto);
-
-        return new ProductResponseDto(findProduct);
+        findProduct.updateInfo(request);
+        return findProduct;
     }
 
     @Override
     @Transactional
-    public void removeProduct(long productId) {
+    public void removeProduct(Long productId) {
         Product findProduct = findExistProduct(productId);
         productRepository.delete(findProduct);
     }
@@ -80,11 +72,7 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.PRODUCT_NOT_FOUND));
     }
 
-    private boolean isDescending(String orderBy) {
-        return orderBy.equals("desc");
-    }
-
-    private boolean isNullInputType(String vegetarianType) {
+    private boolean isNull(String vegetarianType) {
         return vegetarianType == null;
     }
 
@@ -93,16 +81,27 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new BusinessLogicException(MEMBER_NOT_FOUND));
     }
 
-    private Page<Product> getAllByVegetarianType(QueryParamDto queryParamDto) {
-
-        Sort sort = Sort.by(queryParamDto.getSort());
-
-        if (isDescending(queryParamDto.getOrderBy())) {
-            sort = Sort.by(queryParamDto.getSort()).descending();
-        }
-        return productRepository.findAllByVegetarianTypeName(
-                queryParamDto.getVegetarian(),
-                PageRequest.of(queryParamDto.getPage(), queryParamDto.getSize(), sort)
+    private Page<Product> getAllByQueryParam(QueryParamDto queryParamDto) {
+        Sort sort = getSort(
+                queryParamDto.getSort(),
+                queryParamDto.getOrderBy()
         );
+        return productRepository.findAllByVegetarian(
+                queryParamDto.getVegetarian(),
+                PageRequest.of(
+                        queryParamDto.getPage(),
+                        queryParamDto.getSize(),
+                        sort));
+    }
+
+    private Sort getSort(String sort, String orderBy) {
+        if (isDescending(orderBy)) {
+            return Sort.by(sort).descending();
+        }
+        return Sort.by(sort);
+    }
+
+    private boolean isDescending(String orderBy) {
+        return orderBy.equals("desc");
     }
 }

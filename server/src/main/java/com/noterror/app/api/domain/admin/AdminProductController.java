@@ -3,11 +3,13 @@ package com.noterror.app.api.domain.admin;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.service.ProductService;
+import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.global.response.SingleProductResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,7 +18,7 @@ import javax.validation.Valid;
  * SCOPE : ADMIN PAGE, ROLE_ADMIN
  */
 @RestController
-@CrossOrigin
+@Validated
 @Slf4j
 @RequestMapping("/admin/products")
 @RequiredArgsConstructor
@@ -31,7 +33,10 @@ public class AdminProductController {
      */
     @PostMapping("/registration")
     public ResponseEntity<ProductResponseDto> postProduct(@RequestBody @Valid ProductRequestDto productRequestDto) {
-        ProductResponseDto response = productService.createProduct(productRequestDto);
+        Product product = productRequestDto.toEntity();
+        Product newProduct = productService.createProduct(product);
+        ProductResponseDto response = new ProductResponseDto(newProduct);
+
         return new ResponseEntity(
                 new SingleProductResponse(response), HttpStatus.CREATED);
     }
@@ -45,10 +50,12 @@ public class AdminProductController {
     @PutMapping("/edit/{product-id}")
     public ResponseEntity putProduct(@PathVariable("product-id") Long productId,
                                      @Valid @RequestBody ProductRequestDto productRequestDto) {
-        ProductResponseDto response = productService.updateProduct(productId, productRequestDto);
+        Product product = productRequestDto.toEntity();
+        Product updateProduct = productService.updateProduct(productId, product);
+        ProductResponseDto response = new ProductResponseDto(updateProduct);
+
         return new ResponseEntity<>(
-                new SingleProductResponse<>(response),
-                HttpStatus.OK);
+                new SingleProductResponse<>(response), HttpStatus.OK);
     }
 
     /**

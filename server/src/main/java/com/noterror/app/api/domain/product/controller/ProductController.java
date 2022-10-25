@@ -34,7 +34,8 @@ public class ProductController {
      */
     @GetMapping("/detail/{product-id}")
     public ResponseEntity getProduct(@PathVariable("product-id") Long productId) {
-        ProductResponseDto response = productService.findProduct(productId);
+        Product findProduct = productService.findProduct(productId);
+        ProductResponseDto response = new ProductResponseDto(findProduct);
         return new ResponseEntity(new SingleProductResponse(response), HttpStatus.OK);
     }
 
@@ -50,17 +51,20 @@ public class ProductController {
                                       @RequestParam(required = false, defaultValue = "create_date") String sort,
                                       @RequestParam(required = false, defaultValue = "desc") String orderBy,
                                       @RequestParam(required = false) String vegetarian) {
-        QueryParamDto queryParamDto = new QueryParamDto(page-1, size, sort, orderBy, vegetarian);
+
+        QueryParamDto queryParamDto = new QueryParamDto(page - 1, size, sort, orderBy, vegetarian);
         String currentUserEmail = getCurrentUserEmail();
+
         Page<Product> productsInPage = findProducts(queryParamDto, currentUserEmail);
-        List<ProductResponseDto> results = productsInPage.stream().map(ProductResponseDto::new).collect(Collectors.toList());
+
+        List<ProductResponseDto> response = productsInPage.stream()
+                .map(ProductResponseDto::new)
+                .collect(Collectors.toList());
 
         return new ResponseEntity(
-                new MultiProductsResponse(
-                        results,
-                        productsInPage,
-                        new SortInfo(sort, orderBy)),
-                HttpStatus.OK);
+                new MultiProductsResponse(response, productsInPage, new SortInfo(sort, orderBy)),
+                HttpStatus.OK
+        );
     }
 
     private Page<Product> findProducts(QueryParamDto queryParamDto, String email) {
