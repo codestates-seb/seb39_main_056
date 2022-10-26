@@ -1,5 +1,7 @@
 package com.noterror.app.api.domain.member.dto;
 
+import com.noterror.app.api.entity.member.Address;
+import com.noterror.app.api.entity.member.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -51,4 +53,18 @@ public class SignUpDto {
      * 상세 주소(사용자 입력)
      */
     private String detailAddress;
+
+    public Member toEntity() {
+        return Member.builder()
+                .email(this.email)
+                .memberName(this.memberName)
+                .password(this.password)
+                .phone(this.phone)
+                .address(new Address(
+                        this.zipCode,
+                        this.city,
+                        this.detailAddress)
+                )
+                .build();
+    }
 }

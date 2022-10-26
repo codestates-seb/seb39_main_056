@@ -56,25 +56,14 @@ public class Member extends Auditable implements Principal {
         this.cart = cart;
     }
 
-    public void updateMemberInfo(UpdateInfoDto updateInfoDto) {
-        this.phone = updateInfoDto.getPhone();
-        this.address = new Address(
-                updateInfoDto.getZipCode(),
-                updateInfoDto.getCity(),
-                updateInfoDto.getDetailAddress()
-        );
-        this.vegetarianType = updateInfoDto.getVegetarianType();
+    public void updateMemberInfo(Member member) {
+        this.phone = member.getPhone();
+        this.address = member.getAddress();
+        this.vegetarianType = member.getVegetarianType();
     }
 
-    public void proceedGeneralSignUp(SignUpDto signUpDto, List<String> roles, String password) {
-        this.email = signUpDto.getEmail();
-        this.memberName = signUpDto.getMemberName();
-        this.phone = signUpDto.getPhone();
+    public void insertAuthInfo(List<String> roles, String password) {
         this.password = password;
-        this.address = new Address(
-                signUpDto.getZipCode(),
-                signUpDto.getCity(),
-                signUpDto.getDetailAddress());
         this.roles = roles;
     }
 
