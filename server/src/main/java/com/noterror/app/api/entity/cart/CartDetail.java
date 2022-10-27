@@ -5,13 +5,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Setter
 @Getter
+@NoArgsConstructor
 @Entity
-@Table(name = "cart_detail")
 public class CartDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,27 +26,19 @@ public class CartDetail {
     private Product product;
 
     //== BUSINESS LOGIC ==//
-    public void getCart(Cart cart) {
+    public void addCart(Cart cart) {
         this.cart = cart;
     }
 
-    public void getProduct(Product product) {
+    public void addProduct(Product product) {
         this.product = product;
     }
 
-    public void addPurchaseQuantity(int purchaseQuantity) {
+    public void plusPurchaseQuantity(int purchaseQuantity) {
         this.purchaseQuantity += purchaseQuantity;
     }
 
     public void updatePurchaseQuantity(int purchaseQuantity) {
         this.purchaseQuantity = purchaseQuantity;
-    }
-
-    public static CartDetail createCartDetail(Cart cart, Product product, int count) {
-        CartDetail cartDetail = new CartDetail();
-        cartDetail.setCart(cart);
-        cartDetail.setProduct(product);
-        cartDetail.setPurchaseQuantity(count);
-        return cartDetail;
     }
 }

@@ -1,10 +1,9 @@
 
 package com.noterror.app.api.domain.member.service;
 
-import com.noterror.app.api.domain.member.dto.MemberResponseDto;
-import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
 import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
 import com.noterror.app.api.domain.member.repository.MemberRepository;
+import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.infra.auth.CustomAuthorityUtils;
@@ -32,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public Long saveMemberInfo(Member signUpInfo) {
         verifyExistsEmail(signUpInfo.getEmail());
-        insertAuthInfo(signUpInfo);
+        insertAdditionalInfo(signUpInfo);
         Member newMember = memberRepository.save(signUpInfo);
         return newMember.getMemberId();
     }
@@ -66,10 +65,11 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.delete(findMember);
     }
 
-    private void insertAuthInfo(Member newMember) {
+    private void insertAdditionalInfo(Member newMember) {
         List<String> roles = authorityUtils.createRoles(newMember.getEmail());
         String encodedPassword = passwordEncoder.encode(newMember.getPassword());
         newMember.insertAuthInfo(roles, encodedPassword);
+        newMember.addCart(new Cart());
     }
 
     public Member findMemberById(Long memberId) {

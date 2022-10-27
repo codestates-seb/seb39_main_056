@@ -1,10 +1,17 @@
 package com.noterror.app.api.domain.cart.controller;
 
-import com.noterror.app.api.domain.cart.dto.CartDetailDto;
-import com.noterror.app.api.domain.cart.dto.CartPatchDto;
-import com.noterror.app.api.domain.cart.dto.CartProductDto;
+import com.noterror.app.api.domain.cart.dto.CartDetailResponseDto;
+import com.noterror.app.api.domain.cart.dto.CartResponseDto;
+import com.noterror.app.api.domain.cart.dto.PurchaseQuantityDto;
 import com.noterror.app.api.domain.cart.service.CartService;
+import com.noterror.app.api.domain.member.service.MemberService;
+import com.noterror.app.api.domain.product.service.ProductService;
+import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.cart.Cart;
+import com.noterror.app.api.entity.cart.CartDetail;
+import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.global.response.MultiCartsResponse;
+import com.noterror.app.api.global.response.SingleCartDetailResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,50 +21,55 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-
 
 @Controller
 @RequestMapping(value = "/cart")
 @RequiredArgsConstructor
 public class CartController {
 
+    private final MemberService memberService;
+    private final ProductService productService;
     private final CartService cartService;
 
     /**
      * 장바구니 제품 추가
      */
-    @PostMapping
-    public @ResponseBody ResponseEntity addCartProduct(@RequestBody @Valid CartProductDto cartProductDto) {
+    @PostMapping("{product-id}")
+    public ResponseEntity addProductInCart(@PathVariable("product-id") Long productId,
+                                           @RequestBody @Valid PurchaseQuantityDto purchaseQuantityDto) {
+        CartDetail cartDetail = toCartDetail(productId, purchaseQuantityDto);
+        Cart cart = cartService.addProductInCart(cartDetail);
+        CartDetailResponseDto response = new CartDetailResponseDto(cart);
 
-        CartDetailDto cartDetail = cartService.addCart(cartProductDto, getCurrentUserEmail());
-        return new ResponseEntity(new SingleCartResponse(cartDetail), HttpStatus.OK);
+        return new ResponseEntity(
+                new SingleCartDetailResponse(response), HttpStatus.OK);
     }
 
     /**
-     * 장바구니 조회
+     * 장바구니 제품 전체 조회
      */
     @GetMapping
-    public @ResponseBody ResponseEntity viewCartProduct() {
-
-        List<CartDetailDto> cartDetailList = cartService.listCart(getCurrentUserEmail());
-        return new ResponseEntity(new MultiCartsResponse(cartDetailList), HttpStatus.OK);
+    public ResponseEntity getCartDetailsInCart() {
+        Cart cartOfMember = cartService.getCartOfMember(getMemberByEmail());
+        CartResponseDto response = new CartResponseDto(cartOfMember);
+        return new ResponseEntity(
+                new SingleCartResponse(response), HttpStatus.OK);
     }
 
     /**
      * 장바구니 제품 수량 변경
      */
     @PutMapping
-    public @ResponseBody ResponseEntity updateCartProduct(@RequestBody @Valid CartPatchDto cartPatchDto) {
-        CartPatchDto cartDetail = cartService.updateCart(cartPatchDto);
-        return new ResponseEntity(new SingleCartResponse(cartDetail), HttpStatus.OK);
+    public ResponseEntity updateCartProduct(@RequestBody @Valid UpdatePurchaseQuantityDto updatePurchaseQuantityDto) {
+        UpdatePurchaseQuantityDto cartDetail = cartService.updateCart(updatePurchaseQuantityDto);
+        return new ResponseEntity(new SingleCartDetailResponse(cartDetail), HttpStatus.OK);
     }
 
     /**
      * 장바구니 제품 삭제
      */
     @DeleteMapping("/{cart-detail-id}")
-    public @ResponseBody ResponseEntity deleteCartProduct(@PathVariable("cart-detail-id") Long cartDetailId) {
+    public ResponseEntity deleteCartProduct(@PathVariable("cart-detail-id") Long cartDetailId) {
 
         cartService.deleteCart(cartDetailId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -65,5 +77,21 @@ public class CartController {
 
     private String getCurrentUserEmail() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    private Member getMemberByEmail() {
+        return memberService.findMemberByEmail(getCurrentUserEmail());
+    }
+
+
+    private CartDetail toCartDetail(Long productId, PurchaseQuantityDto purchaseQuantityDto) {
+        return purchaseQuantityDto
+                .toCartDetailWithMemberAndProduct
+                        (getMemberByEmail(), getProduct(productId));
+    }
+
+    private Product getProduct(Long productId) {
+        Product product = productService.findProduct(productId);
+        return product;
     }
 }

@@ -41,7 +41,7 @@ public class Member extends Auditable implements Principal {
     @Column
     private String vegetarianType;
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Cart cart;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -54,6 +54,9 @@ public class Member extends Auditable implements Principal {
     //== BUSINESS LOGIC ==//
     public void addCart(Cart cart) {
         this.cart = cart;
+        if (cart.getMember() != this) {
+            cart.addMember(this);
+        }
     }
 
     public void updateMemberInfo(Member member) {

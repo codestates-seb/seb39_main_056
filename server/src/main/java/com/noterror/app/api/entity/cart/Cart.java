@@ -23,23 +23,19 @@ public class Cart extends Auditable {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "cart")
-    private List<CartDetail> cartDetail = new ArrayList<>();
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.PERSIST)
+    private List<CartDetail> cartDetails = new ArrayList<>();
 
     //== BUSINESS LOGIC ==//
     public void addCartDetail(CartDetail cartDetail) {
-        this.cartDetail.add(cartDetail);
+        this.cartDetails.add(cartDetail);
+        if (cartDetail.getCart() != this) {
+            cartDetail.addCart(this);
+        }
     }
 
     public void addMember(Member member) {
         this.member = member;
     }
-
-    public static Cart createCart(Member member) {
-        Cart cart = new Cart();
-        cart.member = member;
-        return cart;
-    }
-
 
 }

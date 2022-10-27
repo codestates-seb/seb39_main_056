@@ -57,9 +57,9 @@ public class ProductController {
 
         Page<Product> productsInPage = findProducts(queryParamDto, currentUserEmail);
 
-        List<ProductResponseDto> response = productsInPage.stream()
-                .map(ProductResponseDto::new)
-                .collect(Collectors.toList());
+        List<ProductResponseDto> response =  productsInPage.stream()
+                    .map(ProductResponseDto::new)
+                    .collect(Collectors.toList());
 
         return new ResponseEntity(
                 new MultiProductsResponse(response, productsInPage, new SortInfo(sort, orderBy)),
