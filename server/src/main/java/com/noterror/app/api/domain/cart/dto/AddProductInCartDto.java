@@ -15,7 +15,7 @@ import javax.validation.constraints.Min;
  */
 @Getter
 @Setter
-public class PurchaseQuantityDto {
+public class AddProductInCartDto {
 
     @Min(value = 1, message = "최소 1개 이상 담아주세요")
     private int purchaseQuantity;

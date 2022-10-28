@@ -1,8 +1,9 @@
 package com.noterror.app.api.domain.cart.controller;
 
+import com.noterror.app.api.domain.cart.dto.AddProductInCartDto;
 import com.noterror.app.api.domain.cart.dto.CartDetailResponseDto;
+import com.noterror.app.api.domain.cart.dto.CartDetailUpdateInfoDto;
 import com.noterror.app.api.domain.cart.dto.CartResponseDto;
-import com.noterror.app.api.domain.cart.dto.PurchaseQuantityDto;
 import com.noterror.app.api.domain.cart.service.CartService;
 import com.noterror.app.api.domain.member.service.MemberService;
 import com.noterror.app.api.domain.product.service.ProductService;
@@ -10,7 +11,6 @@ import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.member.Member;
-import com.noterror.app.api.global.response.MultiCartsResponse;
 import com.noterror.app.api.global.response.SingleCartDetailResponse;
 import com.noterror.app.api.global.response.SingleCartResponse;
 import lombok.RequiredArgsConstructor;
@@ -34,10 +34,10 @@ public class CartController {
     /**
      * 장바구니 제품 추가
      */
-    @PostMapping("{product-id}")
+    @PostMapping("/product/{product-id}")
     public ResponseEntity addProductInCart(@PathVariable("product-id") Long productId,
-                                           @RequestBody @Valid PurchaseQuantityDto purchaseQuantityDto) {
-        CartDetail cartDetail = toCartDetail(productId, purchaseQuantityDto);
+                                           @RequestBody @Valid AddProductInCartDto addProductInCartDto) {
+        CartDetail cartDetail = toCartDetail(productId, addProductInCartDto);
         Cart cart = cartService.addProductInCart(cartDetail);
         CartDetailResponseDto response = new CartDetailResponseDto(cart);
 
@@ -59,16 +59,20 @@ public class CartController {
     /**
      * 장바구니 제품 수량 변경
      */
-    @PutMapping
-    public ResponseEntity updateCartProduct(@RequestBody @Valid UpdatePurchaseQuantityDto updatePurchaseQuantityDto) {
-        UpdatePurchaseQuantityDto cartDetail = cartService.updateCart(updatePurchaseQuantityDto);
-        return new ResponseEntity(new SingleCartDetailResponse(cartDetail), HttpStatus.OK);
+    @PutMapping("/cart-detail/{cart-detail-id}")
+    public ResponseEntity updateCartProduct(@PathVariable("cart-detail-id") Long cartDetailId,
+                                            @RequestBody @Valid CartDetailUpdateInfoDto cartDetailUpdateInfoDto) {
+        cartDetailUpdateInfoDto.setCartDetailId(cartDetailId);
+        Cart updateCart = cartService.updateCartDetail(cartDetailUpdateInfoDto);
+        CartDetailResponseDto response = new CartDetailResponseDto(updateCart);
+        return new ResponseEntity(
+                new SingleCartDetailResponse(response), HttpStatus.OK);
     }
 
     /**
      * 장바구니 제품 삭제
      */
-    @DeleteMapping("/{cart-detail-id}")
+    @DeleteMapping("cart-detail/{cart-detail-id}")
     public ResponseEntity deleteCartProduct(@PathVariable("cart-detail-id") Long cartDetailId) {
 
         cartService.deleteCart(cartDetailId);
@@ -84,8 +88,8 @@ public class CartController {
     }
 
 
-    private CartDetail toCartDetail(Long productId, PurchaseQuantityDto purchaseQuantityDto) {
-        return purchaseQuantityDto
+    private CartDetail toCartDetail(Long productId, AddProductInCartDto addProductInCartDto) {
+        return addProductInCartDto
                 .toCartDetailWithMemberAndProduct
                         (getMemberByEmail(), getProduct(productId));
     }

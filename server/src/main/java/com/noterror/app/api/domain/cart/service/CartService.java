@@ -1,4 +1,5 @@
 package com.noterror.app.api.domain.cart.service;
+import com.noterror.app.api.domain.cart.dto.CartDetailUpdateInfoDto;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.member.Member;
@@ -22,10 +23,10 @@ public interface CartService {
 
     /**
      * 장바구니 수량 변경
-     * @param updatePurchaseQuantityDto
+     * @param updateInfo : cartDetailId, purchaseQuantity
      * @return
      */
-    Cart updateCart();
+    Cart updateCartDetail(CartDetailUpdateInfoDto updateInfo);
 
     /**
      * 장바구니 제품 삭제

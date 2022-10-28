@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class CartDetail {
     @Id

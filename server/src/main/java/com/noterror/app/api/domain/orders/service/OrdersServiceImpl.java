@@ -89,7 +89,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public OrderInfoDto orderCartProducts(String email) {
         Member findMember = memberRepository.findByEmail(email).get();
-        List<CartDetail> cartDetailList = findMember.getCart().getCartDetail();
+        List<CartDetail> cartDetailList = findMember.getCart().getCartDetails();
 
         List<OrderDto> orderDtoList = new ArrayList<>();
         for (CartDetail cartDetail : cartDetailList) {
@@ -105,6 +105,7 @@ public class OrdersServiceImpl implements OrdersService {
 
         return orderProductId;
     }
+
 
     //장바구니에서 주문할 상품 데이터를 전달받아 주문 생성
     public OrderInfoDto orderCartList(List<OrderDto> orderDtoList, Member member) {
