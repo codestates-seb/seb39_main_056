@@ -1,10 +1,12 @@
 package com.noterror.app.api.domain.cart.dto;
 
 import com.noterror.app.api.entity.cart.Cart;
+import lombok.Getter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class CartResponseDto {
 
     private Long cartId;
