@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/category")
 public class CategoryController {
+
     private final CategoryService categoryService;
 
     /**
@@ -23,7 +24,6 @@ public class CategoryController {
     public ResponseEntity getCategoryList() {
         List<CategoryResponseDto> response = categoryService.findCategoryList();
         return new ResponseEntity(
-                new SingleCategoryResponse(response),
-                HttpStatus.OK);
+                new SingleCategoryResponse(response), HttpStatus.OK);
     }
 }

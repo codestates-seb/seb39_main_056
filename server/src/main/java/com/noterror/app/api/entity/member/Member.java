@@ -1,9 +1,8 @@
 
 package com.noterror.app.api.entity.member;
 
-import com.noterror.app.api.domain.member.dto.SignUpDto;
-import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
 import com.noterror.app.api.entity.cart.Cart;
+import com.noterror.app.api.entity.order.Orders;
 import com.noterror.app.api.global.audit.Auditable;
 import lombok.*;
 
@@ -44,6 +43,9 @@ public class Member extends Auditable implements Principal {
     @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Cart cart;
 
+    @OneToMany(mappedBy = "member")
+    private List<Orders> orderList = new ArrayList<>();
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "roles",
@@ -56,6 +58,13 @@ public class Member extends Auditable implements Principal {
         this.cart = cart;
         if (cart.getMember() != this) {
             cart.addMember(this);
+        }
+    }
+
+    public void addOrders(Orders orders) {
+        this.orderList.add(orders);
+        if (orders.getMember() != this) {
+            orders.addMember(this);
         }
     }
 

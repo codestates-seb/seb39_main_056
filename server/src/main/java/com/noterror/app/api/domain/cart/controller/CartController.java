@@ -17,14 +17,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping(value = "/cart")
 @RequiredArgsConstructor
+@Validated
 public class CartController {
 
     private final MemberService memberService;
@@ -37,7 +38,7 @@ public class CartController {
     @PostMapping("/product/{product-id}")
     public ResponseEntity addProductInCart(@PathVariable("product-id") Long productId,
                                            @RequestBody @Valid AddProductInCartDto addProductInCartDto) {
-        CartDetail cartDetail = toCartDetail(productId, addProductInCartDto);
+        CartDetail cartDetail = toCartDetailByProduct(productId, addProductInCartDto);
         Cart cart = cartService.addProductInCart(cartDetail);
         CartDetailResponseDto response = new CartDetailResponseDto(cart);
 
@@ -74,7 +75,6 @@ public class CartController {
      */
     @DeleteMapping("cart-detail/{cart-detail-id}")
     public ResponseEntity deleteCartProduct(@PathVariable("cart-detail-id") Long cartDetailId) {
-
         cartService.deleteCart(cartDetailId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -87,15 +87,13 @@ public class CartController {
         return memberService.findMemberByEmail(getCurrentUserEmail());
     }
 
-
-    private CartDetail toCartDetail(Long productId, AddProductInCartDto addProductInCartDto) {
+    private CartDetail toCartDetailByProduct(Long productId, AddProductInCartDto addProductInCartDto) {
         return addProductInCartDto
                 .toCartDetailWithMemberAndProduct
                         (getMemberByEmail(), getProduct(productId));
     }
 
     private Product getProduct(Long productId) {
-        Product product = productService.findProduct(productId);
-        return product;
+        return productService.findProduct(productId);
     }
 }

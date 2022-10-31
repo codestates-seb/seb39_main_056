@@ -1,9 +1,11 @@
 package com.noterror.app.api.domain.product.controller;
 
+import com.noterror.app.api.domain.member.service.MemberService;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
 import com.noterror.app.api.domain.product.dto.QueryParamDto;
 import com.noterror.app.api.domain.product.service.ProductService;
 import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.global.response.MultiProductsResponse;
 import com.noterror.app.api.global.response.SingleProductResponse;
 import com.noterror.app.api.global.response.SortInfo;
@@ -27,6 +29,7 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     private final ProductService productService;
+    private final MemberService memberService;
 
     /**
      * 제품 개별 조회
@@ -53,13 +56,8 @@ public class ProductController {
                                       @RequestParam(required = false) String vegetarian) {
 
         QueryParamDto queryParamDto = new QueryParamDto(page - 1, size, sort, orderBy, vegetarian);
-        String currentUserEmail = getCurrentUserEmail();
-
-        Page<Product> productsInPage = findProducts(queryParamDto, currentUserEmail);
-
-        List<ProductResponseDto> response =  productsInPage.stream()
-                    .map(ProductResponseDto::new)
-                    .collect(Collectors.toList());
+        Page<Product> productsInPage = findProducts(queryParamDto, getCurrentUserEmail());
+        List<ProductResponseDto> response = toListOfProductResponses(productsInPage);
 
         return new ResponseEntity(
                 new MultiProductsResponse(response, productsInPage, new SortInfo(sort, orderBy)),
@@ -71,7 +69,7 @@ public class ProductController {
         if (isAnonymousUser(email)) {
             return productService.findProductsWhenAnonymous(queryParamDto);
         } else {
-            return productService.findProductsWhenAuthenticated(queryParamDto, email);
+            return productService.findProductsWhenAuthenticated(queryParamDto, getMemberByEmail());
         }
     }
 
@@ -81,5 +79,15 @@ public class ProductController {
 
     private boolean isAnonymousUser(String email) {
         return email.equals("anonymousUser");
+    }
+
+    private Member getMemberByEmail() {
+        return memberService.findMemberByEmail(getCurrentUserEmail());
+    }
+
+    private List<ProductResponseDto> toListOfProductResponses(Page<Product> productsInPage) {
+        return productsInPage.stream()
+                .map(ProductResponseDto::new)
+                .collect(Collectors.toList());
     }
 }

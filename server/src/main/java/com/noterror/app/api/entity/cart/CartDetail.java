@@ -1,6 +1,8 @@
 package com.noterror.app.api.entity.cart;
 
 import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.order.OrderDetail;
+import com.noterror.app.api.entity.order.Orders;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,5 +43,12 @@ public class CartDetail {
 
     public void updatePurchaseQuantity(int purchaseQuantity) {
         this.purchaseQuantity = purchaseQuantity;
+    }
+
+    public OrderDetail toOrderDetailByCartDetail() {
+        return OrderDetail.builder()
+                .orderQuantity(this.purchaseQuantity)
+                .product(product)
+                .build();
     }
 }

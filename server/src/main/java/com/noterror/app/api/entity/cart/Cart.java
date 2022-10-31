@@ -38,4 +38,7 @@ public class Cart extends Auditable {
         this.member = member;
     }
 
+    public void toOrder() {
+
+    }
 }

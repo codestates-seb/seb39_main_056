@@ -22,7 +22,6 @@ import static com.noterror.app.api.global.exception.ExceptionCode.MEMBER_NOT_FOU
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final MemberRepository memberRepository;
 
     @Override
     public Product findProduct(Long productId) {
@@ -38,9 +37,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, String email) {
+    public Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, Member member) {
         if (isNull(queryParamDto.getVegetarian())) {
-            Member member = getMember(email);
             queryParamDto.setVegetarian(member.getVegetarianType());
         }
         return getAllByQueryParam(queryParamDto);
@@ -74,11 +72,6 @@ public class ProductServiceImpl implements ProductService {
 
     private boolean isNull(String vegetarianType) {
         return vegetarianType == null;
-    }
-
-    private Member getMember(String email) {
-        return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new BusinessLogicException(MEMBER_NOT_FOUND));
     }
 
     private Page<Product> getAllByQueryParam(QueryParamDto queryParamDto) {

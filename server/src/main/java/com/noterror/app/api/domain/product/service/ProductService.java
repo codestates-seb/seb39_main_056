@@ -4,6 +4,7 @@ import com.noterror.app.api.domain.product.dto.QueryParamDto;
 import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.dto.ProductResponseDto;
+import com.noterror.app.api.entity.member.Member;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public interface ProductService {
      * @CASE1 인증된 회원일 때
      * @method 제품 전체 조회 기능
      */
-    Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, String email);
+    Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, Member member);
 
     /**
      * @param product
