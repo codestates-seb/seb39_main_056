@@ -37,16 +37,19 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     @Transactional
     public Orders orderProductsInCart(Cart cart) {
+        Orders newOrder = new Orders();
+        List<CartDetail> cartDetailList = cart.getCartDetails();
+        setNewOrderByCartDetailList(newOrder, cartDetailList);
 
-        Orders orders = new Orders();
-        List<CartDetail> cartDetails = cart.getCartDetails();
-        cartDetails.stream()
+        newOrder.addMember(cart.getMember());
+        newOrder.applyQuantityDecrease();
+        return ordersRepository.save(newOrder);
+    }
+
+    private void setNewOrderByCartDetailList(Orders newOrder, List<CartDetail> cartDetailList) {
+        cartDetailList.stream()
                 .map(CartDetail::toOrderDetailByCartDetail)
-                .forEach(orderDetail -> orders.addOrderDetail(orderDetail));
-        orders.addMember(cart.getMember());
-        orders.applyQuantityDecrease();
-
-        return ordersRepository.save(orders);
+                .forEach(orderDetail -> newOrder.addOrderDetail(orderDetail));
     }
 
     private PageRequest getPageInfo(int page, int size) {
