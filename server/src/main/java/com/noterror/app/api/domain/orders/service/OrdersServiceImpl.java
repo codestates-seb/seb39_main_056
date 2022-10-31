@@ -37,13 +37,17 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     @Transactional
     public Orders orderProductsInCart(Cart cart) {
-        Orders newOrder = new Orders();
-        List<CartDetail> cartDetailList = cart.getCartDetails();
-        setNewOrderByCartDetailList(newOrder, cartDetailList);
-
+        Orders newOrder = orderFromCart(cart);
         newOrder.addMember(cart.getMember());
         newOrder.applyQuantityDecrease();
         return ordersRepository.save(newOrder);
+    }
+
+    private Orders orderFromCart(Cart cart) {
+        Orders order = new Orders();
+        List<CartDetail> cartDetailList = cart.getCartDetails();
+        setNewOrderByCartDetailList(order, cartDetailList);
+        return order;
     }
 
     private void setNewOrderByCartDetailList(Orders newOrder, List<CartDetail> cartDetailList) {
