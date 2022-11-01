@@ -1,17 +1,17 @@
 package com.noterror.app.api.entity.cart;
 
 import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.order.OrderDetail;
+import com.noterror.app.api.entity.order.Orders;
 import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "cart_detail")
 public class CartDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,15 +29,15 @@ public class CartDetail {
     private Product product;
 
     //== BUSINESS LOGIC ==//
-    public void getCart(Cart cart) {
+    public void addCart(Cart cart) {
         this.cart = cart;
     }
 
-    public void getProduct(Product product) {
+    public void addProduct(Product product) {
         this.product = product;
     }
 
-    public void addPurchaseQuantity(int purchaseQuantity) {
+    public void plusPurchaseQuantity(int purchaseQuantity) {
         this.purchaseQuantity += purchaseQuantity;
     }
 
@@ -45,11 +45,10 @@ public class CartDetail {
         this.purchaseQuantity = purchaseQuantity;
     }
 
-    public static CartDetail createCartDetail(Cart cart, Product product, int count) {
-        CartDetail cartDetail = new CartDetail();
-        cartDetail.setCart(cart);
-        cartDetail.setProduct(product);
-        cartDetail.setPurchaseQuantity(count);
-        return cartDetail;
+    public OrderDetail toOrderDetailByCartDetail() {
+        return OrderDetail.builder()
+                .orderQuantity(this.purchaseQuantity)
+                .product(product)
+                .build();
     }
 }

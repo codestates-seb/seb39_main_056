@@ -1,111 +1,86 @@
 package com.noterror.app.api.domain.cart.service;
 
-import com.noterror.app.api.domain.cart.dto.CartDetailDto;
-import com.noterror.app.api.domain.cart.dto.CartPatchDto;
-import com.noterror.app.api.domain.cart.dto.CartProductDto;
+import com.noterror.app.api.domain.cart.dto.CartDetailUpdateInfoDto;
 import com.noterror.app.api.domain.cart.repository.CartDetailRepository;
 import com.noterror.app.api.domain.cart.repository.CartRepository;
-import com.noterror.app.api.domain.member.repository.MemberRepository;
-import com.noterror.app.api.domain.product.repository.ProductRepository;
 import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.member.Member;
+import com.noterror.app.api.global.exception.BusinessLogicException;
+import com.noterror.app.api.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
     private final CartDetailRepository cartDetailRepository;
-    private final ProductRepository productRepository;
-    private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
 
     @Override
     @Transactional
-    public CartDetailDto addCart(CartProductDto cartProductDto, String email) {
-
-        Member member = memberRepository.findByEmail(email).get();
-        Product product = productRepository.findById(cartProductDto.getProductId()).get();
-        Cart cart = member.getCart();
-
-        if (cart == null) {
-            cart = Cart.createCart(member);
-            cartRepository.save(cart);
-        }
-
-        //상품이 장바구니에 있는지 없는지 조회
-        //CartDetail existProduct = cartDetailRepository.findByCartIdAndProductId(cart.getCartId(), cartProductDto.getProductId());
-        CartDetail existProduct = cartDetailRepository.findByProductId(product.getProductId());
-        // 만약 상품이 이미 있으면은 개수를 +
-        if (existProduct != null) {
-            existProduct.addPurchaseQuantity(cartProductDto.getPurchaseQuantity());
-            //cartDetailRepository.save(existProduct);
-
-            CartDetailDto cartDetailDto = new CartDetailDto();
-            cartDetailDto.setCartDetailId(existProduct.getCartDetailId());
-            cartDetailDto.setProductName(existProduct.getProduct().getProductName());
-            cartDetailDto.setPrice(existProduct.getProduct().getPrice());
-            cartDetailDto.setPurchaseQuantity(existProduct.getPurchaseQuantity());
-            cartDetailDto.setThumbnailImage(existProduct.getProduct().getThumbnailImage());
-            return cartDetailDto;
-        } else { // 아니면은 CartItem 에 상품 저장
-            CartDetail cartItem = CartDetail.createCartDetail(cart, product, cartProductDto.getPurchaseQuantity());
-            cartDetailRepository.save(cartItem);
-
-            CartDetailDto cartDetailDto = new CartDetailDto();
-            cartDetailDto.setCartDetailId(cartItem.getCartDetailId());
-            cartDetailDto.setProductName(cartItem.getProduct().getProductName());
-            cartDetailDto.setPrice(cartItem.getProduct().getPrice());
-            cartDetailDto.setPurchaseQuantity(cartItem.getPurchaseQuantity());
-            cartDetailDto.setThumbnailImage(cartItem.getProduct().getThumbnailImage());
-            return cartDetailDto;
-        }
+    public Cart addProductInCart(CartDetail cartDetailInfo) {
+        cartDetailInfo = checkAlreadyExistProduct(cartDetailInfo);
+        Cart currentCart = cartDetailInfo.getCart();
+        currentCart.addCartDetail(cartDetailInfo);
+        return cartRepository.save(currentCart);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<CartDetailDto> listCart(String email) {
-        List<CartDetailDto> cartDetailDtoList = new ArrayList<>();
-
-        Member member = memberRepository.findByEmail(email).get();
-        Cart cart = member.getCart();
-
-        if (cart == null) {
-            return cartDetailDtoList;
-        }
-
-        cartDetailDtoList = cartDetailRepository.findCartDetailDtoList(cart.getCartId());
-
-        return cartDetailDtoList;
-    }
-
-
-    //장바구니 상품수량 up
-    @Override
-    public CartPatchDto updateCart(CartPatchDto cartPatchDto) {
-        CartDetail cartDetail = cartDetailRepository.findById(cartPatchDto.getCartDetailId()).get();
-        cartDetail.updatePurchaseQuantity(cartPatchDto.getPurchaseQuantity());
-
-        //cartDetailRepository.save(cartDetail);
-        CartPatchDto cartUpdateDto = new CartPatchDto();
-        cartUpdateDto.setCartDetailId(cartPatchDto.getCartDetailId());
-        cartUpdateDto.setPurchaseQuantity(cartPatchDto.getPurchaseQuantity());
-        return cartUpdateDto;
+    public Cart getCartOfMember(Member currentUser) {
+        Long cartId = getCartIdOfMember(currentUser);
+        return getCart(cartId);
     }
 
     @Override
+    @Transactional
+    public Cart updateCartDetail(CartDetailUpdateInfoDto updateInfo) {
+        CartDetail currentCartDetail = getCartDetail(updateInfo.getCartDetailId());
+        currentCartDetail.updatePurchaseQuantity(updateInfo.getPurchaseQuantity());
+        Cart currentCart = currentCartDetail.getCart();
+        return cartRepository.save(currentCart);
+    }
+
+    @Override
+    @Transactional
     public void deleteCart(Long cartDetailId) {
-        CartDetail cartDetail = cartDetailRepository.findById(cartDetailId).get();
-        cartDetailRepository.delete(cartDetail);
+        cartDetailRepository.delete(getCartDetail(cartDetailId));
     }
 
+    private CartDetail checkAlreadyExistProduct(CartDetail cartDetailInfo) {
+        Product wishProduct = cartDetailInfo.getProduct();
 
+        if (isExistInCart(wishProduct)) {
+            cartDetailInfo = getCartDetailByProduct(wishProduct);
+            cartDetailInfo.plusPurchaseQuantity(cartDetailInfo.getPurchaseQuantity());
+        }
+        return cartDetailInfo;
+    }
+
+    private CartDetail getCartDetailByProduct(Product product) {
+        return cartDetailRepository.findByProductId(product.getProductId()).get();
+    }
+
+    private boolean isExistInCart(Product product) {
+        return cartDetailRepository
+                .findByProductId(product.getProductId())
+                .isPresent();
+    }
+
+    private CartDetail getCartDetail(Long cartDetailId) {
+        return cartDetailRepository.findById(cartDetailId)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.CART_DETAIL_NOT_FOUND));
+    }
+
+    private Cart getCart(Long cartId) {
+        return cartRepository.findById(cartId).get();
+    }
+
+    private Long getCartIdOfMember(Member currentUser) {
+        return currentUser.getCart().getCartId();
+    }
 }

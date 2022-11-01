@@ -22,6 +22,9 @@ public enum ExceptionCode {
     //VegetarianType
     TYPE_BAD_REQUEST(400, "잘못된 채식 유형입니다."),
 
+    //Cart
+    CART_DETAIL_NOT_FOUND(404,"해당 제품은 장바구니에 없습니다."),
+
     //Global
     BAD_REQUEST(400, "잘못된 요청입니다."),
 

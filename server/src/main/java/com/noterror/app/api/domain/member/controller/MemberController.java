@@ -2,17 +2,20 @@ package com.noterror.app.api.domain.member.controller;
 
 import com.noterror.app.api.domain.member.dto.*;
 import com.noterror.app.api.domain.member.service.MemberService;
+import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.global.response.SingleMemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
+@Validated
 @RequestMapping(value = "/members")
 @RequiredArgsConstructor
 public class MemberController {
@@ -24,9 +27,11 @@ public class MemberController {
      */
     @PostMapping("/sign-up")
     public ResponseEntity<MemberResponseDto> postMember(@RequestBody @Valid SignUpDto signUpDto) {
-        Long newMemberId = memberService.saveMemberInfo(signUpDto);
+        Member member = signUpDto.toEntity();
+        Long newMemberId = memberService.saveMemberInfo(member);
 
-        return new ResponseEntity(new MemberIdResponseDto(newMemberId), HttpStatus.CREATED);
+        return new ResponseEntity(
+                new MemberIdResponseDto(newMemberId), HttpStatus.CREATED);
     }
 
     /**
@@ -35,10 +40,13 @@ public class MemberController {
     @PostMapping("/sign-up/type/{member-id}")
     public ResponseEntity<MemberResponseDto> postVegetarianTypeOfNewMember(
             @PathVariable("member-id") Long memberId,
-            @RequestBody @Valid VegetarianTypeInputDto vegetarianType) {
+            @RequestBody VegetarianTypeInputDto vegetarianType) {
 
-        MemberResponseDto response = memberService.saveTypeOfNewMember(memberId, vegetarianType);
-        return new ResponseEntity(new SingleMemberResponse<>(response), HttpStatus.OK);
+        Member member = memberService.saveTypeOfNewMember(memberId, vegetarianType);
+        MemberResponseDto response = new MemberResponseDto(member);
+
+        return new ResponseEntity(
+                new SingleMemberResponse<>(response), HttpStatus.OK);
     }
 
     /**
@@ -47,7 +55,9 @@ public class MemberController {
     @PutMapping("/info")
     public ResponseEntity putMember(
             @RequestBody @Valid UpdateInfoDto updateInfoDto) {
-        MemberResponseDto response = memberService.updateMember(currentUserEmail(), updateInfoDto);
+        Member member = updateInfoDto.toEntity();
+        Member updateMember = memberService.updateMember(currentUserEmail(), member);
+        MemberResponseDto response = new MemberResponseDto(updateMember);
 
         return new ResponseEntity<>(
                 new SingleMemberResponse<>(response), HttpStatus.OK);
@@ -58,7 +68,8 @@ public class MemberController {
      */
     @GetMapping("/info")
     public ResponseEntity getMember() {
-        MemberResponseDto response = memberService.findMember(currentUserEmail());
+        Member findMember = memberService.findMemberByEmail(currentUserEmail());
+        MemberResponseDto response = new MemberResponseDto(findMember);
         return new ResponseEntity<>(
                 new SingleMemberResponse(response), HttpStatus.OK);
     }
