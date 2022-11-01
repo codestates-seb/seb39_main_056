@@ -1,9 +1,8 @@
 
 package com.noterror.app.api.entity.member;
 
-import com.noterror.app.api.domain.member.dto.SignUpDto;
-import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
 import com.noterror.app.api.entity.cart.Cart;
+import com.noterror.app.api.entity.order.Orders;
 import com.noterror.app.api.global.audit.Auditable;
 import lombok.*;
 
@@ -41,8 +40,11 @@ public class Member extends Auditable implements Principal {
     @Column
     private String vegetarianType;
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Cart cart;
+
+    @OneToMany(mappedBy = "member")
+    private List<Orders> orderList = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
@@ -54,27 +56,26 @@ public class Member extends Auditable implements Principal {
     //== BUSINESS LOGIC ==//
     public void addCart(Cart cart) {
         this.cart = cart;
+        if (cart.getMember() != this) {
+            cart.addMember(this);
+        }
     }
 
-    public void updateMemberInfo(UpdateInfoDto updateInfoDto) {
-        this.phone = updateInfoDto.getPhone();
-        this.address = new Address(
-                updateInfoDto.getZipCode(),
-                updateInfoDto.getCity(),
-                updateInfoDto.getDetailAddress()
-        );
-        this.vegetarianType = updateInfoDto.getVegetarianType();
+    public void addOrders(Orders orders) {
+        this.orderList.add(orders);
+        if (orders.getMember() != this) {
+            orders.addMember(this);
+        }
     }
 
-    public void proceedGeneralSignUp(SignUpDto signUpDto, List<String> roles, String password) {
-        this.email = signUpDto.getEmail();
-        this.memberName = signUpDto.getMemberName();
-        this.phone = signUpDto.getPhone();
+    public void updateMemberInfo(Member member) {
+        this.phone = member.getPhone();
+        this.address = member.getAddress();
+        this.vegetarianType = member.getVegetarianType();
+    }
+
+    public void insertAuthInfo(List<String> roles, String password) {
         this.password = password;
-        this.address = new Address(
-                signUpDto.getZipCode(),
-                signUpDto.getCity(),
-                signUpDto.getDetailAddress());
         this.roles = roles;
     }
 

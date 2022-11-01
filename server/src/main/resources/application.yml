@@ -31,8 +31,8 @@ jwt:
   access-token-expiration-minutes: 150
   refresh-token-expiration-minutes: 420
   key:
-    secret: ${JWT_SECRET_KEY}
+    secret: 23123kjds;jnablvnasvnsdfsdmbfskfksdfljsdflhsdfslkafkldfdasfwv3r13fdsvcscv
 
 mail:
   address:
-    admin: ${ADMIN_MAIL}
+    admin: admin056@admin.com

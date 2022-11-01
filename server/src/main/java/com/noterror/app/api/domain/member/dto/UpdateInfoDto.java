@@ -1,5 +1,7 @@
 package com.noterror.app.api.domain.member.dto;
 
+import com.noterror.app.api.entity.member.Address;
+import com.noterror.app.api.entity.member.Member;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -36,4 +38,17 @@ public class UpdateInfoDto {
     private String detailAddress;
 
     private String vegetarianType;
+
+    public Member toEntity() {
+        return Member.builder()
+                .phone(this.phone)
+                .address(
+                        new Address(
+                                this.zipCode,
+                                this.city,
+                                this.detailAddress
+                        ))
+                .vegetarianType(this.vegetarianType)
+                .build();
+    }
 }

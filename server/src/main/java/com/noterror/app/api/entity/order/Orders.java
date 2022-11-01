@@ -5,58 +5,60 @@ import com.noterror.app.api.global.audit.Auditable;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-@Table(name = "orders")
+@Entity
 public class Orders extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long ordersId;
 
     @Enumerated(EnumType.STRING)
     @Column
-    private OrdersStatus ordersStatus = OrdersStatus.ORDER_REQUEST;
+    private OrdersStatus orderStatus = OrdersStatus.ORDER_REQUEST;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "orders")
-    private List<OrderProduct> orderProducts = new ArrayList<>();
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
-    public void setMember(Member member) {
+    //== BUSINESS LOGIC ==//
+    public void addMember(Member member) {
         this.member = member;
-    }
-
-    public void addOrderProduct(OrderProduct orderProduct){
-        orderProducts.add(orderProduct);
-        orderProduct.setOrders(this);
-    }
-
-    public static Orders createOrder(Member member, List<OrderProduct> orderProductList) {
-        Orders order = new Orders();
-        order.setMember(member);
-        order.setOrdersStatus(OrdersStatus.ORDER_REQUEST);
-        for(OrderProduct orderProduct : orderProductList) {
-            order.addOrderProduct(orderProduct);
+        if (!member.getOrderList().contains(this)) {
+            member.addOrders(this);
         }
-        return order;
     }
 
-    public int getTotalPrice(){
-        int totalPrice = 0;
-        for(OrderProduct orderProduct : orderProducts){
-            totalPrice += orderProduct.getTotalPrice();
+    public void addOrderDetail(OrderDetail orderDetail) {
+        orderDetails.add(orderDetail);
+        if (orderDetail.getOrders() != this) {
+            orderDetail.addOrders(this);
         }
-        return totalPrice;
+    }
+
+    public int getOrderTotalPrice() {
+        return this.orderDetails.stream()
+                .mapToInt(OrderDetail::getProductTotalPrice)
+                .sum();
+    }
+
+    public void applyQuantityDecrease() {
+        this.orderDetails.stream()
+                .map(OrderDetail::getOrderQuantity)
+                .forEach(orderQuantity -> {
+                    this.orderDetails.stream()
+                            .map(OrderDetail::getProduct)
+                            .forEach(product ->
+                                    product.decreaseStockQuantity(orderQuantity));
+                });
     }
 }

@@ -1,33 +1,32 @@
 package com.noterror.app.api.domain.cart.service;
-import com.noterror.app.api.domain.cart.dto.CartDetailDto;
-import com.noterror.app.api.domain.cart.dto.CartPatchDto;
-import com.noterror.app.api.domain.cart.dto.CartProductDto;
-import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
-
-import java.util.List;
+import com.noterror.app.api.domain.cart.dto.CartDetailUpdateInfoDto;
+import com.noterror.app.api.entity.cart.Cart;
+import com.noterror.app.api.entity.cart.CartDetail;
+import com.noterror.app.api.entity.member.Member;
 
 public interface CartService {
     /**
      * 장바구니 제품 추가
-     * @param cartProductDto
-     * @param email
+     * @CASE1 : 동일한 제품이 이미 추가되어있다면 구매 개수만 추가
+     * @CASE2 : 동일한 제품이 없다면, 새롭게 추가
+     * @param cartDetail : 현재 회원의 장바구니에 추가되는 제품 정보(수량)
      * @return
      */
-    CartDetailDto addCart(CartProductDto cartProductDto, String email) ;
+    Cart addProductInCart(CartDetail cartDetail) ;
+
+    /**
+     * 회원의 장바구니 제품 전체 조회
+     * @param currentUser
+     * @return
+     */
+    Cart getCartOfMember(Member currentUser);
 
     /**
      * 장바구니 수량 변경
-     * @param cartPatchDto
+     * @param updateInfo : cartDetailId, purchaseQuantity
      * @return
      */
-    CartPatchDto updateCart(CartPatchDto cartPatchDto);
-
-    /**
-     * 장바구니 조회
-     * @param email
-     * @return
-     */
-    List<CartDetailDto> listCart(String email);
+    Cart updateCartDetail(CartDetailUpdateInfoDto updateInfo);
 
     /**
      * 장바구니 제품 삭제

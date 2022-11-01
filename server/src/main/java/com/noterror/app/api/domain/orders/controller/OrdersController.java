@@ -1,69 +1,123 @@
 package com.noterror.app.api.domain.orders.controller;
 
-import com.noterror.app.api.domain.orders.dto.OrderDto;
-import com.noterror.app.api.domain.orders.dto.OrderInfoDto;
+import com.noterror.app.api.domain.member.service.MemberService;
+import com.noterror.app.api.domain.orders.dto.OrderDetailDto;
 import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
 import com.noterror.app.api.domain.orders.service.OrdersService;
+import com.noterror.app.api.domain.product.dto.ProductResponseDto;
+import com.noterror.app.api.domain.product.dto.QueryParamDto;
+import com.noterror.app.api.domain.product.service.ProductService;
+import com.noterror.app.api.entity.Product;
+import com.noterror.app.api.entity.cart.Cart;
+import com.noterror.app.api.entity.member.Member;
+import com.noterror.app.api.entity.order.OrderDetail;
+import com.noterror.app.api.entity.order.Orders;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.api.global.exception.ExceptionCode;
 import com.noterror.app.api.global.response.MultiOrdersResponse;
+import com.noterror.app.api.global.response.MultiProductsResponse;
 import com.noterror.app.api.global.response.SingleOrderResponse;
+import com.noterror.app.api.global.response.SortInfo;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@Slf4j
-@RequestMapping("/orders")
+@RequestMapping("/order")
 @RequiredArgsConstructor
+@Validated
 public class OrdersController {
+
     private final OrdersService ordersService;
+    private final MemberService memberService;
+    private final ProductService productService;
 
     /**
      * 주문 내역 조회
+     * 페이지네이션 기능 추가
      */
-    @GetMapping
-    public ResponseEntity getOrders() {
-        List<OrderInfoDto> pageRequest = ordersService.getOrderList(getCurrentUserEmail());
-        return new ResponseEntity(new MultiOrdersResponse(pageRequest), HttpStatus.OK);
+    @GetMapping("/list")
+    public ResponseEntity getOrderList(@RequestParam(required = false, defaultValue = "1") int page,
+                                       @RequestParam(required = false, defaultValue = "10") int size) {
+
+        Page<Orders> ordersInPage = ordersService.getOrderList(getMemberByEmail(), page, size);
+        List<OrderResponseDto> response = toListOfOrderResponses(ordersInPage);
+        return new ResponseEntity(
+                new MultiOrdersResponse(response, ordersInPage), HttpStatus.OK);
     }
 
     /**
      * 단일 주문
      */
-    @PostMapping
-    public ResponseEntity addOrder(@RequestBody OrderDto orderDto) {
-
-        OrderResponseDto orderResponseDto = ordersService.orderProduct(orderDto, getCurrentUserEmail());
-        return new ResponseEntity(new SingleOrderResponse<>(orderResponseDto), HttpStatus.OK);
+    @PostMapping("/product/{product-id}")
+    public ResponseEntity OrderSingleProduct(@PathVariable("product-id") Long productId,
+                                             @RequestBody @Valid OrderDetailDto orderDetailDto) {
+        OrderDetail currentOrderProductInfo = getOrderDetail(productId, orderDetailDto);
+        Orders singleOrder = setOrderInfo(currentOrderProductInfo);
+        Orders newOrder = ordersService.orderProduct(singleOrder);
+        OrderResponseDto response = new OrderResponseDto(newOrder);
+        return new ResponseEntity(
+                new SingleOrderResponse<>(response), HttpStatus.OK);
     }
 
     /**
      * 장바구니 내역 전체 주문
-     * 패키지 이동(cart -> order)
-     * 멤버가 갖고있는 cart 를 활용
      */
     @PostMapping("/cart")
-    public @ResponseBody ResponseEntity orderCartProduct() {
-        OrderInfoDto orderId = ordersService.orderCartProducts(getCurrentUserEmail());
-        return new ResponseEntity(new SingleOrderResponse(orderId), HttpStatus.OK);
+    public ResponseEntity orderProductsInCart() {
+        Cart cartOfMember = getCartByMember();
+        Orders newOrder = ordersService.orderProductsInCart(cartOfMember);
+        OrderResponseDto response = new OrderResponseDto(newOrder);
+        return new ResponseEntity(
+                new SingleOrderResponse(response), HttpStatus.OK);
     }
 
     /**
      * TODO 주문 취소
      */
     @DeleteMapping("/{orders-id}")
-    public @ResponseBody ResponseEntity deleteOrder(@PathVariable("orders-id") Long ordersId) {
+    public ResponseEntity deleteOrder(@PathVariable("orders-id") Long ordersId) {
         throw new BusinessLogicException(ExceptionCode.NOT_IMPLEMENTATION);
     }
 
     private String getCurrentUserEmail() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    private Member getMemberByEmail() {
+        return memberService.findMemberByEmail(getCurrentUserEmail());
+    }
+
+    private Product getProduct(Long productId) {
+        return productService.findProduct(productId);
+    }
+
+    private OrderDetail getOrderDetail(Long productId, OrderDetailDto orderDetailDto) {
+        return orderDetailDto.toOrderDetailWithProduct(
+                getProduct(productId)
+        );
+    }
+
+    private Orders setOrderInfo(OrderDetail currentOrderProductInfo) {
+        return currentOrderProductInfo.toOrdersWithMember(getMemberByEmail());
+    }
+
+    private Cart getCartByMember() {
+        return getMemberByEmail().getCart();
+    }
+
+    private List<OrderResponseDto> toListOfOrderResponses(Page<Orders> ordersInPage) {
+        return ordersInPage.stream()
+                .map(OrderResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 }

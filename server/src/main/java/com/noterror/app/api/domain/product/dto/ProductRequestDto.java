@@ -1,5 +1,6 @@
 package com.noterror.app.api.domain.product.dto;
 
+import com.noterror.app.api.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class ProductRequestDto {
 
     @Min(value = 1, message = "수량은 최소 1개 이상이어야 합니다.")
     @Positive
-    private int StockQuantity;
+    private int stockQuantity;
 
     @Min(value = 100, message = "금액은 100원 이상부터 등록가능합니다.")
     @Positive
@@ -34,4 +35,15 @@ public class ProductRequestDto {
 
     @NotBlank(message = "제품이 해당하는 채식 유형을 선택해주세요.")
     private String vegetarianType;
+
+    public Product toEntity() {
+        return Product.builder()
+                .productName(this.productName)
+                .stockQuantity(this.stockQuantity)
+                .price(this.price)
+                .thumbnailImage(this.thumbnailImage)
+                .detailImage(this.detailImage)
+                .vegetarianType(this.vegetarianType)
+                .build();
+    }
 }
