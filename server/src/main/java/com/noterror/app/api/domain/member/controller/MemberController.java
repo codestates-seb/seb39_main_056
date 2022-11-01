@@ -55,8 +55,8 @@ public class MemberController {
     @PutMapping("/info")
     public ResponseEntity putMember(
             @RequestBody @Valid UpdateInfoDto updateInfoDto) {
-        Member member = updateInfoDto.toEntity();
-        Member updateMember = memberService.updateMember(currentUserEmail(), member);
+        Member updateInfo = updateInfoDto.toEntityWithEmail(currentUserEmail());
+        Member updateMember = memberService.updateMember(updateInfo);
         MemberResponseDto response = new MemberResponseDto(updateMember);
 
         return new ResponseEntity<>(

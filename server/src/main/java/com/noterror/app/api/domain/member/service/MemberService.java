@@ -32,7 +32,7 @@ public interface MemberService {
      * @param member
      * @return MemberResponseDto
      */
-    Member updateMember(String email, Member member);
+    Member updateMember(Member member);
 
     /**
      * 개별 회원 정보 조회 기능
