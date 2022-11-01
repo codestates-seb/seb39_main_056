@@ -53,7 +53,7 @@ public class OrdersServiceImpl implements OrdersService {
     private void setNewOrderByCartDetailList(Orders newOrder, List<CartDetail> cartDetailList) {
         cartDetailList.stream()
                 .map(CartDetail::toOrderDetailByCartDetail)
-                .forEach(orderDetail -> newOrder.addOrderDetail(orderDetail));
+                .forEach(newOrder::addOrderDetail);
     }
 
     private PageRequest getPageInfo(int page, int size) {
