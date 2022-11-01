@@ -46,8 +46,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public Member updateMember(String currentUserEmail, Member updateInfo) {
-        Member findMember = findMemberByEmail(currentUserEmail);
+    public Member updateMember(Member updateInfo) {
+        String email = updateInfo.getEmail();
+        Member findMember = findMemberByEmail(email);
         findMember.updateMemberInfo(updateInfo);
         return memberRepository.save(findMember);
     }

@@ -39,8 +39,9 @@ public class UpdateInfoDto {
 
     private String vegetarianType;
 
-    public Member toEntity() {
+    public Member toEntityWithEmail(String email) {
         return Member.builder()
+                .email(email)
                 .phone(this.phone)
                 .address(
                         new Address(
@@ -49,6 +50,7 @@ public class UpdateInfoDto {
                                 this.detailAddress
                         ))
                 .vegetarianType(this.vegetarianType)
+
                 .build();
     }
 }
