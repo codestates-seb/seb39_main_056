@@ -136,10 +136,4 @@ public class GetProductsOfProductControllerTest {
                 .andExpect(jsonPath("$.sortInfo.sort").value("price"))
                 .andExpect(jsonPath("$.sortInfo.orderBy").value("desc"));
     }
-
-
-
-
-
-
 }

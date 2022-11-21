@@ -18,8 +18,12 @@ public class OrdersRepositoryExtensionImpl extends QuerydslRepositorySupport imp
 
     @Override
     public Page<Orders> findAllByMember(Member member, Pageable pageable) {
+
         QOrders orders = QOrders.orders;
-        JPQLQuery<Orders> query = from(orders).where(orders.member.memberId.eq(member.getMemberId()));
+
+        JPQLQuery<Orders> query = from(orders)
+                .where(orders.member.memberId.eq(member.getMemberId()));
+
         JPQLQuery<Orders> pageableQuery = getQuerydsl().applyPagination(pageable, query);
         QueryResults<Orders> fetchResults = pageableQuery.fetchResults();
         return new PageImpl<>(fetchResults.getResults(), pageable, fetchResults.getTotal());
