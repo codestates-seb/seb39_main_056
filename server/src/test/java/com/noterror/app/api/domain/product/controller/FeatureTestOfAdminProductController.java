@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.noterror.app.api.domain.product.dto.ProductRequestDto;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
 import com.noterror.app.api.entity.Product;
+import com.noterror.app.helper.WithAccount;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,12 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,6 +57,7 @@ public class FeatureTestOfAdminProductController {
 
     @Test
     @DisplayName("제품 수정 성공 - 정상 입력, 제품명만 변경")
+    @WithAccount("admin")
     void 제품_수정_테스트() throws Exception {
 
         // 카레라면 -> 사과하세우
@@ -62,7 +65,8 @@ public class FeatureTestOfAdminProductController {
                 "사과하세우",
                 3, 10000,
                 "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA",
-                "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA"
+                "AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA",
+                "비건"
         );
 
         String jsonOfRequest = gson.toJson(request);
@@ -79,6 +83,7 @@ public class FeatureTestOfAdminProductController {
 
     @Test
     @DisplayName("제품 삭제 성공")
+    @WithAccount("admin")
     void 제품_삭제_테스트() throws Exception {
 
         ResultActions actions = mockMvc.perform(
