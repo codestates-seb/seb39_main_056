@@ -1,7 +1,7 @@
 package com.noterror.app.api.domain.product.controller;
 
-import com.noterror.app.api.domain.entity.Product;
 import com.noterror.app.api.domain.product.repository.ProductRepository;
+import com.noterror.app.api.entity.Product;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,12 +18,17 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * @Test : 제품 전체 조회 QueryParam Case 테스트
+ */
 @Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
 public class GetProductsOfProductControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
+
     @Autowired private ProductRepository productRepository;
 
     static Product dataInDB_1;
@@ -31,12 +36,12 @@ public class GetProductsOfProductControllerTest {
     static Product dataInDB_3;
 
     @BeforeEach
-    void beforeEach() throws InterruptedException {
+    void beforeEach() {
         Product data_1
                 = Product.builder()
                 .productName("카레라면")
                 .price(10000)
-                .quantity(3)
+                .stockQuantity(3)
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();
@@ -46,7 +51,7 @@ public class GetProductsOfProductControllerTest {
                 = Product.builder()
                 .productName("옥수수식빵")
                 .price(2000)
-                .quantity(2)
+                .stockQuantity(2)
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();
@@ -56,17 +61,17 @@ public class GetProductsOfProductControllerTest {
                 = Product.builder()
                 .productName("가지돈까스")
                 .price(500)
-                .quantity(7)
+                .stockQuantity(7)
                 .thumbnailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .detailImage("AOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYAAOh-ky201T2iwWCIEQQOTQYxLJ90U01aMK7o8NrPzoCSYA")
                 .build();
 
         dataInDB_1 = productRepository.save(data_1);
-        dataInDB_1.setSignDate(LocalDateTime.now());
+        dataInDB_1.setCreateDate(LocalDateTime.now());
         dataInDB_2 = productRepository.save(data_2);
-        dataInDB_2.setSignDate(LocalDateTime.now().plusDays(3));
+        dataInDB_2.setCreateDate(LocalDateTime.now().plusDays(3));
         dataInDB_3 = productRepository.save(data_3);
-        dataInDB_3.setSignDate(LocalDateTime.now().plusDays(1));
+        dataInDB_3.setCreateDate(LocalDateTime.now().plusDays(1));
     }
 
     @AfterEach()
@@ -97,7 +102,7 @@ public class GetProductsOfProductControllerTest {
                 .andExpect(jsonPath("$.products[1].productId").value(dataInDB_3.getProductId()))
                 .andExpect(jsonPath("$.products[2].productId").value(dataInDB_1.getProductId()))
                 .andExpect(jsonPath("$.pageInfo.totalElements").value(3))
-                .andExpect(jsonPath("$.sortInfo.sort").value("signDate"))
+                .andExpect(jsonPath("$.sortInfo.sort").value("create_date"))
                 .andExpect(jsonPath("$.sortInfo.orderBy").value("desc"));
     }
 
@@ -119,6 +124,7 @@ public class GetProductsOfProductControllerTest {
                 .andExpect(jsonPath("$.sortInfo.orderBy").value("asc"));
     }
 
+    // 제품은
     // 출력 순서 : 1 -> 2 -> 3
     @Test
     @DisplayName("제품 전체 조회 성공 테스트 - 높은 가격순 정렬")
@@ -136,10 +142,4 @@ public class GetProductsOfProductControllerTest {
                 .andExpect(jsonPath("$.sortInfo.sort").value("price"))
                 .andExpect(jsonPath("$.sortInfo.orderBy").value("desc"));
     }
-
-
-
-
-
-
 }

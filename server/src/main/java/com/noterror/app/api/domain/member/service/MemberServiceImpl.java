@@ -68,9 +68,13 @@ public class MemberServiceImpl implements MemberService {
 
     private void insertAdditionalInfo(Member newMember) {
         List<String> roles = authorityUtils.createRoles(newMember.getEmail());
-        String encodedPassword = passwordEncoder.encode(newMember.getPassword());
+        String encodedPassword = encodingPassword(newMember.getPassword());
         newMember.insertAuthInfo(roles, encodedPassword);
         newMember.addCart(new Cart());
+    }
+
+    private String encodingPassword(String password) {
+        return passwordEncoder.encode(password);
     }
 
     public Member findMemberById(Long memberId) {
