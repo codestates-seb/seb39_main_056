@@ -1,7 +1,6 @@
 
 package com.noterror.app.api.domain.member.service;
 
-import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
 import com.noterror.app.api.domain.member.repository.MemberRepository;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.member.Member;
@@ -38,9 +37,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public Member saveTypeOfNewMember(Long memberId, VegetarianTypeInputDto request) {
+    public Member saveTypeOfNewMember(Long memberId, String type) {
         Member member = findMemberById(memberId);
-        member.setVegetarianType(request.getVegetarianType());
+        member.setVegetarianType(type);
         return member;
     }
 

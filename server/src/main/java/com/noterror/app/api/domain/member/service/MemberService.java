@@ -1,9 +1,5 @@
 package com.noterror.app.api.domain.member.service;
 
-import com.noterror.app.api.domain.member.dto.MemberResponseDto;
-import com.noterror.app.api.domain.member.dto.SignUpDto;
-import com.noterror.app.api.domain.member.dto.UpdateInfoDto;
-import com.noterror.app.api.domain.member.dto.VegetarianTypeInputDto;
 import com.noterror.app.api.entity.member.Member;
 
 public interface MemberService {
@@ -23,12 +19,10 @@ public interface MemberService {
      * @param vegetarianType
      * @return
      */
-    Member saveTypeOfNewMember(Long memberId, VegetarianTypeInputDto vegetarianType);
+    Member saveTypeOfNewMember(Long memberId, String vegetarianType);
 
     /**
      * 회원 정보 수정 기능
-     *
-     * @param email
      * @param member
      * @return MemberResponseDto
      */

@@ -13,6 +13,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @Validated
@@ -40,9 +42,9 @@ public class MemberController {
     @PostMapping("/sign-up/type/{member-id}")
     public ResponseEntity<MemberResponseDto> postVegetarianTypeOfNewMember(
             @PathVariable("member-id") Long memberId,
-            @RequestBody VegetarianTypeInputDto vegetarianType) {
+            @RequestBody HashMap<String, String> vegetarianType) {
 
-        Member member = memberService.saveTypeOfNewMember(memberId, vegetarianType);
+        Member member = memberService.saveTypeOfNewMember(memberId, vegetarianType.get("vegetarianType"));
         MemberResponseDto response = new MemberResponseDto(member);
 
         return new ResponseEntity(
