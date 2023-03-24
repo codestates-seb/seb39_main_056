@@ -1,6 +1,6 @@
 package com.noterror.app.api.domain.product.controller;
 
-import com.noterror.app.api.domain.product.repository.ProductRepository;
+import com.noterror.app.api.product.repository.ProductRepository;
 import com.noterror.app.api.entity.Product;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

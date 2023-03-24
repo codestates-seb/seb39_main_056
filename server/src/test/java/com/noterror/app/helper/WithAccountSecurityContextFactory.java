@@ -1,7 +1,7 @@
 package com.noterror.app.helper;
 
-import com.noterror.app.api.domain.member.dto.SignUpDto;
-import com.noterror.app.api.domain.member.service.MemberService;
+import com.noterror.app.api.member.dto.SignUpDto;
+import com.noterror.app.api.member.service.MemberService;
 import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.infra.auth.CustomAuthorityUtils;
 import com.noterror.app.infra.auth.MemberDetails;

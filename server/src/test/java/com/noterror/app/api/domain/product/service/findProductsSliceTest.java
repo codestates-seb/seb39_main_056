@@ -1,8 +1,9 @@
 package com.noterror.app.api.domain.product.service;
 
-import com.noterror.app.api.domain.product.repository.ProductRepository;
+import com.noterror.app.api.product.repository.ProductRepository;
 import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.global.exception.BusinessLogicException;
+import com.noterror.app.api.product.service.ProductServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
