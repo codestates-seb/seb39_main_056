@@ -1,6 +1,5 @@
 package com.noterror.app.api.member.controller;
 
-import com.noterror.app.api.domain.member.dto.*;
 import com.noterror.app.api.member.dto.MemberIdResponseDto;
 import com.noterror.app.api.member.dto.MemberResponseDto;
 import com.noterror.app.api.member.dto.UpdateInfoDto;
