@@ -3,8 +3,8 @@ export const SerchBar = styled.input`
   width: 100%;
   min-width : 500px;
   height: 50px;
-  font-size: 1.2em;
-  padding: 5px 10px 0 35px;
+  font-size: 1.3em;
+  padding: 5px 10px 0 50px;
   font-family: "Spoqa Han Sans Neo", sans-serif;
   font-weight: 400;
   underline : none;

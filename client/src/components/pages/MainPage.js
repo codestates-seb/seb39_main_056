@@ -6,6 +6,7 @@ import Floating from '../organism/Floating';
 import { useSearchParams } from 'react-router-dom';
 import Page from '../organism/Page/Page';
 import { PageBox } from '../organism/Page/style';
+import styled from 'styled-components';
 
 const MainPage = () => {
   const [pages, setPages] = useState([]);

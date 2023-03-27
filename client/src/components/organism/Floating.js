@@ -13,14 +13,16 @@ const Container = styled.div`
 const Item = styled.div`
   color: #594a4e;
   text-align: center;
-  width: 100px;
-  height: 30px;
-  line-height: 20px;
+  width: 120px;
+  height: 40px;
+  line-height: 15px;
   padding: 10px;
+  font-size: 12px;
+  cursor : pointer;
   :hover {
     text-decoration: underline;
+    background: 
   }
-  font-size: x-small;
 `;
 
 const Floating = ({ Types, setSearchParams, searchParams }) => {
