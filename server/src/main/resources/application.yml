@@ -36,3 +36,7 @@ jwt:
 mail:
   address:
     admin: admin056@admin.com
+
+api:
+  ai:
+    key: ${OPEN_AI_KEY}

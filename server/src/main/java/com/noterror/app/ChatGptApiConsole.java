@@ -1,6 +1,8 @@
 package com.noterror.app;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,12 +11,14 @@ import java.net.URL;
 
 public class ChatGptApiConsole {
     public static void chatGPT(String text) throws Exception {
+
         String url = "https://api.openai.com/v1/completions";
+
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + "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");
+        con.setRequestProperty("Authorization", "Bearer " + "openAiKey");
 
         JSONObject data = new JSONObject();
         data.put("model", "text-davinci-003");

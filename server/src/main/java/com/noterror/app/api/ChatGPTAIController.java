@@ -1,9 +1,12 @@
 package com.noterror.app.api;
 
 import com.noterror.app.api.global.response.AiAnswerResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,19 +20,24 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class ChatGPTAIController {
+
+    @Value("${api.ai.key}")
+    private String openAiKey;
 
     @PostMapping("/helper")
     public ResponseEntity postChatGPTApi(@RequestBody Map<String, String> userInput) throws Exception {
 
         String text = userInput.get("text");
-        System.out.println("text = " + text);
+        log.info("Input : {}", text);
         String url = "https://api.openai.com/v1/completions";
+
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
-        con.setRequestProperty("Authorization", "Bearer " + "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");
+        con.setRequestProperty("Authorization", "Bearer " + openAiKey);
 
         JSONObject data = new JSONObject();
         data.put("model", "text-davinci-003");
@@ -47,7 +55,7 @@ public class ChatGPTAIController {
                 .reduce((a, b) -> a + b).get();
         String answer = new JSONObject(output).getJSONArray("choices").getJSONObject(0).getString("text");
 
-        System.out.println("answer = " + answer);
+        log.info("Answer : {}", answer);
         return new ResponseEntity(new AiAnswerResponse(answer), HttpStatus.OK);
     }
 
