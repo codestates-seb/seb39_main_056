@@ -55,4 +55,10 @@ public interface ProductService {
      * @param id
      */
     void removeProduct(Long id);
+
+
+    /**
+     * 현재 페이지의 채식 유형 정보 출력
+     */
+    public String getCurrentPageVegetarianName();
 }

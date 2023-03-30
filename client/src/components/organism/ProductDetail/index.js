@@ -105,7 +105,7 @@ export const ProductPage = ({ productId, productData }) => {
       const answer = res.data.answer;
       console.log(answer);
       $("#chat").append("<div class='admin-block'>"
-      +"<i class='fa-solid fa-robot fa-2x' style='margin:10px; color:#6ba543; align-self:flex-start;'></i>"
+      +"<i class='fa-solid fa-robot fa-2x' style='margin:10px; color:#C2C2C2; align-self:flex-start;'></i>"
       +"<p class='admin-chat'>" + answer +"</p>"
       +"</div>");
       $('#chat').scrollTop($('#chat')[0].scrollHeight);
@@ -152,7 +152,7 @@ export const ProductPage = ({ productId, productData }) => {
           <AIStyled.AdminBlock>
           <FontAwesomeIcon
                 icon={faRobot}
-                color='#6ba543'
+                color='#c2c2c2'
                 size='2x'
                 style={{ margin: '10px' }}
             />

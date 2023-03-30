@@ -60,7 +60,7 @@ public class ProductController {
         List<ProductResponseDto> response = toListOfProductResponses(productsInPage);
 
         return new ResponseEntity(
-                new MultiProductsResponse(response, productsInPage, new SortInfo(sort, orderBy)),
+                new MultiProductsResponse(response, productsInPage, new SortInfo(sort, orderBy),productService.getCurrentPageVegetarianName()),
                 HttpStatus.OK
         );
     }

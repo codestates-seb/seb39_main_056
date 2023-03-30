@@ -25,7 +25,7 @@ const Item = styled.div`
   }
 `;
 
-const Floating = ({ Types, setSearchParams, searchParams }) => {
+const Floating = ({ Types, setSearchParams, searchParams}) => {
   const onClick = e => {
     const params = [];
     const paramsObj = {};

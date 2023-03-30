@@ -9,13 +9,13 @@
 
 
 .admin-block .admin-chat {
-    background-color: #c2c2c2;
+    background-color: #C2C2C2;
     border-radius: 20px;
     width : fit-content;
     height : fit-content;
     max-width: 70%;
-    padding : 15px;
-    line-height: 20px;
+    padding : 13px;
+    line-height: 24px;
 }
 
 /* User */
@@ -33,5 +33,5 @@
     max-width: 70%;
     height : fit-content;
     padding : 10px;
-    line-height: 20px;
+    line-height: 24px;
 }

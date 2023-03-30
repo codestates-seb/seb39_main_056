@@ -20,6 +20,14 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
+    private String currentPageVegetarianName;
+
+    @Override
+    public String getCurrentPageVegetarianName() {
+        return currentPageVegetarianName;
+    }
+
+
     @Override
     public Product findProduct(Long productId) {
         return findExistProduct(productId);
@@ -76,8 +84,11 @@ public class ProductServiceImpl implements ProductService {
                 queryParamDto.getSort(),
                 queryParamDto.getOrderBy()
         );
+
+        currentPageVegetarianName = queryParamDto.getVegetarian();
+
         return productRepository.findAllByVegetarian(
-                queryParamDto.getVegetarian(),
+                currentPageVegetarianName,
                 PageRequest.of(
                         queryParamDto.getPage(),
                         queryParamDto.getSize(),
