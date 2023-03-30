@@ -102,9 +102,11 @@ export const SoldOutBtn = styled.button`
 `;
 
 export const Space = styled.div`
-  padding: 15px 0px 44px 0px;
+  padding: 5px 0px 44px 0px;
   margin-bottom: 20px;
   border-bottom: 2px solid #f7f7f7;
+  overflow: auto;
+
 }
 `;
 
@@ -118,8 +120,7 @@ export const DetailedProductTitle = styled.p`
 `;
 
 export const DetailedProductDesc = styled.img`
-
-  max-width: 900px;
+  max-width: 800px;
   margin : 0 auto;
   height: 100%;
 `;
