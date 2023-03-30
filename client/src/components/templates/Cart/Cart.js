@@ -22,9 +22,8 @@ const CartTemplate = ({
         orderCart={orderCart}
       ></CartList>
       <Styled.TotalPrice></Styled.TotalPrice>
-      <Styled.BuyBtn onClick={handleClick}>결제하기</Styled.BuyBtn>
+      <Styled.BuyBtn onClick={handleClick}>전체 주문하기</Styled.BuyBtn>
     </Styled.CartContainer>
-    // <button>주문하기</button>
   );
 };
 

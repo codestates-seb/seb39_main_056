@@ -16,7 +16,7 @@ export const ProductPage = ({ productId, productData }) => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const tokenHeader = setTokenHeader();
-  const url = `${process.env.REACT_APP_API_URL}/cart/product`;
+  const url = `${process.env.REACT_APP_API_URL}/cart/product/${productId}`;
   //장바구니에 담기 눌렀을때
   const AddToCartProduct = async () => {
     if (productData.stockQuantity < quantity) {
@@ -32,12 +32,11 @@ export const ProductPage = ({ productId, productData }) => {
             ...tokenHeader,
           },
           body: JSON.stringify({
-            productId,
             purchaseQuantity: quantity,
           }),
         })
           .then(response => {
-            if (!response.ok) throw new Error('No Response');
+            if (!response.ok) throw new Error('로그인 후 이용해주세요.');
             console.log(response.json());
             response.json();
           })
@@ -46,6 +45,7 @@ export const ProductPage = ({ productId, productData }) => {
             window.location.reload();
           });
       } catch (e) {
+        alert('로그인 후 이용해주세요.');
         console.log(e.message);
       }
     }
@@ -59,15 +59,14 @@ export const ProductPage = ({ productId, productData }) => {
     } else {
       axios({
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/orders`,
+        url: `${process.env.REACT_APP_API_URL}/order/product/${productId}`,
         headers: {
           Accept: 'application/json',
           'Content-type': 'application/json',
           ...tokenHeader,
         },
         data: JSON.stringify({
-          productId,
-          ordersQuantity: quantity,
+          orderQuantity: quantity,
         }),
       }).then(res => {
         if (res.status === 200) {

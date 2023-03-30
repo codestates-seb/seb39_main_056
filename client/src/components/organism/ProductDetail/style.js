@@ -85,12 +85,11 @@ export const BuyBtn = styled.button`
 export const SoldOutBtn = styled.button`
   border: 0;
   outline; 0;
-  cursor: pointer;
   border-radius: 2px;
   padding: 10px;
   font-size: 1.2em;
   font-family: 'MICEGothic_Bold';
-  background-color: #6aa338;
+  background-color: #c2c2c2;
   color: #fff;
   display: inline-block;
   width: 200px;

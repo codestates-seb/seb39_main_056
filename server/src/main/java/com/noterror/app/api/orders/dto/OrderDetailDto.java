@@ -21,6 +21,7 @@ public class OrderDetailDto {
     public OrderDetail toOrderDetailWithProduct(Product product) {
         return OrderDetail.builder()
                 .orderQuantity(this.orderQuantity)
+                .productTotalPrice(this.orderQuantity * product.getPrice())
                 .orders(new Orders())
                 .product(product)
                 .build();
