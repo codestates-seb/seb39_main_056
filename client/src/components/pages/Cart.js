@@ -24,7 +24,7 @@ const Cart = () => {
   const deleteCartItem = id => {
     axios({
       method: 'delete',
-      url: `${process.env.REACT_APP_API_URL}/cart-detail/${id}`,
+      url: `${process.env.REACT_APP_API_URL}/cart/cart-detail/${id}`,
       headers: {
         ...token,
       },
@@ -37,7 +37,7 @@ const Cart = () => {
   const fixCartItemQuantity = (id, quantity) => {
     axios({
       method: 'put',
-      url: `${process.env.REACT_APP_API_URL}/cart-detail/${id}`,
+      url: `${process.env.REACT_APP_API_URL}/cart/cart-detail/${id}`,
       headers: {
         ...token,
         'Content-type': 'application/json',

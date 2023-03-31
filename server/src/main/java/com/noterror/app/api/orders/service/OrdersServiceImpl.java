@@ -1,10 +1,15 @@
 package com.noterror.app.api.orders.service;
 
+import com.noterror.app.api.cart.repository.CartDetailRepository;
+import com.noterror.app.api.cart.repository.CartRepository;
+import com.noterror.app.api.global.exception.BusinessLogicException;
+import com.noterror.app.api.global.exception.ExceptionCode;
 import com.noterror.app.api.orders.repository.OrdersRepository;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.entity.order.Orders;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +25,7 @@ import java.util.List;
 public class OrdersServiceImpl implements OrdersService {
 
     private final OrdersRepository ordersRepository;
+    private final CartRepository cartRepository;
 
     @Override
     public Page<Orders> getOrderList(Member member, int page, int size) {
@@ -40,12 +46,17 @@ public class OrdersServiceImpl implements OrdersService {
         Orders newOrder = orderFromCart(cart);
         newOrder.addMember(cart.getMember());
         newOrder.applyQuantityDecrease();
+        cart.getCartDetails().clear();
+        cartRepository.save(cart);
         return ordersRepository.save(newOrder);
     }
 
     private Orders orderFromCart(Cart cart) {
         Orders order = new Orders();
         List<CartDetail> cartDetailList = cart.getCartDetails();
+        if (cartDetailList.isEmpty()) {
+            throw new BusinessLogicException(ExceptionCode.CART_DETAIL_NOT_FOUND);
+        }
         setNewOrderByCartDetailList(order, cartDetailList);
         return order;
     }

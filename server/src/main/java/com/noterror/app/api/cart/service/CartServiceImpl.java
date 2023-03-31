@@ -7,6 +7,7 @@ import com.noterror.app.api.entity.Product;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.member.Member;
+import com.noterror.app.api.entity.order.Orders;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.api.global.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
@@ -49,6 +50,11 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public void deleteCart(Long cartDetailId) {
         cartDetailRepository.delete(getCartDetail(cartDetailId));
+    }
+
+    @Override
+    public void successOrderAndDeleteCartAll() {
+        cartDetailRepository.deleteAll();
     }
 
     private CartDetail checkAlreadyExistProduct(CartDetail cartDetailInfo) {

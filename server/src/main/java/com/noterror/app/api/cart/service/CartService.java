@@ -3,6 +3,7 @@ import com.noterror.app.api.cart.dto.CartDetailUpdateInfoDto;
 import com.noterror.app.api.entity.cart.Cart;
 import com.noterror.app.api.entity.cart.CartDetail;
 import com.noterror.app.api.entity.member.Member;
+import com.noterror.app.api.entity.order.Orders;
 
 public interface CartService {
     /**
@@ -35,4 +36,5 @@ public interface CartService {
     void deleteCart(Long cartDetailId);
 
 
+    void successOrderAndDeleteCartAll();
 }

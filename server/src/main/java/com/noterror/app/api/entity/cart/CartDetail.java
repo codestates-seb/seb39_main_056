@@ -48,6 +48,7 @@ public class CartDetail {
     public OrderDetail toOrderDetailByCartDetail() {
         return OrderDetail.builder()
                 .orderQuantity(this.purchaseQuantity)
+                .productTotalPrice(this.purchaseQuantity * product.getPrice())
                 .product(product)
                 .build();
     }
