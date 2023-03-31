@@ -80,13 +80,13 @@ const Index = () => {
             <Styled.LoginBtn>로그인</Styled.LoginBtn>
           </form>
         </Styled.LoginContainer>
-        <Styled.SocialContainer>
+        {/* <Styled.SocialContainer>
           <Styled.LoginH3>소셜 로그인</Styled.LoginH3>
           <GoogleBtn
             onGoogleSignIn={onGoogleSign}
             text="signin_with"
           ></GoogleBtn>
-        </Styled.SocialContainer>
+        </Styled.SocialContainer> */}
       </Styled.InnerBox>
     </CenterBox>
   );
