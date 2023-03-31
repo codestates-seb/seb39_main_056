@@ -5,7 +5,7 @@ const History = () => {
   const [productHistory, setProductHistory] = useState();
   const token = localStorage.getItem('JWT TOKEN');
   const getData = async () => {
-    let url = `${process.env.REACT_APP_API_URL}/orders`;
+    let url = `${process.env.REACT_APP_API_URL}/order/list`;
     try {
       fetch(url, {
         method: 'GET',

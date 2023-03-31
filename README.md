@@ -1,5 +1,11 @@
 # 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **채식이들 🥗**
 
+## 채식이들 버전 관리
+
+* [v1.2.0] | 채식주의자 유형에 따른 차별적인 제품 제공 기능, 쇼핑 서비스 기능(장바구니, 주문 등), AWS 3 tier architecture(EC2,RDS,S3)
+* __[v2-Current release]__ | ChatGPT 기반 AI 대화형 큐레이션 기능, 사용자 맞춤 UI 수정, Github Actioin, S3, CI/CD
+
+
 <a href="http://chaesik2s.shop/">
   <img width="150" src="https://img.shields.io/badge/채식이들 배포 링크-ffffff?style=for-the-badge&logo=one&logoColor=black"></a>
   

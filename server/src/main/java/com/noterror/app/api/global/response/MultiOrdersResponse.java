@@ -1,6 +1,6 @@
 package com.noterror.app.api.global.response;
 
-import com.noterror.app.api.domain.orders.dto.OrderResponseDto;
+import com.noterror.app.api.orders.dto.OrderResponseDto;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 

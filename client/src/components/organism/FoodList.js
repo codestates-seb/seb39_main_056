@@ -17,6 +17,7 @@ const FoodList = ({
   assortArr,
   setAssortArr,
   changeAssortArr,
+  setCurrentType
 }) => {
   const selectedPage =
     searchParams.get('page') === null ? '' : `page=${searchParams.get('page')}`;
@@ -45,6 +46,7 @@ const FoodList = ({
         // setAssortArr(changeAssortArr(assortArr));
         const result = changeAssortArr(assortArr);
         setAssortArr(result);
+        setCurrentType(res.data.pageInfo.currentType)
         console.log(assortArr);
       });
     // .then(data => {

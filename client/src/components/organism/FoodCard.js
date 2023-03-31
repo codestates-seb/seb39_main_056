@@ -2,6 +2,7 @@ import H2 from '../atom/H2';
 import H3 from '../atom/H3';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div`
   width: 210px;
@@ -10,14 +11,28 @@ const Container = styled.div`
   margin: 10px;
   cursor: pointer;
   transition: all 0.2s linear;
-  text-decoration: none;
   :hover {
     transform: scale(1.1);
   }
 `;
+
+const Badge = styled.span`
+    display: inline-block;
+    background: #6ba543;
+    width: fit-content;
+    margin-right: 3px;
+    margin-bottom : 5px;
+    padding: 0 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 18px;
+    word-break: keep-all;
+`;
+
 const Img = styled.img`
   width: 100%;
-  margin: 0px auto;
+  margin: 0 auto;
   height: 210px;
   border-radius: 10px;
 `;
@@ -33,8 +48,9 @@ const FoodCard = ({ card }) => {
   };
 
   return (
-    <Link to={`/product/${card.productId}`}>
+    <Link to={`/product/${card.productId}` }>
       <Container>
+      <Badge>{card?.vegetarianType}</Badge>
         <Img src={card?.thumbnailImage} />
         <Text>
           <H2 style={style}>{card?.productName}</H2>

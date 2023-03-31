@@ -1,7 +1,7 @@
 package com.noterror.app.infra.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.noterror.app.api.domain.member.dto.GeneralLoginDto;
+import com.noterror.app.api.member.dto.GeneralLoginDto;
 import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.infra.jwt.JwtTokenizer;
 import lombok.SneakyThrows;
