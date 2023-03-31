@@ -12,13 +12,14 @@ public class MultiProductsResponse<T> {
     private PageInfo pageInfo;
     private SortInfo sortInfo;
 
-    public MultiProductsResponse(List<T> products, Page page, SortInfo sortInfo) {
+    public MultiProductsResponse(List<T> products, Page page, SortInfo sortInfo, String currentType) {
         this.products = products;
         this.pageInfo = new PageInfo(
                 page.getNumber() + 1,
                 page.getSize(),
                 page.getTotalElements(),
-                page.getTotalPages());
+                page.getTotalPages(),
+                currentType);
         this.sortInfo = new SortInfo(
                 sortInfo.getSort(),
                 sortInfo.getOrderBy()

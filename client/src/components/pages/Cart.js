@@ -16,7 +16,7 @@ const Cart = () => {
       headers: { ...token },
     }).then(res => {
       if (res.status === 200) {
-        setCart(res.data.carts);
+        setCart(res.data.cart.cartDetails);
       }
     });
   };
@@ -24,7 +24,7 @@ const Cart = () => {
   const deleteCartItem = id => {
     axios({
       method: 'delete',
-      url: `${process.env.REACT_APP_API_URL}/cart/${id}`,
+      url: `${process.env.REACT_APP_API_URL}/cart/cart-detail/${id}`,
       headers: {
         ...token,
       },
@@ -37,13 +37,12 @@ const Cart = () => {
   const fixCartItemQuantity = (id, quantity) => {
     axios({
       method: 'put',
-      url: `${process.env.REACT_APP_API_URL}/cart`,
+      url: `${process.env.REACT_APP_API_URL}/cart/cart-detail/${id}`,
       headers: {
         ...token,
         'Content-type': 'application/json',
       },
       data: JSON.stringify({
-        cartDetailId: id,
         purchaseQuantity: quantity,
       }),
     }).then(res => {
@@ -56,7 +55,7 @@ const Cart = () => {
   const orderCart = () => {
     axios({
       method: 'post',
-      url: `${process.env.REACT_APP_API_URL}/orders/cart`,
+      url: `${process.env.REACT_APP_API_URL}/order/cart`,
       headers: {
         ...token,
       },
@@ -65,6 +64,8 @@ const Cart = () => {
         alert('구매가 완료됐습니다.');
         navigate('/mypage/history');
       }
+    }).catch(e => {
+      alert('죄송합니다. 현재 장바구니 내에 재고 수량보다 많은 제품이 있습니다.');
     });
   };
 

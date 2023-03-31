@@ -1,0 +1,37 @@
+
+/* AI BOT */
+.admin-block {
+    display : flex;
+    align-items : center;
+    justify-content : flex-start;
+    margin : 20px 15px 20px 10px;
+}
+
+
+.admin-block .admin-chat {
+    background-color: #C2C2C2;
+    border-radius: 20px;
+    width : fit-content;
+    height : fit-content;
+    max-width: 70%;
+    padding : 13px;
+    line-height: 24px;
+}
+
+/* User */
+.user-block {
+    display : flex;
+    align-items : center;
+    justify-content : flex-end;
+    margin : 10px 20px;
+}
+
+.user-block .user-chat {
+    background-color: #b4d57d;
+    border-radius: 20px;
+    width : fit-content;
+    max-width: 70%;
+    height : fit-content;
+    padding : 10px;
+    line-height: 24px;
+}

@@ -6,8 +6,36 @@ import Floating from '../organism/Floating';
 import { useSearchParams } from 'react-router-dom';
 import Page from '../organism/Page/Page';
 import { PageBox } from '../organism/Page/style';
+import styled from 'styled-components';
+import { setSelectionRange } from '@testing-library/user-event/dist/utils';
+
 
 const MainPage = () => {
+
+  const CurrentPageBlock = styled.div `
+  width: 120px;
+  height: 60px;
+  position: fixed;
+  bottom: 370px;
+  right: 0;
+  margin: 20px;
+  border-radius: 10px;
+  background-color: #6BA544;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  `;
+
+  const TypeTitle = styled.div`
+    font-weight: 600;
+  `;
+  const TypeName = styled.p`
+    widht: 100%;
+    color: #FFF;
+  `;
+
+
   const [pages, setPages] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -29,6 +57,7 @@ const MainPage = () => {
   ];
 
   const [assortArr, setAssortArr] = useState(['20개씩 보기', '40개씩 보기']);
+  const [CurrentType, setCurrentType] = useState('');
 
   const orderBy = searchParams.get('orderBy');
   const sort = searchParams.get('sort');
@@ -87,6 +116,7 @@ const MainPage = () => {
         assortArr={assortArr}
         setAssortArr={setAssortArr}
         changeAssortArr={changeAssortArr}
+        setCurrentType={setCurrentType}
       />
       <PageBox>
         {pagesQuantity.map((page, idx) => {
@@ -100,6 +130,10 @@ const MainPage = () => {
           );
         })}
       </PageBox>
+      <CurrentPageBlock>
+        <TypeTitle>CURRENT</TypeTitle>
+        <TypeName>{CurrentType}</TypeName>
+      </CurrentPageBlock>
       <Floating
         Types={Types}
         setSearchParams={setSearchParams}
