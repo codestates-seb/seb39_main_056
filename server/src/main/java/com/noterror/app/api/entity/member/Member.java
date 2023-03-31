@@ -40,7 +40,7 @@ public class Member extends Auditable implements Principal {
     @Column
     private String vegetarianType;
 
-    @OneToOne(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "member", cascade = {CascadeType.ALL})
     private Cart cart;
 
     @OneToMany(mappedBy = "member")

@@ -20,7 +20,7 @@ spring:
     database: mysql
     open-in-view: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     show-sql: false
     defer-datasource-initialization: true
 
@@ -46,3 +46,7 @@ jwt:
 mail:
   address:
     admin: ${ADMIN_MAIL}
+
+api:
+  ai:
+    key: ${OPEN_AI_KEY}

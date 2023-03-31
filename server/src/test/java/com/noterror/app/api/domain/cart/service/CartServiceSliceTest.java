@@ -1,8 +1,8 @@
 package com.noterror.app.api.domain.cart.service;
 
-import com.noterror.app.api.domain.cart.repository.CartDetailRepository;
-import com.noterror.app.api.domain.cart.repository.CartRepository;
-import com.noterror.app.api.entity.cart.CartDetail;
+import com.noterror.app.api.cart.repository.CartDetailRepository;
+import com.noterror.app.api.cart.repository.CartRepository;
+import com.noterror.app.api.cart.service.CartServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,6 @@
 package com.noterror.app.infra.auth;
 
-import com.noterror.app.api.domain.member.repository.MemberRepository;
+import com.noterror.app.api.member.repository.MemberRepository;
 import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import static com.noterror.app.api.global.exception.ExceptionCode.MEMBER_AUTH_FAIL;
-import static com.noterror.app.api.global.exception.ExceptionCode.MEMBER_NOT_FOUND;
 
 @Component
 public class MemberDetailsService implements UserDetailsService {
