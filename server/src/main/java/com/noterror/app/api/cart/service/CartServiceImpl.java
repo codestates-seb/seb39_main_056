@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
-    private final MemberRepository memberRepository;
     private final CartDetailRepository cartDetailRepository;
     private final CartRepository cartRepository;
 

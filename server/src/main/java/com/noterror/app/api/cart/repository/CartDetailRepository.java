@@ -15,7 +15,5 @@ public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
             "where product_id = :productId", nativeQuery = true)
     Optional<CartDetail> findByProductId(@Param("productId") Long productId);
 
-    @Query(value = "delete from cart_detail where cart_id = :cartId", nativeQuery = true)
-    void deleteAllByCartId(Long cartId);
 }
 
