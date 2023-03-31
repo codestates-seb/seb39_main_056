@@ -35,6 +35,11 @@ public interface CartService {
      */
     void deleteCart(Long cartDetailId);
 
-
-    void successOrderAndDeleteCartAll();
+    /**
+     * 장바구니 내의 제품 주문 완료 후, 장바구니 내역 삭제
+     * Cart 는 그대로 유지, Cart 내부에 CartDetail 내용들이 삭제되는 것
+     * 요구사항) Cart ID 를 가진 CartDetail 을 전부 삭제해라
+     * @param cart
+     */
+    void successOrderAndDeleteCartAll(Cart cart);
 }

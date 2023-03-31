@@ -36,6 +36,7 @@ public class OrdersController {
     private final OrdersService ordersService;
     private final MemberService memberService;
     private final ProductService productService;
+    private final CartService cartService;
 
     /**
      * 주문 내역 조회
@@ -72,6 +73,7 @@ public class OrdersController {
     public ResponseEntity orderProductsInCart() {
         Cart cartOfMember = getCartByMember();
         Orders newOrder = ordersService.orderProductsInCart(cartOfMember);
+        cartService.successOrderAndDeleteCartAll(cartOfMember);
         OrderResponseDto response = new OrderResponseDto(newOrder);
         return new ResponseEntity(
                 new SingleOrderResponse(response), HttpStatus.OK);

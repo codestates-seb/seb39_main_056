@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -46,8 +47,6 @@ public class OrdersServiceImpl implements OrdersService {
         Orders newOrder = orderFromCart(cart);
         newOrder.addMember(cart.getMember());
         newOrder.applyQuantityDecrease();
-        cart.getCartDetails().clear();
-        cartRepository.save(cart);
         return ordersRepository.save(newOrder);
     }
 

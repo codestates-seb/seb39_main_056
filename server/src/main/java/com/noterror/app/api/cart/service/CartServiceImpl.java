@@ -10,15 +10,21 @@ import com.noterror.app.api.entity.member.Member;
 import com.noterror.app.api.entity.order.Orders;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.api.global.exception.ExceptionCode;
+import com.noterror.app.api.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
+    private final MemberRepository memberRepository;
     private final CartDetailRepository cartDetailRepository;
     private final CartRepository cartRepository;
 
@@ -53,8 +59,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void successOrderAndDeleteCartAll() {
-        cartDetailRepository.deleteAll();
+    @Transactional
+    public void successOrderAndDeleteCartAll(Cart cart) {
+        Cart findCart = cartRepository.findById(cart.getCartId()).get();
+        findCart.getCartDetails().stream().map(CartDetail::getCartDetailId).forEach(this::deleteCart);
+        findCart.getCartDetails().clear();
+        cartRepository.save(findCart);
     }
 
     private CartDetail checkAlreadyExistProduct(CartDetail cartDetailInfo) {
