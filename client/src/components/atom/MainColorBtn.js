@@ -5,7 +5,7 @@ const MainColorBtn = styled.button`
   font-size: 1rem;
   color: #33272a;
   border-radius: 0.2rem;
-  padding: 0.3rem 0.8rem;
+  padding: 0.6rem 0.8rem;
   font-family: 'MICEGothic_Bold';
   text-align: center;
   cursor: pointer;

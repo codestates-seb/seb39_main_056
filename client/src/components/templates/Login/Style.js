@@ -5,12 +5,11 @@ import H3 from '../../atom/H3';
 
 export const InnerBox = styled.div`
   width: fit-content;
-  height: 100%;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  /* background-color: powderblue; */
 `;
 
 export const SocialContainer = styled.div`
@@ -20,9 +19,6 @@ export const SocialContainer = styled.div`
 
 export const LoginContainer = styled.div`
   width: 100%;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
 
   > form {
     width: 100%;
@@ -33,11 +29,14 @@ export const LoginContainer = styled.div`
 `;
 
 export const LoginBtn = styled(MainColorBtn)`
-  margin: 1rem;
+  width : 250px;
+  margin : 15px;
 `;
 
 export const LoginInput = styled(StyledInput)`
-  width: 100%;
+  width: 250px;
+  height: 38px;
+  font-size: 1em;
 `;
 
 export const LoginH3 = styled(H3)`

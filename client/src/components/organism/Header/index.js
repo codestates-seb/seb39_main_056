@@ -25,7 +25,7 @@ const HeaderComponent = () => {
   const logoutButton = () => {
     localStorage.removeItem('JWT TOKEN');
     dispatch(setLoginChange(false));
-    // window.location.reload();
+    window.location.reload();
     alert('로그아웃 되었습니다.');
     navigate('/');
   };

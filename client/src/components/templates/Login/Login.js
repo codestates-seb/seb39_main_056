@@ -8,6 +8,7 @@ import CenterBox from '../../templates/CenterBox';
 import H1 from '../../atom/H1';
 import * as Styled from './Style';
 import axios from 'axios';
+import $ from 'jquery';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Index = () => {
         }
       })
       .catch(e => {
-        alert('이메일이나 비밀번호가 일치하지 않습니다.');
+        alert("이메일이나 패스워드가 일치하지 않습니다.");
       });
   };
 
@@ -64,7 +65,7 @@ const Index = () => {
       <Styled.InnerBox>
         <H1>로그인</H1>
         <Styled.LoginContainer>
-          <form
+          <form id="loginForm"
             onSubmit={e => {
               handleSubmit(e);
             }}
@@ -80,6 +81,7 @@ const Index = () => {
             <Styled.LoginBtn>로그인</Styled.LoginBtn>
           </form>
         </Styled.LoginContainer>
+
         {/* <Styled.SocialContainer>
           <Styled.LoginH3>소셜 로그인</Styled.LoginH3>
           <GoogleBtn
@@ -87,6 +89,7 @@ const Index = () => {
             text="signin_with"
           ></GoogleBtn>
         </Styled.SocialContainer> */}
+
       </Styled.InnerBox>
     </CenterBox>
   );
