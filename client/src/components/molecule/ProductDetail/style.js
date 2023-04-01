@@ -24,6 +24,11 @@ export const ProductDesc = styled.div`
   flex-direction: column;
 `;
 
+
+export const BadgeBlock = styled.div`
+  display: flex;
+`;
+
 export const ProductBadge = styled.span `
     display: inline-block;
     background: #6ba543;
@@ -34,10 +39,41 @@ export const ProductBadge = styled.span `
     border-radius: 4px;
     font-size: 12px;
     color: #fff;
-    line-height: 18px;
+    line-height: 20px;
     word-break: keep-all;
     margin-bottom : 5px
 `;
+
+export const SoldOutBadge = styled.span `
+    display: inline-block;
+    background: #c2c2c2;
+    width: fit-content;
+    height: 20px;
+    margin-right: 3px;
+    padding: 0 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 20px;
+    word-break: keep-all;
+    margin-bottom : 5px
+`;
+
+export const AlmostSoldOutBadge = styled.span `
+    display: inline-block;
+    background: #ddb902;
+    width: fit-content;
+    height: 20px;
+    margin-right: 3px;
+    padding: 0 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 20px;
+    word-break: keep-all;
+    margin-bottom : 5px
+`;
+
 
 export const ProductTitle = styled.p`
   padding: 8px 0px;

@@ -4,7 +4,6 @@ const StyledInput = styled.input`
   background-color: ${props => (props.disabled ? ' #e9e9e9' : '#fffffe')};
   border-radius: 5px;
   margin-top: 10px;
-  margin-right: 10px;
   padding: 5px 10px;
   border: 2px solid #55494c;
   width: 200px;

@@ -16,45 +16,36 @@ export const ProductPage = ({ productId, productData }) => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const tokenHeader = setTokenHeader();
-  const url = `${process.env.REACT_APP_API_URL}/cart/product/${productId}`;
-  //장바구니에 담기 눌렀을때
-  const AddToCartProduct = async () => {
-    if (productData.stockQuantity < quantity) {
-      alert(
-        `장바구니에 담을 수 있는 최대 재고량은 ${productData.stockQuantity}입니다.`,
-      );
-    } else {
-      try {
-        fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...tokenHeader,
-          },
-          body: JSON.stringify({
-            purchaseQuantity: quantity,
-          }),
-        })
-          .then(response => {
-            if (!response.ok) throw new Error('로그인 후 이용해주세요.');
-            console.log(response.json());
-            response.json();
-          })
-          .then(data => {
-            alert('장바구니에 추가되었습니다!');
+  
+  const AddToCartProduct = () => {
+
+      axios({
+        method: 'post',
+        url:`${process.env.REACT_APP_API_URL}/cart/product/${productId}`,
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+          ...tokenHeader,
+        },
+        data: JSON.stringify({
+          purchaseQuantity: quantity,
+        }),
+      }).then(res => {
+        if (res.status === 200) {
+          alert('장바구니에 추가되었습니다!');
             window.location.reload();
-          });
-      } catch (e) {
+        } else {
+          alert('다시 한 번 시도해주세요!');
+        }
+      }).catch(e => {
         alert('로그인 후 이용해주세요.');
-        console.log(e.message);
-      }
-    }
+      });
   };
 
   const BuyProduct = () => {
     if (productData.stockQuantity < quantity) {
       alert(
-        `현재 구매 가능한 최대 재고량은 ${productData.stockQuantity}입니다.`,
+        `현재 제품의 재고량은 ${productData.stockQuantity}개 입니다.`,
       );
     } else {
       axios({
@@ -75,6 +66,8 @@ export const ProductPage = ({ productId, productData }) => {
         } else {
           alert('다시 한 번 시도해주세요!');
         }
+      }).catch(e => {
+        alert('로그인 후 이용해주세요.');
       });
     }
   };
@@ -122,20 +115,15 @@ export const ProductPage = ({ productId, productData }) => {
           setQuantity={setQuantity}
         />
         <Styled.BtnBlock>
-          {productData !== undefined && productData.stockQuantity === 0 ? (
-            <Styled.SoldOutBtn disabled>품절</Styled.SoldOutBtn>
-          ) : (
-            <Styled.CartBtn onClick={AddToCartProduct}>
-              장바구니
-            </Styled.CartBtn>
-          )}
-          {productData !== undefined && productData.stockQuantity === 0 ? (
-            <Styled.SoldOutBtn disabled>품절</Styled.SoldOutBtn>
-          ) : (
-            <Styled.BuyBtn onClick={BuyProduct}>구매하기</Styled.BuyBtn>
+        <Styled.CartBtn onClick={AddToCartProduct}>
+            장바구니
+        </Styled.CartBtn>
+        {productData !== undefined && productData.stockQuantity === 0 ? (
+          <Styled.SoldOutBtn disabled>품절</Styled.SoldOutBtn>
+        ) : (
+          <Styled.BuyBtn onClick={BuyProduct}>구매하기</Styled.BuyBtn>
           )}
         </Styled.BtnBlock>
-
         {/* chatGPT-API HELPER */}
         <AIStyled.AIHelperBlock>
           <AIStyled.AIHelperTitle>

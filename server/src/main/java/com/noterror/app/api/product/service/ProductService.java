@@ -27,11 +27,12 @@ public interface ProductService {
 
     /**
      * @param queryParamDto
+     * @param email
      * @return Page
      * @CASE1 인증된 회원일 때
      * @method 제품 전체 조회 기능
      */
-    Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, Member member);
+    Page<Product> findProductsWhenAuthenticated(QueryParamDto queryParamDto, String email);
 
     /**
      * @param product

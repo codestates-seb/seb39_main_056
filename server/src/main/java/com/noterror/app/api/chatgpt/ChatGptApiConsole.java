@@ -1,4 +1,4 @@
-package com.noterror.app;
+package com.noterror.app.api.chatgpt;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;

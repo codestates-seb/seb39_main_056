@@ -71,7 +71,7 @@ public class ProductController {
         if (isAnonymousUser(email)) {
             return productService.findProductsWhenAnonymous(queryParamDto);
         } else {
-            return productService.findProductsWhenAuthenticated(queryParamDto, getMemberByEmail());
+            return productService.findProductsWhenAuthenticated(queryParamDto, email);
         }
     }
 
@@ -81,10 +81,6 @@ public class ProductController {
 
     private boolean isAnonymousUser(String email) {
         return email.equals("anonymousUser");
-    }
-
-    private Member getMemberByEmail() {
-        return memberService.findMemberByEmail(getCurrentUserEmail());
     }
 
     private List<ProductResponseDto> toListOfProductResponses(Page<Product> productsInPage) {

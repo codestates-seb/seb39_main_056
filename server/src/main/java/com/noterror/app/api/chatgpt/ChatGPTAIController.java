@@ -1,4 +1,4 @@
-package com.noterror.app.api;
+package com.noterror.app.api.chatgpt;
 
 import com.noterror.app.api.global.response.AiAnswerResponse;
 import lombok.extern.slf4j.Slf4j;
