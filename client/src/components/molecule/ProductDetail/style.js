@@ -61,7 +61,7 @@ export const SoldOutBadge = styled.span `
 
 export const AlmostSoldOutBadge = styled.span `
     display: inline-block;
-    background: #ffd500;
+    background: #ddb902;
     width: fit-content;
     height: 20px;
     margin-right: 3px;

@@ -16,8 +16,11 @@ const Container = styled.div`
   }
 `;
 
+const BadgeBlock = styled.div`
+  display: flex;
+`;
+
 const Badge = styled.span`
-    display: inline-block;
     background: #6ba543;
     width: fit-content;
     margin-right: 3px;
@@ -26,7 +29,33 @@ const Badge = styled.span`
     border-radius: 4px;
     font-size: 12px;
     color: #fff;
-    line-height: 18px;
+    line-height: 20px;
+    word-break: keep-all;
+`;
+
+const SoldOutBadge = styled.span`
+    background: #c2c2c2;
+    width: fit-content;
+    margin-right: 3px;
+    margin-bottom : 5px;
+    padding: 0 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 20px;
+    word-break: keep-all;
+`;
+
+const AlmostSoldOutBadge = styled.span`
+    background: #ddb902;
+    width: fit-content;
+    margin-right: 3px;
+    margin-bottom : 5px;
+    padding: 0 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 20px;
     word-break: keep-all;
 `;
 
@@ -50,7 +79,16 @@ const FoodCard = ({ card }) => {
   return (
     <Link to={`/product/${card.productId}` }>
       <Container>
-      <Badge>{card?.vegetarianType}</Badge>
+
+      <BadgeBlock>
+        <Badge>{card?.vegetarianType}</Badge>
+        {card?.stockQuantity === 0
+        ? (<SoldOutBadge>품절</SoldOutBadge>)
+        : (card?.stockQuantity > 0 && card.stockQuantity < 11 
+          ? (<AlmostSoldOutBadge>품절임박</AlmostSoldOutBadge>)
+          : (<p></p>) )
+        }
+      </BadgeBlock>
         <Img src={card?.thumbnailImage} />
         <Text>
           <H2 style={style}>{card?.productName}</H2>
