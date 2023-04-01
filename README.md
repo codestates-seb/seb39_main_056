@@ -20,7 +20,7 @@
 
 ## 채식이들 버전 이력
 
-### v2 (CURRENT REALEASE)
+### v2.1.0 (CURRENT REALEASE)
 [배포 링크]
 
 [요약]
