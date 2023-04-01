@@ -1,42 +1,56 @@
 # 개인 맞춤형 채식 쇼핑몰 웹 애플리케이션, **채식이들 🥗**
 
-## 채식이들 버전 관리
+<a href="http://chaesik2s.shop/">
+  <img width="150" height="30" src="https://img.shields.io/badge/(v1)채식이들 배포 링크-ffffff?style=for-the-badge&logo=one&logoColor=black"></a>
+  
+<a href="https://www.youtube.com/watch?v=7s14aXx1vXM">
+  <img width="175" height="30" src="https://img.shields.io/badge/채식이들 유튜브 영상-ffffff?style=for-the-badge&logo=youtube&logoColor=black"></a>
+  
+<a href="https://codestates.notion.site/39-Team-cbcc6beff32a4ba1bfac9e8a12cf41ad">
+    <img width="150" height="30" src="https://img.shields.io/badge/채식이들 팀 노션-ffffff?style=for-the-badge&logo=notion&logoColor=black"></a>
+  
+<a href="https://not-error-064.tistory.com/">
+  <img width="160" height="30" src="https://img.shields.io/badge/채식이들 팀 블로그-ffffff?style=for-the-badge&logo=tistory&logoColor=black"></a>
+
+<br>
+
+<img width="1200" alt="스크린샷 2022-10-10 오후 5 57 07" src="https://user-images.githubusercontent.com/95335294/194830808-1122b293-33c3-4e61-aab9-f92db5d0622b.png">
+
+<br>
+
+## 채식이들 버전 이력
+
+### v2 (CURRENT REALEASE)
+[배포 링크]
+
+[요약]
+* __ChatGPT 기반 AI 대화형 큐레이션 기능__
+* 사용자 맞춤 UI 수정
+* 제품 재고 수량에 맞는 품절, 품절임박 태그 추가 / 장바구니의 제품이 품절일 경우 품절 표시
+* 코드 리팩토링 및 API 통신 트러블 슈팅
+* 제품 추가 Admin 페이지 생성
+
+[자세한 내용은 옆에 링크 참고]
+
+---
 
 ### v1.2.0
 
-[LINK] http://chaesik2s.shop/
+[배포링크] http://chaesik2s.shop/
 
 * 채식주의자 유형에 따른 차별적인 제품 제공 기능
 * 쇼핑 서비스 기능(장바구니, 주문 등)
 * AWS 3 tier architecture(EC2,RDS,S3)
 
-### v2-current release
-
-[LINK] 
-
-* ChatGPT 기반 AI 대화형 큐레이션 기능
-* 사용자 맞춤 UI 수정
-
-<a href="http://chaesik2s.shop/">
-  <img width="150" src="https://img.shields.io/badge/채식이들 배포 링크-ffffff?style=for-the-badge&logo=one&logoColor=black"></a>
-  
-<a href="https://www.youtube.com/watch?v=7s14aXx1vXM">
-  <img width="175" src="https://img.shields.io/badge/채식이들 유튜브 영상-ffffff?style=for-the-badge&logo=youtube&logoColor=black"></a>
-  
-<a href="https://codestates.notion.site/39-Team-cbcc6beff32a4ba1bfac9e8a12cf41ad">
-    <img width="150" src="https://img.shields.io/badge/채식이들 팀 노션-ffffff?style=for-the-badge&logo=notion&logoColor=black"></a>
-  
-<a href="https://not-error-064.tistory.com/">
-  <img width="160" src="https://img.shields.io/badge/채식이들 팀 블로그-ffffff?style=for-the-badge&logo=tistory&logoColor=black"></a>
-
 <br>
-
-<img width="900" alt="스크린샷 2022-10-10 오후 5 57 07" src="https://user-images.githubusercontent.com/95335294/194830808-1122b293-33c3-4e61-aab9-f92db5d0622b.png">
-
 
 ## ▪️ 프로젝트 기간
 
-#### `2022.09.07 ~ 2022.10.12`
+v1 : `2022.09.07 ~ 2022.10.12`
+
+v2 : `2023.03 ~ 2023.04`
+
+<br>
 
 ## ▪️ 프로젝트 설명
 
