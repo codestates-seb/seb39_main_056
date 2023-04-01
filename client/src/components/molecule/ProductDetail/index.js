@@ -20,7 +20,15 @@ export const ProductInfoContainer = ({
         <Styled.ProductImg src={productData?.thumbnailImage} />
       </Styled.ProductImgBox>
       <Styled.ProductDesc>
+      <Styled.BadgeBlock>
         <Styled.ProductBadge>{productData?.vegetarianType}</Styled.ProductBadge>
+        {productData?.stockQuantity === 0
+        ? (<Styled.SoldOutBadge>품절</Styled.SoldOutBadge>)
+        : (productData?.stockQuantity > 0 && productData.stockQuantity < 11 
+          ? (<Styled.AlmostSoldOutBadge>품절임박</Styled.AlmostSoldOutBadge>)
+          : (<p></p>) )
+        }
+        </Styled.BadgeBlock>
         <Styled.ProductTitle>{productData?.productName}</Styled.ProductTitle>
         <Styled.ProductDescBox>
         <Styled.ProductContent>

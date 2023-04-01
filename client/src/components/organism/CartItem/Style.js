@@ -27,6 +27,12 @@ export const ImgBox = styled.div`
   }
 `;
 
+export const SoldOut = styled.p`
+  font-weight : 600;
+  color : red;
+  font-size:1.2em;
+`;
+
 export const InfoBox = styled.div`
   width: 60%;
   min-width: fit-content;
