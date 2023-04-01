@@ -9,7 +9,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     defer-datasource-initialization: true
 
   sql:
@@ -27,11 +27,11 @@ jwt:
   access-token-expiration-minutes: 150
   refresh-token-expiration-minutes: 420
   key:
-    secret: 23123kjds;jnablvnasvnsdfsdmbfskfksdfljsdflhsdfslkafkldfdasfwv3r13fdsvcscv
+    secret: ${JWT_SECRET_KEY}
 
 mail:
   address:
-    admin: admin056@admin.com
+    admin: ${ADMIN_EMAIL}
 
 api:
   ai:

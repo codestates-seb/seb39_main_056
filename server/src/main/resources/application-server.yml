@@ -1,20 +1,9 @@
 spring:
-  sql:
-    init:
-#      schema-locations:
-#        - classpath*:db/mysql/member/roles_schema.sql
-#        - classpath*:db/mysql/cart_detail/cart_detail_schema.sql
-#        - classpath*:db/mysql/cart/cart_schema.sql
-#        - classpath*:db/mysql/order_product/order_product_schema.sql
-#        - classpath*:db/mysql/order/order_schema.sql
-#        - classpath*:db/mysql/member/member_schema.sql
-#        - classpath*:db/mysql/product/product_schema.sql
-#        - classpath*:db/mysql/vegetarian/vegetarian_schema.sql
-#        - classpath*:db/mysql/constraint.sql
-      data-locations:
-        - classpath*:db/mysql/data.sql
-      encoding: UTF-8
-      mode: always
+  datasource:
+    username: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
+    url: ${RDS_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     database: mysql
@@ -24,11 +13,12 @@ spring:
     show-sql: false
     defer-datasource-initialization: true
 
-  datasource:
-    password: ${RDS_PASSWORD}
-    url: ${RDS_URL}
-    username: ${RDS_USERNAME}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      data-locations:
+        - classpath*:db/mysql/data.sql
+      encoding: UTF-8
+      mode: always
 
 logging:
   level:
@@ -45,7 +35,7 @@ jwt:
 
 mail:
   address:
-    admin: ${ADMIN_MAIL}
+    admin: ${ADMIN_EMAIL}
 
 api:
   ai:
