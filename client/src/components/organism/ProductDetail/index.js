@@ -34,11 +34,12 @@ export const ProductPage = ({ productId, productData }) => {
         if (res.status === 200) {
           alert('장바구니에 추가되었습니다!');
             window.location.reload();
-        } else {
-          alert('다시 한 번 시도해주세요!');
         }
       }).catch(e => {
-        alert('로그인 후 이용해주세요.');
+        if(e.response.data.status == 401) {
+          alert('로그인 후에 장바구니에 추가할 수 있습니다.');
+          navigate('/login');
+        }
       });
   };
 
@@ -63,11 +64,13 @@ export const ProductPage = ({ productId, productData }) => {
         if (res.status === 200) {
           alert('주문이 완료되었습니다!');
           navigate('/mypage/history');
-        } else {
-          alert('다시 한 번 시도해주세요!');
         }
       }).catch(e => {
-        alert('로그인 후 이용해주세요.');
+        console.log(e);
+        if(e.response.data.status == 404) {
+          alert('로그인 후에 구매할 수 있습니다.');
+          navigate('/login');
+        }
       });
     }
   };

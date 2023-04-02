@@ -33,7 +33,9 @@ const FoodList = ({
     searchParams.get('vegetarian') === null
       ? ''
       : `vegetarian=${searchParams.get('vegetarian')}`;
+
   const token = setTokenHeader();
+  
   const [cardList, setCardList] = useState([]);
   const getProducts = () => {
     let url = `${process.env.REACT_APP_API_URL}/products/list?${selectedPage}&${selectedSize}&${selectedSort}&${selectedOrderBy}&${selectedVegetarian}`;

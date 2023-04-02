@@ -23,6 +23,10 @@ function App() {
   const dispatch = useDispatch();
   const tokenHeader = setTokenHeader();
 
+  if(!tokenHeader) {
+    dispatch(setLoginChange(false));
+  }
+
   useEffect(() => {
     axios({
       method: 'get',

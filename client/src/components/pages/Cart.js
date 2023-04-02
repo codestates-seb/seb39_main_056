@@ -32,7 +32,7 @@ const Cart = () => {
       if (res.status === 204) {
         getCartInfo();
       }
-    });
+    })
   };
   const fixCartItemQuantity = (id, quantity) => {
     axios({

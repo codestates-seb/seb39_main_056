@@ -29,6 +29,7 @@ public class AppConfig {
         config.setAllowCredentials(true);
         config.addAllowedOriginPattern("*");
         config.addExposedHeader("Authorization");
+        config.addExposedHeader("Expiration");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 

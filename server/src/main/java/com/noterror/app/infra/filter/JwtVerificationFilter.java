@@ -1,14 +1,24 @@
 package com.noterror.app.infra.filter;
 
+import com.noterror.app.api.global.advice.GlobalExceptionAdvice;
 import com.noterror.app.api.global.exception.BusinessLogicException;
 import com.noterror.app.api.global.exception.ExceptionCode;
 import com.noterror.app.api.global.exception.response.ErrorResponse;
 import com.noterror.app.infra.auth.CustomAuthorityUtils;
 import com.noterror.app.infra.jwt.JwtTokenizer;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -29,6 +39,8 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     // JWT 검증에 성공하면 Authentication 객체에 넣어줄 권한을 생성
     private final CustomAuthorityUtils authorityUtils;
 
+    private final Logger logger = LoggerFactory.getLogger(JwtVerificationFilter.class);
+
     public JwtVerificationFilter(JwtTokenizer jwtTokenizer
             , CustomAuthorityUtils authorityUtils) {
         this.jwtTokenizer = jwtTokenizer;
@@ -40,8 +52,14 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        Map<String, Object> claims = verifyJws(request);
-        setAuthenticationToContext(claims);
+        try {
+            Map<String, Object> claims = verifyJws(request);
+            setAuthenticationToContext(claims);
+        } catch (NullPointerException e) {
+            BusinessLogicException exception = new BusinessLogicException(ExceptionCode.MEMBER_EXPIRED_TOKEN);
+            GlobalExceptionAdvice handler = new GlobalExceptionAdvice();
+            handler.handleBusinessLogicException(exception);
+        }
 
         filterChain.doFilter(request, response);
     }
@@ -61,10 +79,17 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         String jws = request.getHeader("Authorization").replace("Bearer ", "");
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
         Map<String, Object> claims = null;
+
         try {
             claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
-        } catch (Exception e) {
-            ErrorResponse.of(ExceptionCode.MEMBER_EXPIRED_TOKEN);
+        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
+            logger.info("잘못된 JWT 서명입니다.");
+        } catch (ExpiredJwtException e) {
+            logger.info("만료된 JWT 토큰입니다.");
+        } catch (UnsupportedJwtException e) {
+            logger.info("지원되지 않는 JWT 토큰입니다.");
+        } catch (IllegalArgumentException e) {
+            logger.info("JWT 토큰이 잘못되었습니다.");
         }
 
         return claims;

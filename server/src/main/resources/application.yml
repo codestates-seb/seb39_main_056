@@ -24,15 +24,15 @@ logging:
           jpa: DEBUG
 
 jwt:
-  access-token-expiration-minutes: 150
+  access-token-expiration-minutes: 1
   refresh-token-expiration-minutes: 420
   key:
-    secret: ${JWT_SECRET_KEY}
+    secret: sdfkajsdfkasjhdfkljhsdjkfhsdnvjasnvsdanflkvjrkfjewfjsdlkfnsdkaljfklasdfsdjflksjalkfjsakldfjksdljfklsdfklja
 
 mail:
   address:
-    admin: ${ADMIN_EMAIL}
+    admin: zlcls456@gmail.com
 
 api:
   ai:
-    key: ${OPEN_AI_KEY}
+    key: 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
